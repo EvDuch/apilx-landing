@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="API LX demo game catalog for premium casino slot providers." />
+  <title>API LX | Demo Game Catalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=block" as="style" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=block" />
+  <link rel="stylesheet" href="css/demo-games.css?v=20260519-font-loading" />
+</head>
+<body>
+  <main class="demo-page">
+    <section class="demo-hero" id="top">
+      <canvas class="particle-field" data-particles aria-hidden="true"></canvas>
+      <header class="demo-nav">
+        <a class="brand" href="index.html" aria-label="Back to API LX landing">
+          <img src="assets/api-lx-logo.webp" alt="API LX" />
+        </a>
+        <span class="live-badge"><i></i> Live RTP API</span>
+      </header>
+
+      <div class="hero-content">
+        <p class="eyebrow">Premium Demo Lobby</p>
+        <h1>Demo Game Catalog</h1>
+        <p>Test premium casino slots directly inside API LX infrastructure</p>
+      </div>
+    </section>
+
+    <section class="stats-section" aria-label="Provider statistics">
+      <div class="stat-card glass">
+        <span>Total Demo Games</span>
+        <strong data-total-games>0</strong>
+      </div>
+      <div class="stat-card glass">
+        <span>Providers Online</span>
+        <strong>4</strong>
+      </div>
+      <div class="stat-card glass">
+        <span>Average RTP Range</span>
+        <strong>88-97%</strong>
+      </div>
+      <div class="stat-card glass">
+        <span>Launch Status</span>
+        <strong>Instant</strong>
+      </div>
+    </section>
+
+    <section class="catalog-section" aria-labelledby="filtersTitle">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Provider Filters</p>
+          <h2 id="filtersTitle">Choose Provider</h2>
+        </div>
+        <a class="back-link" href="index.html#catalog">Back to API LX</a>
+      </div>
+
+      <div class="filter-bar" data-filters aria-label="Filter games by provider">
+        <button class="filter active" type="button" data-provider="all">All Games</button>
+        <button class="filter" type="button" data-provider="Pragmatic Play">Pragmatic Play</button>
+        <button class="filter" type="button" data-provider="PG Soft">PG Soft</button>
+        <button class="filter" type="button" data-provider="Amusnet">Amusnet</button>
+        <button class="filter" type="button" data-provider="Evolution">Evolution</button>
+      </div>
+
+      <div class="game-grid" data-game-grid></div>
+    </section>
+  </main>
+
+  <div class="launcher-modal" data-launcher aria-hidden="true">
+    <div class="launcher-shell">
+      <div class="launcher-top">
+        <div>
+          <span class="live-badge"><i></i> Secure demo session</span>
+          <h2 data-launch-title>Demo Launcher</h2>
+        </div>
+        <button class="close-launcher" type="button" data-close-launcher aria-label="Close demo launcher">&times;</button>
+      </div>
+      <div class="iframe-wrap">
+        <iframe data-launch-frame title="API LX demo game launcher" src="about:blank" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/demo-games.js"></script>
+</body>
+</html>
