@@ -45,11 +45,13 @@
     ["great britain", "United Kingdom"]
   ]);
   const globeScripts = [
-    "node_modules/three/build/three.min.js",
-    "node_modules/three-globe/dist/three-globe.min.js",
-    "node_modules/topojson-client/dist/topojson-client.min.js"
-  ];
-  const worldAtlasUrl = "node_modules/world-atlas/countries-110m.json";
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js",
+    "https://cdn.jsdelivr.net/npm/three-globe@2.31.1/dist/three-globe.min.js",
+    "https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"
+];
+
+const worldAtlasUrl =
+  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
