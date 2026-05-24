@@ -44,14 +44,37 @@
     ["england", "United Kingdom"],
     ["great britain", "United Kingdom"]
   ]);
-  const globeScripts = [
-    "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js",
-    "https://cdn.jsdelivr.net/npm/three-globe@2.31.1/dist/three-globe.min.js",
-    "https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"
-];
+  const globeLibraries = [
+    {
+      name: "three",
+      globalName: "THREE",
+      urls: [
+        "https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js",
+        "https://unpkg.com/three@0.149.0/build/three.min.js"
+      ]
+    },
+    {
+      name: "three-globe",
+      globalName: "ThreeGlobe",
+      urls: [
+        "https://cdn.jsdelivr.net/npm/three-globe@2.30.0/dist/three-globe.min.js",
+        "https://unpkg.com/three-globe@2.30.0/dist/three-globe.min.js"
+      ]
+    },
+    {
+      name: "topojson-client",
+      globalName: "topojson",
+      urls: [
+        "https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js",
+        "https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js"
+      ]
+    }
+  ];
 
-const worldAtlasUrl =
-  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+  const worldAtlasUrls = [
+    "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json",
+    "https://unpkg.com/world-atlas@2.0.2/countries-110m.json"
+  ];
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
@@ -166,15 +189,50 @@ const worldAtlasUrl =
     const script = document.createElement("script");
     script.src = src;
     script.async = true;
+    script.crossOrigin = "anonymous";
+    script.referrerPolicy = "no-referrer";
     script.onload = resolve;
     script.onerror = () => reject(new Error(`Unable to load ${src}`));
     document.head.appendChild(script);
   });
 
+  const loadCdnLibrary = async ({ name, globalName, urls }) => {
+    if (window[globalName]) return;
+    let lastError;
+    for (const url of urls) {
+      try {
+        await loadScript(url);
+        if (window[globalName]) return;
+        lastError = new Error(`${name} did not expose window.${globalName}`);
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError || new Error(`Unable to load ${name} from CDN`);
+  };
+
+  const loadGlobeLibraries = async () => {
+    for (const library of globeLibraries) {
+      await loadCdnLibrary(library);
+    }
+  };
+
+  const fetchFirstJson = async (urls) => {
+    let lastError;
+    for (const url of urls) {
+      try {
+        const response = await fetch(url, { cache: "force-cache", mode: "cors" });
+        if (!response.ok) throw new Error(`Unable to load ${url}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError || new Error("Unable to load JSON from CDN");
+  };
+
   const fetchWorldPolygons = async () => {
-    const response = await fetch(worldAtlasUrl, { cache: "force-cache" });
-    if (!response.ok) throw new Error("Unable to load world polygons");
-    const topology = await response.json();
+    const topology = await fetchFirstJson(worldAtlasUrls);
     const geoJson = window.topojson?.feature(topology, topology.objects.countries);
     return Array.isArray(geoJson.features) ? geoJson.features : [];
   };
@@ -438,11 +496,9 @@ const worldAtlasUrl =
     }
 
     try {
-      for (const src of globeScripts) {
-        await loadScript(src);
-      }
+      await loadGlobeLibraries();
     } catch (error) {
-      console.warn("[api-lx-globe] Local globe libraries unavailable, using fallback globe.", error);
+      console.warn("[api-lx-globe] CDN globe libraries unavailable, using fallback globe.", error);
       showFallback();
       return;
     }

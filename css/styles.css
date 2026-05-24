@@ -1714,6 +1714,26 @@ input[type="range"] {
   padding: 0 20px 20px;
 }
 
+.faq-answer .faq-list {
+  margin: 0;
+  padding: 0 20px 20px 42px;
+  color: var(--soft);
+}
+
+.faq-answer .faq-list li {
+  margin: 0 0 8px;
+}
+
+.faq-answer a {
+  color: var(--cyan);
+  text-decoration: none;
+}
+
+.faq-answer a:hover,
+.faq-answer a:focus-visible {
+  text-decoration: underline;
+}
+
 .badges {
   display: flex;
   flex-wrap: wrap;
@@ -6504,11 +6524,14 @@ body,
 }
 
 #updates .updates-timeline {
+  --updates-axis-x: 11px;
+  --updates-timeline-gap: clamp(26px, 3.4vw, 44px);
+  --updates-timeline-pad: clamp(38px, 5vw, 72px);
   position: relative;
   z-index: 2;
   display: grid;
-  gap: clamp(26px, 3.4vw, 44px);
-  padding-left: clamp(38px, 5vw, 72px);
+  gap: var(--updates-timeline-gap);
+  padding-left: var(--updates-timeline-pad);
 }
 
 #updates .updates-timeline::before {
@@ -6516,11 +6539,12 @@ body,
   position: absolute;
   top: 16px;
   bottom: 18px;
-  left: 10px;
+  left: var(--updates-axis-x);
   width: 2px;
   border-radius: 999px;
   background: linear-gradient(180deg, rgba(167, 190, 255, 0.4), rgba(179, 202, 255, 0.92), rgba(167, 190, 255, 0.4));
   box-shadow: 0 0 26px rgba(141, 169, 255, 0.76);
+  transform: translateX(-50%);
 }
 
 #updates .timeline-entry {
@@ -6530,14 +6554,16 @@ body,
 
 #updates .timeline-dot {
   position: absolute;
+  z-index: 2;
   top: 7px;
-  left: calc(-1 * clamp(38px, 5vw, 72px) - 1px);
+  left: calc(var(--updates-axis-x) - var(--updates-timeline-pad));
   width: 20px;
   height: 20px;
   border: 5px solid rgba(161, 184, 255, 0.96);
   border-radius: 50%;
   background: #fff;
   box-shadow: 0 0 0 8px rgba(121, 151, 255, 0.18), 0 0 22px rgba(125, 156, 255, 0.86);
+  transform: translateX(-50%);
 }
 
 #updates .timeline-entry time {
@@ -6717,11 +6743,9 @@ body,
   }
 
   #updates .updates-timeline {
-    padding-left: 34px;
-  }
-
-  #updates .timeline-dot {
-    left: -34px;
+    --updates-axis-x: 11px;
+    --updates-timeline-pad: 34px;
+    padding-left: var(--updates-timeline-pad);
   }
 
   #updates .update-game-list {
@@ -7431,7 +7455,6 @@ body:has(#hero),
 #updates .update-chip-list li,
 #updates .update-checks span,
 #referral .referral-showcase,
-#referral .referral-note,
 .contact-panel,
 .modal-dialog,
 .lead-dialog,
@@ -7505,8 +7528,6 @@ body:has(#hero),
 #updates .timeline-entry::after,
 #referral .referral-showcase::before,
 #referral .referral-showcase::after,
-#referral .referral-note::before,
-#referral .referral-note::after,
 .contact-panel::before,
 .contact-panel::after,
 .modal-dialog::before,
@@ -7603,22 +7624,111 @@ body:has(#hero),
   color: rgba(255, 255, 255, 0.88) !important;
 }
 
-#updates .timeline-entry .btn.primary {
-  margin-top: 18px !important;
-  border: 1px solid rgba(255, 255, 255, 0.24) !important;
-  background: #061a3e !important;
+#updates .updates-timeline::before {
+  content: none !important;
+  display: none !important;
+}
+
+#updates .timeline-entry {
+  cursor: pointer !important;
+  outline: 0 !important;
+  transition: opacity 180ms ease, transform 180ms ease !important;
+}
+
+#updates .timeline-entry:not(:last-child)::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 17px !important;
+  bottom: calc(-1 * var(--updates-timeline-gap) - 17px) !important;
+  left: calc(var(--updates-axis-x) - var(--updates-timeline-pad)) !important;
+  width: 2px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: linear-gradient(180deg, rgba(167, 190, 255, 0.4), rgba(179, 202, 255, 0.92), rgba(167, 190, 255, 0.4)) !important;
+  box-shadow: 0 0 26px rgba(141, 169, 255, 0.58) !important;
+  transform: translateX(-50%) !important;
+  pointer-events: none !important;
+}
+
+#updates .timeline-entry > :not(.timeline-dot):not(time):not(h3) {
+  max-height: 0 !important;
+  margin-top: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(-4px) !important;
+  transition: max-height 260ms ease, opacity 180ms ease, transform 220ms ease, margin-top 180ms ease !important;
+}
+
+#updates .timeline-entry.is-open > :not(.timeline-dot):not(time):not(h3) {
+  max-height: 980px !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
+}
+
+#updates .timeline-entry.is-open .update-game-list,
+#updates .timeline-entry.is-open .update-chip-list,
+#updates .timeline-entry.is-open .update-checks,
+#updates .timeline-entry.is-open p {
+  margin-top: 16px !important;
+}
+
+#updates .timeline-entry h3 {
+  align-items: center !important;
+  display: flex !important;
+  gap: 14px !important;
+  justify-content: space-between !important;
+}
+
+#updates .timeline-entry h3::after {
+  content: "+" !important;
+  display: grid !important;
+  flex: 0 0 28px !important;
+  height: 28px !important;
+  place-items: center !important;
+  width: 28px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  color: rgba(117, 215, 255, 0.92) !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+  text-shadow: 0 0 16px rgba(117, 215, 255, 0.34) !important;
+}
+
+#updates .timeline-entry.is-open h3::after {
+  content: "-" !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+#updates .timeline-entry:is(:hover, :focus-visible, .is-open) .timeline-dot {
+  background: #75d7ff !important;
+  box-shadow: 0 0 0 8px rgba(117, 215, 255, 0.13), 0 0 28px rgba(117, 215, 255, 0.5) !important;
+}
+
+#updates .timeline-entry:focus-visible h3 {
   color: #ffffff !important;
-  box-shadow: none !important;
+  text-shadow: 0 0 22px rgba(117, 215, 255, 0.28) !important;
 }
 
-#updates .timeline-entry .btn.primary:hover,
-#updates .timeline-entry .btn.primary:focus-visible {
-  border-color: rgba(255, 255, 255, 0.34) !important;
-  background: #082456 !important;
+/* Referral intro note should read as plain copy, not a card. */
+#referral .referral-note {
+  max-width: 570px !important;
+  margin: clamp(18px, 2.4vw, 28px) 0 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
   box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
-#updates .timeline-entry .btn.primary::before {
+#referral .referral-note::before,
+#referral .referral-note::after {
   content: none !important;
   display: none !important;
 }

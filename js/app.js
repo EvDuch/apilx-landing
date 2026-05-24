@@ -123,6 +123,31 @@
   }, { threshold: 0.5 });
   $$("[data-count]").forEach((el) => countObserver.observe(el));
 
+  const updateEntries = $$("#updates .timeline-entry");
+  if (updateEntries.length) {
+    const setActiveUpdate = (activeEntry) => {
+      updateEntries.forEach((entry) => {
+        const isActive = entry === activeEntry;
+        entry.classList.toggle("is-open", isActive);
+        entry.setAttribute("aria-expanded", isActive ? "true" : "false");
+      });
+    };
+
+    updateEntries.forEach((entry, index) => {
+      entry.tabIndex = 0;
+      entry.setAttribute("role", "button");
+      entry.setAttribute("aria-expanded", index === 0 ? "true" : "false");
+      entry.classList.toggle("is-open", index === 0);
+
+      entry.addEventListener("click", () => setActiveUpdate(entry));
+      entry.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        setActiveUpdate(entry);
+      });
+    });
+  }
+
   if (window.API_LX_ENABLE_TILT === true) $$(".glass[data-tilt], [data-tilt]").forEach((card) => {
     if (card.classList.contains("catalog-card")) return;
     card.addEventListener("pointermove", (event) => {
