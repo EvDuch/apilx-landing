@@ -506,12 +506,26 @@
   });
   updateCalculator({ animate: true });
 
-  $$(".faq-question").forEach((button) => {
-    button.addEventListener("click", () => {
-      const item = button.closest(".faq-item");
-      const answer = $(".faq-answer", item);
-      const isOpen = item.classList.toggle("open");
-      answer.style.maxHeight = isOpen ? `${answer.scrollHeight}px` : "0px";
+  const faqItems = $$(".faq-item");
+  const setFaqItemOpen = (item, isOpen) => {
+    const button = $(".faq-question", item);
+    const answer = $(".faq-answer", item);
+    item.classList.toggle("open", isOpen);
+    button?.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    if (answer) answer.style.maxHeight = isOpen ? `${answer.scrollHeight}px` : "0px";
+  };
+
+  faqItems.forEach((item) => {
+    setFaqItemOpen(item, item.classList.contains("open"));
+    $(".faq-question", item)?.addEventListener("click", () => {
+      const shouldOpen = !item.classList.contains("open");
+      faqItems.forEach((faqItem) => setFaqItemOpen(faqItem, faqItem === item && shouldOpen));
+    });
+  });
+
+  window.addEventListener("api-lx-language-change", () => {
+    faqItems.forEach((item) => {
+      if (item.classList.contains("open")) setFaqItemOpen(item, true);
     });
   });
 

@@ -6807,6 +6807,22 @@ body,
   letter-spacing: 0;
 }
 
+#referral .referral-title-word {
+  display: block;
+}
+
+#referral .referral-title-word--blue {
+  color: #36c3ff;
+}
+
+#referral .referral-title-word--purple {
+  color: #9b62ff;
+}
+
+#referral .referral-title-word--pink {
+  color: #ff4fa3;
+}
+
 #referral .referral-lead {
   max-width: 620px;
   margin: 18px 0 0;
@@ -7731,4 +7747,437 @@ body:has(#hero),
 #referral .referral-note::after {
   content: none !important;
   display: none !important;
+}
+
+/* Referral phones should sit cleanly without artificial shadows. */
+#referral .referral-visual {
+  justify-content: flex-end !important;
+  min-height: clamp(460px, 52vw, 650px) !important;
+}
+
+#referral .referral-visual::before {
+  content: none !important;
+  display: none !important;
+}
+
+#referral .referral-visual img {
+  --referral-phone-x: 2%;
+  width: min(520px, 86%) !important;
+  max-width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  transform: none !important;
+  transform-origin: 50% 48% !important;
+  translate: var(--referral-phone-x) 0;
+  rotate: -1.1deg;
+  filter: none !important;
+  box-shadow: none !important;
+  animation: referralPhoneLevitate 6.4s ease-in-out infinite !important;
+  will-change: translate, rotate;
+}
+
+@keyframes referralPhoneLevitate {
+  0%,
+  100% {
+    translate: var(--referral-phone-x) 0;
+    rotate: -1.1deg;
+  }
+
+  28% {
+    translate: var(--referral-phone-x) -10px;
+    rotate: 0.7deg;
+  }
+
+  58% {
+    translate: var(--referral-phone-x) -20px;
+    rotate: -0.4deg;
+  }
+
+  78% {
+    translate: var(--referral-phone-x) -7px;
+    rotate: 0.45deg;
+  }
+}
+
+@media (max-width: 1020px) {
+  #referral .referral-visual {
+    justify-content: center !important;
+    min-height: clamp(380px, 68vw, 560px) !important;
+  }
+
+  #referral .referral-visual img {
+    --referral-phone-x: 0%;
+    width: min(430px, 72vw) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #referral .referral-visual {
+    min-height: clamp(320px, 90vw, 460px) !important;
+  }
+
+  #referral .referral-visual img {
+    --referral-phone-x: 0%;
+    width: min(340px, 82vw) !important;
+  }
+}
+
+/* Benefits cards keep their border on hover and lift by scale only. */
+#benefits.benefits-showcase .benefits-showcase__grid {
+  overflow: visible !important;
+}
+
+#benefits.benefits-showcase .benefit-card {
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  transform-origin: center !important;
+  transition: transform 180ms ease, border-color 160ms ease, background-color 160ms ease !important;
+  will-change: transform;
+}
+
+#benefits.benefits-showcase .benefit-card:hover,
+#benefits.benefits-showcase .benefit-card:focus-within {
+  border: 1px solid rgba(255, 255, 255, 0.34) !important;
+  transform: scale(1.025) !important;
+  z-index: 3 !important;
+}
+
+/* Lead and referral popup: contained backdrop, glass only on choice cards. */
+.lead-modal {
+  isolation: isolate !important;
+  background: rgba(7, 5, 18, 0.74) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+.lead-modal::before,
+.lead-modal::after {
+  content: none !important;
+  display: none !important;
+}
+
+.lead-dialog {
+  position: relative !important;
+  color: #211827 !important;
+  z-index: 1 !important;
+  width: min(940px, calc(100vw - 34px)) !important;
+  max-height: min(820px, calc(100dvh - 34px)) !important;
+  padding: clamp(1.45rem, 2.6vw, 2.4rem) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  scrollbar-color: rgba(236, 79, 134, 0.74) transparent !important;
+  scrollbar-gutter: auto !important;
+  scrollbar-width: thin !important;
+  border-radius: 30px !important;
+  border: 0 !important;
+  background-clip: padding-box !important;
+  clip-path: inset(0 round 30px) !important;
+  background:
+    radial-gradient(circle at 7.4% 4.4%, rgba(255, 221, 232, 0.98) 0 0.85rem, transparent 1.35rem),
+    radial-gradient(circle at 92.8% 27.4%, rgba(255, 214, 229, 0.88) 0 0.72rem, transparent 1.3rem),
+    radial-gradient(circle at 80% 79.5%, rgba(255, 220, 232, 0.76) 0 0.84rem, transparent 1.5rem),
+    radial-gradient(circle at 8% 8%, #ff82ad 0 2.6rem, #f2548c 5.4rem, #c92d66 7.65rem, transparent 7.8rem),
+    radial-gradient(circle at 92% 30%, #ff78a8 0 2.1rem, #ed4d86 3.95rem, #bf2c62 5.7rem, transparent 5.85rem),
+    radial-gradient(circle at 78% 86%, #ff78a8 0 3.1rem, #ee4b84 5.9rem, #bd2b61 7.95rem, transparent 8.1rem),
+    radial-gradient(circle at 43% 113%, #ff80ad 0 2rem, #ef4d86 3.9rem, #bc2b61 5.45rem, transparent 5.6rem),
+    linear-gradient(135deg, #dce7f2, #c7d2df 46%, #d7e0ec) !important;
+  box-shadow:
+    0 26px 70px rgba(23, 16, 38, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+}
+
+.lead-dialog::-webkit-scrollbar,
+.lead-dialog .country-panel::-webkit-scrollbar {
+  width: 12px !important;
+  height: 0 !important;
+}
+
+.lead-dialog::-webkit-scrollbar-button,
+.lead-dialog .country-panel::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.lead-dialog::-webkit-scrollbar-track,
+.lead-dialog .country-panel::-webkit-scrollbar-track {
+  margin: 22px 8px 22px 0 !important;
+  background: transparent !important;
+  border-radius: 999px !important;
+}
+
+.lead-dialog::-webkit-scrollbar-thumb,
+.lead-dialog .country-panel::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(180deg, rgba(255, 116, 166, 0.95), rgba(142, 92, 255, 0.9)) !important;
+  background-clip: content-box !important;
+  border: 4px solid transparent !important;
+  border-radius: 999px !important;
+  min-height: 56px !important;
+}
+
+.lead-dialog::-webkit-scrollbar-thumb:hover,
+.lead-dialog .country-panel::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(180deg, rgba(255, 142, 183, 0.98), rgba(164, 118, 255, 0.95)) !important;
+}
+
+.lead-dialog::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+.lead-dialog:hover,
+.lead-dialog:focus-within {
+  border: 0 !important;
+  background:
+    radial-gradient(circle at 7.4% 4.4%, rgba(255, 221, 232, 0.98) 0 0.85rem, transparent 1.35rem),
+    radial-gradient(circle at 92.8% 27.4%, rgba(255, 214, 229, 0.88) 0 0.72rem, transparent 1.3rem),
+    radial-gradient(circle at 80% 79.5%, rgba(255, 220, 232, 0.76) 0 0.84rem, transparent 1.5rem),
+    radial-gradient(circle at 8% 8%, #ff82ad 0 2.6rem, #f2548c 5.4rem, #c92d66 7.65rem, transparent 7.8rem),
+    radial-gradient(circle at 92% 30%, #ff78a8 0 2.1rem, #ed4d86 3.95rem, #bf2c62 5.7rem, transparent 5.85rem),
+    radial-gradient(circle at 78% 86%, #ff78a8 0 3.1rem, #ee4b84 5.9rem, #bd2b61 7.95rem, transparent 8.1rem),
+    radial-gradient(circle at 43% 113%, #ff80ad 0 2rem, #ef4d86 3.9rem, #bc2b61 5.45rem, transparent 5.6rem),
+    linear-gradient(135deg, #dce7f2, #c7d2df 46%, #d7e0ec) !important;
+  box-shadow:
+    0 26px 70px rgba(23, 16, 38, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36) !important;
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.lead-dialog::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  border-radius: inherit !important;
+  background:
+    repeating-linear-gradient(18deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(104deg, rgba(0, 0, 0, 0.045) 0 1px, transparent 1px 6px),
+    radial-gradient(circle at 22% 26%, rgba(255, 255, 255, 0.12), transparent 34%),
+    radial-gradient(circle at 70% 76%, rgba(0, 0, 0, 0.1), transparent 44%) !important;
+  mix-blend-mode: overlay !important;
+  opacity: 0.52 !important;
+  -webkit-mask:
+    radial-gradient(circle at 8% 8%, #000 0 7.65rem, transparent 7.85rem),
+    radial-gradient(circle at 92% 30%, #000 0 5.7rem, transparent 5.9rem),
+    radial-gradient(circle at 78% 86%, #000 0 7.95rem, transparent 8.15rem),
+    radial-gradient(circle at 43% 113%, #000 0 5.45rem, transparent 5.65rem) !important;
+  mask:
+    radial-gradient(circle at 8% 8%, #000 0 7.65rem, transparent 7.85rem),
+    radial-gradient(circle at 92% 30%, #000 0 5.7rem, transparent 5.9rem),
+    radial-gradient(circle at 78% 86%, #000 0 7.95rem, transparent 8.15rem),
+    radial-gradient(circle at 43% 113%, #000 0 5.45rem, transparent 5.65rem) !important;
+  -webkit-mask-composite: source-over !important;
+  mask-composite: add !important;
+}
+
+.lead-dialog::after {
+  content: none !important;
+  display: none !important;
+}
+
+.lead-dialog > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.lead-dialog .lead-content > h2,
+.lead-dialog .lead-success h2,
+.lead-dialog .lead-step-hint,
+.lead-dialog .lead-progress span,
+.lead-dialog .lead-field label,
+.lead-dialog .eyebrow {
+  color: #211827 !important;
+  text-shadow: none !important;
+}
+
+.lead-dialog .lead-step-hint,
+.lead-dialog .lead-field label {
+  color: rgba(33, 24, 39, 0.66) !important;
+}
+
+.lead-dialog .eyebrow::before {
+  background: #ec4f86 !important;
+  box-shadow: none !important;
+}
+
+.lead-dialog .lead-progress-track {
+  background: rgba(33, 24, 39, 0.12) !important;
+}
+
+.lead-dialog .lead-progress-track i {
+  background: linear-gradient(90deg, #ec4f86, #8e5cff) !important;
+}
+
+.lead-dialog .wizard-input-card,
+.lead-dialog .wizard-contact-grid,
+.lead-dialog .wizard-summary,
+.lead-dialog .lead-success,
+.lead-dialog .lead-field input,
+.lead-dialog .lead-field select,
+.lead-dialog .lead-field textarea,
+.lead-dialog .country-trigger {
+  color: #211827 !important;
+  background-color: rgba(255, 255, 255, 0.42) !important;
+  background-image: none !important;
+  border-color: rgba(33, 24, 39, 0.18) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.lead-dialog .lead-field input::placeholder,
+.lead-dialog .lead-field textarea::placeholder {
+  color: rgba(33, 24, 39, 0.42) !important;
+}
+
+.lead-dialog .wizard-input-card,
+.lead-dialog .wizard-contact-grid,
+.lead-dialog .wizard-summary,
+.lead-dialog .lead-success {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.lead-dialog .wizard-option {
+  position: relative !important;
+  overflow: hidden !important;
+  color: #211827 !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.62) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.58),
+    0 14px 34px rgba(65, 50, 83, 0.13) !important;
+  backdrop-filter: blur(18px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(145%) !important;
+}
+
+.lead-dialog .wizard-option::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.54), rgba(255, 255, 255, 0.12) 42%, transparent 68%) !important;
+  opacity: 1 !important;
+}
+
+.lead-dialog .wizard-option::after {
+  content: none !important;
+  display: none !important;
+}
+
+.lead-dialog .wizard-option:hover,
+.lead-dialog .wizard-option:focus-visible,
+.lead-dialog .wizard-option:focus-within,
+.lead-dialog .wizard-option.selected {
+  border-color: rgba(236, 79, 134, 0.58) !important;
+  background: rgba(255, 255, 255, 0.42) !important;
+}
+
+.lead-dialog .country-panel {
+  background: rgba(232, 239, 248, 0.96) !important;
+  border-color: rgba(33, 24, 39, 0.16) !important;
+  box-shadow: 0 22px 70px rgba(65, 50, 83, 0.22) !important;
+  backdrop-filter: blur(20px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+  scrollbar-color: rgba(236, 79, 134, 0.74) transparent !important;
+  scrollbar-width: thin !important;
+}
+
+.lead-dialog .modal-close,
+.lead-dialog .lead-back,
+.lead-dialog .lead-next,
+.lead-dialog .lead-submit,
+.lead-dialog .lead-success-actions .button {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+.lead-dialog .modal-close {
+  color: #211827 !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  border-color: rgba(33, 24, 39, 0.16) !important;
+}
+
+.lead-dialog .lead-back {
+  color: #211827 !important;
+  border-color: rgba(33, 24, 39, 0.18) !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+}
+
+@media (max-width: 720px) {
+  .lead-modal {
+    align-items: flex-end !important;
+    padding: 0.75rem !important;
+  }
+
+  .lead-dialog {
+    width: 100% !important;
+    max-height: calc(100dvh - 1.5rem) !important;
+    border-radius: 26px 26px 18px 18px !important;
+    clip-path: inset(0 round 26px 26px 18px 18px) !important;
+    padding: 1.25rem !important;
+  }
+}
+
+/* Catalog cards: keep the active-card expansion smooth after global glass overrides. */
+@media (min-width: 981px) {
+  #catalog .catalog-grid,
+  #catalog .catalog-grid.active-1,
+  #catalog .catalog-grid.active-2,
+  #catalog .catalog-grid.active-3,
+  #catalog .catalog-grid.active-4,
+  #catalog .catalog-grid.has-active:not(:hover):not(:focus-within) {
+    display: flex !important;
+    grid-template-columns: none !important;
+    align-items: stretch !important;
+    gap: clamp(10px, 1vw, 16px) !important;
+  }
+
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active,
+  #catalog .catalog-grid:hover .catalog-card:hover,
+  #catalog .catalog-grid:focus-within .catalog-card:focus-within {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    transition:
+      flex-grow 620ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      flex-basis 620ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      opacity 260ms ease,
+      border-color 180ms ease,
+      background-color 180ms ease !important;
+    will-change: flex-grow, flex-basis, opacity;
+  }
+
+  #catalog .catalog-grid.has-active .catalog-card:not(.is-active) {
+    flex-grow: 0.72 !important;
+    opacity: 0.78 !important;
+  }
+
+  #catalog .catalog-grid.has-active .catalog-card.is-active,
+  #catalog .catalog-grid:hover .catalog-card:hover,
+  #catalog .catalog-grid:focus-within .catalog-card:focus-within {
+    flex-grow: 2.25 !important;
+    opacity: 1 !important;
+  }
+
+  #catalog .catalog-grid.has-active:not(:hover):not(:focus-within) .catalog-card {
+    flex-grow: 1 !important;
+    opacity: 1 !important;
+  }
 }

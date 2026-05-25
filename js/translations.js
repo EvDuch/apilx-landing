@@ -214,6 +214,9 @@ window.API_LX_TRANSLATIONS = (() => {
 
     referral_eyebrow: "Partner Program",
     referral_title: "Refer. Earn. Repeat.",
+    referral_title_recommend: "Refer.",
+    referral_title_earn: "Earn.",
+    referral_title_repeat: "Repeat.",
     referral_subtitle: "Invite casino operators and earn recurring revenue from every partner who goes live.",
     referral_profit_title: "Earn together with us",
     referral_profit_text: "Join the API LX partner program and turn warm introductions into stable B2B revenue.",
@@ -590,6 +593,9 @@ window.API_LX_TRANSLATIONS = (() => {
 
     referral_eyebrow: "Партнерская программа",
     referral_title: "Рекомендуйте. Зарабатывайте. Повторяйте.",
+    referral_title_recommend: "Рекомендуйте.",
+    referral_title_earn: "Зарабатывайте.",
+    referral_title_repeat: "Повторяйте.",
     referral_subtitle: "Приводите владельцев казино и получайте процент от прибыли проекта.",
     referral_profit_title: "Заработайте вместе с нами",
     referral_profit_text: "Присоединяйтесь к партнерской программе API LX и превращайте теплые рекомендации в стабильный B2B-доход.",
