@@ -433,7 +433,7 @@ window.API_LX_TRANSLATIONS = (() => {
 
     catalog_eyebrow: "Игровой контент",
     catalog_title: "Премиальный каталог игр",
-    catalog_subtitle: "Изучите высокоэффективные копии слотов от самых востребованных casino providers.",
+    catalog_subtitle: "популярные игровые решения от ведущих casino providers",
     provider_pragmatic_count: "500+ игр",
     provider_amusnet_count: "299+ игр",
     provider_amatic_count: "200+ игр",

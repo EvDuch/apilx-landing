@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&subset=cyrillic,latin&display=swap');
+
 :root {
   --bg: #10051f;
   --bg-2: #1a0b35;
@@ -19,7 +21,7 @@
   --radius: 8px;
   --radius-lg: 14px;
   --container: min(1160px, calc(100% - 32px));
-  --font: 'Trebuchet MS', Arial, 'Noto Sans', 'Noto Sans Devanagari', 'Noto Sans Georgian', 'Noto Sans Thai', 'Noto Sans KR', 'Noto Sans SC', sans-serif;
+  --font: 'Comfortaa', 'Noto Sans', 'Noto Sans Devanagari', 'Noto Sans Georgian', 'Noto Sans Thai', 'Noto Sans KR', 'Noto Sans SC', sans-serif;
 }
 
 * {
@@ -2122,7 +2124,7 @@ input[type="range"] {
 }
 
 .hero-copy {
-  font-family: "Trebuchet MS", var(--font);
+  font-family: var(--font);
   max-width: 1080px;
   margin: 0 auto;
   text-align: center;
@@ -2136,7 +2138,7 @@ input[type="range"] {
 }
 
 .hero-copy h1 {
-  font-family: "Trebuchet MS", Arial, sans-serif !important;
+  font-family: var(--font) !important;
   max-width: 1040px;
   margin-inline: auto;
   margin-bottom: 24px;
@@ -2148,7 +2150,7 @@ input[type="range"] {
 }
 
 .hero-copy .lead {
-  font-family: "Trebuchet MS", Arial, sans-serif !important;
+  font-family: var(--font) !important;
   max-width: 720px;
   margin-inline: auto;
   margin-bottom: 30px;
@@ -2161,7 +2163,7 @@ input[type="range"] {
 
 .hero-copy .eyebrow,
 .hero-actions .btn {
-  font-family: "Trebuchet MS", Arial, sans-serif !important;
+  font-family: var(--font) !important;
 }
 
 .gradient-text {
@@ -8180,4 +8182,328 @@ body:has(#hero),
     flex-grow: 1 !important;
     opacity: 1 !important;
   }
+}
+
+/* Hero balance: tighter first screen with the copy, lead and actions grouped as one unit. */
+@media (min-width: 721px) {
+  #hero {
+    min-height: 100vh !important;
+    min-height: 100svh !important;
+  }
+
+  #hero .hero-stage {
+    min-height: 100vh !important;
+    min-height: 100svh !important;
+    align-items: center !important;
+    padding: clamp(112px, 14svh, 150px) 0 clamp(86px, 10svh, 120px) !important;
+  }
+
+  #hero .hero-grid {
+    align-self: center !important;
+  }
+
+  #hero .hero-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    transform: none !important;
+  }
+
+  #hero .hero-copy .eyebrow {
+    margin: 0 0 clamp(12px, 1.55svh, 18px) !important;
+  }
+
+  #hero .hero-copy h1 {
+    max-width: min(940px, 100%) !important;
+    margin: 0 !important;
+  }
+
+  #hero .hero-copy .lead {
+    max-width: 680px !important;
+    margin: clamp(18px, 2.3svh, 24px) auto 0 !important;
+    line-height: 1.58 !important;
+  }
+
+  #hero .hero-actions {
+    margin-top: clamp(20px, 2.8svh, 28px) !important;
+  }
+
+  #hero .hero-bottom {
+    bottom: clamp(24px, 4svh, 42px) !important;
+  }
+}
+
+@media (min-width: 721px) and (max-height: 760px) {
+  #hero .hero-copy h1 {
+    font-size: clamp(46px, 4.35vw, 72px) !important;
+    line-height: 1.02 !important;
+  }
+
+  #hero .hero-copy .lead {
+    font-size: clamp(17px, 1.45vw, 20px) !important;
+  }
+
+  #hero .hero-actions .btn {
+    min-height: 56px !important;
+    padding-inline: 28px !important;
+  }
+}
+
+/* Map region list scrollbar: subtle glass rail inside the card. */
+#map .region-list ul {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding-right: 12px !important;
+  scrollbar-color: rgba(117, 215, 255, 0.68) rgba(255, 255, 255, 0.04) !important;
+  scrollbar-gutter: stable !important;
+  scrollbar-width: thin !important;
+}
+
+#map .region-list ul::-webkit-scrollbar {
+  width: 13px !important;
+}
+
+#map .region-list ul::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+#map .region-list ul::-webkit-scrollbar-track {
+  margin: 2px 0 !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.025)) !important;
+  border: 5px solid transparent !important;
+  background-clip: content-box !important;
+}
+
+#map .region-list ul::-webkit-scrollbar-thumb {
+  min-height: 58px !important;
+  border: 4px solid transparent !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(180deg, rgba(117, 215, 255, 0.84), rgba(155, 98, 255, 0.66)) !important;
+  background-clip: content-box !important;
+}
+
+#map .region-list ul::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(180deg, rgba(139, 226, 255, 0.96), rgba(178, 132, 255, 0.78)) !important;
+  background-clip: content-box !important;
+}
+
+#map .region-list ul::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+/* Calculator comparison: clean column charts, no nested cards or glare. */
+#calculator .calc-chart-grid {
+  gap: 0 !important;
+}
+
+#calculator .calc-chart-card,
+#calculator .calc-chart-card:hover,
+#calculator .calc-chart-card:focus-within {
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 0 clamp(12px, 1.35vw, 22px) !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+#calculator .calc-chart-card:last-child {
+  border-right: 0 !important;
+}
+
+#calculator .calc-comparison::before,
+#calculator .calc-comparison::after,
+#calculator .calc-chart-card::before,
+#calculator .calc-chart-card::after,
+#calculator .chart-bars::before,
+#calculator .bar::before {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+#calculator .chart-title {
+  min-height: 28px !important;
+  gap: 12px !important;
+  color: #ffffff !important;
+  font-size: clamp(12px, 0.9vw, 15px) !important;
+  font-weight: 700 !important;
+}
+
+#calculator .chart-icon {
+  width: 30px !important;
+  height: 30px !important;
+  flex: 0 0 30px !important;
+  border-radius: 11px !important;
+  background: linear-gradient(135deg, rgba(104, 185, 255, 0.84), rgba(177, 62, 235, 0.8)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26) !important;
+}
+
+#calculator .chart-bars {
+  height: 220px !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  align-items: end !important;
+  gap: clamp(8px, 0.8vw, 14px) !important;
+  margin-top: 0 !important;
+  padding-top: 10px !important;
+  overflow: visible !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  border-bottom: 0 !important;
+}
+
+#calculator .chart-bar-pair {
+  height: 100% !important;
+  display: grid !important;
+  grid-template-rows: 16px minmax(0, 1fr) 18px !important;
+  row-gap: 10px !important;
+  align-items: end !important;
+  justify-items: center !important;
+  min-width: 0 !important;
+}
+
+#calculator .chart-bar-pair strong {
+  color: rgba(255, 255, 255, 0.92) !important;
+  font-size: clamp(11px, 0.86vw, 14px) !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  text-shadow: none !important;
+}
+
+#calculator .chart-bar-pair small {
+  max-width: 100% !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  line-height: 1.05 !important;
+  text-align: center !important;
+}
+
+#calculator .bar {
+  width: clamp(36px, 3.6vw, 54px) !important;
+  min-height: 10px !important;
+  overflow: visible !important;
+  border-radius: 7px 7px 2px 2px !important;
+}
+
+#calculator .bar.other {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(139, 114, 194, 0.52)) !important;
+  box-shadow: none !important;
+}
+
+#calculator .bar.api {
+  background: linear-gradient(180deg, rgba(104, 185, 255, 0.98), rgba(89, 87, 242, 0.86)) !important;
+  box-shadow: 0 12px 30px rgba(81, 143, 255, 0.18) !important;
+}
+
+@media (max-width: 1180px) {
+  #calculator .calc-chart-grid {
+    gap: 18px !important;
+  }
+
+  #calculator .calc-chart-card,
+  #calculator .calc-chart-card:last-child {
+    padding: 0 !important;
+    border-right: 0 !important;
+  }
+}
+
+/* Landing section eyebrow labels removed. Modal step labels stay intact. */
+.site-shell main .eyebrow {
+  display: none !important;
+}
+
+/* Seamless creative background for the site body; hero keeps its own atmosphere. */
+:root {
+  --site-creative-background: url("../assets/site-orb-background.png");
+}
+
+html,
+body,
+.site-shell,
+.site-shell main,
+body:has(#hero),
+.site-shell main:has(#hero) {
+  background: var(--site-creative-background) !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+body::before,
+body::after,
+.site-shell main::before,
+.site-shell main::after,
+.site-shell main:has(#hero)::before,
+.site-shell main:has(#hero)::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+}
+
+.site-shell main > .section:not(#hero),
+.site-shell main > [data-partial] + .section:not(#hero),
+#catalog.section,
+#map.section,
+#calculator.section,
+#faq.section,
+#updates.section,
+#referral.section,
+#contact.section,
+.footer,
+.benefits-showcase,
+.control-core-section {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.site-shell main section:not(#hero)::before,
+.site-shell main section:not(#hero)::after,
+#catalog.section::before,
+#catalog.section::after,
+#map.section::before,
+#map.section::after,
+#calculator.section::before,
+#calculator.section::after,
+#faq.section::before,
+#faq.section::after,
+#updates.section::before,
+#updates.section::after,
+#referral.section::before,
+#referral.section::after,
+#contact.section::before,
+#contact.section::after,
+.footer::before,
+.footer::after,
+.benefits-showcase::before,
+.benefits-showcase::after,
+.control-core-section::before,
+.control-core-section::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
 }
