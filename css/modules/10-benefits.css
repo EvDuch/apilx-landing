@@ -1,0 +1,214 @@
+﻿/* APILX CSS module: Benefits showcase styles.
+   Extracted mechanically from css/styles.css lines 5184-5393.
+   Production still loads css/styles.css as the bundled file. */
+
+/* Figma-aligned benefits glass section */
+.benefits-showcase {
+  position: relative;
+  overflow: hidden;
+  min-height: calc(100svh - 88px);
+  scroll-margin-top: 96px;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(72px, 10svh, 118px);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(126, 96, 255, 0.42), transparent 34%),
+    radial-gradient(circle at 84% 26%, rgba(232, 48, 173, 0.28), transparent 34%),
+    radial-gradient(circle at 50% 102%, rgba(92, 174, 255, 0.26), transparent 32%),
+    linear-gradient(180deg, #6f35d8 0%, #7936dc 48%, #6c33d2 100%);
+}
+
+.benefits-showcase::before,
+.benefits-showcase::after {
+  content: "";
+  position: absolute;
+  inset: auto;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(2px);
+}
+
+.benefits-showcase::before {
+  width: min(38vw, 520px);
+  height: min(38vw, 520px);
+  left: -14vw;
+  top: 16%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.13), transparent 64%);
+}
+
+.benefits-showcase::after {
+  width: min(34vw, 460px);
+  height: min(34vw, 460px);
+  right: -12vw;
+  bottom: 6%;
+  background: radial-gradient(circle, rgba(132, 206, 255, 0.16), transparent 66%);
+}
+
+.benefits-showcase__wrap {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1210px);
+}
+
+.benefits-showcase__head {
+  max-width: 960px;
+  margin: 0 auto clamp(58px, 7svh, 74px);
+}
+
+.benefits-showcase__eyebrow {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.benefits-showcase__eyebrow::before {
+  background: #78ff71;
+  box-shadow: 0 0 14px rgba(120, 255, 113, 0.66);
+}
+
+.benefits-showcase__head h2 {
+  color: #ffffff;
+  font-size: clamp(50px, min(7vw, 10svh), 86px);
+  line-height: 0.98;
+  letter-spacing: 0;
+  text-wrap: balance;
+  text-shadow: 0 18px 44px rgba(18, 5, 51, 0.28);
+}
+
+.benefits-showcase__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.1vw, 28px);
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.benefits-showcase .benefit-card {
+  position: relative;
+  min-width: 0;
+  min-height: clamp(174px, 20svh, 190px);
+  padding: clamp(14px, 1.4vw, 18px) clamp(17px, 1.55vw, 22px) clamp(18px, 1.7vw, 24px);
+  overflow: visible;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.055) 45%, rgba(255, 255, 255, 0.1)),
+    rgba(31, 13, 59, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    0 20px 52px rgba(25, 5, 66, 0.2);
+  backdrop-filter: blur(11px);
+  -webkit-backdrop-filter: blur(11px);
+  contain: layout paint;
+  isolation: isolate;
+  transform: none !important;
+  filter: none !important;
+  opacity: 1;
+  will-change: auto;
+}
+
+.benefits-showcase .benefit-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 26% 12%, rgba(255, 255, 255, 0.18), transparent 32%),
+    radial-gradient(circle at 82% 84%, rgba(105, 195, 255, 0.16), transparent 38%);
+  opacity: 0.76;
+}
+
+.benefits-showcase .benefit-card:hover,
+.benefits-showcase .benefit-card:focus-within {
+  border-color: rgba(255, 255, 255, 0.38);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.36),
+    0 22px 56px rgba(25, 5, 66, 0.24);
+  transform: none !important;
+}
+
+.benefits-showcase .benefit-card__media {
+  width: clamp(142px, 11.5vw, 178px);
+  height: clamp(142px, 11.5vw, 178px);
+  margin: clamp(-70px, -5.8vw, -48px) auto clamp(-50px, -3.6vw, -34px);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.benefits-showcase .benefit-card__media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  border-radius: 0;
+  mix-blend-mode: normal;
+  filter: none;
+  transform: none !important;
+}
+
+.benefits-showcase .benefit-card h3 {
+  margin: 0 0 clamp(7px, 0.8svh, 10px);
+  max-width: 100%;
+  color: #ffffff;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.08;
+  letter-spacing: 0;
+  text-align: left;
+  text-shadow: 0 8px 20px rgba(15, 4, 46, 0.34);
+  overflow-wrap: break-word;
+}
+
+.benefits-showcase .benefit-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(13px, 1.04vw, 15px);
+  line-height: 1.42;
+  text-align: left;
+  text-shadow: 0 5px 16px rgba(15, 4, 46, 0.22);
+}
+
+@media (max-width: 1080px) {
+  .benefits-showcase {
+    min-height: auto;
+    padding-block: 88px;
+  }
+
+  .benefits-showcase__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 780px;
+    row-gap: 42px;
+  }
+}
+
+@media (max-width: 720px) {
+  .benefits-showcase {
+    padding-block: 76px;
+  }
+
+  .benefits-showcase__head {
+    margin-bottom: 44px;
+  }
+
+  .benefits-showcase__head h2 {
+    font-size: clamp(40px, 12vw, 58px);
+  }
+
+  .benefits-showcase__grid {
+    grid-template-columns: 1fr;
+    max-width: 430px;
+    row-gap: 38px;
+  }
+
+  .benefits-showcase .benefit-card {
+    min-height: 168px;
+    padding-inline: 20px;
+  }
+
+  .benefits-showcase .benefit-card__media {
+    width: 138px;
+    height: 138px;
+    margin-top: -48px;
+    margin-bottom: -38px;
+  }
+}
+

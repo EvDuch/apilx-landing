@@ -1,0 +1,110 @@
+﻿/* APILX CSS module: Footer and adjacent shared styles.
+   Extracted mechanically from css/styles.css lines 1868-1973.
+   Production still loads css/styles.css as the bundled file. */
+
+.footer {
+  padding: 38px 0;
+  border-top: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 20px;
+}
+
+.footer a,
+.footer p {
+  color: var(--muted);
+}
+
+.footer-links {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.68);
+  backdrop-filter: blur(14px);
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-dialog {
+  width: min(900px, 100%);
+  max-height: min(760px, calc(100vh - 36px));
+  overflow: auto;
+  padding: 24px;
+  transform: scale(0.96) translateY(20px);
+  opacity: 0;
+  animation: modalIn 220ms ease forwards;
+}
+
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.modal-close {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.demo-card {
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at top right, rgba(47, 243, 255, 0.11), transparent 12rem),
+    rgba(255, 255, 255, 0.045);
+}
+
+.demo-card span {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--soft);
+  font-size: 13px;
+}
+
+.demo-card a {
+  min-height: 38px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.brand-logo {
+  display: block;
+  width: 158px;
+  height: auto;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 12px 24px rgba(255, 79, 195, 0.2));
+}
+
+.brand-logo-aggregator {
+  width: 206px;
+}
+

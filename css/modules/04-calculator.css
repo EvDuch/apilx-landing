@@ -1,0 +1,154 @@
+﻿/* APILX CSS module: Initial GGR calculator styles.
+   Extracted mechanically from css/styles.css lines 1505-1654.
+   Production still loads css/styles.css as the bundled file. */
+
+.calculator-shell {
+  padding: 24px;
+}
+
+.calc-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.control-card {
+  padding: 18px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.control-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.control-value {
+  color: var(--text);
+  font-weight: 900;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--cyan);
+}
+
+.turnover-input {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 10px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--text);
+  background: rgba(3, 7, 17, 0.7);
+  outline: none;
+}
+
+.turnover-input:focus {
+  border-color: rgba(47, 243, 255, 0.62);
+  box-shadow: 0 0 0 3px rgba(47, 243, 255, 0.1);
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.calc-card {
+  position: relative;
+  overflow: hidden;
+  padding: 22px;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 22% 12%, rgba(255, 255, 255, 0.12), transparent 13rem),
+    linear-gradient(180deg, rgba(10, 4, 27, 0.18), rgba(10, 4, 27, 0.34));
+  border: 1px solid rgba(172, 135, 255, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 18px 46px rgba(0, 0, 0, 0.16);
+}
+
+.calc-card.highlight {
+  border-color: rgba(255, 79, 195, 0.48);
+  background:
+    radial-gradient(circle at 78% 12%, rgba(255, 79, 195, 0.16), transparent 14rem),
+    linear-gradient(180deg, rgba(11, 2, 30, 0.08), rgba(11, 2, 30, 0.24));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 34px rgba(255, 79, 195, 0.12),
+    0 20px 56px rgba(47, 243, 255, 0.08);
+}
+
+.calc-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.08), transparent 18rem),
+    linear-gradient(90deg, rgba(5, 2, 18, 0.18), transparent 58%);
+}
+
+.calc-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  color: var(--muted);
+}
+
+.metric:last-child {
+  border-bottom: 0;
+}
+
+.metric strong {
+  color: var(--text);
+  text-align: right;
+}
+
+.extra-revenue {
+  margin-top: 16px;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(47, 243, 255, 0.16), rgba(139, 92, 255, 0.12), rgba(255, 201, 107, 0.1));
+  border: 1px solid rgba(47, 243, 255, 0.25);
+  text-align: center;
+}
+
+.extra-revenue span {
+  display: block;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.extra-revenue strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--green);
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(88, 255, 180, 0.24);
+}
+
+.disclaimer {
+  margin: 14px 0 0;
+  color: var(--soft);
+  font-size: 13px;
+  text-align: center;
+}
+

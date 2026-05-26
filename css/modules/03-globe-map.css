@@ -1,0 +1,334 @@
+﻿/* APILX CSS module: Map section, globe, markers and region UI.
+   Extracted mechanically from css/styles.css lines 1175-1504.
+   Production still loads css/styles.css as the bundled file. */
+
+.map-wrap {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) minmax(560px, 1.42fr) 340px;
+  gap: clamp(44px, 6vw, 104px);
+  align-items: center;
+  min-height: min(720px, calc(100vh - 120px));
+  overflow: visible;
+}
+
+#map {
+  overflow: hidden;
+}
+
+#map .container {
+  width: min(96vw, 1720px);
+  max-width: none;
+}
+
+.map-copy {
+  margin: 0;
+}
+
+.map-copy h2 {
+  max-width: 460px;
+}
+
+.map-copy p:not(.eyebrow) {
+  max-width: 360px;
+}
+
+.world-card,
+.globe-stage {
+  position: relative;
+  min-height: clamp(560px, 58vw, 720px);
+  overflow: hidden;
+}
+
+.globe-stage {
+  padding: 0;
+  overflow: visible;
+  cursor: grab;
+  touch-action: none;
+}
+
+.globe-stage:active {
+  cursor: grabbing;
+}
+
+.globe-grid-glow {
+  position: absolute;
+  inset: -12% -18%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(46, 210, 255, 0.22), transparent 38%),
+    radial-gradient(circle at 52% 52%, rgba(143, 86, 255, 0.16), transparent 54%),
+    radial-gradient(circle at 50% 50%, rgba(255, 79, 195, 0.08), transparent 68%);
+  opacity: 0.84;
+  mask-image: radial-gradient(circle at 50% 50%, #000 0 42%, rgba(0, 0, 0, 0.65) 56%, transparent 72%);
+  pointer-events: none;
+}
+
+.globe-stage::before,
+.globe-stage::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.globe-stage::before {
+  width: min(720px, 102%);
+  aspect-ratio: 1;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(46, 210, 255, 0.12);
+  box-shadow: 0 0 110px rgba(46, 210, 255, 0.2), inset 0 0 110px rgba(46, 210, 255, 0.08);
+  transform: translate(-50%, -50%);
+}
+
+.globe-stage::after {
+  width: min(640px, 92%);
+  aspect-ratio: 1;
+  left: 50%;
+  top: 52%;
+  background:
+    radial-gradient(circle, rgba(46, 210, 255, 0.2), transparent 58%),
+    radial-gradient(circle, rgba(143, 86, 255, 0.14), transparent 70%);
+  filter: blur(18px);
+  transform: translate(-50%, -50%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 0 62%, transparent 74%);
+}
+
+.globe-canvas {
+  position: absolute;
+  inset: -18% -16%;
+  z-index: 2;
+}
+
+.globe-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.globe-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.globe-marker {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(46, 210, 255, 0.58);
+  border-radius: 50%;
+  color: #ffffff;
+  background: rgba(4, 16, 38, 0.5);
+  box-shadow: 0 0 24px rgba(46, 210, 255, 0.5), inset 0 0 14px rgba(46, 210, 255, 0.16);
+  opacity: 0;
+  transform: translate(-50%, -82%) scale(0.72);
+  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: auto;
+}
+
+.globe-marker.visible {
+  opacity: 1;
+  transform: translate(-50%, -82%) scale(1);
+  animation: handshakeFloat 2.4s ease-in-out infinite, markerGlowBeat 1.7s ease-in-out infinite;
+}
+
+.globe-marker::before,
+.globe-marker::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+}
+
+.globe-marker::before {
+  inset: -12px;
+  border: 1px solid rgba(46, 210, 255, 0.28);
+  animation: mapPulse 1.9s ease-out infinite;
+}
+
+.globe-marker::after {
+  inset: 12px;
+  background: var(--cyan);
+  box-shadow: 0 0 20px rgba(46, 210, 255, 0.94);
+}
+
+.globe-marker .emoji {
+  position: relative;
+  z-index: 1;
+  font-size: 17px;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(46, 210, 255, 0.92));
+}
+
+.globe-marker.active {
+  border-color: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 0 32px rgba(46, 210, 255, 0.72), 0 0 52px rgba(255, 79, 195, 0.18);
+}
+
+.globe-loading {
+  position: absolute;
+  left: 24px;
+  bottom: 22px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.globe-loading::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 16px rgba(46, 210, 255, 0.95);
+  animation: mapPulse 1.4s ease-out infinite;
+}
+
+.globe-stage.ready .globe-loading {
+  display: none;
+}
+
+.globe-handshake {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(46, 210, 255, 0.45);
+  border-radius: 50%;
+  background: rgba(4, 16, 38, 0.64);
+  box-shadow: 0 0 28px rgba(46, 210, 255, 0.48), inset 0 0 14px rgba(46, 210, 255, 0.12);
+  animation: handshakeFloat 2.8s ease-in-out infinite;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.globe-handshake svg {
+  width: 22px;
+  height: 22px;
+  color: #9cf7ff;
+  filter: drop-shadow(0 0 8px rgba(46, 210, 255, 0.9));
+}
+
+.globe-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  gap: 18px;
+  padding: 24px;
+  text-align: center;
+}
+
+.globe-fallback[hidden] {
+  display: none !important;
+}
+
+.fallback-planet {
+  position: relative;
+  width: min(320px, 72vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 24%, rgba(255, 255, 255, 0.28), transparent 9%),
+    radial-gradient(circle at 28% 30%, rgba(46, 210, 255, 0.42), transparent 22%),
+    radial-gradient(circle at 66% 64%, rgba(143, 86, 255, 0.34), transparent 32%),
+    linear-gradient(145deg, #1059bd, #081849 68%);
+  box-shadow: inset -34px -28px 70px rgba(2, 6, 26, 0.68), 0 0 90px rgba(46, 210, 255, 0.26);
+}
+
+.fallback-point {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 22px rgba(46, 210, 255, 0.9);
+}
+
+.fallback-point i {
+  position: absolute;
+  inset: -12px;
+  border: 1px solid rgba(46, 210, 255, 0.36);
+  border-radius: 50%;
+  animation: mapPulse 1.8s ease-out infinite;
+}
+
+.fallback-point.brazil { left: 32%; top: 58%; }
+.fallback-point.india { left: 66%; top: 48%; }
+.fallback-point.turkey { left: 56%; top: 38%; }
+.fallback-point.mexico { left: 24%; top: 44%; }
+.fallback-point.indonesia { left: 74%; top: 62%; }
+
+.globe-fallback p {
+  max-width: 360px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+}
+
+.map-tooltip {
+  position: fixed;
+  z-index: 80;
+  display: none;
+  transform: translate(14px, 14px);
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--text);
+  background: rgba(8, 12, 27, 0.92);
+  box-shadow: var(--shadow);
+  pointer-events: none;
+}
+
+.region-list {
+  padding: 22px;
+  transform: translateX(clamp(0px, 1.8vw, 30px));
+}
+
+.region-list ul {
+  display: grid;
+  gap: 10px;
+  max-height: min(58vh, 620px);
+  margin: 0;
+  padding: 0;
+  padding-right: 4px;
+  overflow: auto;
+  list-style: none;
+}
+
+.region-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px;
+  border-radius: var(--radius);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+  cursor: default;
+}
+
+.region-list li:hover,
+.region-list li.active {
+  transform: translateX(-3px);
+  border-color: rgba(46, 210, 255, 0.34);
+  background:
+    linear-gradient(90deg, rgba(46, 210, 255, 0.12), rgba(143, 86, 255, 0.08)),
+    rgba(255, 255, 255, 0.055);
+  box-shadow: 0 16px 38px rgba(46, 210, 255, 0.08);
+}
+
+.region-list strong {
+  color: var(--text);
+}
+

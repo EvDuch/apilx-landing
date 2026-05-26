@@ -1,0 +1,217 @@
+﻿/* APILX CSS module: FAQ section styles.
+   Extracted mechanically from css/styles.css lines 1655-1867.
+   Production still loads css/styles.css as the bundled file. */
+
+.faq-wrap {
+  display: grid;
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 64px;
+  padding: 18px 20px;
+  border: 0;
+  color: var(--text);
+  background: transparent;
+  text-align: left;
+  font-weight: 850;
+}
+
+.faq-question i {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.faq-question i::before,
+.faq-question i::after {
+  content: "";
+  position: absolute;
+  inset: 8px 1px auto;
+  height: 2px;
+  background: var(--cyan);
+  transition: transform 200ms ease;
+}
+
+.faq-question i::after {
+  transform: rotate(90deg);
+}
+
+.faq-item.open .faq-question i::after {
+  transform: rotate(0deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 260ms ease;
+}
+
+.faq-answer p {
+  margin: 0;
+  padding: 0 20px 20px;
+}
+
+.faq-answer .faq-list {
+  margin: 0;
+  padding: 0 20px 20px 42px;
+  color: var(--soft);
+}
+
+.faq-answer .faq-list li {
+  margin: 0 0 8px;
+}
+
+.faq-answer a {
+  color: var(--cyan);
+  text-decoration: none;
+}
+
+.faq-answer a:hover,
+.faq-answer a:focus-visible {
+  text-decoration: underline;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.badge {
+  display: inline-flex;
+  padding: 7px 9px;
+  border-radius: 999px;
+  color: #c9faff;
+  background: rgba(47, 243, 255, 0.09);
+  border: 1px solid rgba(47, 243, 255, 0.2);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 18px;
+  align-items: start;
+}
+
+.contact-form,
+.contact-card {
+  padding: 24px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+.field label {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--text);
+  background: rgba(3, 7, 17, 0.68);
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.field textarea {
+  min-height: 118px;
+  padding-top: 13px;
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: rgba(47, 243, 255, 0.62);
+  box-shadow: 0 0 0 3px rgba(47, 243, 255, 0.1);
+}
+
+.form-message {
+  display: none;
+  margin: 14px 0 0;
+  padding: 12px;
+  border-radius: var(--radius);
+  color: var(--green);
+  background: rgba(88, 255, 180, 0.08);
+  border: 1px solid rgba(88, 255, 180, 0.2);
+}
+
+.contact-card {
+  position: sticky;
+  top: 96px;
+}
+
+.contact-list {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 0;
+}
+
+.contact-row {
+  padding: 14px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.contact-row span {
+  display: block;
+  color: var(--soft);
+  font-size: 12px;
+}
+
+.contact-row strong {
+  display: block;
+  margin-top: 4px;
+}
+
+.referral-band {
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: 28px;
+  align-items: center;
+  padding: 28px;
+}
+
+.step-card {
+  min-height: 186px;
+}
+

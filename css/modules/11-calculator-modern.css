@@ -1,0 +1,341 @@
+﻿/* APILX CSS module: Later calculator visual pass.
+   Extracted mechanically from css/styles.css lines 5394-5730.
+   Production still loads css/styles.css as the bundled file. */
+
+/* Calm glass GGR calculator */
+#calculator {
+  position: relative;
+  scroll-margin-top: 24px;
+  padding: 12px 0 28px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 16% 20%, rgba(105, 195, 255, 0.16), transparent 34%),
+    radial-gradient(circle at 88% 28%, rgba(232, 48, 173, 0.16), transparent 34%),
+    linear-gradient(180deg, #24115a 0%, #30136c 44%, #211052 100%);
+}
+
+#calculator::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035), transparent 26%, transparent 74%, rgba(255, 255, 255, 0.03)),
+    radial-gradient(circle at 50% 100%, rgba(111, 53, 216, 0.34), transparent 42%);
+}
+
+#calculator > .container {
+  position: relative;
+  z-index: 1;
+}
+
+#calculator .section-head {
+  max-width: 1040px;
+  margin-bottom: 18px;
+}
+
+#calculator .section-head h2 {
+  color: #ffffff;
+  font-size: clamp(28px, 3.6vw, 46px);
+  line-height: 1;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+#calculator .section-head p:not(.eyebrow) {
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+#calculator .calculator-shell {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: clamp(10px, 1.25vw, 16px);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(28, 13, 62, 0.34);
+  box-shadow: 0 24px 72px rgba(10, 2, 38, 0.26);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+#calculator .calc-controls {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1vw, 14px);
+  margin-bottom: clamp(10px, 1vw, 14px);
+}
+
+#calculator .control-card,
+#calculator .calc-comparison,
+#calculator .extra-revenue {
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(34, 18, 70, 0.28);
+  box-shadow: 0 14px 44px rgba(12, 4, 48, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+#calculator .control-card {
+  padding: 8px 10px;
+}
+
+#calculator .control-label {
+  margin-bottom: 3px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+#calculator .control-value {
+  font-size: clamp(17px, 1.4vw, 22px);
+  color: #ffffff;
+}
+
+#calculator .calc-mini-bars {
+  height: 22px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(10px, 1fr));
+  align-items: end;
+  gap: clamp(5px, 0.7vw, 10px);
+  padding: 4px 4px 1px;
+}
+
+#calculator .calc-mini-bars span {
+  height: 18px;
+  border-radius: 6px 6px 2px 2px;
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: height 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+#calculator .turnover-bars span.active {
+  background: linear-gradient(180deg, rgba(191, 96, 255, 0.94), rgba(112, 62, 235, 0.78));
+  box-shadow: 0 10px 24px rgba(159, 82, 255, 0.18);
+}
+
+#calculator .rtp-bars span.active {
+  background: linear-gradient(180deg, rgba(104, 185, 255, 0.96), rgba(87, 96, 245, 0.78));
+  box-shadow: 0 10px 24px rgba(76, 163, 255, 0.18);
+}
+
+#calculator input[type="range"] {
+  height: 6px;
+  appearance: none;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, #7d45ff 0 var(--range-progress, 50%), rgba(255, 255, 255, 0.14) var(--range-progress, 50%) 100%);
+  accent-color: #7d45ff;
+}
+
+#calculator input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 4px solid rgba(255, 255, 255, 0.86);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #68b9ff, #7d45ff);
+  box-shadow: 0 0 0 8px rgba(111, 53, 216, 0.18), 0 10px 22px rgba(27, 7, 74, 0.28);
+}
+
+#calculator input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 4px solid rgba(255, 255, 255, 0.86);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #68b9ff, #7d45ff);
+  box-shadow: 0 0 0 8px rgba(111, 53, 216, 0.18), 0 10px 22px rgba(27, 7, 74, 0.28);
+}
+
+#calculator .range-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.76);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+#calculator .turnover-input {
+  margin-top: 4px;
+  min-height: 24px;
+  border-color: rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+#calculator .calc-comparison {
+  padding: clamp(10px, 1.1vw, 14px);
+}
+
+#calculator .calc-comparison h3 {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: clamp(18px, 1.55vw, 24px);
+  text-align: center;
+}
+
+#calculator .calc-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+}
+
+#calculator .calc-chart-card {
+  min-width: 0;
+  padding: 0 clamp(12px, 1.35vw, 22px);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+#calculator .calc-chart-card:last-child {
+  border-right: 0;
+}
+
+#calculator .chart-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 28px;
+  color: #ffffff;
+  font-size: clamp(12px, 0.9vw, 15px);
+  line-height: 1.15;
+}
+
+#calculator .chart-icon {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 12px;
+  background: linear-gradient(135deg, rgba(104, 185, 255, 0.84), rgba(177, 62, 235, 0.8));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+
+#calculator .chart-bars {
+  height: 220px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  gap: clamp(8px, 0.8vw, 14px);
+  padding-top: 10px;
+  border-bottom: 0;
+}
+
+#calculator .chart-bar-pair {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 16px minmax(0, 1fr) 18px;
+  row-gap: 10px;
+  align-items: end;
+  justify-items: center;
+  min-width: 0;
+}
+
+#calculator .chart-bar-pair strong {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(11px, 0.86vw, 14px);
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+#calculator .chart-bar-pair small {
+  max-width: 100%;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 10px;
+  line-height: 1.05;
+  text-align: center;
+}
+
+#calculator .bar {
+  width: clamp(36px, 3.6vw, 54px);
+  height: var(--bar-height, 45%);
+  min-height: 10px;
+  border-radius: 7px 7px 2px 2px;
+  transition: height 220ms ease;
+}
+
+.calculator-dragging #calculator .calc-mini-bars span,
+.calculator-dragging #calculator .bar {
+  transition: none;
+}
+
+#calculator .bar.other {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(139, 114, 194, 0.52));
+}
+
+#calculator .bar.api {
+  background: linear-gradient(180deg, rgba(104, 185, 255, 0.98), rgba(89, 87, 242, 0.86));
+  box-shadow: 0 12px 30px rgba(81, 143, 255, 0.18);
+}
+
+#calculator .calc-chart-card em {
+  display: none;
+}
+
+#calculator .calc-chart-card em.negative {
+  color: #73d5ff;
+  border-color: rgba(115, 213, 255, 0.22);
+}
+
+#calculator .extra-revenue {
+  margin-top: 4px;
+  min-height: 52px;
+  padding: 6px 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: center;
+  text-align: left;
+}
+
+#calculator .extra-revenue span {
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 800;
+}
+
+#calculator .extra-revenue strong {
+  color: #56ffac;
+  font-size: clamp(24px, 2.7vw, 34px);
+  line-height: 1;
+}
+
+#calculator .disclaimer {
+  display: none;
+  margin: 10px 0 0;
+  color: rgba(255, 255, 255, 0.56);
+  text-align: center;
+  font-size: 12px;
+}
+
+@media (max-width: 1180px) {
+  #calculator .calc-chart-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  #calculator .calc-chart-card {
+    padding: 0;
+    border-right: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  #calculator .calc-controls,
+  #calculator .calc-chart-grid,
+  #calculator .extra-revenue {
+    grid-template-columns: 1fr;
+  }
+
+  #calculator .chart-bars {
+    height: 150px;
+  }
+
+  #calculator .extra-revenue {
+    text-align: center;
+  }
+}
+
+/* Smooth catalog hover: flex-basis is reliably animatable, unlike fr grid tracks. */

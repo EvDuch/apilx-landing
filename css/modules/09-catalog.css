@@ -1,0 +1,736 @@
+﻿/* APILX CSS module: Game catalog accordion and provider card styles.
+   Extracted mechanically from css/styles.css lines 4452-5183.
+   Production still loads css/styles.css as the bundled file. */
+
+/* Game catalog accordion */
+#catalog {
+  --catalog-red: #ec0719;
+  --catalog-deep: #070406;
+}
+
+#catalog .section-head {
+  margin-bottom: clamp(34px, 5vw, 64px);
+}
+
+#catalog .container {
+  max-width: min(1210px, calc(100% - 32px));
+}
+
+#catalog .catalog-grid {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(12px, 1.4vw, 18px);
+  min-height: clamp(390px, 34vw, 500px);
+}
+
+#catalog .catalog-card {
+  isolation: isolate;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: clamp(390px, 34vw, 500px);
+  padding: clamp(22px, 2.2vw, 34px);
+  border: 1px solid rgba(255, 42, 55, 0.54);
+  border-radius: 36px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 22%),
+    linear-gradient(180deg, rgba(5, 5, 7, 0.74) 0%, rgba(16, 5, 8, 0.64) 45%, rgba(210, 0, 15, 0.8) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -18px 48px rgba(255, 0, 20, 0.28),
+    0 24px 82px rgba(0, 0, 0, 0.42);
+  overflow: hidden;
+  transition:
+    flex-grow 420ms ease,
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+#catalog .catalog-card:first-child {
+  flex-grow: 1.65;
+}
+
+#catalog .catalog-grid:hover .catalog-card,
+#catalog .catalog-grid:focus-within .catalog-card {
+  flex-grow: 0.88;
+}
+
+#catalog .catalog-grid:hover .catalog-card:hover,
+#catalog .catalog-grid:focus-within .catalog-card:focus-within {
+  flex-grow: 2.05;
+}
+
+#catalog .catalog-card::before {
+  background:
+    radial-gradient(circle at var(--mx, 48%) var(--my, 20%), color-mix(in srgb, var(--accent), transparent 58%), transparent 18rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 35%);
+  opacity: 0.78;
+}
+
+#catalog .catalog-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(4, 4, 5, 0.74) 0%, rgba(4, 4, 5, 0.28) 38%, rgba(224, 0, 16, 0.16) 100%),
+    radial-gradient(ellipse at 50% 96%, rgba(255, 6, 25, 0.94), transparent 52%),
+    radial-gradient(ellipse at 50% 108%, rgba(255, 246, 121, 0.24), transparent 38%);
+}
+
+#catalog .catalog-card:hover,
+#catalog .catalog-card:focus-within {
+  transform: translateY(-7px);
+  border-color: rgba(255, 244, 109, 0.8);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -18px 62px rgba(255, 0, 20, 0.36),
+    0 28px 98px rgba(255, 0, 20, 0.18),
+    0 28px 96px rgba(0, 0, 0, 0.5);
+}
+
+#catalog .catalog-copy,
+#catalog .catalog-card .btn {
+  position: relative;
+  z-index: 2;
+}
+
+#catalog .catalog-copy {
+  max-width: 310px;
+}
+
+#catalog .catalog-card h3 {
+  max-width: 280px;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(23px, 1.9vw, 33px);
+  font-weight: 950;
+  line-height: 1.02;
+  text-shadow: 0 8px 26px rgba(0, 0, 0, 0.58);
+}
+
+#catalog .game-count {
+  margin: 14px 0 14px;
+  border-color: rgba(255, 244, 109, 0.36);
+  color: #fff86f;
+  background: rgba(9, 5, 8, 0.48);
+  box-shadow: 0 0 24px rgba(255, 244, 109, 0.1);
+}
+
+#catalog .feature-list {
+  max-width: 260px;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.28;
+}
+
+#catalog .feature-list li {
+  align-items: flex-start;
+  text-shadow: 0 5px 18px rgba(0, 0, 0, 0.68);
+}
+
+#catalog .feature-list li::before {
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 16px var(--accent);
+}
+
+#catalog .provider-orb {
+  top: auto;
+  right: auto;
+  bottom: -86px;
+  left: 50%;
+  z-index: -1;
+  width: 250px;
+  height: 250px;
+  translate: -50% 0;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent), #fff 12%), transparent 68%);
+  opacity: 0.62;
+  filter: blur(12px);
+}
+
+#catalog .catalog-art {
+  position: absolute;
+  right: clamp(-92px, -6vw, -34px);
+  bottom: clamp(14px, 2vw, 34px);
+  z-index: 1;
+  width: clamp(220px, 28vw, 430px);
+  max-width: 92%;
+  aspect-ratio: 1.24 / 1;
+  display: grid;
+  place-items: center;
+  opacity: 0.9;
+  transform: translateX(16%) scale(0.86);
+  transition: transform 420ms ease, opacity 220ms ease;
+}
+
+#catalog .catalog-art::before {
+  content: "";
+  position: absolute;
+  inset: 12% 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 0, 20, 0.34), transparent 64%);
+  filter: blur(16px);
+}
+
+#catalog .catalog-art img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 34px 34px rgba(0, 0, 0, 0.42));
+}
+
+#catalog .catalog-card:hover .catalog-art,
+#catalog .catalog-card:focus-within .catalog-art,
+#catalog .catalog-card:first-child .catalog-art {
+  opacity: 1;
+  transform: translateX(4%) scale(1);
+}
+
+#catalog .catalog-card .btn {
+  align-self: flex-start;
+  margin-top: auto;
+  min-width: 128px;
+  border-color: rgba(255, 244, 109, 0.58);
+  color: #090506;
+  background: linear-gradient(180deg, #fff968, #f1d719);
+  box-shadow: 0 14px 34px rgba(255, 244, 109, 0.15);
+}
+
+#catalog .catalog-card .btn:hover {
+  border-color: rgba(255, 255, 255, 0.76);
+  background: linear-gradient(180deg, #fffda1, #fff340);
+}
+
+@media (max-width: 1180px) {
+  #catalog .catalog-grid {
+    min-height: auto;
+    flex-wrap: wrap;
+  }
+
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid:hover .catalog-card:hover,
+  #catalog .catalog-grid:focus-within .catalog-card:focus-within {
+    flex: 1 1 calc(50% - 12px);
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 680px) {
+  #catalog .catalog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid:hover .catalog-card:hover,
+  #catalog .catalog-grid:focus-within .catalog-card:focus-within {
+    min-height: 360px;
+    border-radius: 28px;
+  }
+
+  #catalog .catalog-card h3 {
+    font-size: clamp(22px, 7vw, 30px);
+  }
+
+  #catalog .catalog-art {
+    right: -70px;
+    bottom: 22px;
+    width: min(350px, 92vw);
+    transform: translateX(10%) scale(0.92);
+  }
+}
+
+/* Lighter glassmorphism pass for the game catalog */
+#catalog .catalog-grid {
+  gap: clamp(14px, 1.6vw, 24px);
+}
+
+#catalog .catalog-card,
+#catalog .catalog-card:first-child,
+#catalog .catalog-grid:hover .catalog-card,
+#catalog .catalog-grid:focus-within .catalog-card,
+#catalog .catalog-grid:hover .catalog-card:hover,
+#catalog .catalog-grid:focus-within .catalog-card:focus-within {
+  flex-grow: 1;
+}
+
+#catalog .catalog-card {
+  contain: layout paint;
+  border-color: rgba(255, 255, 255, 0.32);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.045)),
+    radial-gradient(circle at 22% 18%, color-mix(in srgb, var(--accent-2), transparent 56%), transparent 15rem),
+    radial-gradient(circle at 82% 88%, color-mix(in srgb, var(--accent), transparent 44%), transparent 16rem),
+    rgba(42, 22, 98, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    0 22px 58px rgba(24, 8, 68, 0.22);
+  backdrop-filter: blur(13px) saturate(1.24);
+  -webkit-backdrop-filter: blur(13px) saturate(1.24);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+#catalog .catalog-card:hover,
+#catalog .catalog-card:focus-within {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.56);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 24px 62px rgba(39, 11, 92, 0.26);
+}
+
+#catalog .catalog-card::before {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent 40%),
+    radial-gradient(circle at 30% 22%, color-mix(in srgb, var(--accent-2), transparent 48%), transparent 12rem),
+    radial-gradient(circle at 72% 74%, color-mix(in srgb, var(--accent), transparent 50%), transparent 12rem);
+  opacity: 0.54;
+  transition: opacity 180ms ease;
+}
+
+#catalog .catalog-card::after {
+  background:
+    linear-gradient(180deg, rgba(14, 5, 44, 0.16), rgba(9, 3, 28, 0.28)),
+    radial-gradient(ellipse at 50% 108%, color-mix(in srgb, var(--accent), transparent 54%), transparent 54%);
+}
+
+#catalog .provider-orb,
+#catalog .catalog-art::before,
+#catalog .catalog-art img {
+  filter: none;
+}
+
+#catalog .provider-orb {
+  width: 210px;
+  height: 210px;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--accent-2), #ffffff 16%), transparent 64%);
+  opacity: 0.26;
+}
+
+#catalog .catalog-art {
+  opacity: 0.74;
+  transform: translateX(10%) scale(0.9);
+  transition: opacity 160ms ease, transform 180ms ease;
+}
+
+#catalog .catalog-card:hover .catalog-art,
+#catalog .catalog-card:focus-within .catalog-art,
+#catalog .catalog-card:first-child .catalog-art {
+  opacity: 0.9;
+  transform: translateX(6%) scale(0.96);
+}
+
+#catalog .catalog-card h3,
+#catalog .feature-list li {
+  text-shadow: 0 6px 22px rgba(9, 3, 28, 0.48);
+}
+
+#catalog .game-count {
+  border-color: rgba(255, 255, 255, 0.34);
+  color: #ffffff;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent), transparent 62%), color-mix(in srgb, var(--accent-2), transparent 68%)),
+    rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+#catalog .feature-list li::before {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: none;
+}
+
+#catalog .catalog-card .btn {
+  border-color: rgba(255, 255, 255, 0.42);
+  color: #ffffff;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent), transparent 8%), color-mix(in srgb, var(--accent-2), transparent 10%));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    0 14px 28px rgba(38, 10, 88, 0.18);
+}
+
+#catalog .catalog-card .btn:hover {
+  border-color: rgba(255, 255, 255, 0.68);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent), #ffffff 10%), color-mix(in srgb, var(--accent-2), #ffffff 12%));
+}
+
+@media (max-width: 1180px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid:hover .catalog-card:hover,
+  #catalog .catalog-grid:focus-within .catalog-card:focus-within {
+    flex-grow: 1;
+  }
+}
+
+/* Fit the catalog into the visible viewport on desktop screens */
+#catalog {
+  scroll-margin-top: 86px;
+}
+
+@media (min-width: 1181px) {
+  #catalog.section {
+    min-height: calc(100svh - 74px);
+    padding-top: clamp(22px, 4.2svh, 48px);
+    padding-bottom: clamp(22px, 3.8svh, 46px);
+  }
+
+  #catalog .container {
+    display: grid;
+    align-content: center;
+    max-width: min(1500px, calc(100% - 48px));
+    min-height: calc(100svh - 74px - clamp(44px, 8svh, 94px));
+  }
+
+  #catalog .section-head {
+    margin-bottom: clamp(18px, 3.1svh, 36px);
+  }
+
+  #catalog .section-head .eyebrow {
+    margin-bottom: clamp(8px, 1.1svh, 14px);
+  }
+
+  #catalog .section-head h2 {
+    font-size: clamp(46px, min(6vw, 9svh), 86px);
+    line-height: 0.98;
+  }
+
+  #catalog .section-head p:not(.eyebrow) {
+    max-width: 980px;
+    margin-inline: auto;
+    font-size: clamp(15px, min(1.45vw, 2.6svh), 21px);
+    line-height: 1.28;
+  }
+
+  #catalog .catalog-grid {
+    gap: clamp(14px, 1.45vw, 28px);
+    min-height: 0;
+    height: clamp(330px, calc(100svh - 420px), 430px);
+  }
+
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid:hover .catalog-card:hover,
+  #catalog .catalog-grid:focus-within .catalog-card:focus-within {
+    min-height: 0;
+    height: 100%;
+    padding: clamp(20px, min(1.65vw, 2.7svh), 28px);
+    border-radius: clamp(22px, 2.1vw, 34px);
+  }
+
+  #catalog .catalog-card h3 {
+    max-width: 260px;
+    font-size: clamp(24px, min(1.8vw, 4svh), 34px);
+    line-height: 1.06;
+  }
+
+  #catalog .game-count {
+    margin: clamp(10px, 1.3svh, 14px) 0 clamp(10px, 1.5svh, 15px);
+    padding: 7px 13px;
+    font-size: clamp(12px, min(0.88vw, 1.8svh), 14px);
+  }
+
+  #catalog .feature-list {
+    gap: clamp(6px, 0.85svh, 9px);
+    font-size: clamp(13px, min(0.95vw, 1.95svh), 15px);
+    line-height: 1.25;
+  }
+
+  #catalog .catalog-art {
+    right: clamp(-72px, -3.4vw, -26px);
+    bottom: clamp(46px, 7svh, 86px);
+    width: clamp(170px, 18vw, 300px);
+  }
+
+  #catalog .catalog-card .btn {
+    min-width: clamp(118px, 8.6vw, 158px);
+    min-height: clamp(42px, 5.6svh, 56px);
+    padding-inline: clamp(18px, 1.4vw, 24px);
+    font-size: clamp(13px, min(0.9vw, 1.8svh), 15px);
+  }
+}
+
+@media (min-width: 1181px) and (max-height: 820px) {
+  #catalog.section {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  #catalog .section-head {
+    margin-bottom: 18px;
+  }
+
+  #catalog .section-head .eyebrow {
+    display: none;
+  }
+
+  #catalog .section-head h2 {
+    font-size: clamp(42px, min(5.4vw, 8.4svh), 72px);
+  }
+
+  #catalog .section-head p:not(.eyebrow) {
+    font-size: 16px;
+  }
+
+  #catalog .catalog-grid {
+    height: clamp(310px, calc(100svh - 300px), 380px);
+  }
+
+  #catalog .catalog-art {
+    bottom: 48px;
+    width: clamp(150px, 15vw, 240px);
+  }
+}
+
+@media (min-width: 1181px) and (max-height: 690px) {
+  #catalog .section-head p:not(.eyebrow) {
+    display: none;
+  }
+
+  #catalog .catalog-grid {
+    height: clamp(280px, calc(100svh - 210px), 340px);
+  }
+
+  #catalog .catalog-card h3 {
+    font-size: clamp(22px, min(1.55vw, 3.8svh), 28px);
+  }
+
+  #catalog .game-count {
+    margin-block: 8px;
+  }
+
+  #catalog .feature-list {
+    font-size: 13px;
+    gap: 5px;
+  }
+}
+
+/* Final optimized transparent accordion */
+#catalog .catalog-grid {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(12px, 1.3vw, 22px);
+}
+
+#catalog .catalog-card,
+#catalog .catalog-card:first-child,
+#catalog .catalog-grid:hover .catalog-card,
+#catalog .catalog-grid:focus-within .catalog-card,
+#catalog .catalog-grid:hover .catalog-card:hover,
+#catalog .catalog-grid:focus-within .catalog-card:focus-within {
+  flex: 0 1 25%;
+}
+
+#catalog .catalog-card {
+  contain: layout paint;
+  isolation: isolate;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 18px 44px rgba(12, 3, 34, 0.16);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: flex-basis 240ms ease, border-color 160ms ease;
+  transform: none;
+}
+
+#catalog .catalog-card::before,
+#catalog .catalog-card::after,
+#catalog .provider-orb,
+#catalog .catalog-art {
+  display: none;
+}
+
+#catalog .catalog-grid:hover .catalog-card,
+#catalog .catalog-grid:focus-within .catalog-card {
+  flex: 0 1 20%;
+}
+
+#catalog .catalog-grid:hover .catalog-card:hover,
+#catalog .catalog-grid:focus-within .catalog-card:focus-within {
+  flex: 0 1 38%;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+#catalog .catalog-card:hover,
+#catalog .catalog-card:focus-within {
+  transform: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 18px 44px rgba(12, 3, 34, 0.16);
+}
+
+#catalog .catalog-copy {
+  max-width: 100%;
+}
+
+#catalog .catalog-card h3 {
+  max-width: 320px;
+  color: #ffffff;
+  text-shadow: 0 6px 18px rgba(8, 3, 24, 0.36);
+  overflow-wrap: break-word;
+}
+
+#catalog .game-count {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+#catalog .feature-list li {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: none;
+}
+
+#catalog .feature-list li::before {
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: none;
+}
+
+#catalog .catalog-card .btn {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.36);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+#catalog .catalog-card .btn:hover {
+  border-color: rgba(255, 255, 255, 0.62);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+@media (min-width: 1181px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid:hover .catalog-card:hover,
+  #catalog .catalog-grid:focus-within .catalog-card:focus-within {
+    flex: 0 1 25%;
+    min-height: 0;
+    height: 100%;
+  }
+}
+
+@media (max-width: 1180px) {
+  #catalog .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid:hover .catalog-card:hover,
+  #catalog .catalog-grid:focus-within .catalog-card:focus-within {
+    flex: initial;
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 680px) {
+  #catalog .catalog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid:hover .catalog-card:hover,
+  #catalog .catalog-grid:focus-within .catalog-card:focus-within {
+    min-height: 300px;
+  }
+}
+
+/* Catalog accordion layout override */
+@media (min-width: 1181px) {
+  #catalog .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: clamp(10px, 1vw, 16px);
+    min-height: clamp(330px, 32vw, 420px);
+    transition: grid-template-columns 640ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid:hover .catalog-card:hover,
+  #catalog .catalog-grid:focus-within .catalog-card:focus-within {
+    min-width: 0;
+    min-height: 0;
+    height: auto;
+    flex: initial;
+  }
+
+  #catalog .catalog-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: opacity 360ms ease, border-color 260ms ease, box-shadow 260ms ease;
+    transition-delay: 0ms !important;
+  }
+
+  #catalog .catalog-grid.active-1 {
+    grid-template-columns: 2.25fr 0.72fr 0.72fr 0.72fr;
+  }
+
+  #catalog .catalog-grid.active-2 {
+    grid-template-columns: 0.72fr 2.25fr 0.72fr 0.72fr;
+  }
+
+  #catalog .catalog-grid.active-3 {
+    grid-template-columns: 0.72fr 0.72fr 2.25fr 0.72fr;
+  }
+
+  #catalog .catalog-grid.active-4 {
+    grid-template-columns: 0.72fr 0.72fr 0.72fr 2.25fr;
+  }
+
+  #catalog .catalog-grid.has-active:not(:hover):not(:focus-within) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  #catalog .catalog-grid.has-active:not(:hover):not(:focus-within) .catalog-card {
+    opacity: 1;
+  }
+
+  #catalog .catalog-grid:hover .catalog-card:not(:hover),
+  #catalog .catalog-grid:focus-within .catalog-card:not(:focus-within),
+  #catalog .catalog-grid.has-active .catalog-card:not(.is-active) {
+    opacity: 0.72;
+  }
+}
+
