@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1277 744" preserveAspectRatio="none">
+  <path
+    d="M38 2 H865 C887 2 905 20 905 42 V91 C905 114 924 132 947 132 H1237 C1258 132 1275 150 1275 171 V704 C1275 725 1258 742 1237 742 H407 C385 742 368 724 368 702 V650 C368 628 350 610 328 610 L38 604 C18 604 2 587 2 567 V38 C2 18 18 2 38 2 Z"
+    fill="none"
+    stroke="#5fd8ff"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    vector-effect="non-scaling-stroke"
+    shape-rendering="geometricPrecision"
+  />
+</svg>
