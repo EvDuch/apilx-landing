@@ -54,7 +54,7 @@ window.API_LX_LANGUAGE = (() => {
     { code: "ru", native: "\u0420\u0443\u0441\u0441\u043a\u0438\u0439", label: "Russian", flagSrc: "assets/flags/flag-ru.png?v=20260602" },
     { code: "fr", native: "Fran\u00e7ais", label: "French", flagSrc: "assets/flags/flag-fr.png?v=20260602" },
     { code: "es", native: "Espa\u00f1ol", label: "Spanish", flagSrc: "assets/flags/flag-es.png?v=20260602" },
-    { code: "pt", native: "Portugu\u00eas", label: "Portuguese", flagSrc: "assets/flags/flag-pt.png?v=20260602" }
+    { code: "pt", native: "Portugu\u00eas", label: "Portuguese", flagSrc: "assets/flags/flag-pt.png?v=20260602-portugal" }
   ];
 
   const languageLabels = languageMeta;

@@ -96,6 +96,41 @@
   requestAnimationFrame(updateActiveNav);
   window.addEventListener("hashchange", () => requestAnimationFrame(updateActiveNav));
 
+  const applyScrollReveal = () => {
+    const revealSelectors = [
+      ".reveal",
+      ".marquee-strip",
+      "#benefits .benefits-showcase__head",
+      "#benefits .benefit-card",
+      "#catalog .section-head",
+      "#catalog .catalog-card",
+      "#map .map-copy",
+      "#map .globe-stage",
+      "#map .region-list",
+      "#calculator .section-head",
+      "#calculator .calculator-shell",
+      "#calculator .control-card",
+      "#calculator .calc-comparison",
+      "#calculator .calc-chart-card",
+      "#calculator .extra-revenue",
+      "#faq .section-head",
+      "#faq .faq-wrap",
+      "#faq .faq-item",
+      "#updates .updates-showcase",
+      "#updates .timeline-entry",
+      "#referral .referral-section-title",
+      "#referral .referral-showcase",
+      ".footer .footer-grid > *"
+    ];
+
+    $$(revealSelectors.join(",")).forEach((el, index) => {
+      el.classList.add("reveal", "reveal-pop");
+      el.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 55}ms`);
+    });
+  };
+
+  applyScrollReveal();
+
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -103,10 +138,12 @@
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.16 });
+  }, { threshold: 0.02, rootMargin: "0px 0px 18% 0px" });
 
   $$(".reveal").forEach((el, index) => {
-    el.style.transitionDelay = `${Math.min(index % 6, 5) * 60}ms`;
+    if (!el.style.getPropertyValue("--reveal-delay")) {
+      el.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 55}ms`);
+    }
     revealObserver.observe(el);
   });
 
@@ -548,8 +585,14 @@
       const apiHeight = visualHeight(data.api);
       if (otherValue && !otherValue.matches("[data-other-ggr], [data-other-fee], [data-other-net]")) otherValue.textContent = data.format(data.other);
       if (apiValue && !apiValue.matches("[data-api-ggr], [data-api-fee], [data-api-net], [data-api-rtp], [data-api-rate]")) apiValue.textContent = data.format(data.api);
-      if (otherBar) otherBar.style.setProperty("--bar-height", `${otherHeight}%`);
-      if (apiBar) apiBar.style.setProperty("--bar-height", `${apiHeight}%`);
+      if (otherBar) {
+        otherBar.style.setProperty("--bar-height", `${otherHeight}%`);
+        otherBar.style.setProperty("--bar-scale", String(clamp(otherHeight / 100, 0.08, 1)));
+      }
+      if (apiBar) {
+        apiBar.style.setProperty("--bar-height", `${apiHeight}%`);
+        apiBar.style.setProperty("--bar-scale", String(clamp(apiHeight / 100, 0.08, 1)));
+      }
       if (delta) {
         const sign = data.delta > 0 ? "+" : "";
         delta.textContent = `${sign}${Math.round(data.delta)}%`;

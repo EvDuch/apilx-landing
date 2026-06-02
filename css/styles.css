@@ -10948,8 +10948,9 @@ html[lang="ru"] #updates .timeline-entry h3::after {
 #benefits.benefits-grid-section .benefit-card.glass,
 #benefits.benefits-grid-section .benefit-card:hover,
 #benefits.benefits-grid-section .benefit-card:focus-within {
-  background-color: #073a89 !important;
-  background-image: url("../assets/referral-card-texture.png?v=20260528-referral-texture") !important;
+  isolation: isolate !important;
+  background-color: transparent !important;
+  background-image: none !important;
   background-position: center !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
@@ -10962,6 +10963,32 @@ html[lang="ru"] #updates .timeline-entry h3::after {
     inset 0 0 0 1px rgba(255, 255, 255, 0.06) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+}
+
+#benefits.benefits-grid-section .benefit-card::before,
+#benefits.benefits-grid-section .benefit-card.glass::before,
+#benefits.benefits-grid-section .benefit-card:hover::before,
+#benefits.benefits-grid-section .benefit-card:focus-within::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  z-index: 0 !important;
+  inset: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: inherit !important;
+  background: #073a89 url("../assets/referral-card-texture.png?v=20260528-referral-texture") center / cover no-repeat !important;
+  opacity: 0.72 !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+}
+
+#benefits.benefits-grid-section .benefit-card::after,
+#benefits.benefits-grid-section .benefit-card.glass::after,
+#benefits.benefits-grid-section .benefit-card:hover::after,
+#benefits.benefits-grid-section .benefit-card:focus-within::after {
+  content: none !important;
+  display: none !important;
 }
 
 #benefits.benefits-grid-section .benefit-card:hover,
@@ -10978,8 +11005,10 @@ html[lang="ru"] #updates .timeline-entry h3::after {
 #faq .faq-item:hover,
 #faq .faq-item:focus-within,
 #faq .faq-item.open {
-  background-color: #073a89 !important;
-  background-image: url("../assets/referral-card-texture.png?v=20260528-referral-texture") !important;
+  position: relative !important;
+  isolation: isolate !important;
+  background-color: transparent !important;
+  background-image: none !important;
   background-position: center !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
@@ -10994,6 +11023,38 @@ html[lang="ru"] #updates .timeline-entry h3::after {
   -webkit-backdrop-filter: none !important;
 }
 
+#faq .faq-item::before,
+#faq .faq-item:hover::before,
+#faq .faq-item:focus-within::before,
+#faq .faq-item.open::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  z-index: 0 !important;
+  inset: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: inherit !important;
+  background: #073a89 url("../assets/referral-card-texture.png?v=20260528-referral-texture") center / cover no-repeat !important;
+  opacity: 0.72 !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+}
+
+#faq .faq-item::after,
+#faq .faq-item:hover::after,
+#faq .faq-item:focus-within::after,
+#faq .faq-item.open::after {
+  content: none !important;
+  display: none !important;
+}
+
+#faq .faq-question,
+#faq .faq-answer {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
 #faq .faq-item:hover,
 #faq .faq-item:focus-within,
 #faq .faq-item.open {
@@ -11002,4 +11063,213 @@ html[lang="ru"] #updates .timeline-entry h3::after {
     0 0 5px rgba(102, 220, 255, 0.95),
     0 0 22px rgba(92, 213, 255, 0.58),
     inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Active Regions card matches the Why Exactly Choose Us card treatment. */
+#map .region-list,
+#map .region-list:hover,
+#map .region-list:focus-within {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-clip: padding-box !important;
+  opacity: 1 !important;
+  border: 2px solid rgba(92, 213, 255, 0.9) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    0 0 4px rgba(102, 220, 255, 0.92),
+    0 0 18px rgba(92, 213, 255, 0.52),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+#map .region-list::before,
+#map .region-list:hover::before,
+#map .region-list:focus-within::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  z-index: 0 !important;
+  inset: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: inherit !important;
+  background: #073a89 url("../assets/referral-card-texture.png?v=20260528-referral-texture") center / cover no-repeat !important;
+  opacity: 0.72 !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+}
+
+#map .region-list::after,
+#map .region-list:hover::after,
+#map .region-list:focus-within::after {
+  content: none !important;
+  display: none !important;
+}
+
+#map .region-list h3,
+#map .region-list ul {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+#map .region-list:hover,
+#map .region-list:focus-within {
+  border-color: rgba(92, 213, 255, 0.96) !important;
+  box-shadow:
+    0 0 5px rgba(102, 220, 255, 0.95),
+    0 0 22px rgba(92, 213, 255, 0.58),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Sitewide scroll reveal: blocks softly pop into place while scrolling down. */
+.reveal-pop {
+  will-change: opacity, transform, filter;
+  transition:
+    opacity 880ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 880ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 880ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 160ms ease,
+    background-color 160ms ease !important;
+  transition-delay:
+    var(--reveal-delay, 0ms),
+    var(--reveal-delay, 0ms),
+    var(--reveal-delay, 0ms),
+    0ms,
+    0ms !important;
+}
+
+body .marquee-strip.reveal-pop:not(.visible),
+body #benefits .benefits-showcase__head.reveal-pop:not(.visible),
+body #benefits .benefit-card.reveal-pop:not(.visible),
+body #catalog .section-head.reveal-pop:not(.visible),
+body #catalog .catalog-card.reveal-pop:not(.visible),
+body #map .map-copy.reveal-pop:not(.visible),
+body #map .globe-stage.reveal-pop:not(.visible),
+body #map .region-list.reveal-pop:not(.visible),
+body #calculator .section-head.reveal-pop:not(.visible),
+body #calculator .calculator-shell.reveal-pop:not(.visible),
+body #calculator .control-card.reveal-pop:not(.visible),
+body #calculator .calc-comparison.reveal-pop:not(.visible),
+body #calculator .calc-chart-card.reveal-pop:not(.visible),
+body #calculator .extra-revenue.reveal-pop:not(.visible),
+body #faq .section-head.reveal-pop:not(.visible),
+body #faq .faq-wrap.reveal-pop:not(.visible),
+body #faq .faq-item.reveal-pop:not(.visible),
+body #updates .updates-showcase.reveal-pop:not(.visible),
+body #updates .timeline-entry.reveal-pop:not(.visible),
+body #referral .referral-section-title.reveal-pop:not(.visible),
+body #referral .referral-showcase.reveal-pop:not(.visible),
+body .footer .footer-grid > .reveal-pop:not(.visible),
+body .reveal-pop:not(.visible) {
+  opacity: 0.08 !important;
+  transform: translate3d(0, 58px, 0) scale(0.992) !important;
+  filter: saturate(0.98) brightness(0.96) !important;
+}
+
+body .marquee-strip.reveal-pop.visible,
+body #benefits .benefits-showcase__head.reveal-pop.visible,
+body #benefits .benefit-card.reveal-pop.visible,
+body #catalog .section-head.reveal-pop.visible,
+body #catalog .catalog-card.reveal-pop.visible,
+body #map .map-copy.reveal-pop.visible,
+body #map .globe-stage.reveal-pop.visible,
+body #map .region-list.reveal-pop.visible,
+body #calculator .section-head.reveal-pop.visible,
+body #calculator .calculator-shell.reveal-pop.visible,
+body #calculator .control-card.reveal-pop.visible,
+body #calculator .calc-comparison.reveal-pop.visible,
+body #calculator .calc-chart-card.reveal-pop.visible,
+body #calculator .extra-revenue.reveal-pop.visible,
+body #faq .section-head.reveal-pop.visible,
+body #faq .faq-wrap.reveal-pop.visible,
+body #faq .faq-item.reveal-pop.visible,
+body #updates .updates-showcase.reveal-pop.visible,
+body #updates .timeline-entry.reveal-pop.visible,
+body #referral .referral-section-title.reveal-pop.visible,
+body #referral .referral-showcase.reveal-pop.visible,
+body .footer .footer-grid > .reveal-pop.visible,
+body .reveal-pop.visible {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) scale(1) !important;
+  filter: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body .marquee-strip.reveal-pop,
+  body #benefits .benefits-showcase__head.reveal-pop,
+  body #benefits .benefit-card.reveal-pop,
+  body #catalog .section-head.reveal-pop,
+  body #catalog .catalog-card.reveal-pop,
+  body #map .map-copy.reveal-pop,
+  body #map .globe-stage.reveal-pop,
+  body #map .region-list.reveal-pop,
+  body #calculator .section-head.reveal-pop,
+  body #calculator .calculator-shell.reveal-pop,
+  body #calculator .control-card.reveal-pop,
+  body #calculator .calc-comparison.reveal-pop,
+  body #calculator .calc-chart-card.reveal-pop,
+  body #calculator .extra-revenue.reveal-pop,
+  body #faq .section-head.reveal-pop,
+  body #faq .faq-wrap.reveal-pop,
+  body #faq .faq-item.reveal-pop,
+  body #updates .updates-showcase.reveal-pop,
+  body #updates .timeline-entry.reveal-pop,
+  body #referral .referral-section-title.reveal-pop,
+  body #referral .referral-showcase.reveal-pop,
+  body .footer .footer-grid > .reveal-pop,
+  body .reveal-pop {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
+/* Calculator chart smoothing: animate bars visually without relaying out the grid. */
+#calculator .chart-bar-pair {
+  contain: layout paint !important;
+}
+
+#calculator .chart-bar-pair strong {
+  min-width: 7.4em !important;
+  font-variant-numeric: tabular-nums !important;
+  font-feature-settings: "tnum" 1 !important;
+}
+
+#calculator .bar,
+#calculator .bar.other,
+#calculator .bar.api {
+  height: 100% !important;
+  min-height: 0 !important;
+  transform: scaleY(var(--bar-scale, 0.45)) translateZ(0) !important;
+  transform-origin: center bottom !important;
+  transition:
+    transform 280ms cubic-bezier(0.22, 0.72, 0.28, 1),
+    background 180ms ease,
+    box-shadow 180ms ease !important;
+  will-change: transform !important;
+  backface-visibility: hidden !important;
+}
+
+.calculator-dragging #calculator .bar,
+.calculator-dragging #calculator .bar.other,
+.calculator-dragging #calculator .bar.api {
+  transition:
+    transform 190ms cubic-bezier(0.22, 0.72, 0.28, 1),
+    background 120ms ease,
+    box-shadow 120ms ease !important;
+}
+
+.calculator-dragging #calculator .calc-mini-bars span {
+  transition:
+    height 140ms ease-out,
+    background 120ms ease,
+    box-shadow 120ms ease !important;
 }
