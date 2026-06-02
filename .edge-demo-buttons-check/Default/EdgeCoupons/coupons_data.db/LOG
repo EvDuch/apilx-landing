@@ -1,0 +1,5 @@
+2026/06/02-15:02:30.682 6a7c Creating DB C:\apilx-landing\.edge-demo-buttons-check\Default\EdgeCoupons/coupons_data.db since it was missing.
+2026/06/02-15:02:30.695 6a7c Reusing MANIFEST C:\apilx-landing\.edge-demo-buttons-check\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/06/02-15:03:30.666 4370 Level-0 table #5: started
+2026/06/02-15:03:30.674 4370 Level-0 table #5: 682649 bytes OK
+2026/06/02-15:03:30.676 4370 Delete type=0 #3

@@ -10856,3 +10856,150 @@ html[lang="ru"] #updates .timeline-entry h3::after {
 .lead-dialog .lead-actions > .lead-submit {
   order: 3;
 }
+
+/* Language selector flags */
+.language-button {
+  width: auto !important;
+  min-width: 102px !important;
+  padding: 0 18px !important;
+}
+
+.language-current-flag,
+.language-flag-image {
+  display: block !important;
+  width: 28px !important;
+  height: 28px !important;
+  flex: 0 0 28px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  overflow: hidden !important;
+}
+
+.language-button [data-current-lang] {
+  display: inline-block !important;
+  max-width: 92px !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  opacity: 1 !important;
+}
+
+.language-menu {
+  width: 214px !important;
+}
+
+.language-menu button > span,
+.language-quick span,
+.language-card-label {
+  gap: 10px !important;
+}
+
+.language-card .language-flag-image {
+  width: 32px !important;
+  height: 32px !important;
+  flex-basis: 32px !important;
+}
+
+@media (max-width: 760px) {
+  .language-button {
+    width: 46px !important;
+    max-width: 46px !important;
+    min-width: 46px !important;
+    min-height: 40px !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  .language-button::before {
+    content: none !important;
+  }
+
+  .language-current-flag {
+    width: 28px !important;
+    height: 28px !important;
+    flex-basis: 28px !important;
+  }
+
+  .language-button [data-current-lang] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    max-width: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    opacity: 0 !important;
+  }
+
+  .language-button svg {
+    display: none !important;
+  }
+
+  .language-menu {
+    width: 190px !important;
+  }
+}
+
+/* Why Exactly Choose Us cards use the referral card texture and neon frame. */
+#benefits.benefits-grid-section .benefit-card,
+#benefits.benefits-grid-section .benefit-card.glass,
+#benefits.benefits-grid-section .benefit-card:hover,
+#benefits.benefits-grid-section .benefit-card:focus-within {
+  background-color: #073a89 !important;
+  background-image: url("../assets/referral-card-texture.png?v=20260528-referral-texture") !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-clip: padding-box !important;
+  opacity: 1 !important;
+  border: 2px solid rgba(92, 213, 255, 0.9) !important;
+  box-shadow:
+    0 0 4px rgba(102, 220, 255, 0.92),
+    0 0 18px rgba(92, 213, 255, 0.52),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+#benefits.benefits-grid-section .benefit-card:hover,
+#benefits.benefits-grid-section .benefit-card:focus-within {
+  border-color: rgba(92, 213, 255, 0.96) !important;
+  box-shadow:
+    0 0 5px rgba(102, 220, 255, 0.95),
+    0 0 22px rgba(92, 213, 255, 0.58),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+}
+
+/* FAQ question cards match the referral card opacity and neon treatment. */
+#faq .faq-item,
+#faq .faq-item:hover,
+#faq .faq-item:focus-within,
+#faq .faq-item.open {
+  background-color: #073a89 !important;
+  background-image: url("../assets/referral-card-texture.png?v=20260528-referral-texture") !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-clip: padding-box !important;
+  opacity: 1 !important;
+  border: 2px solid rgba(92, 213, 255, 0.9) !important;
+  box-shadow:
+    0 0 4px rgba(102, 220, 255, 0.92),
+    0 0 18px rgba(92, 213, 255, 0.52),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+#faq .faq-item:hover,
+#faq .faq-item:focus-within,
+#faq .faq-item.open {
+  border-color: rgba(92, 213, 255, 0.96) !important;
+  box-shadow:
+    0 0 5px rgba(102, 220, 255, 0.95),
+    0 0 22px rgba(92, 213, 255, 0.58),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+}

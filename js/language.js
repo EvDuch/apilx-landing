@@ -43,24 +43,25 @@ window.API_LX_LANGUAGE = (() => {
     const languageGrid = $("[data-language-grid]");
     const languageClose = $("[data-language-close]");
     const currentLang = $("[data-current-lang]");
+    const currentLangFlag = $("[data-current-lang-flag]");
     if (!langToggle || !langMenu || !languageModal || !languageGrid || !languageClose || !currentLang) {
       applyStaticLanguage();
       return { closeLanguageMenu() {}, closeLanguageModal() {}, applyLanguage: applyStaticLanguage };
     }
 
     const languageMeta = [
-    { code: "en", native: "English", label: "English", flag: "\ud83c\uddec\ud83c\udde7" },
-    { code: "ru", native: "\u0420\u0443\u0441\u0441\u043a\u0438\u0439", label: "Russian", flag: "\ud83c\uddf7\ud83c\uddfa" },
-    { code: "fr", native: "Fran\u00e7ais", label: "French", flag: "\ud83c\uddeb\ud83c\uddf7" },
-    { code: "es", native: "Espa\u00f1ol", label: "Spanish", flag: "\ud83c\uddea\ud83c\uddf8" },
-    { code: "pt", native: "Portugu\u00eas", label: "Portuguese", flag: "\ud83c\uddf5\ud83c\uddf9" }
+    { code: "en", native: "English", label: "English", flagSrc: "assets/flags/flag-en.png?v=20260602" },
+    { code: "ru", native: "\u0420\u0443\u0441\u0441\u043a\u0438\u0439", label: "Russian", flagSrc: "assets/flags/flag-ru.png?v=20260602" },
+    { code: "fr", native: "Fran\u00e7ais", label: "French", flagSrc: "assets/flags/flag-fr.png?v=20260602" },
+    { code: "es", native: "Espa\u00f1ol", label: "Spanish", flagSrc: "assets/flags/flag-es.png?v=20260602" },
+    { code: "pt", native: "Portugu\u00eas", label: "Portuguese", flagSrc: "assets/flags/flag-pt.png?v=20260602" }
   ];
 
   const languageLabels = languageMeta;
 
   languageGrid.innerHTML = languageMeta.map((language) => `
     <button class="language-card" type="button" data-lang="${language.code}">
-      <span class="language-card-label"><span class="language-flag" aria-hidden="true">${language.flag}</span><strong>${language.native}</strong></span>
+      <span class="language-card-label"><img class="language-flag language-flag-image" src="${language.flagSrc}" alt="" aria-hidden="true" /><strong>${language.native}</strong></span>
       <span class="language-chevron" aria-hidden="true">›</span>
     </button>
   `).join("");
@@ -93,12 +94,13 @@ window.API_LX_LANGUAGE = (() => {
     if (!modal.classList.contains("open")) document.body.style.overflow = "";
   };
 
-    const isCompactLanguageLabel = () => window.matchMedia("(max-width: 760px)").matches;
-
     const setCurrentLanguageLabel = (selected) => {
-      currentLang.textContent = isCompactLanguageLabel()
-        ? selected.code.toUpperCase()
-        : `${selected.flag} ${selected.native}`;
+      currentLang.textContent = selected.native;
+      if (currentLangFlag) {
+        currentLangFlag.src = selected.flagSrc;
+        currentLangFlag.alt = selected.label;
+      }
+      langToggle.setAttribute("aria-label", selected.label);
     };
 
     const applyLanguage = (lang) => {
