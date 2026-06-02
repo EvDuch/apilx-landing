@@ -1404,7 +1404,10 @@
   };
 
   $$('[data-lead-open]').forEach((button) => {
-    button.addEventListener("click", openLeadModal);
+    button.addEventListener("click", () => {
+      navLinks?.classList.remove("open");
+      openLeadModal();
+    });
   });
 
   $$('[data-referral-open]').forEach((button) => {

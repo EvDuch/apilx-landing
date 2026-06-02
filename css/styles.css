@@ -11273,3 +11273,172 @@ body .reveal-pop.visible {
     background 120ms ease,
     box-shadow 120ms ease !important;
 }
+
+.nav-cta-menu {
+  display: none !important;
+}
+
+/* Mobile nav cleanup: logo, burger and language flag share one row; menu shows all actions. */
+@media (max-width: 760px) {
+  .topbar .nav {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    min-height: 68px !important;
+    gap: 10px !important;
+  }
+
+  .topbar .logo {
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  .topbar .menu-toggle {
+    position: relative !important;
+    order: 2 !important;
+    flex: 0 0 42px !important;
+    margin: 0 !important;
+    align-self: center !important;
+  }
+
+  .topbar .nav-actions {
+    order: 3 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    flex: 1 0 auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    gap: 0 !important;
+    position: static !important;
+  }
+
+  .topbar .language-switcher {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    right: auto !important;
+    z-index: 70 !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+
+  .topbar .language-button,
+  .topbar .language-button:hover,
+  .topbar .language-button:focus-visible {
+    width: 32px !important;
+    max-width: 32px !important;
+    min-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    text-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .topbar .language-current-flag {
+    width: 32px !important;
+    height: 32px !important;
+    flex: 0 0 32px !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+  }
+
+  .topbar .language-button [data-current-lang],
+  .topbar .language-button svg,
+  .topbar .language-button::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  .topbar .language-menu {
+    position: fixed !important;
+    top: 68px !important;
+    right: 12px !important;
+    left: auto !important;
+    width: min(210px, calc(100vw - 24px)) !important;
+  }
+
+  .topbar .nav-links {
+    position: fixed !important;
+    top: 76px !important;
+    left: 12px !important;
+    right: 12px !important;
+    z-index: 65 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    padding: 10px !important;
+    overflow: visible !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(-8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 14px !important;
+    background: #43255b !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease !important;
+  }
+
+  .topbar .nav-links.open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+    min-height: 264px !important;
+    max-height: calc(100dvh - 94px) !important;
+    overflow-y: auto !important;
+  }
+
+  .topbar .nav-links a,
+  .topbar .nav-links .nav-cta-menu {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 44px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 14px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  .topbar .nav-links:not(.open) a,
+  .topbar .nav-links:not(.open) .nav-cta-menu {
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .topbar .nav-actions > .nav-cta:not(.nav-cta-menu) {
+    display: none !important;
+  }
+
+  .topbar .nav-links .nav-cta-menu {
+    margin-top: 4px !important;
+  }
+
+  .topbar .nav-links .nav-cta-menu .nav-cta-full {
+    display: none !important;
+  }
+
+  .topbar .nav-links .nav-cta-menu .nav-cta-short {
+    display: inline !important;
+  }
+}
