@@ -1,11 +1,11 @@
 (() => {
   "use strict";
 
-  const DATA_URL = "./data/pragmatic-games.json";
   const PAGE_SIZE = 40;
-  const DEMO_BASE_URL = "https://demogamesfree.pragmaticplay.net/hub-demo/openGame.do";
-  const CLIENT_HUB_URL = "https://clienthub.pragmaticplay.com/";
-  const LOBBY_URL = "https://clienthub.pragmaticplay.com/slots/game-library/";
+  const PRAGMATIC_DEMO_BASE_URL = "https://demogamesfree.pragmaticplay.net/hub-demo/openGame.do";
+  const PRAGMATIC_CLIENT_HUB_URL = "https://clienthub.pragmaticplay.com/";
+  const PRAGMATIC_LOBBY_URL = "https://clienthub.pragmaticplay.com/slots/game-library/";
+  const PGSOFT_DEMO_BASE_URL = "https://public.pg-demo.com/demo/";
 
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
@@ -25,12 +25,94 @@
     frameLoader: $("[data-frame-loader]"),
     frameTitle: $("[data-frame-title]"),
     frameProvider: $("[data-frame-provider]"),
-    backToGames: $("[data-back-to-games]")
+    backToGames: $("[data-back-to-games]"),
+    providerBadge: $("[data-provider-badge]"),
+    providerName: $("[data-provider-name]"),
+    pageTitle: $("[data-page-title]"),
+    pageSubtitle: $("[data-page-subtitle]"),
+    providerFilters: $$("[data-provider-filter]")
+  };
+
+  const providers = {
+    pragmatic: {
+      key: "pragmatic",
+      dataUrl: "./data/pragmatic-games.json",
+      displayName: "Pragmatic Play",
+      shortName: "Pragmatic",
+      error: "Unable to load ./data/pragmatic-games.json.",
+      normalize: (game, index) => ({
+        id: `pragmatic-${game.symbol || index}`,
+        providerKey: "pragmatic",
+        provider: String(game.vendorid || "Pragmatic Play").trim(),
+        title: String(game.name || "Untitled game").trim(),
+        symbol: String(game.symbol || "").trim(),
+        gameId: String(game.gameid || "").trim(),
+        launchValue: String(game.symbol || "").trim(),
+        image: String(game.iconurl2 || game.iconurl1 || "").trim(),
+        fallbackImage: String(game.iconurl1 || "").trim(),
+        miniBet: game.miniBet
+      }),
+      buildDemoUrl: (game) => {
+        if (!game.launchValue) throw new Error("Pragmatic Play game symbol is missing.");
+        const params = [
+          "lang=en",
+          "cur=USD",
+          `websiteUrl=${encodeURIComponent(PRAGMATIC_CLIENT_HUB_URL)}`,
+          "gcpif=2831",
+          `gameSymbol=${encodeURIComponent(game.launchValue)}`,
+          "jurisdiction=99",
+          `lobbyUrl=${PRAGMATIC_LOBBY_URL}`
+        ];
+
+        return `${PRAGMATIC_DEMO_BASE_URL}?${params.join("&")}`;
+      }
+    },
+    pgsoft: {
+      key: "pgsoft",
+      dataUrl: "./data/PGSoft.json",
+      displayName: "PG Soft",
+      shortName: "PG Soft",
+      error: "Unable to load ./data/PGSoft.json.",
+      normalize: (game, index) => ({
+        id: `pgsoft-${game.gameid || game.symbol || index}`,
+        providerKey: "pgsoft",
+        provider: String(game.vendorid || "PG Soft").trim(),
+        title: String(game.name || "Untitled game").trim(),
+        symbol: String(game.symbol || "").trim(),
+        gameId: String(game.gameid || "").trim(),
+        launchValue: String(game.gameid || "").trim(),
+        image: String(game.iconurl || "").trim(),
+        fallbackImage: "",
+        miniBet: game.miniBet
+      }),
+      buildDemoUrl: (game) => {
+        if (!game.launchValue) throw new Error("PG Soft gameid is missing.");
+        return `${PGSOFT_DEMO_BASE_URL}?gi=${encodeURIComponent(game.launchValue)}&lang=en`;
+      }
+    }
+  };
+
+  const filterLabels = {
+    all: "All providers",
+    pragmatic: "Pragmatic Play",
+    pgsoft: "PG Soft"
   };
 
   let games = [];
+  let providerScopedGames = [];
   let filteredGames = [];
+  let activeProvider = "all";
   let renderedCount = PAGE_SIZE;
+  let loadErrors = [];
+  let frameLoadingTimer = 0;
+
+  const getInitialProvider = () => {
+    const params = new URLSearchParams(window.location.search);
+    const provider = String(params.get("provider") || params.get("vendor") || "all").toLowerCase();
+    if (["pragmatic", "pragmatic-play", "pragmatic_play"].includes(provider)) return "pragmatic";
+    if (["pgsoft", "pg-soft", "pg_soft", "pg"].includes(provider)) return "pgsoft";
+    return "all";
+  };
 
   const placeholderImage = (title = "Game") => {
     const initials = title
@@ -39,7 +121,7 @@
       .slice(0, 2)
       .map((word) => word[0])
       .join("")
-      .toUpperCase() || "PP";
+      .toUpperCase() || "LX";
 
     const svg = `
       <svg xmlns="http://www.w3.org/2000/svg" width="650" height="520" viewBox="0 0 650 520">
@@ -70,30 +152,6 @@
     }).format(number);
   };
 
-  const normalizeGame = (game, index) => ({
-    id: `${game.symbol || "game"}-${index}`,
-    title: String(game.name || "Untitled game").trim(),
-    provider: String(game.vendorid || "Pragmatic Play").trim(),
-    symbol: String(game.symbol || "").trim(),
-    image: String(game.iconurl2 || game.iconurl1 || "").trim(),
-    fallbackImage: String(game.iconurl1 || "").trim(),
-    miniBet: game.miniBet
-  });
-
-  const buildDemoUrl = (symbol) => {
-    const params = [
-      "lang=en",
-      "cur=USD",
-      `websiteUrl=${encodeURIComponent(CLIENT_HUB_URL)}`,
-      "gcpif=2831",
-      `gameSymbol=${encodeURIComponent(symbol)}`,
-      "jurisdiction=99",
-      `lobbyUrl=${LOBBY_URL}`
-    ];
-
-    return `${DEMO_BASE_URL}?${params.join("&")}`;
-  };
-
   const setStatus = (message, isError = false) => {
     if (!els.status) return;
     els.status.textContent = message;
@@ -101,8 +159,31 @@
     els.status.classList.toggle("is-error", isError);
   };
 
+  const providerMatches = (game) => activeProvider === "all" || game.providerKey === activeProvider;
+
+  const updateProviderUi = () => {
+    const label = filterLabels[activeProvider] || filterLabels.all;
+    if (els.providerBadge) els.providerBadge.textContent = activeProvider === "all" ? "API LX demos" : `${label} demos`;
+    if (els.providerName) els.providerName.textContent = label;
+    if (els.pageTitle) els.pageTitle.textContent = activeProvider === "all" ? "Demo Game Catalog" : `${label} Demo Games`;
+    if (els.pageSubtitle) {
+      els.pageSubtitle.textContent = activeProvider === "all"
+        ? "Search both provider catalogs, launch a slot, and keep the demo session inside this page."
+        : `Search ${label} demos, launch a slot, and keep the demo session inside this page.`;
+    }
+    if (els.search) {
+      els.search.setAttribute("placeholder", activeProvider === "pgsoft" ? "Plushie Frenzy, Fortune Gods..." : "Sweet Bonanza, Gates of Olympus...");
+    }
+    els.providerFilters.forEach((button) => {
+      const isActive = button.dataset.providerFilter === activeProvider;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+  };
+
   const setTotals = () => {
-    if (els.total) els.total.textContent = games.length.toString();
+    providerScopedGames = games.filter(providerMatches);
+    if (els.total) els.total.textContent = providerScopedGames.length.toString();
     els.visible.forEach((node) => {
       node.textContent = Math.min(renderedCount, filteredGames.length).toString();
     });
@@ -150,9 +231,9 @@
     const meta = document.createElement("div");
     meta.className = "game-meta";
 
-    const symbol = document.createElement("span");
-    symbol.textContent = game.symbol;
-    meta.append(symbol);
+    const launchId = document.createElement("span");
+    launchId.textContent = game.providerKey === "pgsoft" ? `gameid ${game.launchValue}` : game.symbol;
+    meta.append(launchId);
 
     const miniBet = formatMiniBet(game.miniBet);
     if (miniBet) {
@@ -165,12 +246,20 @@
     button.className = "play-button";
     button.type = "button";
     button.textContent = "Play Demo";
-    button.disabled = !game.symbol;
+    button.disabled = !game.launchValue;
     button.addEventListener("click", () => openGame(game));
 
     body.append(provider, title, meta, button);
     card.append(imageWrap, body);
     return card;
+  };
+
+  const applyFilters = () => {
+    const query = (els.search?.value || "").trim().toLowerCase();
+    providerScopedGames = games.filter(providerMatches);
+    filteredGames = providerScopedGames.filter((game) => !query || game.title.toLowerCase().includes(query));
+    renderedCount = PAGE_SIZE;
+    renderGames();
   };
 
   const renderGames = () => {
@@ -183,8 +272,10 @@
     visibleGames.forEach((game) => fragment.append(createGameCard(game)));
     els.grid.append(fragment);
 
-    if (!filteredGames.length) {
-      setStatus("No Pragmatic Play games match your search.");
+    if (loadErrors.length) {
+      setStatus(loadErrors.join(" "), true);
+    } else if (!filteredGames.length) {
+      setStatus("No games match your search.");
     } else {
       setStatus("");
     }
@@ -198,19 +289,25 @@
     setTotals();
   };
 
-  const applySearch = () => {
-    const query = (els.search?.value || "").trim().toLowerCase();
-    filteredGames = query
-      ? games.filter((game) => game.title.toLowerCase().includes(query))
-      : games.slice();
-    renderedCount = PAGE_SIZE;
-    renderGames();
+  const beginFrameLoading = () => {
+    if (!els.frameLoader) return;
+    window.clearTimeout(frameLoadingTimer);
+    els.frameLoader.textContent = "Loading demo session...";
+    els.frameLoader.hidden = false;
+    els.frameLoader.classList.add("is-visible");
+    frameLoadingTimer = window.setTimeout(() => {
+      els.frameLoader.textContent = "Demo is still loading. Please try another game if it does not start.";
+      els.frameLoader.hidden = false;
+      els.frameLoader.classList.add("is-visible");
+    }, 15000);
   };
 
-  const setPlayerLoading = (isLoading) => {
+  const finishFrameLoading = () => {
+    window.clearTimeout(frameLoadingTimer);
+    frameLoadingTimer = 0;
     if (!els.frameLoader) return;
-    els.frameLoader.hidden = !isLoading;
-    els.frameLoader.classList.toggle("is-visible", isLoading);
+    els.frameLoader.hidden = true;
+    els.frameLoader.classList.remove("is-visible");
   };
 
   const scrollToPlayer = () => {
@@ -222,18 +319,27 @@
     });
   };
 
-  const openGame = (game) => {
-    if (!game.symbol || !els.frame || !els.playerView || !els.catalogView) return;
+  function openGame(game) {
+    if (!game.launchValue || !els.frame || !els.playerView || !els.catalogView) return;
+
+    let demoUrl = "";
+    try {
+      demoUrl = providers[game.providerKey].buildDemoUrl(game);
+    } catch (error) {
+      setStatus(error.message || "Demo is not available.", true);
+      return;
+    }
 
     if (els.frameTitle) els.frameTitle.textContent = game.title;
     if (els.frameProvider) els.frameProvider.textContent = game.provider;
-    setPlayerLoading(true);
-    els.frame.src = buildDemoUrl(game.symbol);
+    setStatus("");
+    beginFrameLoading();
+    els.frame.src = demoUrl;
     els.catalogView.hidden = true;
     els.playerView.hidden = false;
     els.body.classList.add("is-playing-demo");
     scrollToPlayer();
-  };
+  }
 
   const closeGame = () => {
     if (!els.frame || !els.playerView || !els.catalogView) return;
@@ -242,40 +348,56 @@
     els.playerView.hidden = true;
     els.catalogView.hidden = false;
     els.body.classList.remove("is-playing-demo");
-    setPlayerLoading(false);
+    finishFrameLoading();
     window.scrollTo({ top: els.catalogView.offsetTop, behavior: "smooth" });
   };
 
-  const loadGames = async () => {
-    setStatus("Loading Pragmatic Play catalog...");
-
-    try {
-      const response = await fetch(DATA_URL, { cache: "no-store" });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-      const payload = await response.json();
-      if (!Array.isArray(payload?.data)) throw new Error("Invalid JSON: data array is missing.");
-
-      games = payload.data.map(normalizeGame).filter((game) => game.title && game.symbol);
-      filteredGames = games.slice();
-      renderedCount = PAGE_SIZE;
-      renderGames();
-    } catch (error) {
-      console.error(error);
-      games = [];
-      filteredGames = [];
-      renderGames();
-      setStatus("Unable to load ./data/pragmatic-games.json. Check that the local server is running and the file exists.", true);
-    }
+  const loadProvider = async (providerConfig) => {
+    const response = await fetch(providerConfig.dataUrl, { cache: "no-store" });
+    if (!response.ok) throw new Error(`${providerConfig.error} HTTP ${response.status}`);
+    const payload = await response.json();
+    if (!Array.isArray(payload?.data)) throw new Error(`${providerConfig.error} Invalid data array.`);
+    return payload.data
+      .map(providerConfig.normalize)
+      .filter((game) => game.title && game.launchValue);
   };
 
-  els.search?.addEventListener("input", applySearch);
+  const loadGames = async () => {
+    setStatus("Loading demo catalogs...");
+
+    const results = await Promise.allSettled(Object.values(providers).map(loadProvider));
+    loadErrors = [];
+    games = [];
+
+    results.forEach((result, index) => {
+      if (result.status === "fulfilled") {
+        games.push(...result.value);
+        return;
+      }
+      const providerConfig = Object.values(providers)[index];
+      loadErrors.push(result.reason?.message || providerConfig.error);
+    });
+
+    applyFilters();
+  };
+
+  activeProvider = getInitialProvider();
+  updateProviderUi();
+
+  els.providerFilters.forEach((button) => {
+    button.addEventListener("click", () => {
+      activeProvider = button.dataset.providerFilter || "all";
+      updateProviderUi();
+      applyFilters();
+    });
+  });
+  els.search?.addEventListener("input", applyFilters);
   els.loadMore?.addEventListener("click", () => {
     renderedCount += PAGE_SIZE;
     renderGames();
   });
   els.backToGames?.addEventListener("click", closeGame);
-  els.frame?.addEventListener("load", () => setPlayerLoading(false));
+  els.frame?.addEventListener("load", finishFrameLoading);
 
   loadGames();
 })();

@@ -34,7 +34,7 @@
       window.addEventListener("load", forceHeroStart);
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260602-mobile-menu-bg" />
+  <link rel="stylesheet" href="css/styles.css?v=20260605-section-nav-no-bubble" />
 </head>
 <body>
   <div class="site-shell">
@@ -76,7 +76,7 @@
             <div class="map-copy section-head reveal">
               <p class="eyebrow" data-i18n="map_eyebrow">Global Coverage</p>
               <h2 data-i18n="map_title">Our Global Client Network</h2>
-              <p data-i18n="map_subtitle">Trusted by operators across multiple regions.</p>
+              <p data-i18n="map_subtitle">Trusted by operators across multiple regions. Be first in your GEO.</p>
             </div>
             <div class="globe-stage reveal" data-globe-shell>
               <div class="globe-grid-glow" aria-hidden="true"></div>
@@ -204,11 +204,14 @@
 
       <section id="updates" class="section updates-section">
         <div class="container">
-          <div class="updates-showcase reveal">
+          <div class="updates-showcase reveal" data-updates-carousel data-active-update="1" style="--updates-index: 1">
             <span class="update-sphere update-sphere-a" aria-hidden="true"></span>
             <span class="update-sphere update-sphere-b" aria-hidden="true"></span>
             <span class="update-sphere update-sphere-c" aria-hidden="true"></span>
             <span class="update-sphere update-sphere-d" aria-hidden="true"></span>
+            <div class="updates-carousel">
+              <div class="updates-track" data-updates-track>
+                <article class="updates-release" data-update-slide aria-hidden="true" inert>
             <div class="updates-intro">
               <p class="eyebrow" data-i18n="updates_eyebrow">Latest updates</p>
               <h2 data-i18n="updates_pgsoft_title">PG Soft Update is live on API LX</h2>
@@ -260,6 +263,59 @@
                 <p class="update-live-note" data-i18n="updates_live_note">The update is already live on the platform. For demos, game lists, or integration details:</p>
               </article>
             </div>
+                </article>
+
+                <article class="updates-release is-active" data-update-slide aria-hidden="false">
+                  <div class="updates-intro">
+                    <p class="eyebrow" data-i18n="updates_eyebrow">Latest updates</p>
+                    <h2 data-i18n="updates_pragmatic_title">Pragmatic Play Update is now live on API LX</h2>
+                    <p data-i18n="updates_pragmatic_intro">We’ve just rolled out another Pragmatic Play update with 13 new releases added to the platform.</p>
+                  </div>
+                  <div class="updates-timeline" aria-label="Pragmatic Play platform update details">
+                    <article class="timeline-entry timeline-entry-featured">
+                      <span class="timeline-dot" aria-hidden="true"></span>
+                      <time data-i18n="updates_status_now_live">Now live</time>
+                      <h3 data-i18n="updates_latest_games">Latest games added</h3>
+                      <ul class="update-game-list">
+                        <li><span>2661</span> Big Bass Football Bonanza <em>vs10bbwcup</em></li>
+                        <li><span>2660</span> Candy Rush <em>vs20candyia</em></li>
+                        <li><span>2659</span> The Big Dog House <em>vs20bgdoghouse</em></li>
+                        <li><span>2658</span> Triple Pot Plinko - Hercules <em>vswaysplnk3p</em></li>
+                        <li><span>2657</span> Heartbreakers <em>vs20prizegrow</em></li>
+                        <li><span>2656</span> Launch to Riches <em>vswaysrocktrls</em></li>
+                        <li><span>2655</span> Mr Null's Wicked Wares <em>vswaysmrcursc</em></li>
+                        <li><span>2654</span> Sweet Bonanza 2500 <em>vs20swbon2500</em></li>
+                        <li><span>2653</span> Dragon Pots Megaways <em>vswaysdragden</em></li>
+                        <li><span>2652</span> Great Ghosts <em>vs50grghsts</em></li>
+                        <li><span>2651</span> Big Bass Trophy Catch <em>vs10bbtrphfshn</em></li>
+                        <li><span>2650</span> Inca Queen <em>vs20thunder</em></li>
+                        <li><span>2649</span> Idol Pop Fever <em>vs20slightwdm</em></li>
+                      </ul>
+                    </article>
+                    <article class="timeline-entry">
+                      <span class="timeline-dot" aria-hidden="true"></span>
+                      <h3 data-i18n="updates_focus_title">At API LX, we continuously focus on:</h3>
+                      <div class="update-checks">
+                        <span data-i18n="updates_fast_updates">Fast provider updates</span>
+                        <span data-i18n="updates_full_portfolio">Full game availability</span>
+                        <span data-i18n="updates_stable_integrations">Stable infrastructure</span>
+                      </div>
+                    </article>
+                    <article class="timeline-entry">
+                      <span class="timeline-dot" aria-hidden="true"></span>
+                      <h3 data-i18n="updates_why_title">Why it matters</h3>
+                      <p data-i18n="updates_operators_note">Because operators shouldn’t wait weeks for fresh content to go live.</p>
+                      <p class="update-live-note" data-i18n="updates_pragmatic_live_note">The update is already available on the platform.</p>
+                      <button class="btn btn-primary" type="button" data-lead-open data-i18n="updates_contact_start">Contact us to get started.</button>
+                    </article>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="updates-carousel-nav" aria-label="Update navigation">
+              <button class="updates-arrow updates-arrow--older" type="button" data-updates-older data-i18n-aria-label="updates_older_label" aria-label="Previous update">←</button>
+              <button class="updates-arrow updates-arrow--newer" type="button" data-updates-newer data-i18n-aria-label="updates_newer_label" aria-label="Next update" hidden>→</button>
+            </div>
           </div>
         </div>
       </section>
@@ -294,6 +350,30 @@
 
     <div data-partial="footer"></div>
   </div>
+
+  <nav class="section-quick-nav" data-section-nav aria-label="Quick section navigation">
+    <a class="section-quick-nav__item" href="#benefits" data-section-nav-link aria-label="Benefits" data-i18n-aria-label="quick_nav_benefits">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+    <a class="section-quick-nav__item" href="#catalog" data-section-nav-link aria-label="Game catalog" data-i18n-aria-label="quick_nav_catalog">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+    <a class="section-quick-nav__item" href="#map" data-section-nav-link aria-label="Active regions" data-i18n-aria-label="quick_nav_regions">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+    <a class="section-quick-nav__item" href="#calculator" data-section-nav-link aria-label="GGR calculator" data-i18n-aria-label="quick_nav_calculator">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+    <a class="section-quick-nav__item" href="#faq" data-section-nav-link aria-label="FAQ" data-i18n-aria-label="quick_nav_faq">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+    <a class="section-quick-nav__item" href="#updates" data-section-nav-link aria-label="Updates" data-i18n-aria-label="quick_nav_updates">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+    <a class="section-quick-nav__item" href="#referral" data-section-nav-link aria-label="Referral program" data-i18n-aria-label="quick_nav_referral">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+  </nav>
 
   <div class="modal" data-modal aria-hidden="true">
     <div class="modal-dialog glass" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -479,11 +559,11 @@
 
   <div class="map-tooltip" data-map-tooltip></div>
 
-  <script src="js/translations.js?v=20260528-referral-heading-fix"></script>
-  <script src="js/latin-translations.js?v=20260528-referral-heading-fix"></script>
+  <script src="js/translations.js?v=20260604-section-quick-nav"></script>
+  <script src="js/latin-translations.js?v=20260604-section-quick-nav"></script>
   <script src="js/language.js?v=20260602-portugal-flag"></script>
-  <script src="js/globe.js?v=20260526-performance-pass"></script>
+  <script src="js/globe.js?v=20260603-marker-altitude"></script>
   <script src="js/phone-data.js?v=20260521-phone-all-countries"></script>
-  <script src="js/app.js?v=20260602-mobile-nav-fix-2"></script>
+  <script src="js/app.js?v=20260605-heading-scroll"></script>
 </body>
 </html>

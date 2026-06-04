@@ -79,6 +79,7 @@
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
   const prefersSlowUpdate = window.matchMedia("(update: slow)").matches;
+  const MARKER_ALTITUDE = 0.12;
   const isLowPowerDevice = () => prefersSlowUpdate
     || isCoarsePointer
     || (navigator.deviceMemory && navigator.deviceMemory <= 4)
@@ -348,7 +349,7 @@
       });
       const sprite = new THREE.Sprite(material);
       const coords = typeof globe.getCoords === "function"
-        ? globe.getCoords(point.lat, point.lng, 0.24)
+        ? globe.getCoords(point.lat, point.lng, MARKER_ALTITUDE)
         : { x: 0, y: 0, z: 0 };
       sprite.position.set(coords.x, coords.y, coords.z);
       sprite.renderOrder = 8;

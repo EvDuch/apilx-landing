@@ -51,19 +51,40 @@
     topbar.classList.toggle("is-scrolled", window.scrollY > 12);
   };
 
+  const getScrollOffset = () => Math.ceil(topbar?.getBoundingClientRect().height || 0) + 14;
+
+  const getSectionScrollAnchor = (target) => {
+    if (!target) return null;
+    if (target.id === "updates") {
+      return target.querySelector(".updates-release.is-active .updates-intro h2")
+        || target.querySelector(".updates-intro h2")
+        || target;
+    }
+    return target.querySelector(":scope h2") || target;
+  };
+
+  const scrollToSectionHeading = (target, { behavior = "smooth" } = {}) => {
+    const anchor = getSectionScrollAnchor(target);
+    if (!anchor) return;
+    window.scrollTo({
+      top: Math.max(0, anchor.getBoundingClientRect().top + window.scrollY - getScrollOffset()),
+      behavior
+    });
+  };
+
   menuToggle.addEventListener("click", () => {
     const isOpen = navLinks.classList.toggle("open");
     menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
   });
 
-  $$('a[href^="#"], [data-scroll-target]').forEach((el) => {
+  $$('a[href^="#"]:not([data-section-nav-link]), [data-scroll-target]').forEach((el) => {
     el.addEventListener("click", (event) => {
       const targetSelector = el.getAttribute("href") || el.dataset.scrollTarget;
       const target = targetSelector && $(targetSelector);
       if (!target) return;
       event.preventDefault();
       navLinks.classList.remove("open");
-      target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+      scrollToSectionHeading(target, { behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
   });
 
@@ -82,6 +103,109 @@
     navItems.forEach((item) => item.link.classList.toggle("active", item === current));
   };
 
+  const sectionQuickNav = $("[data-section-nav]");
+  const sectionQuickNavItems = sectionQuickNav
+    ? $$("[data-section-nav-link]", sectionQuickNav).map((link) => ({
+      link,
+      section: document.querySelector(link.getAttribute("href"))
+    })).filter((item) => item.section)
+    : [];
+
+  const syncSectionQuickNav = () => {
+    if (!sectionQuickNav) return;
+    const trigger = $("#benefits");
+    if (!trigger) return;
+
+    const shouldShow = trigger.getBoundingClientRect().top <= window.innerHeight * 0.58;
+    sectionQuickNav.classList.toggle("is-visible", shouldShow);
+    if (!shouldShow) sectionQuickNav.classList.remove("is-collapsed");
+    sectionQuickNav.setAttribute("aria-hidden", shouldShow ? "false" : "true");
+
+    const probeY = window.scrollY + getScrollOffset() + window.innerHeight * 0.24;
+    let activeLink = null;
+    sectionQuickNavItems.forEach((item) => {
+      if (item.section.offsetTop <= probeY) activeLink = item.link;
+    });
+
+    sectionQuickNavItems.forEach((item) => {
+      const isActive = item.link === activeLink;
+      item.link.classList.toggle("is-active", isActive);
+      if (isActive) {
+        item.link.setAttribute("aria-current", "true");
+      } else {
+        item.link.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  sectionQuickNavItems.forEach(({ link, section }) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      navLinks.classList.remove("open");
+
+      const root = document.documentElement;
+      const previousBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = "auto";
+      scrollToSectionHeading(section, { behavior: "auto" });
+      if (link.hash) history.pushState(null, "", link.hash);
+      requestAnimationFrame(() => {
+        root.style.scrollBehavior = previousBehavior;
+        syncSectionQuickNav();
+        updateActiveNav();
+      });
+    });
+  });
+
+  if (sectionQuickNav) {
+    let quickNavTouched = false;
+    const isPointInQuickNavRightHold = (event) => {
+      if (!event) return false;
+      const rect = sectionQuickNav.getBoundingClientRect();
+      const rightEdge = window.innerWidth || document.documentElement.clientWidth || rect.right;
+      return event.clientX >= rect.right - 2 && event.clientX <= rightEdge + 2;
+    };
+    const stopQuickNavRightHold = () => {
+      window.removeEventListener("pointermove", trackQuickNavRightHold);
+    };
+    const trackQuickNavRightHold = (event) => {
+      if (!quickNavTouched || !sectionQuickNav.classList.contains("is-visible")) {
+        stopQuickNavRightHold();
+        return;
+      }
+      if (sectionQuickNav.matches(":hover") || isPointInQuickNavRightHold(event)) {
+        sectionQuickNav.classList.remove("is-collapsed");
+        return;
+      }
+      sectionQuickNav.classList.add("is-collapsed");
+      stopQuickNavRightHold();
+    };
+    const expandSectionQuickNav = () => {
+      if (!sectionQuickNav.classList.contains("is-visible")) return;
+      quickNavTouched = true;
+      sectionQuickNav.classList.remove("is-collapsed");
+      stopQuickNavRightHold();
+    };
+    const collapseSectionQuickNav = (event) => {
+      if (!quickNavTouched || !sectionQuickNav.classList.contains("is-visible")) return;
+      if (isPointInQuickNavRightHold(event)) {
+        sectionQuickNav.classList.remove("is-collapsed");
+        window.addEventListener("pointermove", trackQuickNavRightHold, { passive: true });
+        return;
+      }
+      sectionQuickNav.classList.add("is-collapsed");
+      stopQuickNavRightHold();
+    };
+
+    sectionQuickNav.addEventListener("pointerenter", expandSectionQuickNav);
+    sectionQuickNav.addEventListener("pointerleave", collapseSectionQuickNav);
+    sectionQuickNav.addEventListener("focusin", expandSectionQuickNav);
+    sectionQuickNav.addEventListener("focusout", () => {
+      requestAnimationFrame(() => {
+        if (!sectionQuickNav.contains(document.activeElement)) collapseSectionQuickNav();
+      });
+    });
+  }
+
   let navScrollFrame = 0;
   window.addEventListener("scroll", () => {
     if (navScrollFrame) return;
@@ -89,12 +213,19 @@
       navScrollFrame = 0;
       setTopbarState();
       updateActiveNav();
+      syncSectionQuickNav();
     });
   }, { passive: true });
   setTopbarState();
   updateActiveNav();
+  syncSectionQuickNav();
   requestAnimationFrame(updateActiveNav);
-  window.addEventListener("hashchange", () => requestAnimationFrame(updateActiveNav));
+  requestAnimationFrame(syncSectionQuickNav);
+  window.addEventListener("hashchange", () => requestAnimationFrame(() => {
+    updateActiveNav();
+    syncSectionQuickNav();
+  }));
+  window.addEventListener("resize", () => requestAnimationFrame(syncSectionQuickNav), { passive: true });
 
   const applyScrollReveal = () => {
     const revealSelectors = [
@@ -232,8 +363,10 @@
   }, { threshold: 0.5 });
   $$("[data-count]").forEach((el) => countObserver.observe(el));
 
-  const updateEntries = $$("#updates .timeline-entry");
-  if (updateEntries.length) {
+  $$("#updates .updates-timeline").forEach((timeline) => {
+    const updateEntries = $$(".timeline-entry", timeline);
+    if (!updateEntries.length) return;
+
     const setActiveUpdate = (activeEntry) => {
       updateEntries.forEach((entry) => {
         const isActive = entry === activeEntry;
@@ -248,14 +381,51 @@
       entry.setAttribute("aria-expanded", index === 0 ? "true" : "false");
       entry.classList.toggle("is-open", index === 0);
 
-      entry.addEventListener("click", () => setActiveUpdate(entry));
+      entry.addEventListener("click", (event) => {
+        if (event.target.closest("[data-lead-open], a, button")) return;
+        setActiveUpdate(entry);
+      });
       entry.addEventListener("keydown", (event) => {
         if (event.key !== "Enter" && event.key !== " ") return;
         event.preventDefault();
         setActiveUpdate(entry);
       });
     });
-  }
+  });
+
+  $$("[data-updates-carousel]").forEach((carousel) => {
+    const slides = $$("[data-update-slide]", carousel);
+    const olderButton = $("[data-updates-older]", carousel);
+    const newerButton = $("[data-updates-newer]", carousel);
+    if (slides.length < 2 || !olderButton || !newerButton) return;
+
+    let activeIndex = clamp(Number(carousel.dataset.activeUpdate || slides.length - 1), 0, slides.length - 1);
+
+    const renderUpdatesCarousel = () => {
+      carousel.dataset.activeUpdate = String(activeIndex);
+      carousel.style.setProperty("--updates-index", String(activeIndex));
+      slides.forEach((slide, index) => {
+        const isActive = index === activeIndex;
+        slide.classList.toggle("is-active", isActive);
+        slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+        slide.toggleAttribute("inert", !isActive);
+      });
+      olderButton.hidden = activeIndex <= 0;
+      newerButton.hidden = activeIndex >= slides.length - 1;
+    };
+
+    olderButton.addEventListener("click", () => {
+      activeIndex = Math.max(0, activeIndex - 1);
+      renderUpdatesCarousel();
+    });
+
+    newerButton.addEventListener("click", () => {
+      activeIndex = Math.min(slides.length - 1, activeIndex + 1);
+      renderUpdatesCarousel();
+    });
+
+    renderUpdatesCarousel();
+  });
 
   if (window.API_LX_ENABLE_TILT === true) $$(".glass[data-tilt], [data-tilt]").forEach((card) => {
     if (card.classList.contains("catalog-card")) return;
