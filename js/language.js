@@ -3,7 +3,25 @@ window.API_LX_LANGUAGE = (() => {
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
   const translations = window.API_LX_TRANSLATIONS || {};
   const supportedLanguages = ["en", "ru", "fr", "es", "pt"];
+  const defaultLanguage = "en";
   const normalizeLanguage = (lang) => supportedLanguages.includes(lang) ? lang : "en";
+
+  const writeStoredLanguage = (lang = defaultLanguage) => {
+    try {
+      localStorage.setItem("api-lx-language", normalizeLanguage(lang));
+    } catch {
+      /* Storage can be unavailable in strict browser modes. */
+    }
+  };
+
+  const forceDefaultLanguage = () => {
+    document.documentElement.lang = defaultLanguage;
+    document.documentElement.dir = "ltr";
+    writeStoredLanguage(defaultLanguage);
+    return defaultLanguage;
+  };
+
+  forceDefaultLanguage();
 
   function applyDocumentMetadata(dictionary) {
     const titleKey = document.documentElement.dataset.titleKey;
@@ -15,7 +33,7 @@ window.API_LX_LANGUAGE = (() => {
     }
   }
 
-  function applyStaticLanguage(lang = localStorage.getItem("api-lx-language") || "en") {
+  function applyStaticLanguage(lang = defaultLanguage) {
     lang = normalizeLanguage(lang);
     const dictionary = { ...translations.en, ...(translations[lang] || {}) };
     document.documentElement.lang = lang;
@@ -126,14 +144,14 @@ window.API_LX_LANGUAGE = (() => {
       applyDocumentMetadata(dictionary);
       setCurrentLanguageLabel(selected);
       $$("[data-lang]").forEach((button) => button.classList.toggle("active", button.dataset.lang === lang));
-      localStorage.setItem("api-lx-language", lang);
+      writeStoredLanguage(lang);
       window.dispatchEvent(new CustomEvent("api-lx-language-change", { detail: { lang } }));
       document.body.classList.remove("is-translating");
     }, 120);
   };
 
     window.addEventListener("resize", () => {
-      const selected = languageLabels.find((language) => language.code === normalizeLanguage(localStorage.getItem("api-lx-language") || document.documentElement.lang)) || languageLabels[0];
+      const selected = languageLabels.find((language) => language.code === normalizeLanguage(document.documentElement.lang || defaultLanguage)) || languageLabels[0];
       setCurrentLanguageLabel(selected);
     });
 
@@ -171,7 +189,7 @@ window.API_LX_LANGUAGE = (() => {
       }
     });
 
-    applyLanguage(localStorage.getItem("api-lx-language") || "en");
+    applyLanguage(defaultLanguage);
     return { closeLanguageMenu, closeLanguageModal, applyLanguage };
   }
 

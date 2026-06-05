@@ -9,17 +9,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=block" as="style" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=block" />
-  <link rel="stylesheet" href="css/styles.css?v=20260602-mobile-menu-bg" />
+  <link rel="stylesheet" href="css/styles.css?v=20260605-privacy-layout-fix" />
 </head>
-<body>
+<body class="privacy-body">
   <div class="site-shell">
-    <header class="topbar">
-      <a class="logo" href="/">
-        <img class="brand-logo" src="assets/api-lx-logo.webp" alt="API LX" />
-      </a>
-      <nav class="nav-links" aria-label="Privacy navigation">
-        <a href="/" data-i18n="privacy_nav_home">Home</a>
-      </nav>
+    <header class="topbar privacy-topbar">
+      <div class="container nav privacy-nav">
+        <a class="logo" href="/">
+          <img class="brand-logo" src="assets/api-lx-logo.webp" alt="API LX" />
+        </a>
+        <nav class="nav-links privacy-nav-links" aria-label="Privacy navigation">
+          <a class="privacy-home-link" href="/" data-i18n="privacy_nav_home">Home</a>
+        </nav>
+      </div>
     </header>
 
     <main>
@@ -107,7 +109,10 @@
 
             <h2 data-i18n="privacy_section_10_title">10. Contact Us</h2>
             <p data-i18n="privacy_contact_intro">If you have any questions about this Privacy Policy or how we handle your data, please contact us:</p>
-            <p><span data-i18n="privacy_contact_email">Email:</span> <a href="mailto:contact@apilx.co">contact@apilx.co</a><br /><span data-i18n="privacy_contact_website">Website:</span> <a href="https://apilx.co">https://apilx.co</a></p>
+            <div class="privacy-contact-actions">
+              <a class="privacy-contact-cta" href="/#hero" data-i18n="footer_request_access">Request API Access</a>
+              <a class="privacy-contact-site" href="https://apilx.co"><span data-i18n="privacy_contact_website">Website:</span> https://apilx.co</a>
+            </div>
           </article>
         </div>
       </section>
@@ -127,7 +132,7 @@
         </div>
         <div>
           <h3 data-i18n="footer_contact">Contact</h3>
-          <div class="footer-links"><a href="mailto:contact@apilx.co">contact@apilx.co</a><a href="/#referral" data-i18n="footer_referral">Referral Program</a><a href="/privacy.html" data-i18n="privacy_policy_link">Privacy Policy</a></div>
+          <div class="footer-links"><a href="/#hero" data-i18n="footer_request_access">Request API Access</a><a href="/#referral" data-i18n="footer_referral">Referral Program</a><a href="/privacy.html" data-i18n="privacy_policy_link">Privacy Policy</a></div>
           <p style="margin-top:18px"><span data-i18n="footer_copyright">Copyright</span> 2026 API LX. <span data-i18n="footer_rights">All rights reserved.</span></p>
         </div>
       </div>
@@ -135,7 +140,7 @@
   </div>
   <script src="js/translations.js?v=20260604-footer-ru-aggregator-copy"></script>
   <script src="js/latin-translations.js?v=20260604-footer-disclaimer-remove"></script>
-  <script src="js/language.js?v=20260602-portugal-flag"></script>
+  <script src="js/language.js?v=20260605-force-default-en-safe"></script>
   <script>
     window.API_LX_LANGUAGE?.applyStaticLanguage();
   </script>

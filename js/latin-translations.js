@@ -214,7 +214,7 @@ window.API_LX_TRANSLATIONS = (() => {
     faq_11_a_5: "Después, nuestro bot te enviará automáticamente el usuario de un manager con quien podrás aclarar detalles e iniciar la integración.",
 
     updates_eyebrow: "Últimas actualizaciones",
-    updates_title: "Últimas actualizaciones de proveedores",
+    updates_title: "Nuestras actualizaciones",
     updates_pgsoft_title: "La actualización de PG Soft ya está activa en API LX",
     updates_pgsoft_intro: "Hemos publicado una nueva actualización de PG Soft en nuestra plataforma.",
     updates_new_games: "Nuevos juegos añadidos",
@@ -602,7 +602,7 @@ window.API_LX_TRANSLATIONS = (() => {
     faq_11_a_5: "Ensuite, notre bot vous enverra automatiquement le username d'un manager à contacter pour clarifier les détails et démarrer l'intégration.",
 
     updates_eyebrow: "Dernières mises à jour",
-    updates_title: "Dernières mises à jour fournisseurs",
+    updates_title: "Nos mises à jour",
     updates_pgsoft_title: "La mise à jour PG Soft est en ligne sur API LX",
     updates_pgsoft_intro: "Nous avons déployé une nouvelle mise à jour PG Soft sur notre plateforme.",
     updates_new_games: "Nouveaux jeux ajoutés",
@@ -990,7 +990,7 @@ window.API_LX_TRANSLATIONS = (() => {
     faq_11_a_5: "Depois disso, nosso bot enviará automaticamente o username de um gerente com quem você poderá esclarecer detalhes e iniciar a integração.",
 
     updates_eyebrow: "Últimas atualizações",
-    updates_title: "Últimas atualizações de provedores",
+    updates_title: "Nossas atualizações",
     updates_pgsoft_title: "A atualização da PG Soft está ativa na API LX",
     updates_pgsoft_intro: "Lançamos uma nova atualização da PG Soft em nossa plataforma.",
     updates_new_games: "Novos jogos adicionados",

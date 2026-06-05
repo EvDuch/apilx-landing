@@ -210,7 +210,7 @@ window.API_LX_TRANSLATIONS = (() => {
     faq_11_a_5: "After that, our bot will automatically send you the username of a manager you can contact to clarify all details and start integration.",
 
     updates_eyebrow: "Latest updates",
-    updates_title: "Latest Provider Updates",
+    updates_title: "Our updates",
     updates_pgsoft_title: "PG Soft Update is live on API LX",
     updates_pgsoft_intro: "We've rolled out a new update for PG Soft on our platform.",
     updates_new_games: "New games added",
@@ -620,7 +620,7 @@ window.API_LX_TRANSLATIONS = (() => {
     faq_11_a_5: "После этого наш бот автоматически отправит вам username менеджера, с которым вы сможете связаться для уточнения всех деталей и начала интеграции.",
 
     updates_eyebrow: "Лента релизов",
-    updates_title: "Последние обновления провайдеров",
+    updates_title: "Наши обновления",
     updates_pgsoft_title: "Обновление PG Soft уже доступно на API LX",
     updates_pgsoft_intro: "Мы выпустили новое обновление PG Soft на нашей платформе.",
     updates_new_games: "Добавлены новые игры",

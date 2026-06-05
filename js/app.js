@@ -56,7 +56,8 @@
   const getSectionScrollAnchor = (target) => {
     if (!target) return null;
     if (target.id === "updates") {
-      return target.querySelector(".updates-release.is-active .updates-intro h2")
+      return target.querySelector(":scope .updates-section-title")
+        || target.querySelector(".updates-release.is-active .updates-intro h2")
         || target.querySelector(".updates-intro h2")
         || target;
     }
@@ -148,6 +149,7 @@
       root.style.scrollBehavior = "auto";
       scrollToSectionHeading(section, { behavior: "auto" });
       if (link.hash) history.pushState(null, "", link.hash);
+      if (event.detail > 0) link.blur();
       requestAnimationFrame(() => {
         root.style.scrollBehavior = previousBehavior;
         syncSectionQuickNav();
@@ -158,6 +160,11 @@
 
   if (sectionQuickNav) {
     let quickNavTouched = false;
+    const blurSectionQuickNavFocus = () => {
+      if (sectionQuickNav.contains(document.activeElement)) {
+        document.activeElement.blur?.();
+      }
+    };
     const isPointInQuickNavRightHold = (event) => {
       if (!event) return false;
       const rect = sectionQuickNav.getBoundingClientRect();
@@ -177,6 +184,7 @@
         return;
       }
       sectionQuickNav.classList.add("is-collapsed");
+      blurSectionQuickNavFocus();
       stopQuickNavRightHold();
     };
     const expandSectionQuickNav = () => {
@@ -193,6 +201,7 @@
         return;
       }
       sectionQuickNav.classList.add("is-collapsed");
+      blurSectionQuickNavFocus();
       stopQuickNavRightHold();
     };
 
