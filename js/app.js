@@ -148,7 +148,6 @@
       const previousBehavior = root.style.scrollBehavior;
       root.style.scrollBehavior = "auto";
       scrollToSectionHeading(section, { behavior: "auto" });
-      if (link.hash) history.pushState(null, "", link.hash);
       if (event.detail > 0) link.blur();
       requestAnimationFrame(() => {
         root.style.scrollBehavior = previousBehavior;
@@ -1701,13 +1700,17 @@
 
   if (window.location.hash) {
     window.setTimeout(() => {
-      const target = document.querySelector(window.location.hash);
-      target?.scrollIntoView({ block: "start" });
+      const hashTargetId = decodeURIComponent(window.location.hash.slice(1));
+      const target = hashTargetId ? document.getElementById(hashTargetId) : null;
+      if (target) scrollToSectionHeading(target, { behavior: "auto" });
     }, 80);
+  } else {
+    window.API_LX_FORCE_HERO_START?.({ repeat: true });
   }
   }
 
   loadPartials().then(initApp).catch((error) => {
     console.error(error);
+    window.API_LX_FINISH_BOOT?.();
   });
 })();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-booting">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +7,74 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="preconnect" href="https://unpkg.com" crossorigin />
   <title>API LX | Premium Casino Slot APIs</title>
+  <style>
+    html.is-booting,
+    html.is-booting body {
+      min-height: 100%;
+      overflow: hidden;
+      background: #090326;
+    }
+
+    html.is-booting .site-shell {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    html.is-booting body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 99998;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 79, 195, 0.28), transparent 28rem),
+        radial-gradient(circle at 82% 14%, rgba(46, 210, 255, 0.16), transparent 26rem),
+        linear-gradient(145deg, #12063b 0%, #07031b 68%, #03010d 100%);
+    }
+
+    html.is-booting body::after {
+      content: "";
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      z-index: 99999;
+      width: 48px;
+      height: 48px;
+      pointer-events: none;
+      background: url("assets/api-lx-symbol.webp") center / contain no-repeat;
+      transform: translate(-50%, -50%) scale(0.98);
+      filter: drop-shadow(0 0 18px rgba(46, 210, 255, 0.42));
+      animation: apiLxBootPulse 1s ease-in-out infinite alternate;
+    }
+
+    html:not(.is-booting) .site-shell {
+      opacity: 1;
+      transition: opacity 180ms ease;
+    }
+
+    @keyframes apiLxBootPulse {
+      from {
+        opacity: 0.58;
+        transform: translate(-50%, -50%) scale(0.94);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html.is-booting body::after {
+        animation: none;
+      }
+
+      html:not(.is-booting) .site-shell {
+        transition: none;
+      }
+    }
+  </style>
   <script>
     window.API_LX_CONFIG = window.API_LX_CONFIG || {
       turnstileSiteKey: "0x4AAAAAADSOrisXiUAEuGgD",
@@ -16,22 +84,49 @@
   <script>
     (() => {
       if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      const root = document.documentElement;
+      let bootFinished = false;
 
-      const forceHeroStart = () => {
-        if (window.location.hash) return;
-        const root = document.documentElement;
+      const hasStartupHash = () => window.location.hash && window.location.hash.length > 1;
+
+      const forceHeroStart = ({ repeat = false } = {}) => {
+        if (hasStartupHash()) return;
         const previousBehavior = root.style.scrollBehavior;
         root.style.scrollBehavior = "auto";
         window.scrollTo(0, 0);
         requestAnimationFrame(() => window.scrollTo(0, 0));
-        window.setTimeout(() => {
+        const restore = () => {
           window.scrollTo(0, 0);
           root.style.scrollBehavior = previousBehavior;
-        }, 80);
+        };
+        window.setTimeout(restore, 80);
+        if (repeat) {
+          [180, 420, 760].forEach((delay) => window.setTimeout(() => {
+            if (!hasStartupHash()) window.scrollTo(0, 0);
+          }, delay));
+        }
       };
 
-      window.addEventListener("pageshow", forceHeroStart);
-      window.addEventListener("load", forceHeroStart);
+      const finishBoot = () => {
+        if (bootFinished) return;
+        bootFinished = true;
+        window.setTimeout(() => {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              root.classList.remove("is-booting");
+              root.classList.add("is-ready");
+              forceHeroStart({ repeat: true });
+            });
+          });
+        }, 180);
+      };
+
+      window.API_LX_FORCE_HERO_START = forceHeroStart;
+      window.API_LX_FINISH_BOOT = finishBoot;
+      window.addEventListener("pageshow", () => forceHeroStart({ repeat: true }));
+      window.addEventListener("load", () => forceHeroStart({ repeat: true }));
+      window.addEventListener("api-lx:partials-ready", finishBoot);
+      window.setTimeout(finishBoot, 4500);
     })();
   </script>
   <link rel="stylesheet" href="css/styles.css?v=20260605-updates-mobile-arrow-balance" />
@@ -565,6 +660,6 @@
   <script src="js/language.js?v=20260605-force-default-en-safe"></script>
   <script src="js/globe.js?v=20260603-marker-altitude"></script>
   <script src="js/phone-data.js?v=20260521-phone-all-countries"></script>
-  <script src="js/app.js?v=20260605-updates-section-title"></script>
+  <script src="js/app.js?v=20260607-clean-start-boot"></script>
 </body>
 </html>
