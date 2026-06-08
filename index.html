@@ -76,10 +76,13 @@
     }
   </style>
   <script>
-    window.API_LX_CONFIG = window.API_LX_CONFIG || {
-      turnstileSiteKey: "0x4AAAAAADSOrisXiUAEuGgD",
-      leadEndpointUrl: "http://127.0.0.1:8787/api/lead"
-    };
+    (() => {
+      const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+      window.API_LX_CONFIG = window.API_LX_CONFIG || {
+        turnstileSiteKey: "0x4AAAAAADSOrisXiUAEuGgD",
+        leadEndpointUrl: isLocalHost ? "http://127.0.0.1:8787/api/lead" : ""
+      };
+    })();
   </script>
   <script>
     (() => {

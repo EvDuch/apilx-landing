@@ -10,11 +10,19 @@ loadEnvFile(path.join(__dirname, ".env"));
 
 const PORT = Number(process.env.PORT || 8787);
 const TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
-const ALLOWED_ORIGINS = new Set([
+const DEFAULT_ALLOWED_ORIGINS = [
   "http://127.0.0.1:4173",
   "http://localhost:4173",
   "http://127.0.0.1:5500",
-  "http://localhost:5500"
+  "http://localhost:5500",
+  "https://evduch.github.io"
+];
+const ALLOWED_ORIGINS = new Set([
+  ...DEFAULT_ALLOWED_ORIGINS,
+  ...String(process.env.ALLOWED_ORIGINS || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean)
 ]);
 
 function loadEnvFile(filePath) {
@@ -132,7 +140,14 @@ async function verifyTurnstileToken(token, remoteIp) {
   }
 
   const result = await response.json();
-  return Boolean(result.success);
+  if (!result.success) {
+    const errorCodes = Array.isArray(result["error-codes"]) ? result["error-codes"].join(", ") : "";
+    const error = new Error(errorCodes ? `Turnstile verification failed: ${errorCodes}` : "Turnstile verification failed");
+    error.statusCode = 403;
+    throw error;
+  }
+
+  return true;
 }
 
 async function forwardLeadToGoogleSheets(payload) {

@@ -1534,6 +1534,10 @@
     if (leadSubmitError) leadSubmitError.hidden = true;
 
     try {
+      if (!leadEndpointUrl) {
+        throw new Error("Lead endpoint URL is not configured");
+      }
+
       const turnstileToken = await getTurnstileToken();
       const payload = {
         ...buildLeadPayload(),
