@@ -6,36 +6,151 @@
   const fallback = document.querySelector("[data-globe-fallback]");
   const loading = document.querySelector("[data-globe-loading]");
   const tooltip = document.querySelector("[data-map-tooltip]");
-  const regionRows = Array.from(document.querySelectorAll("[data-region-country]"));
+  const regionList = document.querySelector("[data-region-list]");
+  let regionRows = [];
 
   if (!shell || !mount) return;
 
   const clientPoints = [
-    { country: "Brazil", lat: -14.2350, lng: -51.9253, clients: 30 },
-    { country: "India", lat: 20.5937, lng: 78.9629, clients: 42 },
-    { country: "Turkey", lat: 38.9637, lng: 35.2433, clients: 21 },
-    { country: "Mexico", lat: 23.6345, lng: -102.5528, clients: 18 },
-    { country: "Indonesia", lat: -0.7893, lng: 113.9213, clients: 25 },
-    { country: "Germany", lat: 51.1657, lng: 10.4515, clients: 34 },
-    { country: "Spain", lat: 40.4637, lng: -3.7492, clients: 22 },
-    { country: "France", lat: 46.2276, lng: 2.2137, clients: 30 },
-    { country: "Italy", lat: 41.8719, lng: 12.5674, clients: 21 },
-    { country: "United Kingdom", lat: 55.3781, lng: -3.4360, clients: 32 },
-    { country: "South Africa", lat: -30.5595, lng: 22.9375, clients: 20 },
-    { country: "United Arab Emirates", lat: 23.4241, lng: 53.8478, clients: 19 },
-    { country: "Vietnam", lat: 14.0583, lng: 108.2772, clients: 23 },
-    { country: "Thailand", lat: 15.8700, lng: 100.9925, clients: 26 },
-    { country: "Argentina", lat: -38.4161, lng: -63.6167, clients: 18 },
-    { country: "Colombia", lat: 4.5709, lng: -74.2973, clients: 24 },
-    { country: "Nigeria", lat: 9.0820, lng: 8.6753, clients: 34 },
-    { country: "Philippines", lat: 12.8797, lng: 121.7740, clients: 22 },
-    { country: "Canada", lat: 56.1304, lng: -106.3468, clients: 27 },
-    { country: "Australia", lat: -25.2744, lng: 133.7751, clients: 24 }
+    { iso: "AL", country: "Albania", lat: 41.1533, lng: 20.1683, clients: 12 },
+    { iso: "DZ", country: "Algeria", lat: 28.0339, lng: 1.6596, clients: 18 },
+    { iso: "AO", country: "Angola", lat: -11.2027, lng: 17.8739, clients: 14 },
+    { iso: "AR", country: "Argentina", lat: -38.4161, lng: -63.6167, clients: 22 },
+    { iso: "AU", country: "Australia", lat: -25.2744, lng: 133.7751, clients: 28 },
+    { iso: "AT", country: "Austria", lat: 47.5162, lng: 14.5501, clients: 16 },
+    { iso: "AZ", country: "Azerbaijan", lat: 40.1431, lng: 47.5769, clients: 17 },
+    { iso: "BS", country: "Bahamas", lat: 25.0343, lng: -77.3963, clients: 9 },
+    { iso: "BD", country: "Bangladesh", lat: 23.6850, lng: 90.3563, clients: 21 },
+    { iso: "BY", country: "Belarus", lat: 53.7098, lng: 27.9534, clients: 13 },
+    { iso: "BE", country: "Belgium", lat: 50.5039, lng: 4.4699, clients: 18 },
+    { iso: "BG", country: "Bulgaria", lat: 42.7339, lng: 25.4858, clients: 19 },
+    { iso: "BO", country: "Bolivia", lat: -16.2902, lng: -63.5887, clients: 11 },
+    { iso: "BA", country: "Bosnia and Herzegovina", lat: 43.9159, lng: 17.6791, clients: 12 },
+    { iso: "BW", country: "Botswana", lat: -22.3285, lng: 24.6849, clients: 10 },
+    { iso: "BR", country: "Brazil", lat: -14.2350, lng: -51.9253, clients: 42 },
+    { iso: "GB", country: "United Kingdom", lat: 55.3781, lng: -3.4360, clients: 36 },
+    { iso: "HU", country: "Hungary", lat: 47.1625, lng: 19.5033, clients: 17 },
+    { iso: "VN", country: "Vietnam", lat: 14.0583, lng: 108.2772, clients: 27 },
+    { iso: "GH", country: "Ghana", lat: 7.9465, lng: -1.0232, clients: 19 },
+    { iso: "GT", country: "Guatemala", lat: 15.7835, lng: -90.2308, clients: 10 },
+    { iso: "DE", country: "Germany", lat: 51.1657, lng: 10.4515, clients: 38 },
+    { iso: "HK", country: "Hong Kong", lat: 22.3193, lng: 114.1694, clients: 18 },
+    { iso: "GR", country: "Greece", lat: 39.0742, lng: 21.8243, clients: 16 },
+    { iso: "GE", country: "Georgia", lat: 42.3154, lng: 43.3569, clients: 14 },
+    { iso: "GN", country: "Guinea", lat: 9.9456, lng: -9.6966, clients: 8 },
+    { iso: "DK", country: "Denmark", lat: 56.2639, lng: 9.5018, clients: 15 },
+    { iso: "EG", country: "Egypt", lat: 26.8206, lng: 30.8025, clients: 25 },
+    { iso: "ZM", country: "Zambia", lat: -13.1339, lng: 27.8493, clients: 12 },
+    { iso: "ZW", country: "Zimbabwe", lat: -19.0154, lng: 29.1549, clients: 11 },
+    { iso: "IL", country: "Israel", lat: 31.0461, lng: 34.8516, clients: 20 },
+    { iso: "IN", country: "India", lat: 20.5937, lng: 78.9629, clients: 46 },
+    { iso: "ID", country: "Indonesia", lat: -0.7893, lng: 113.9213, clients: 31 },
+    { iso: "JO", country: "Jordan", lat: 30.5852, lng: 36.2384, clients: 13 },
+    { iso: "IQ", country: "Iraq", lat: 33.2232, lng: 43.6793, clients: 12 },
+    { iso: "IR", country: "Iran", lat: 32.4279, lng: 53.6880, clients: 16 },
+    { iso: "IE", country: "Ireland", lat: 53.4129, lng: -8.2439, clients: 15 },
+    { iso: "IS", country: "Iceland", lat: 64.9631, lng: -19.0208, clients: 7 },
+    { iso: "ES", country: "Spain", lat: 40.4637, lng: -3.7492, clients: 29 },
+    { iso: "IT", country: "Italy", lat: 41.8719, lng: 12.5674, clients: 28 },
+    { iso: "KZ", country: "Kazakhstan", lat: 48.0196, lng: 66.9237, clients: 18 },
+    { iso: "CA", country: "Canada", lat: 56.1304, lng: -106.3468, clients: 30 },
+    { iso: "KE", country: "Kenya", lat: -0.0236, lng: 37.9062, clients: 21 },
+    { iso: "CN", country: "China", lat: 35.8617, lng: 104.1954, clients: 32 },
+    { iso: "CO", country: "Colombia", lat: 4.5709, lng: -74.2973, clients: 27 },
+    { iso: "CR", country: "Costa Rica", lat: 9.7489, lng: -83.7534, clients: 12 },
+    { iso: "KG", country: "Kyrgyzstan", lat: 41.2044, lng: 74.7661, clients: 10 },
+    { iso: "KR", country: "South Korea", lat: 35.9078, lng: 127.7669, clients: 24 },
+    { iso: "KW", country: "Kuwait", lat: 29.3117, lng: 47.4818, clients: 12 },
+    { iso: "LB", country: "Lebanon", lat: 33.8547, lng: 35.8623, clients: 11 },
+    { iso: "LY", country: "Libya", lat: 26.3351, lng: 17.2283, clients: 9 },
+    { iso: "LU", country: "Luxembourg", lat: 49.8153, lng: 6.1296, clients: 8 },
+    { iso: "MY", country: "Malaysia", lat: 4.2105, lng: 101.9758, clients: 25 },
+    { iso: "MA", country: "Morocco", lat: 31.7917, lng: -7.0926, clients: 20 },
+    { iso: "MX", country: "Mexico", lat: 23.6345, lng: -102.5528, clients: 26 },
+    { iso: "MN", country: "Mongolia", lat: 46.8625, lng: 103.8467, clients: 9 },
+    { iso: "MZ", country: "Mozambique", lat: -18.6657, lng: 35.5296, clients: 13 },
+    { iso: "MM", country: "Myanmar", lat: 21.9162, lng: 95.9560, clients: 14 },
+    { iso: "NA", country: "Namibia", lat: -22.9576, lng: 18.4904, clients: 9 },
+    { iso: "NG", country: "Nigeria", lat: 9.0820, lng: 8.6753, clients: 39 },
+    { iso: "NL", country: "Netherlands", lat: 52.1326, lng: 5.2913, clients: 24 },
+    { iso: "NZ", country: "New Zealand", lat: -40.9006, lng: 174.8860, clients: 14 },
+    { iso: "NO", country: "Norway", lat: 60.4720, lng: 8.4689, clients: 13 },
+    { iso: "NP", country: "Nepal", lat: 28.3949, lng: 84.1240, clients: 11 },
+    { iso: "AE", country: "United Arab Emirates", lat: 23.4241, lng: 53.8478, clients: 23 },
+    { iso: "PK", country: "Pakistan", lat: 30.3753, lng: 69.3451, clients: 24 },
+    { iso: "PY", country: "Paraguay", lat: -23.4425, lng: -58.4438, clients: 10 },
+    { iso: "PE", country: "Peru", lat: -9.1900, lng: -75.0152, clients: 17 },
+    { iso: "PL", country: "Poland", lat: 51.9194, lng: 19.1451, clients: 22 },
+    { iso: "PT", country: "Portugal", lat: 39.3999, lng: -8.2245, clients: 16 },
+    { iso: "RS", country: "Serbia", lat: 44.0165, lng: 21.0059, clients: 15 },
+    { iso: "RO", country: "Romania", lat: 45.9432, lng: 24.9668, clients: 19 },
+    { iso: "RW", country: "Rwanda", lat: -1.9403, lng: 29.8739, clients: 10 },
+    { iso: "SD", country: "Sudan", lat: 12.8628, lng: 30.2176, clients: 10 },
+    { iso: "SS", country: "South Sudan", lat: 6.8770, lng: 31.3070, clients: 7 },
+    { iso: "SG", country: "Singapore", lat: 1.3521, lng: 103.8198, clients: 22 },
+    { iso: "SK", country: "Slovakia", lat: 48.6690, lng: 19.6990, clients: 12 },
+    { iso: "SI", country: "Slovenia", lat: 46.1512, lng: 14.9955, clients: 11 },
+    { iso: "SZ", country: "Eswatini", lat: -26.5225, lng: 31.4659, clients: 7 },
+    { iso: "SY", country: "Syria", lat: 34.8021, lng: 38.9968, clients: 8 },
+    { iso: "TH", country: "Thailand", lat: 15.8700, lng: 100.9925, clients: 30 },
+    { iso: "TZ", country: "Tanzania", lat: -6.3690, lng: 34.8888, clients: 17 },
+    { iso: "TN", country: "Tunisia", lat: 33.8869, lng: 9.5375, clients: 13 },
+    { iso: "TM", country: "Turkmenistan", lat: 38.9697, lng: 59.5563, clients: 8 },
+    { iso: "TR", country: "Turkey", lat: 38.9637, lng: 35.2433, clients: 28 },
+    { iso: "UG", country: "Uganda", lat: 1.3733, lng: 32.2903, clients: 15 },
+    { iso: "UZ", country: "Uzbekistan", lat: 41.3775, lng: 64.5853, clients: 14 },
+    { iso: "UA", country: "Ukraine", lat: 48.3794, lng: 31.1656, clients: 21 },
+    { iso: "UY", country: "Uruguay", lat: -32.5228, lng: -55.7658, clients: 11 },
+    { iso: "PH", country: "Philippines", lat: 12.8797, lng: 121.7740, clients: 27 },
+    { iso: "FI", country: "Finland", lat: 61.9241, lng: 25.7482, clients: 14 },
+    { iso: "FR", country: "France", lat: 46.2276, lng: 2.2137, clients: 34 },
+    { iso: "HR", country: "Croatia", lat: 45.1000, lng: 15.2000, clients: 13 },
+    { iso: "CZ", country: "Czechia", lat: 49.8175, lng: 15.4730, clients: 16 },
+    { iso: "CL", country: "Chile", lat: -35.6751, lng: -71.5430, clients: 16 },
+    { iso: "CH", country: "Switzerland", lat: 46.8182, lng: 8.2275, clients: 18 },
+    { iso: "SE", country: "Sweden", lat: 60.1282, lng: 18.6435, clients: 17 },
+    { iso: "CM", country: "Cameroon", lat: 7.3697, lng: 12.3547, clients: 14 },
+    { iso: "CF", country: "Central African Republic", lat: 6.6111, lng: 20.9394, clients: 6 },
+    { iso: "TD", country: "Chad", lat: 15.4542, lng: 18.7322, clients: 8 },
+    { iso: "CG", country: "Republic of the Congo", lat: -0.2280, lng: 15.8277, clients: 7 },
+    { iso: "GQ", country: "Equatorial Guinea", lat: 1.6508, lng: 10.2679, clients: 6 },
+    { iso: "GA", country: "Gabon", lat: -0.8037, lng: 11.6094, clients: 7 },
+    { iso: "BJ", country: "Benin", lat: 9.3077, lng: 2.3158, clients: 8 },
+    { iso: "BF", country: "Burkina Faso", lat: 12.2383, lng: -1.5616, clients: 7 },
+    { iso: "CI", country: "Ivory Coast", lat: 7.5400, lng: -5.5471, clients: 13 },
+    { iso: "GW", country: "Guinea-Bissau", lat: 11.8037, lng: -15.1804, clients: 5 },
+    { iso: "ML", country: "Mali", lat: 17.5707, lng: -3.9962, clients: 8 },
+    { iso: "NE", country: "Niger", lat: 17.6078, lng: 8.0817, clients: 7 },
+    { iso: "SN", country: "Senegal", lat: 14.4974, lng: -14.4524, clients: 11 },
+    { iso: "TG", country: "Togo", lat: 8.6195, lng: 0.8248, clients: 7 },
+    { iso: "ZA", country: "South Africa", lat: -30.5595, lng: 22.9375, clients: 24 },
+    { iso: "JM", country: "Jamaica", lat: 18.1096, lng: -77.2975, clients: 9 },
+    { iso: "JP", country: "Japan", lat: 36.2048, lng: 138.2529, clients: 25 }
   ];
 
   const hub = { country: "API LX Hub", lat: 25.2048, lng: 55.2708 };
   const activeCountryNames = new Set(clientPoints.map((point) => point.country));
   const countryAliases = new Map([
+    ["bosnia and herz.", "Bosnia and Herzegovina"],
+    ["bosnia and herzegovina", "Bosnia and Herzegovina"],
+    ["central african rep.", "Central African Republic"],
+    ["central african republic", "Central African Republic"],
+    ["czech republic", "Czechia"],
+    ["czechia", "Czechia"],
+    ["côte d'ivoire", "Ivory Coast"],
+    ["cote d'ivoire", "Ivory Coast"],
+    ["ivory coast", "Ivory Coast"],
+    ["eq. guinea", "Equatorial Guinea"],
+    ["equatorial guinea", "Equatorial Guinea"],
+    ["eswatini", "Eswatini"],
+    ["swaziland", "Eswatini"],
+    ["republic of serbia", "Serbia"],
+    ["serbia", "Serbia"],
+    ["s. sudan", "South Sudan"],
+    ["south sudan", "South Sudan"],
+    ["sudan", "Sudan"],
+    ["republic of the congo", "Republic of the Congo"],
+    ["congo", "Republic of the Congo"],
     ["turkiye", "Turkey"],
     ["türkiye", "Turkey"],
     ["republic of turkey", "Turkey"],
@@ -116,7 +231,37 @@
     return translations[lang]?.[key] || translations.en?.[key] || key;
   };
 
-  const countryKey = (country) => `country_${country.toLowerCase().replaceAll(" ", "_")}`;
+  const getLanguage = () => document.documentElement.lang || localStorage.getItem("api-lx-language") || "en";
+  const getCountryLabel = (point) => {
+    try {
+      const displayNames = typeof Intl !== "undefined" && Intl.DisplayNames
+        ? new Intl.DisplayNames([getLanguage(), "en"], { type: "region" })
+        : null;
+      return displayNames?.of(point.iso) || point.country;
+    } catch {
+      return point.country;
+    }
+  };
+  const getClientLabel = (count) => translate("map_tooltip_clients").replace("{count}", count);
+  const renderRegionList = () => {
+    if (!regionList) {
+      regionRows = Array.from(document.querySelectorAll("[data-region-country]"));
+      return;
+    }
+    regionList.replaceChildren();
+    clientPoints.forEach((point) => {
+      const row = document.createElement("li");
+      row.dataset.regionCountry = point.country;
+      const country = document.createElement("strong");
+      country.textContent = getCountryLabel(point);
+      const clients = document.createElement("span");
+      clients.textContent = getClientLabel(point.clients);
+      row.append(country, clients);
+      regionList.append(row);
+    });
+    regionRows = Array.from(regionList.querySelectorAll("[data-region-country]"));
+  };
+
   const normalizeCountryName = (name = "") => countryAliases.get(String(name).trim().toLowerCase()) || String(name).trim();
   const getPolygonCountry = (polygon) => normalizeCountryName(polygon?.properties?.ADMIN || polygon?.properties?.name || polygon?.properties?.NAME);
   const isActivePolygon = (polygon) => activeCountryNames.has(getPolygonCountry(polygon));
@@ -262,7 +407,7 @@
     if (!tooltip || !point) return;
     const position = event ? { x: event.clientX, y: event.clientY } : pointerPosition;
     tooltip.style.display = "block";
-    tooltip.innerHTML = `<strong>${translate(countryKey(point.country))}</strong><span> &mdash; ${translate("map_tooltip_clients").replace("{count}", point.clients)}</span>`;
+    tooltip.innerHTML = `<strong>${getCountryLabel(point)}</strong><span> &mdash; ${getClientLabel(point.clients)}</span>`;
     if (position) {
       tooltip.style.left = `${position.x}px`;
       tooltip.style.top = `${position.y}px`;
@@ -396,6 +541,7 @@
   };
 
   const setupRegionRows = () => {
+    renderRegionList();
     regionRows.forEach((row) => {
       const country = row.dataset.regionCountry;
       row.addEventListener("pointerenter", (event) => setActiveCountry(country, event));
@@ -503,6 +649,13 @@
     webglMarkers = [];
     mount.replaceChildren();
   };
+
+  window.addEventListener("api-lx-language-change", () => {
+    const active = activeCountry;
+    renderRegionList();
+    setupRegionRows();
+    setRegionHighlight(active);
+  });
 
   const initGlobe = async () => {
     setupRegionRows();
