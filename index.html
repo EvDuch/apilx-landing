@@ -80,7 +80,7 @@
       const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
       window.API_LX_CONFIG = window.API_LX_CONFIG || {
         turnstileSiteKey: "0x4AAAAAADSOrisXiUAEuGgD",
-        leadEndpointUrl: isLocalHost ? "http://127.0.0.1:8787/api/lead" : ""
+        leadEndpointUrl: isLocalHost ? "http://127.0.0.1:8787/api/lead" : "https://apilx-landing.onrender.com/api/lead"
       };
     })();
   </script>
