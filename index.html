@@ -132,7 +132,7 @@
       window.setTimeout(finishBoot, 4500);
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260608-section-title-scale" />
+  <link rel="stylesheet" href="css/styles.css?v=20260609-geo-picker" />
 </head>
 <body>
   <div class="site-shell">
@@ -552,10 +552,26 @@
           </section>
 
           <section class="lead-step" data-step-key="countries" data-question="lead_q_countries" data-hint="lead_h_countries" hidden>
-            <div class="wizard-input-card">
+            <div class="wizard-input-card geo-picker" data-geo-picker>
               <div class="lead-field full">
-                <label for="leadCountries" data-i18n="lead_countries_label">Target countries or regions</label>
-                <textarea id="leadCountries" name="countries" data-lead-countries data-i18n-placeholder="lead_countries_placeholder" placeholder="Например: Brazil, Mexico, LATAM, Africa, India" required></textarea>
+                <label id="leadCountriesLabel" for="leadCountriesTrigger" data-i18n="lead_countries_label">Target countries or regions</label>
+                <input id="leadCountries" name="countries" type="hidden" data-lead-countries required />
+                <button class="geo-select-trigger" id="leadCountriesTrigger" type="button" data-geo-trigger aria-haspopup="listbox" aria-expanded="false" aria-labelledby="leadCountriesLabel">
+                  <span data-geo-trigger-label data-i18n="lead_countries_select_placeholder">Select countries</span>
+                  <span class="geo-trigger-icon" aria-hidden="true">⌄</span>
+                </button>
+                <div class="geo-selected" data-geo-selected></div>
+                <div class="geo-panel" data-geo-panel hidden>
+                  <div class="geo-panel-top">
+                    <input class="geo-search" type="search" data-geo-search data-i18n-placeholder="lead_countries_search_placeholder" placeholder="Search country" aria-label="Search country" />
+                    <label class="geo-select-all">
+                      <input type="checkbox" data-geo-select-all />
+                      <span data-i18n="lead_countries_select_all">Select all</span>
+                    </label>
+                  </div>
+                  <div class="geo-options" data-geo-options role="listbox" aria-labelledby="leadCountriesLabel"></div>
+                  <p class="geo-empty" data-geo-empty hidden data-i18n="lead_countries_empty">Select a region to see countries.</p>
+                </div>
                 <p class="field-error" data-error-for="countries"></p>
               </div>
             </div>
@@ -658,11 +674,11 @@
 
   <div class="map-tooltip" data-map-tooltip></div>
 
-  <script src="js/translations.js?v=20260605-updates-section-title"></script>
-  <script src="js/latin-translations.js?v=20260605-updates-section-title"></script>
+  <script src="js/translations.js?v=20260609-geo-picker"></script>
+  <script src="js/latin-translations.js?v=20260609-geo-picker"></script>
   <script src="js/language.js?v=20260605-force-default-en-safe"></script>
   <script src="js/globe.js?v=20260603-marker-altitude"></script>
   <script src="js/phone-data.js?v=20260521-phone-all-countries"></script>
-  <script src="js/app.js?v=20260608-lead-endpoint-check"></script>
+  <script src="js/app.js?v=20260609-geo-picker"></script>
 </body>
 </html>

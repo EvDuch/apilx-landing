@@ -912,14 +912,36 @@
   };
   const phoneCountries = buildPhoneCountries();
 
-  const leadStepKeys = ["projectStage", "stageTiming", "projectType", "countries", "activeProjects", "ggr", "contacts"];
-  const optionOnlySteps = new Set(["projectStage", "activeLaunch", "livePlan", "projectType", "activeProjects", "ggr"]);
+  const geoRegionIsos = {
+    europe: ["AX", "AL", "AD", "AT", "BE", "BA", "BG", "HR", "CZ", "DK", "EE", "FO", "FI", "FR", "DE", "GI", "GR", "GG", "HU", "IS", "IE", "IM", "IT", "JE", "XK", "LV", "LI", "LT", "LU", "MT", "MC", "ME", "NL", "MK", "NO", "PL", "PT", "RO", "SM", "RS", "SK", "SI", "ES", "SE", "CH", "GB", "VA"],
+    cis: ["AM", "AZ", "BY", "KZ", "KG", "MD", "RU", "TJ", "TM", "UA", "UZ"],
+    north_america: ["US", "CA", "MX", "BM", "GL", "PM"],
+    latin_america: ["AR", "BO", "BR", "CL", "CO", "CR", "CU", "DO", "EC", "SV", "GT", "HN", "NI", "PA", "PY", "PE", "PR", "UY", "VE", "BZ", "GY", "SR", "GF", "HT", "JM", "TT", "BB", "BS", "AG", "LC", "VC", "GD", "DM", "KN", "AI", "AW", "BQ", "CW", "SX", "KY", "TC", "VG", "VI", "MS", "GP", "MQ", "BL", "MF"],
+    africa: ["DZ", "AO", "BJ", "BW", "BF", "BI", "CM", "CV", "CF", "TD", "KM", "CG", "CD", "CI", "DJ", "EG", "GQ", "ER", "SZ", "ET", "GA", "GM", "GH", "GN", "GW", "KE", "LS", "LR", "LY", "MG", "MW", "ML", "MR", "MU", "YT", "MA", "MZ", "NA", "NE", "NG", "RE", "RW", "SH", "ST", "SN", "SC", "SL", "SO", "ZA", "SS", "SD", "TZ", "TG", "TN", "UG", "EH", "ZM", "ZW"],
+    middle_east: ["AE", "BH", "CY", "EG", "IR", "IQ", "IL", "JO", "KW", "LB", "OM", "PS", "QA", "SA", "SY", "TR", "YE"],
+    asia: ["AF", "BD", "BT", "BN", "KH", "CN", "CX", "CC", "HK", "IN", "ID", "JP", "LA", "MO", "MY", "MV", "MN", "MM", "NP", "KP", "PK", "PH", "SG", "KR", "LK", "TW", "TH", "TL", "VN", "UZ", "KZ", "KG", "TJ", "TM", "AZ", "AM", "GE"]
+  };
+  const geoRegionKeys = ["europe", "cis", "north_america", "latin_america", "africa", "middle_east", "asia", "other", "not_sure"];
+  const geoRegionIsoUnion = new Set(Object.values(geoRegionIsos).flat());
+  const leadStepKeys = ["projectStage", "stageTiming", "projectType", "geo", "countries", "activeProjects", "ggr", "contacts"];
+  const optionOnlySteps = new Set(["projectStage", "activeLaunch", "livePlan", "projectType", "geo", "activeProjects", "ggr"]);
   const requiredChoiceSteps = new Set(["projectStage", "activeLaunch", "livePlan", "projectType", "activeProjects", "ggr"]);
   const canonicalLeadValues = {
     projectStage: { active: "Active project", development: "Project in development" },
     activeLaunch: { under_3_months: "Less than 3 months", over_3_months: "More than 3 months" },
     livePlan: { under_1_month: "Less than 1 month", "1_2_months": "More than 1 month", over_2_months: "More than 2 months" },
     projectType: { platform: "Platform provider", operator: "Operator", aggregator: "Aggregator", other: "Other" },
+    regions: {
+      europe: "Europe",
+      cis: "CIS",
+      north_america: "North America",
+      latin_america: "Latin America",
+      africa: "Africa",
+      middle_east: "Middle East",
+      asia: "Asia",
+      other: "Other",
+      not_sure: "Not sure yet"
+    },
     activeProjects: { "1": "1", "2-5": "2-5", "5-10": "5-10", "10+": "10+" },
     ggr: { none: "None yet", "<500k": "<500k", "500k-1m": "500k-1m", "1m+": "1m+", prefer_not: "Prefer not to say" },
     source: { facebook: "Facebook", instagram: "Instagram", telegram: "Telegram", twitter: "Twitter", google_seo: "Google(or SEO)", other: "Other" }
@@ -1173,6 +1195,159 @@
     });
   };
 
+  const getGeoElements = () => ({
+    picker: $("[data-geo-picker]", leadForm),
+    trigger: $("[data-geo-trigger]", leadForm),
+    triggerLabel: $("[data-geo-trigger-label]", leadForm),
+    panel: $("[data-geo-panel]", leadForm),
+    search: $("[data-geo-search]", leadForm),
+    options: $("[data-geo-options]", leadForm),
+    selected: $("[data-geo-selected]", leadForm),
+    empty: $("[data-geo-empty]", leadForm),
+    selectAll: $("[data-geo-select-all]", leadForm),
+    input: $("[data-lead-countries]", leadForm)
+  });
+
+  const getSelectedRegions = () => Array.isArray(leadState.regions) ? leadState.regions : [];
+  const getSelectedCountryIsos = () => Array.isArray(leadState.countryIsos) ? leadState.countryIsos : [];
+
+  const getAvailableGeoCountries = () => {
+    const selectedRegions = getSelectedRegions();
+    if (!selectedRegions.length || selectedRegions.includes("not_sure")) return [];
+    const isoSet = new Set();
+    selectedRegions.forEach((region) => {
+      if (region === "other") {
+        phoneCountries.forEach((country) => {
+          if (!geoRegionIsoUnion.has(country.iso)) isoSet.add(country.iso);
+        });
+        return;
+      }
+      (geoRegionIsos[region] || []).forEach((iso) => isoSet.add(iso));
+    });
+    return phoneCountries.filter((country) => isoSet.has(country.iso));
+  };
+
+  const closeGeoPanel = () => {
+    const { picker, trigger, panel } = getGeoElements();
+    if (panel) panel.hidden = true;
+    picker?.classList.remove("open");
+    trigger?.setAttribute("aria-expanded", "false");
+  };
+
+  const syncGeoCountriesInput = () => {
+    const { input, triggerLabel } = getGeoElements();
+    const selectedRegions = getSelectedRegions();
+    let countries = "";
+
+    if (selectedRegions.includes("not_sure")) {
+      countries = t("lead_region_not_sure");
+    } else {
+      const selectedIsoSet = new Set(getSelectedCountryIsos());
+      countries = phoneCountries
+        .filter((country) => selectedIsoSet.has(country.iso))
+        .map((country) => country.name)
+        .join(", ");
+    }
+
+    leadState.countries = countries;
+    if (input) input.value = countries;
+    if (triggerLabel) {
+      const count = getSelectedCountryIsos().length;
+      triggerLabel.textContent = count
+        ? t("lead_countries_selected_count").replace("{count}", count)
+        : t("lead_countries_select_placeholder");
+    }
+    return countries;
+  };
+
+  const renderGeoSelectedTags = () => {
+    const { selected } = getGeoElements();
+    if (!selected) return;
+    selected.replaceChildren();
+    const selectedIsoSet = new Set(getSelectedCountryIsos());
+    phoneCountries
+      .filter((country) => selectedIsoSet.has(country.iso))
+      .forEach((country) => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "geo-chip";
+        chip.dataset.geoRemove = country.iso;
+        chip.textContent = country.name;
+        chip.setAttribute("aria-label", `${country.name} remove`);
+        selected.append(chip);
+      });
+  };
+
+  const renderGeoCountryOptions = (query = "") => {
+    const { options, empty, selectAll } = getGeoElements();
+    if (!options) return;
+    const availableCountries = getAvailableGeoCountries();
+    const selectedIsoSet = new Set(getSelectedCountryIsos());
+    const normalizedQuery = query.trim().toLowerCase();
+    const visibleCountries = availableCountries.filter((country) => {
+      return !normalizedQuery || country.searchText.includes(normalizedQuery);
+    });
+
+    options.replaceChildren();
+    if (empty) {
+      empty.hidden = Boolean(visibleCountries.length);
+      empty.textContent = availableCountries.length ? t("phone_no_countries") : t("lead_countries_empty");
+    }
+
+    visibleCountries.forEach((country) => {
+      const label = document.createElement("label");
+      label.className = "geo-option";
+      label.setAttribute("role", "option");
+      label.setAttribute("aria-selected", String(selectedIsoSet.has(country.iso)));
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.dataset.geoCountryIso = country.iso;
+      checkbox.checked = selectedIsoSet.has(country.iso);
+
+      const name = document.createElement("span");
+      name.textContent = `${country.flag} ${country.name}`;
+
+      label.append(checkbox, name);
+      options.append(label);
+    });
+
+    if (selectAll) {
+      const visibleIsoSet = new Set(visibleCountries.map((country) => country.iso));
+      const visibleSelectedCount = getSelectedCountryIsos().filter((iso) => visibleIsoSet.has(iso)).length;
+      selectAll.checked = Boolean(visibleCountries.length) && visibleSelectedCount === visibleCountries.length;
+      selectAll.indeterminate = visibleSelectedCount > 0 && visibleSelectedCount < visibleCountries.length;
+      selectAll.disabled = !visibleCountries.length;
+    }
+  };
+
+  const updateGeoCountryPicker = () => {
+    const { picker, search } = getGeoElements();
+    if (!picker) return;
+    const selectedRegions = getSelectedRegions();
+    const availableIsoSet = new Set(getAvailableGeoCountries().map((country) => country.iso));
+    leadState.countryIsos = getSelectedCountryIsos().filter((iso) => availableIsoSet.has(iso));
+    if (selectedRegions.includes("not_sure")) {
+      leadState.countryIsos = [];
+      closeGeoPanel();
+    }
+    if (search) search.value = "";
+    picker.classList.toggle("is-not-sure", selectedRegions.includes("not_sure"));
+    renderGeoSelectedTags();
+    syncGeoCountriesInput();
+    renderGeoCountryOptions();
+  };
+
+  const openGeoPanel = () => {
+    const { picker, trigger, panel, search } = getGeoElements();
+    if (!panel || picker?.classList.contains("is-not-sure")) return;
+    renderGeoCountryOptions(search?.value || "");
+    panel.hidden = false;
+    picker?.classList.add("open");
+    trigger?.setAttribute("aria-expanded", "true");
+    requestAnimationFrame(() => search?.focus?.());
+  };
+
   const isLeadContactComplete = () => {
     if (!leadForm) return false;
     syncWhatsappNumber();
@@ -1219,6 +1394,7 @@
     if (leadProgressBar) leadProgressBar.style.width = progress + "%";
 
     syncLeadSelections();
+    if (activeKey === "countries") updateGeoCountryPicker();
     clearLeadErrors();
 
     const isContactsStep = activeKey === "contacts";
@@ -1292,10 +1468,16 @@
       isValid = false;
     }
 
+    if (key === "geo") {
+      const regions = getSelectedRegions();
+      if (!regions.length) {
+        setLeadError("regions", leadErrors.required);
+        isValid = false;
+      }
+    }
+
     if (key === "countries") {
-      const data = new FormData(leadForm);
-      const countries = String(data.get("countries") || "").trim();
-      leadState.countries = countries;
+      const countries = syncGeoCountriesInput();
       if (!countries) {
         setLeadError("countries", leadErrors.countries);
         isValid = false;
@@ -1357,6 +1539,15 @@
       leadState[name] = currentValues.includes(value)
         ? currentValues.filter((item) => item !== value)
         : [...currentValues, value];
+      if (name === "regions") {
+        if (value === "not_sure" && leadState.regions.includes("not_sure")) {
+          leadState.regions = ["not_sure"];
+        } else if (leadState.regions.includes("not_sure")) {
+          leadState.regions = leadState.regions.filter((item) => item !== "not_sure");
+        }
+        leadState.regions = leadState.regions.filter((item) => geoRegionKeys.includes(item));
+        updateGeoCountryPicker();
+      }
       setLeadError(name, "");
       syncLeadSelections();
       return;
@@ -1382,7 +1573,10 @@
     const sourceCode = String(data.source || "").trim();
     const telegramId = String(data.telegramId || "").trim();
     const whatsappNumber = String(data.whatsappNumber || "").trim();
-    const countries = String(data.countries || leadState.countries || "").trim();
+    const countries = String(syncGeoCountriesInput() || data.countries || leadState.countries || "").trim();
+    const regions = getSelectedRegions()
+      .map((region) => canonicalLeadValues.regions[region] || region)
+      .join(", ");
     const basePayload = {
       name: String(data.name || "").trim(),
       telegramId,
@@ -1417,7 +1611,7 @@
       stage: canonicalLeadValues.projectStage[leadState.projectStage] || "",
       launchTiming: canonicalLeadValues.activeLaunch[launchTimingCode] || canonicalLeadValues.livePlan[launchTimingCode] || "",
       projectType: canonicalLeadValues.projectType[leadState.projectType] || "",
-      regions: "",
+      regions,
       activeProjects: canonicalLeadValues.activeProjects[leadState.activeProjects] || "",
       ggr: canonicalLeadValues.ggr[leadState.ggr] || "",
       ...basePayload
@@ -1607,6 +1801,24 @@
   leadForm?.addEventListener("click", (event) => {
     const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
+    const geoTrigger = target.closest("[data-geo-trigger]");
+    if (geoTrigger) {
+      const { panel } = getGeoElements();
+      if (panel?.hidden) openGeoPanel();
+      else closeGeoPanel();
+      return;
+    }
+
+    const geoRemove = target.closest("[data-geo-remove]");
+    if (geoRemove) {
+      leadState.countryIsos = getSelectedCountryIsos().filter((iso) => iso !== geoRemove.dataset.geoRemove);
+      renderGeoSelectedTags();
+      syncGeoCountriesInput();
+      renderGeoCountryOptions(getGeoElements().search?.value || "");
+      setLeadError("countries", "");
+      return;
+    }
+
     const countryTrigger = target.closest("[data-country-trigger]");
     if (countryTrigger) {
       const { panel } = getPhoneElements();
@@ -1638,6 +1850,10 @@
       renderCountryOptions(target.value);
       return;
     }
+    if (target.matches("[data-geo-search]")) {
+      renderGeoCountryOptions(target.value);
+      return;
+    }
     if (target.name === "whatsappLocalNumber") {
       parseInternationalPhoneInput();
       syncWhatsappNumber();
@@ -1662,6 +1878,35 @@
       syncWhatsappNumber();
       setLeadError("whatsappNumber", "");
     }
+    if (target.matches("[data-geo-country-iso]")) {
+      const selectedIsoSet = new Set(getSelectedCountryIsos());
+      if (target.checked) selectedIsoSet.add(target.dataset.geoCountryIso);
+      else selectedIsoSet.delete(target.dataset.geoCountryIso);
+      leadState.countryIsos = [...selectedIsoSet];
+      renderGeoSelectedTags();
+      syncGeoCountriesInput();
+      renderGeoCountryOptions(getGeoElements().search?.value || "");
+      setLeadError("countries", "");
+      return;
+    }
+    if (target.matches("[data-geo-select-all]")) {
+      const availableCountries = getAvailableGeoCountries();
+      const query = getGeoElements().search?.value || "";
+      const normalizedQuery = query.trim().toLowerCase();
+      const visibleCountries = availableCountries.filter((country) => !normalizedQuery || country.searchText.includes(normalizedQuery));
+      const selectedIsoSet = new Set(getSelectedCountryIsos());
+      if (target.checked) {
+        visibleCountries.forEach((country) => selectedIsoSet.add(country.iso));
+      } else {
+        visibleCountries.forEach((country) => selectedIsoSet.delete(country.iso));
+      }
+      leadState.countryIsos = [...selectedIsoSet];
+      renderGeoSelectedTags();
+      syncGeoCountriesInput();
+      renderGeoCountryOptions(query);
+      setLeadError("countries", "");
+      return;
+    }
     if (target.name) setLeadError(target.name, "");
     if (getLeadStepKey() === "contacts" && leadSubmit) {
       leadSubmit.disabled = !isLeadContactComplete();
@@ -1672,9 +1917,13 @@
     if (!leadForm || !leadModal?.classList.contains("open")) return;
     const target = event.target instanceof Element ? event.target : null;
     if (!target?.closest("[data-country-combobox]")) closeCountryPanel();
+    if (!target?.closest("[data-geo-picker]")) closeGeoPanel();
   });
 
-  window.addEventListener("api-lx-language-change", renderLeadStep);
+  window.addEventListener("api-lx-language-change", () => {
+    updateGeoCountryPicker();
+    renderLeadStep();
+  });
 
   leadNext?.addEventListener("click", goLeadNext);
   leadBack?.addEventListener("click", goLeadBack);
