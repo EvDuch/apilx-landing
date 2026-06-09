@@ -132,7 +132,7 @@
       window.setTimeout(finishBoot, 4500);
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260609-geo-picker" />
+  <link rel="stylesheet" href="css/styles.css?v=20260609-geo-inline" />
 </head>
 <body>
   <div class="site-shell">
@@ -549,16 +549,13 @@
               <button class="wizard-option" type="button" data-choice="regions" data-value="not_sure" data-multiple="true"><span data-i18n="lead_region_not_sure">Not sure yet</span></button>
             </div>
             <p class="field-error" data-error-for="regions"></p>
-          </section>
-
-          <section class="lead-step" data-step-key="countries" data-question="lead_q_countries" data-hint="lead_h_countries" hidden>
             <div class="wizard-input-card geo-picker" data-geo-picker>
               <div class="lead-field full">
                 <label id="leadCountriesLabel" for="leadCountriesTrigger" data-i18n="lead_countries_label">Target countries or regions</label>
                 <input id="leadCountries" name="countries" type="hidden" data-lead-countries required />
                 <button class="geo-select-trigger" id="leadCountriesTrigger" type="button" data-geo-trigger aria-haspopup="listbox" aria-expanded="false" aria-labelledby="leadCountriesLabel">
                   <span data-geo-trigger-label data-i18n="lead_countries_select_placeholder">Select countries</span>
-                  <span class="geo-trigger-icon" aria-hidden="true">⌄</span>
+                  <span class="geo-trigger-icon" aria-hidden="true">v</span>
                 </button>
                 <div class="geo-selected" data-geo-selected></div>
                 <div class="geo-panel" data-geo-panel hidden>
@@ -679,6 +676,6 @@
   <script src="js/language.js?v=20260605-force-default-en-safe"></script>
   <script src="js/globe.js?v=20260603-marker-altitude"></script>
   <script src="js/phone-data.js?v=20260521-phone-all-countries"></script>
-  <script src="js/app.js?v=20260609-geo-picker"></script>
+  <script src="js/app.js?v=20260609-geo-inline"></script>
 </body>
 </html>

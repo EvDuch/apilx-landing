@@ -3620,6 +3620,12 @@ canvas {
 
 .geo-picker {
   position: relative;
+  display: none;
+  margin-top: 18px;
+}
+
+.geo-picker.is-ready {
+  display: block;
 }
 
 .geo-select-trigger {
@@ -3690,10 +3696,8 @@ canvas {
 }
 
 .geo-panel {
-  position: absolute;
+  position: static;
   z-index: 80;
-  right: clamp(16px, 3vw, 24px);
-  left: clamp(16px, 3vw, 24px);
   margin-top: 10px;
   padding: 12px;
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -3780,6 +3784,10 @@ canvas {
   margin: 8px 2px 2px;
   color: rgba(255, 255, 255, 0.62);
   font-size: 14px;
+}
+
+.geo-picker.is-not-sure {
+  display: none;
 }
 
 .geo-picker.is-not-sure .geo-select-trigger {

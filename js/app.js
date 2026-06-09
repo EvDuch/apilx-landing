@@ -923,7 +923,7 @@
   };
   const geoRegionKeys = ["europe", "cis", "north_america", "latin_america", "africa", "middle_east", "asia", "other", "not_sure"];
   const geoRegionIsoUnion = new Set(Object.values(geoRegionIsos).flat());
-  const leadStepKeys = ["projectStage", "stageTiming", "projectType", "geo", "countries", "activeProjects", "ggr", "contacts"];
+  const leadStepKeys = ["projectStage", "stageTiming", "projectType", "geo", "activeProjects", "ggr", "contacts"];
   const optionOnlySteps = new Set(["projectStage", "activeLaunch", "livePlan", "projectType", "geo", "activeProjects", "ggr"]);
   const requiredChoiceSteps = new Set(["projectStage", "activeLaunch", "livePlan", "projectType", "activeProjects", "ggr"]);
   const canonicalLeadValues = {
@@ -1332,6 +1332,7 @@
       closeGeoPanel();
     }
     if (search) search.value = "";
+    picker.classList.toggle("is-ready", Boolean(selectedRegions.length) && !selectedRegions.includes("not_sure"));
     picker.classList.toggle("is-not-sure", selectedRegions.includes("not_sure"));
     renderGeoSelectedTags();
     syncGeoCountriesInput();
@@ -1394,7 +1395,7 @@
     if (leadProgressBar) leadProgressBar.style.width = progress + "%";
 
     syncLeadSelections();
-    if (activeKey === "countries") updateGeoCountryPicker();
+    if (activeKey === "geo") updateGeoCountryPicker();
     clearLeadErrors();
 
     const isContactsStep = activeKey === "contacts";
@@ -1474,9 +1475,6 @@
         setLeadError("regions", leadErrors.required);
         isValid = false;
       }
-    }
-
-    if (key === "countries") {
       const countries = syncGeoCountriesInput();
       if (!countries) {
         setLeadError("countries", leadErrors.countries);
