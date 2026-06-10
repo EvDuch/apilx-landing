@@ -301,6 +301,48 @@
     return { lat: total.lat / ring.length, lng: total.lng / ring.length };
   };
 
+  const ringArea = (ring) => {
+    if (!Array.isArray(ring) || ring.length < 3) return 0;
+    const averageLat = ring.reduce((sum, pair) => sum + pair[1], 0) / ring.length;
+    const latScale = Math.cos(averageLat * Math.PI / 180);
+    let area = 0;
+    for (let index = 0; index < ring.length; index += 1) {
+      const current = ring[index];
+      const next = ring[(index + 1) % ring.length];
+      area += (current[0] * latScale) * next[1] - (next[0] * latScale) * current[1];
+    }
+    return Math.abs(area) / 2;
+  };
+
+  const polygonArea = (polygon) => {
+    const coordinates = polygon?.geometry?.coordinates;
+    if (!Array.isArray(coordinates)) return 0;
+    if (polygon.geometry?.type === "MultiPolygon") {
+      return coordinates.reduce((sum, polygonRings) => sum + ringArea(polygonRings?.[0]), 0);
+    }
+    return ringArea(coordinates[0]);
+  };
+
+  const updatePointDotScales = (polygons) => {
+    const activeAreas = polygons
+      .map((polygon) => ({ country: getPolygonCountry(polygon), area: polygonArea(polygon) }))
+      .filter(({ country, area }) => activeCountryNames.has(country) && area > 0);
+    const logAreas = activeAreas.map(({ area }) => Math.log1p(area));
+    const minArea = Math.min(...logAreas);
+    const maxArea = Math.max(...logAreas);
+    const areaByCountry = new Map(activeAreas.map(({ country, area }) => [country, Math.log1p(area)]));
+
+    clientPoints.forEach((point) => {
+      const logArea = areaByCountry.get(point.country);
+      if (!Number.isFinite(logArea) || !Number.isFinite(minArea) || maxArea <= minArea) {
+        point.dotScale = 1.1;
+        return;
+      }
+      const normalized = (logArea - minArea) / (maxArea - minArea);
+      point.dotScale = 0.82 + Math.pow(normalized, 0.72) * 2.45;
+    });
+  };
+
   const polygonGradientColor = (polygon) => {
     const { lat, lng } = polygonCentroid(polygon);
     const northSouth = (lat + 58) / 116;
@@ -549,33 +591,26 @@
   };
 
   const createWebglMarkers = () => {
-    const chipTexture = createPokerChipTexture();
-    if (!chipTexture) {
-      webglMarkers = [];
-      return;
-    }
-
-    const chipGeometry = new THREE.CircleGeometry(1, 40);
+    const dotGeometry = new THREE.CircleGeometry(1, 32);
     const surfaceNormal = new THREE.Vector3(0, 0, 1);
 
     webglMarkers = clientPoints.map((point, index) => {
       const material = new THREE.MeshBasicMaterial({
-        map: chipTexture,
-        color: 0xffffff,
+        color: 0xff149d,
         transparent: true,
-        opacity: 0.95,
+        opacity: 1,
         depthTest: true,
         depthWrite: false,
         side: THREE.DoubleSide
       });
-      const marker = new THREE.Mesh(chipGeometry, material);
+      const marker = new THREE.Mesh(dotGeometry, material);
       const coords = typeof globe.getCoords === "function"
         ? globe.getCoords(point.lat, point.lng, MARKER_ALTITUDE)
         : { x: 0, y: 0, z: 0 };
       marker.position.set(coords.x, coords.y, coords.z);
       marker.quaternion.setFromUnitVectors(surfaceNormal, marker.position.clone().normalize());
       marker.renderOrder = 12;
-      marker.scale.setScalar(2.85 + Math.min(point.clients, 36) * 0.018);
+      marker.scale.setScalar(point.dotScale || 1.1);
       marker.userData.point = point;
       marker.userData.phase = index * 0.63;
       globe.add(marker);
@@ -759,6 +794,7 @@
     let polygons = [];
     try {
       polygons = await fetchWorldPolygons();
+      updatePointDotScales(polygons);
     } catch (error) {
       console.warn("[api-lx-globe] World polygons unavailable, rendering points only.", error);
     }
@@ -821,7 +857,7 @@
       .arcEndLng("endLng")
       .arcColor("color")
       .arcAltitude(0.22)
-      .arcStroke(0.32)
+      .arcStroke(0.72)
       .arcDashLength(0.58)
       .arcDashGap(2.45)
       .arcDashInitialGap(() => Math.random())
