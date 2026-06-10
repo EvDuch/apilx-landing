@@ -2524,3 +2524,104 @@ body #benefits.benefits-grid-section .benefit-card.reveal-pop.visible:focus-with
     transition: none !important;
   }
 }
+
+/* Why Exactly Choose Us: image-first flip cards. */
+#benefits.benefits-grid-section .benefit-card--flip,
+#benefits.benefits-grid-section .benefit-card--flip:hover,
+#benefits.benefits-grid-section .benefit-card--flip:focus,
+#benefits.benefits-grid-section .benefit-card--flip:focus-within {
+  min-height: clamp(260px, 27svh, 318px) !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  perspective: 1100px !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--flip::before {
+  opacity: 0 !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__flip {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  border-radius: inherit !important;
+  transform-style: preserve-3d !important;
+  transition: transform 620ms cubic-bezier(0.2, 0.72, 0.18, 1) !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--flip:hover .benefit-card__flip,
+#benefits.benefits-grid-section .benefit-card--flip:focus .benefit-card__flip,
+#benefits.benefits-grid-section .benefit-card--flip:focus-within .benefit-card__flip {
+  transform: rotateY(180deg) !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face {
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  border-radius: inherit !important;
+  overflow: hidden !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face--front {
+  background: #07021b !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face--front img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face--back {
+  gap: 16px !important;
+  padding: clamp(22px, 3vw, 34px) !important;
+  background:
+    linear-gradient(180deg, rgba(3, 12, 48, 0.58), rgba(2, 8, 32, 0.88)),
+    #073a89 url("../../assets/referral-card-texture.png?v=20260528-referral-texture") center / cover no-repeat !important;
+  transform: rotateY(180deg) !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face--back h3,
+#benefits.benefits-grid-section .benefit-card__face--back p {
+  position: relative !important;
+  z-index: 1 !important;
+  margin: 0 !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face--back h3 {
+  font-size: clamp(23px, 2.05vw, 31px) !important;
+  line-height: 1.12 !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face--back p {
+  max-width: 34ch !important;
+  font-size: clamp(15px, 1.2vw, 18px) !important;
+  line-height: 1.45 !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--flip:focus-visible {
+  outline: 2px solid rgba(255, 79, 195, 0.82) !important;
+  outline-offset: 5px !important;
+}
+
+@media (max-width: 720px) {
+  #benefits.benefits-grid-section .benefit-card--flip,
+  #benefits.benefits-grid-section .benefit-card--flip:hover,
+  #benefits.benefits-grid-section .benefit-card--flip:focus,
+  #benefits.benefits-grid-section .benefit-card--flip:focus-within {
+    min-height: 260px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #benefits.benefits-grid-section .benefit-card__flip {
+    transition: none !important;
+  }
+}
