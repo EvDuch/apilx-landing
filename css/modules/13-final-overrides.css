@@ -2583,8 +2583,8 @@ body #benefits.benefits-grid-section .benefit-card.reveal-pop.visible:focus-with
   gap: 16px !important;
   padding: clamp(22px, 3vw, 34px) !important;
   background:
-    linear-gradient(180deg, rgba(3, 12, 48, 0.58), rgba(2, 8, 32, 0.88)),
-    #073a89 url("../../assets/referral-card-texture.png?v=20260528-referral-texture") center / cover no-repeat !important;
+    linear-gradient(180deg, rgba(0, 20, 68, 0.1), rgba(0, 8, 34, 0.24)),
+    #073a89 url("../../assets/benefit-flip-text-back.png?v=20260610-text-back") center / cover no-repeat !important;
   transform: rotateY(180deg) !important;
 }
 
