@@ -13168,7 +13168,7 @@ main > section:not(#hero) .referral-band h2 {
   z-index: 1 !important;
   border-radius: inherit !important;
   transform-style: preserve-3d !important;
-  transition: transform 620ms cubic-bezier(0.2, 0.72, 0.18, 1) !important;
+  transition: transform 1100ms cubic-bezier(0.2, 0.72, 0.18, 1) !important;
 }
 
 #benefits.benefits-grid-section .benefit-card--flip:hover .benefit-card__flip,
