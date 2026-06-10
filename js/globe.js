@@ -327,6 +327,31 @@
     return logoDotColors[seed % logoDotColors.length];
   };
 
+  const createDotTexture = () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 96;
+    canvas.height = 96;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return null;
+
+    const gradient = ctx.createRadialGradient(42, 34, 4, 48, 48, 42);
+    gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
+    gradient.addColorStop(0.24, "rgba(255, 255, 255, 0.95)");
+    gradient.addColorStop(0.62, "rgba(255, 255, 255, 0.72)");
+    gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(48, 48, 42, 0, Math.PI * 2);
+    ctx.fill();
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+    texture.generateMipmaps = false;
+    texture.needsUpdate = true;
+    return texture;
+  };
+
   const hasWebGL = () => {
     try {
       const canvas = document.createElement("canvas");
@@ -424,6 +449,12 @@
     regionRows.forEach((row) => {
       row.classList.toggle("active", row.dataset.regionCountry === country);
     });
+    webglMarkers.forEach(({ point, sprite, baseScale }) => {
+      const isActive = point.country === country;
+      sprite.material.opacity = isActive ? 1 : 0.9;
+      sprite.material.color.set(isActive ? 0xffffff : pointLogoColor(point));
+      sprite.scale.setScalar(baseScale * (isActive ? 1.28 : 1));
+    });
   };
 
   const refreshGlobeStyles = () => {
@@ -473,11 +504,46 @@
   };
 
   const createWebglMarkers = () => {
-    webglMarkers = [];
+    const dotTexture = createDotTexture();
+    if (!dotTexture) {
+      webglMarkers = [];
+      return;
+    }
+
+    webglMarkers = clientPoints.map((point, index) => {
+      const material = new THREE.SpriteMaterial({
+        map: dotTexture,
+        color: new THREE.Color(pointLogoColor(point)),
+        transparent: true,
+        opacity: 0.9,
+        depthTest: false,
+        depthWrite: false,
+        sizeAttenuation: true
+      });
+      const sprite = new THREE.Sprite(material);
+      const coords = typeof globe.getCoords === "function"
+        ? globe.getCoords(point.lat, point.lng, MARKER_ALTITUDE)
+        : { x: 0, y: 0, z: 0 };
+      sprite.position.set(coords.x, coords.y, coords.z);
+      sprite.renderOrder = 12;
+      sprite.scale.setScalar(4.4 + Math.min(point.clients, 36) * 0.055);
+      sprite.userData.point = point;
+      sprite.userData.phase = index * 0.63;
+      globe.add(sprite);
+      return { point, sprite, baseScale: sprite.scale.x };
+    });
   };
 
   const updateWebglMarkers = (time) => {
-    void time;
+    const worldPosition = new THREE.Vector3();
+    webglMarkers.forEach(({ sprite, baseScale }) => {
+      sprite.getWorldPosition(worldPosition);
+      const pulse = 1 + Math.sin(time * 0.0032 + sprite.userData.phase) * 0.08;
+      sprite.visible = worldPosition.z > 8;
+      if (sprite.visible && sprite.userData.point.country !== activeCountry) {
+        sprite.scale.setScalar(baseScale * pulse);
+      }
+    });
   };
 
   const updatePointerNdc = (event) => {
@@ -685,11 +751,11 @@
       .polygonStrokeColor((polygon) => isActivePolygon(polygon) ? "rgba(46, 210, 255, 0.95)" : "rgba(80, 122, 190, 0.18)")
       .polygonAltitude(0.014)
       .polygonsTransitionDuration(180)
-      .pointsData(clientPoints)
+      .pointsData([])
       .pointLat("lat")
       .pointLng("lng")
-      .pointAltitude(0.018)
-      .pointRadius((point) => 0.72 + Math.min(point.clients, 40) / 210)
+      .pointAltitude(0)
+      .pointRadius(0)
       .pointResolution(24)
       .pointColor(pointLogoColor)
       .ringsData(ringPoints)
@@ -706,9 +772,9 @@
       .arcEndLng("endLng")
       .arcColor("color")
       .arcAltitude(0.22)
-      .arcStroke(0.1)
-      .arcDashLength(0.42)
-      .arcDashGap(3.2)
+      .arcStroke(0.32)
+      .arcDashLength(0.58)
+      .arcDashGap(2.45)
       .arcDashInitialGap(() => Math.random())
       .arcDashAnimateTime(4200);
 
@@ -733,7 +799,7 @@
     scene.add(globe);
 
     raycaster = new THREE.Raycaster();
-    raycaster.params.Sprite = { threshold: 0.08 };
+    raycaster.params.Sprite = { threshold: 0.22 };
     createWebglMarkers();
     refreshGlobeStyles();
 
