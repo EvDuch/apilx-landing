@@ -13159,9 +13159,35 @@ main > section:not(#hero) .referral-band h2 {
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
+  clip-path: none !important;
+  contain: none !important;
 }
 
-#benefits.benefits-grid-section .benefit-card--flip::before {
+body #benefits.benefits-grid-section .benefit-card.benefit-card--flip,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--flip.reveal-pop.visible,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--flip:hover,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--flip:focus,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--flip:focus-within,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--flip.reveal-pop.visible:hover,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--flip.reveal-pop.visible:focus,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--flip.reveal-pop.visible:focus-within {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  overflow: visible !important;
+  clip-path: none !important;
+  contain: none !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--flip::before,
+#benefits.benefits-grid-section .benefit-card--flip::after,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--flip.reveal-pop.visible::before,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--flip.reveal-pop.visible::after {
+  content: none !important;
+  display: none !important;
   opacity: 0 !important;
 }
 
@@ -13170,6 +13196,7 @@ main > section:not(#hero) .referral-band h2 {
   inset: 0 !important;
   z-index: 1 !important;
   border-radius: inherit !important;
+  transform-origin: center center !important;
   transform-style: preserve-3d !important;
   transition: transform 1100ms cubic-bezier(0.2, 0.72, 0.18, 1) !important;
 }
