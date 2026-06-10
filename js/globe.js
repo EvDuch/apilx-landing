@@ -207,6 +207,7 @@
   let globe;
   let webglMarkers = [];
   let pokerChipTexture = null;
+  let neonDotTexture = null;
   let raycaster;
   let pointerNdc = { x: 0, y: 0 };
   let canvasRect = { left: 0, top: 0, width: 1, height: 1 };
@@ -440,6 +441,53 @@
     return pokerChipTexture;
   };
 
+  const createNeonDotTexture = () => {
+    if (neonDotTexture) return neonDotTexture;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 128;
+    canvas.height = 128;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return null;
+
+    const center = 64;
+    const glow = ctx.createRadialGradient(center, center, 18, center, center, 58);
+    glow.addColorStop(0, "rgba(255, 0, 184, 1)");
+    glow.addColorStop(0.42, "rgba(255, 20, 157, 0.72)");
+    glow.addColorStop(0.78, "rgba(84, 210, 255, 0.22)");
+    glow.addColorStop(1, "rgba(255, 20, 157, 0)");
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(center, center, 58, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "#ff00b8";
+    ctx.beginPath();
+    ctx.arc(center, center, 26, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = "rgba(255, 124, 222, 0.96)";
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(center, center, 25, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.fillStyle = "rgba(255, 162, 230, 0.62)";
+    ctx.beginPath();
+    ctx.arc(54, 52, 6, 0, Math.PI * 2);
+    ctx.fill();
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+    texture.generateMipmaps = false;
+    texture.needsUpdate = true;
+    neonDotTexture = texture;
+    return neonDotTexture;
+  };
+
   const hasWebGL = () => {
     try {
       const canvas = document.createElement("canvas");
@@ -591,14 +639,22 @@
   };
 
   const createWebglMarkers = () => {
+    const dotTexture = createNeonDotTexture();
+    if (!dotTexture) {
+      webglMarkers = [];
+      return;
+    }
+
     const dotGeometry = new THREE.CircleGeometry(1, 32);
     const surfaceNormal = new THREE.Vector3(0, 0, 1);
 
     webglMarkers = clientPoints.map((point, index) => {
       const material = new THREE.MeshBasicMaterial({
-        color: 0xff149d,
+        map: dotTexture,
+        color: 0xffffff,
         transparent: true,
         opacity: 1,
+        blending: THREE.AdditiveBlending,
         depthTest: true,
         depthWrite: false,
         side: THREE.DoubleSide
