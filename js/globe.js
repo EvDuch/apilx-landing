@@ -194,7 +194,7 @@
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
   const prefersSlowUpdate = window.matchMedia("(update: slow)").matches;
-  const MARKER_ALTITUDE = 0.12;
+  const MARKER_ALTITUDE = 0.029;
   const isLowPowerDevice = () => prefersSlowUpdate
     || isCoarsePointer
     || (navigator.deviceMemory && navigator.deviceMemory <= 4)
@@ -206,6 +206,7 @@
   let camera;
   let globe;
   let webglMarkers = [];
+  let pokerChipTexture = null;
   let raycaster;
   let pointerNdc = { x: 0, y: 0 };
   let canvasRect = { left: 0, top: 0, width: 1, height: 1 };
@@ -288,7 +289,9 @@
   };
 
   const rgb = (color) => `rgb(${color.r}, ${color.g}, ${color.b})`;
-  const logoDotColors = ["#77B4F0", "#968FDA", "#BD5EBE", "#DC37A7", "#E130A3"];
+  const chipPink = "#B41478";
+  const chipPinkDark = "#65083F";
+  const chipPinkLight = "#D83A9B";
 
   const polygonCentroid = (polygon) => {
     const coordinates = polygon?.geometry?.coordinates;
@@ -323,33 +326,76 @@
   };
 
   const pointLogoColor = (point) => {
-    const seed = Array.from(point.country || point.iso || "").reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return logoDotColors[seed % logoDotColors.length];
+    void point;
+    return chipPink;
   };
 
-  const createDotTexture = () => {
+  const createPokerChipTexture = () => {
+    if (pokerChipTexture) return pokerChipTexture;
+
     const canvas = document.createElement("canvas");
-    canvas.width = 96;
-    canvas.height = 96;
+    canvas.width = 128;
+    canvas.height = 128;
     const ctx = canvas.getContext("2d");
     if (!ctx) return null;
 
-    const gradient = ctx.createRadialGradient(42, 34, 4, 48, 48, 42);
-    gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-    gradient.addColorStop(0.24, "rgba(255, 255, 255, 0.95)");
-    gradient.addColorStop(0.62, "rgba(255, 255, 255, 0.72)");
-    gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
-    ctx.fillStyle = gradient;
+    const center = 64;
+    const outerRadius = 43;
+    const innerRadius = 25;
+    const slotRadius = 35;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = chipPink;
     ctx.beginPath();
-    ctx.arc(48, 48, 42, 0, Math.PI * 2);
+    ctx.arc(center, center, outerRadius, 0, Math.PI * 2);
     ctx.fill();
+
+    for (let index = 0; index < 8; index += 1) {
+      const start = index * Math.PI / 4 - 0.16;
+      const end = start + 0.32;
+      ctx.fillStyle = index % 2 === 0 ? chipPinkLight : chipPinkDark;
+      ctx.beginPath();
+      ctx.moveTo(center, center);
+      ctx.arc(center, center, outerRadius, start, end);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    ctx.fillStyle = chipPinkDark;
+    ctx.beginPath();
+    ctx.arc(center, center, 32, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = chipPink;
+    ctx.beginPath();
+    ctx.arc(center, center, innerRadius, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = "rgba(255, 188, 224, 0.8)";
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(center, center, slotRadius, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.strokeStyle = chipPinkDark;
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.arc(center, center, 18, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgba(255, 188, 224, 0.62)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(center, center, outerRadius - 2, 0, Math.PI * 2);
+    ctx.stroke();
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.minFilter = THREE.LinearFilter;
     texture.magFilter = THREE.LinearFilter;
     texture.generateMipmaps = false;
     texture.needsUpdate = true;
-    return texture;
+    pokerChipTexture = texture;
+    return pokerChipTexture;
   };
 
   const hasWebGL = () => {
@@ -449,11 +495,10 @@
     regionRows.forEach((row) => {
       row.classList.toggle("active", row.dataset.regionCountry === country);
     });
-    webglMarkers.forEach(({ point, sprite, baseScale }) => {
+    webglMarkers.forEach(({ point, marker, baseScale }) => {
       const isActive = point.country === country;
-      sprite.material.opacity = isActive ? 1 : 0.9;
-      sprite.material.color.set(isActive ? 0xffffff : pointLogoColor(point));
-      sprite.scale.setScalar(baseScale * (isActive ? 1.28 : 1));
+      marker.material.opacity = isActive ? 1 : 0.95;
+      marker.scale.setScalar(baseScale * (isActive ? 1.08 : 1));
     });
   };
 
@@ -504,44 +549,48 @@
   };
 
   const createWebglMarkers = () => {
-    const dotTexture = createDotTexture();
-    if (!dotTexture) {
+    const chipTexture = createPokerChipTexture();
+    if (!chipTexture) {
       webglMarkers = [];
       return;
     }
 
+    const chipGeometry = new THREE.CircleGeometry(1, 40);
+    const surfaceNormal = new THREE.Vector3(0, 0, 1);
+
     webglMarkers = clientPoints.map((point, index) => {
-      const material = new THREE.SpriteMaterial({
-        map: dotTexture,
-        color: new THREE.Color(pointLogoColor(point)),
+      const material = new THREE.MeshBasicMaterial({
+        map: chipTexture,
+        color: 0xffffff,
         transparent: true,
-        opacity: 0.9,
-        depthTest: false,
+        opacity: 0.95,
+        depthTest: true,
         depthWrite: false,
-        sizeAttenuation: true
+        side: THREE.DoubleSide
       });
-      const sprite = new THREE.Sprite(material);
+      const marker = new THREE.Mesh(chipGeometry, material);
       const coords = typeof globe.getCoords === "function"
         ? globe.getCoords(point.lat, point.lng, MARKER_ALTITUDE)
         : { x: 0, y: 0, z: 0 };
-      sprite.position.set(coords.x, coords.y, coords.z);
-      sprite.renderOrder = 12;
-      sprite.scale.setScalar(4.4 + Math.min(point.clients, 36) * 0.055);
-      sprite.userData.point = point;
-      sprite.userData.phase = index * 0.63;
-      globe.add(sprite);
-      return { point, sprite, baseScale: sprite.scale.x };
+      marker.position.set(coords.x, coords.y, coords.z);
+      marker.quaternion.setFromUnitVectors(surfaceNormal, marker.position.clone().normalize());
+      marker.renderOrder = 12;
+      marker.scale.setScalar(2.85 + Math.min(point.clients, 36) * 0.018);
+      marker.userData.point = point;
+      marker.userData.phase = index * 0.63;
+      globe.add(marker);
+      return { point, marker, baseScale: marker.scale.x };
     });
   };
 
   const updateWebglMarkers = (time) => {
     const worldPosition = new THREE.Vector3();
-    webglMarkers.forEach(({ sprite, baseScale }) => {
-      sprite.getWorldPosition(worldPosition);
-      const pulse = 1 + Math.sin(time * 0.0032 + sprite.userData.phase) * 0.08;
-      sprite.visible = worldPosition.z > 8;
-      if (sprite.visible && sprite.userData.point.country !== activeCountry) {
-        sprite.scale.setScalar(baseScale * pulse);
+    webglMarkers.forEach(({ marker, baseScale }) => {
+      marker.getWorldPosition(worldPosition);
+      const pulse = 1 + Math.sin(time * 0.0032 + marker.userData.phase) * 0.035;
+      marker.visible = worldPosition.z > 8;
+      if (marker.visible && marker.userData.point.country !== activeCountry) {
+        marker.scale.setScalar(baseScale * pulse);
       }
     });
   };
@@ -559,8 +608,8 @@
     if (!needsRaycast || !raycaster || isDragging) return;
     needsRaycast = false;
     raycaster.setFromCamera(pointerNdc, camera);
-    const sprites = webglMarkers.map(({ sprite }) => sprite).filter((sprite) => sprite.visible);
-    const hit = raycaster.intersectObjects(sprites, false)[0]?.object;
+    const markers = webglMarkers.map(({ marker }) => marker).filter((marker) => marker.visible);
+    const hit = raycaster.intersectObjects(markers, false)[0]?.object;
     if (hit?.userData?.point) {
       setActiveCountry(hit.userData.point.country);
     } else if (activeCountry && !regionRows.some((row) => row.matches(":hover"))) {
@@ -799,7 +848,7 @@
     scene.add(globe);
 
     raycaster = new THREE.Raycaster();
-    raycaster.params.Sprite = { threshold: 0.22 };
+    raycaster.params.Mesh = { threshold: 0.1 };
     createWebglMarkers();
     refreshGlobeStyles();
 
