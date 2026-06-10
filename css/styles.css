@@ -9080,7 +9080,7 @@ body:has(#hero),
 
 /* Seamless creative background for the site body; hero keeps its own atmosphere. */
 :root {
-  --site-creative-background: url("../assets/site-orb-background.png");
+  --site-creative-background: url("../assets/site-orb-background-20260610.png");
 }
 
 html,
