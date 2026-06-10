@@ -2534,6 +2534,9 @@ body #benefits.benefits-grid-section .benefit-card.reveal-pop.visible:focus-with
   padding: 0 !important;
   overflow: visible !important;
   perspective: 1100px !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 #benefits.benefits-grid-section .benefit-card--flip::before {
@@ -2562,6 +2565,11 @@ body #benefits.benefits-grid-section .benefit-card.reveal-pop.visible:focus-with
   flex-direction: column !important;
   justify-content: center !important;
   border-radius: inherit !important;
+  border: 2px solid rgba(92, 213, 255, 0.94) !important;
+  box-shadow:
+    0 0 5px rgba(102, 220, 255, 0.95),
+    0 0 22px rgba(92, 213, 255, 0.58),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
   overflow: hidden !important;
   backface-visibility: hidden !important;
   -webkit-backface-visibility: hidden !important;
