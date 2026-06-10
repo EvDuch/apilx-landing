@@ -299,14 +299,14 @@
 
   const polygonGradientColor = (polygon) => {
     const { lat, lng } = polygonCentroid(polygon);
-    const northSouth = Math.max(0, Math.min(1, (lat + 55) / 110));
-    const eastWest = Math.max(0, Math.min(1, (lng + 180) / 360));
-    const first = mixColor("#77B4F0", "#968FDA", 1 - northSouth);
-    const second = mixColor("#BD5EBE", "#E130A3", eastWest);
+    const northSouth = (lat + 58) / 116;
+    const eastWest = (lng + 180) / 360;
+    const first = mixColor("#24e6ff", "#1768ff", northSouth);
+    const second = mixColor("#1768ff", "#9b35ff", eastWest);
     return rgb({
-      r: Math.round(first.r * 0.42 + second.r * 0.58),
-      g: Math.round(first.g * 0.42 + second.g * 0.58),
-      b: Math.round(first.b * 0.42 + second.b * 0.58)
+      r: Math.round((first.r + second.r) / 2),
+      g: Math.round((first.g + second.g) / 2),
+      b: Math.round((first.b + second.b) / 2)
     });
   };
 
@@ -440,13 +440,13 @@
         if (activeCountryNames.has(country)) return polygonGradientColor(polygon);
         return mutedLandColor(polygon);
       })
-      .polygonSideColor((polygon) => getPolygonCountry(polygon) === activeCountry ? "rgba(225, 48, 163, 0.54)" : "rgba(189, 94, 190, 0.18)")
+      .polygonSideColor((polygon) => getPolygonCountry(polygon) === activeCountry ? "rgba(46, 210, 255, 0.54)" : "rgba(46, 210, 255, 0.16)")
       .polygonStrokeColor((polygon) => {
         const country = getPolygonCountry(polygon);
         if (country === activeCountry) return "rgba(255, 255, 255, 0.95)";
-        return activeCountryNames.has(country) ? "rgba(225, 48, 163, 0.86)" : "rgba(80, 122, 190, 0.18)";
+        return activeCountryNames.has(country) ? "rgba(46, 210, 255, 0.95)" : "rgba(80, 122, 190, 0.18)";
       })
-      .pointColor((point) => point.country === activeCountry ? "rgba(255, 255, 255, 0.98)" : "rgba(225, 48, 163, 0.95)");
+      .pointColor((point) => point.country === activeCountry ? "rgba(255, 255, 255, 0.98)" : "rgba(46, 210, 255, 0.95)");
   };
 
   const setActiveCountry = (country = "", event) => {
@@ -719,8 +719,8 @@
       .atmosphereAltitude(0.21)
       .polygonsData(polygons)
       .polygonCapColor((polygon) => isActivePolygon(polygon) ? polygonGradientColor(polygon) : mutedLandColor(polygon))
-      .polygonSideColor((polygon) => isActivePolygon(polygon) ? "rgb(189, 94, 190)" : "rgb(13, 37, 88)")
-      .polygonStrokeColor((polygon) => isActivePolygon(polygon) ? "rgba(225, 48, 163, 0.86)" : "rgba(80, 122, 190, 0.18)")
+      .polygonSideColor((polygon) => isActivePolygon(polygon) ? "rgb(24, 112, 190)" : "rgb(13, 37, 88)")
+      .polygonStrokeColor((polygon) => isActivePolygon(polygon) ? "rgba(46, 210, 255, 0.95)" : "rgba(80, 122, 190, 0.18)")
       .polygonAltitude(0.014)
       .polygonsTransitionDuration(180)
       .pointsData(clientPoints)
@@ -729,7 +729,7 @@
       .pointAltitude(0.066)
       .pointRadius((point) => 0.42 + point.clients / 150)
       .pointResolution(8)
-      .pointColor(() => "rgba(225, 48, 163, 0.95)")
+      .pointColor(() => "rgba(46, 210, 255, 0.95)")
       .ringsData(ringPoints)
       .ringLat("lat")
       .ringLng("lng")
