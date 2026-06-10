@@ -288,6 +288,7 @@
   };
 
   const rgb = (color) => `rgb(${color.r}, ${color.g}, ${color.b})`;
+  const logoDotColors = ["#77B4F0", "#968FDA", "#BD5EBE", "#DC37A7", "#E130A3"];
 
   const polygonCentroid = (polygon) => {
     const coordinates = polygon?.geometry?.coordinates;
@@ -319,6 +320,11 @@
       g: Math.round((base.g + violet.g) / 2),
       b: Math.round((base.b + violet.b) / 2)
     });
+  };
+
+  const pointLogoColor = (point) => {
+    const seed = Array.from(point.country || point.iso || "").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return logoDotColors[seed % logoDotColors.length];
   };
 
   const hasWebGL = () => {
@@ -418,12 +424,6 @@
     regionRows.forEach((row) => {
       row.classList.toggle("active", row.dataset.regionCountry === country);
     });
-    webglMarkers.forEach(({ point, sprite, baseScale }) => {
-      const isActive = point.country === country;
-      sprite.material.opacity = isActive ? 1 : 0.86;
-      sprite.material.color.set(0xffffff);
-      sprite.scale.setScalar(baseScale * (isActive ? 1.22 : 1));
-    });
   };
 
   const refreshGlobeStyles = () => {
@@ -446,7 +446,7 @@
         if (country === activeCountry) return "rgba(255, 255, 255, 0.95)";
         return activeCountryNames.has(country) ? "rgba(46, 210, 255, 0.95)" : "rgba(80, 122, 190, 0.18)";
       })
-      .pointColor((point) => point.country === activeCountry ? "rgba(255, 255, 255, 0.98)" : "rgba(46, 210, 255, 0.95)");
+      .pointColor((point) => point.country === activeCountry ? "rgba(255, 255, 255, 0.98)" : pointLogoColor(point));
   };
 
   const setActiveCountry = (country = "", event) => {
@@ -472,50 +472,12 @@
     hideTooltip();
   };
 
-  const createMarkerTexture = () => {
-    const texture = new THREE.TextureLoader().load("assets/api-lx-marker-logo.png");
-    texture.minFilter = THREE.LinearFilter;
-    texture.magFilter = THREE.LinearFilter;
-    texture.generateMipmaps = false;
-    return texture;
-  };
-
   const createWebglMarkers = () => {
-    const markerTexture = createMarkerTexture();
-    webglMarkers = clientPoints.map((point, index) => {
-      const material = new THREE.SpriteMaterial({
-        map: markerTexture,
-        color: 0xffffff,
-        transparent: true,
-        opacity: 0.94,
-        depthTest: false,
-        depthWrite: false,
-        sizeAttenuation: true
-      });
-      const sprite = new THREE.Sprite(material);
-      const coords = typeof globe.getCoords === "function"
-        ? globe.getCoords(point.lat, point.lng, MARKER_ALTITUDE)
-        : { x: 0, y: 0, z: 0 };
-      sprite.position.set(coords.x, coords.y, coords.z);
-      sprite.renderOrder = 8;
-      sprite.scale.setScalar(7 + Math.min(point.clients, 24) * 0.13);
-      sprite.userData.point = point;
-      sprite.userData.phase = index * 0.63;
-      globe.add(sprite);
-      return { point, sprite, baseScale: sprite.scale.x };
-    });
+    webglMarkers = [];
   };
 
   const updateWebglMarkers = (time) => {
-    const worldPosition = new THREE.Vector3();
-    webglMarkers.forEach(({ sprite, baseScale }) => {
-      sprite.getWorldPosition(worldPosition);
-      const pulse = 1 + Math.sin(time * 0.0032 + sprite.userData.phase) * 0.075;
-      sprite.visible = worldPosition.z > 8;
-      if (sprite.visible && sprite.userData.point.country !== activeCountry) {
-        sprite.scale.setScalar(baseScale * pulse);
-      }
-    });
+    void time;
   };
 
   const updatePointerNdc = (event) => {
@@ -726,10 +688,10 @@
       .pointsData(clientPoints)
       .pointLat("lat")
       .pointLng("lng")
-      .pointAltitude(0.066)
-      .pointRadius((point) => 0.42 + point.clients / 150)
-      .pointResolution(8)
-      .pointColor(() => "rgba(46, 210, 255, 0.95)")
+      .pointAltitude(0.018)
+      .pointRadius((point) => 0.72 + Math.min(point.clients, 40) / 210)
+      .pointResolution(24)
+      .pointColor(pointLogoColor)
       .ringsData(ringPoints)
       .ringLat("lat")
       .ringLng("lng")
@@ -744,9 +706,9 @@
       .arcEndLng("endLng")
       .arcColor("color")
       .arcAltitude(0.22)
-      .arcStroke(0.62)
-      .arcDashLength(0.72)
-      .arcDashGap(2.1)
+      .arcStroke(0.1)
+      .arcDashLength(0.42)
+      .arcDashGap(3.2)
       .arcDashInitialGap(() => Math.random())
       .arcDashAnimateTime(4200);
 
