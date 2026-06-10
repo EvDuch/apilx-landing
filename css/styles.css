@@ -6295,6 +6295,30 @@ body:not(.poker-transition-ready).poker-transition-static .control-core-grid .be
   margin-top: 0;
 }
 
+#catalog .catalog-card h3,
+#catalog .catalog-description {
+  display: none;
+}
+
+#catalog .catalog-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  min-height: 0;
+  display: block;
+  pointer-events: none;
+}
+
+#catalog .game-count {
+  position: absolute;
+  top: 48%;
+  left: clamp(20px, 2vw, 28px);
+  transform: translateY(-50%);
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+}
+
 @media (min-width: 1181px) {
   #catalog .catalog-grid.has-active .catalog-card:not(.is-active) .catalog-logo {
     padding-inline: 10px;
