@@ -13476,7 +13476,7 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal
   pointer-events: auto !important;
   background: transparent !important;
   box-shadow: none !important;
-  filter: saturate(0.9) brightness(0.78) !important;
+  filter: saturate(1.04) brightness(0.9) !important;
   transform:
     translateX(-50%)
     translateY(-50%)
@@ -13492,7 +13492,7 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal
 }
 
 body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.is-active {
-  filter: saturate(1.08) brightness(1) !important;
+  filter: saturate(1.16) brightness(1.06) !important;
 }
 
 body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.is-hidden {
@@ -13515,17 +13515,18 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal
   flex-direction: column !important;
   width: 100% !important;
   height: 100% !important;
-  border: 1px solid rgba(112, 193, 255, 0.23) !important;
+  border: 1px solid rgba(96, 211, 255, 0.34) !important;
   border-radius: inherit !important;
   overflow: hidden !important;
   background:
-    radial-gradient(circle at 50% 42%, rgba(255, 42, 171, 0.18), transparent 52%),
-    linear-gradient(180deg, rgba(9, 31, 87, 0.76), rgba(2, 9, 32, 0.9)) !important;
+    radial-gradient(circle at 50% 38%, rgba(63, 205, 255, 0.26), transparent 56%),
+    linear-gradient(180deg, rgba(13, 57, 129, 0.84), rgba(2, 14, 46, 0.92)) !important;
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.035),
-    0 28px 80px rgba(1, 4, 20, 0.48),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 38px rgba(67, 180, 255, 0.1) !important;
+    0 0 0 1px rgba(88, 215, 255, 0.08),
+    0 0 34px rgba(45, 190, 255, 0.14),
+    0 28px 80px rgba(1, 4, 20, 0.44),
+    inset 0 1px 0 rgba(188, 241, 255, 0.18),
+    inset 0 0 42px rgba(67, 197, 255, 0.18) !important;
   transform: none !important;
   transition:
     border-color 520ms ease,
@@ -13534,16 +13535,16 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal
 }
 
 #benefits.benefits-grid-section .benefit-card--carousel.is-active .benefit-card__flip {
-  border-color: rgba(255, 83, 197, 0.36) !important;
+  border-color: rgba(91, 220, 255, 0.72) !important;
   background:
-    radial-gradient(circle at 50% 46%, rgba(255, 38, 166, 0.34), transparent 52%),
-    linear-gradient(180deg, rgba(12, 38, 104, 0.84), rgba(5, 13, 43, 0.92)) !important;
+    radial-gradient(circle at 50% 42%, rgba(61, 211, 255, 0.42), transparent 58%),
+    linear-gradient(180deg, rgba(15, 65, 145, 0.9), rgba(4, 18, 56, 0.94)) !important;
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.06),
-    0 0 58px rgba(245, 27, 157, 0.22),
-    0 28px 90px rgba(1, 4, 20, 0.54),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    inset 0 0 42px rgba(70, 192, 255, 0.13) !important;
+    0 0 0 1px rgba(204, 248, 255, 0.12),
+    0 0 54px rgba(53, 203, 255, 0.28),
+    0 28px 90px rgba(1, 4, 20, 0.5),
+    inset 0 1px 0 rgba(218, 250, 255, 0.2),
+    inset 0 0 48px rgba(72, 207, 255, 0.24) !important;
 }
 
 #benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face {
@@ -13582,7 +13583,7 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal
   border-radius: clamp(12px, 1.4vw, 18px) !important;
   object-fit: cover !important;
   object-position: center !important;
-  filter: saturate(1.12) contrast(1.05) brightness(0.98) drop-shadow(0 0 18px rgba(73, 210, 255, 0.24)) !important;
+  filter: saturate(1.2) contrast(1.08) brightness(1.08) drop-shadow(0 0 22px rgba(73, 210, 255, 0.34)) !important;
 }
 
 #benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face--back {
