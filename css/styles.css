@@ -13312,3 +13312,31 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--flip.reveal-pop
     transition: none !important;
   }
 }
+
+/* Keep the site art, but blur only the background layer. */
+html,
+body {
+  background: #05071c !important;
+}
+
+body .site-shell,
+body .site-shell main,
+body:has(#hero),
+body .site-shell main:has(#hero) {
+  background: transparent !important;
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+body .site-shell::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: -34px !important;
+  z-index: -1 !important;
+  display: block !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  background: url("../assets/site-orb-background-20260610.png") center center / cover no-repeat !important;
+  filter: blur(18px) saturate(1.08);
+  transform: scale(1.04);
+}
