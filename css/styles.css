@@ -13172,11 +13172,16 @@ main > section:not(#hero) .referral-band h2 {
 }
 
 /* Why Exactly Choose Us: image-first flip cards. */
+#benefits.benefits-grid-section .benefits-showcase__grid {
+  width: min(100%, 1168px) !important;
+  gap: clamp(28px, 2.8vw, 38px) clamp(26px, 3vw, 36px) !important;
+}
+
 #benefits.benefits-grid-section .benefit-card--flip,
 #benefits.benefits-grid-section .benefit-card--flip:hover,
 #benefits.benefits-grid-section .benefit-card--flip:focus,
 #benefits.benefits-grid-section .benefit-card--flip:focus-within {
-  min-height: clamp(260px, 27svh, 318px) !important;
+  min-height: clamp(340px, 33svh, 410px) !important;
   padding: 0 !important;
   overflow: visible !important;
   perspective: 1100px !important;
@@ -13261,8 +13266,8 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--flip.reveal-pop
 }
 
 #benefits.benefits-grid-section .benefit-card__face--back {
-  gap: 16px !important;
-  padding: clamp(22px, 3vw, 34px) !important;
+  gap: clamp(16px, 1.8vw, 22px) !important;
+  padding: clamp(28px, 3.3vw, 42px) !important;
   background:
     linear-gradient(180deg, rgba(0, 20, 68, 0.1), rgba(0, 8, 34, 0.24)),
     #073a89 url("../assets/benefit-flip-text-back.png?v=20260610-text-back") center / cover no-repeat !important;
@@ -13273,6 +13278,7 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--flip.reveal-pop
 #benefits.benefits-grid-section .benefit-card__face--back p {
   position: relative !important;
   z-index: 1 !important;
+  max-width: 100% !important;
   margin: 0 !important;
 }
 
@@ -13282,7 +13288,7 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--flip.reveal-pop
 }
 
 #benefits.benefits-grid-section .benefit-card__face--back p {
-  max-width: 34ch !important;
+  max-width: 38ch !important;
   font-size: clamp(15px, 1.2vw, 18px) !important;
   line-height: 1.45 !important;
 }
@@ -13297,7 +13303,7 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--flip.reveal-pop
   #benefits.benefits-grid-section .benefit-card--flip:hover,
   #benefits.benefits-grid-section .benefit-card--flip:focus,
   #benefits.benefits-grid-section .benefit-card--flip:focus-within {
-    min-height: 260px !important;
+    min-height: 340px !important;
   }
 }
 
