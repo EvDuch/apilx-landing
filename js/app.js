@@ -270,6 +270,117 @@
 
   applyScrollReveal();
 
+  const benefitsCarousel = $("[data-benefits-carousel]");
+  if (benefitsCarousel) {
+    const slides = $$("[data-benefit-slide]", benefitsCarousel);
+    const prevButton = $("[data-benefits-prev]");
+    const nextButton = $("[data-benefits-next]");
+    let activeSlide = 0;
+    let autoTimer = 0;
+
+    const getSlideOffset = (index) => {
+      let offset = index - activeSlide;
+      const midpoint = slides.length / 2;
+      if (offset > midpoint) offset -= slides.length;
+      if (offset < -midpoint) offset += slides.length;
+      return offset;
+    };
+
+    const getSlideSpacing = () => {
+      const width = benefitsCarousel.getBoundingClientRect().width || window.innerWidth || 1200;
+      if (width < 720) return width * 0.62;
+      return clamp(width * 0.24, 230, 340);
+    };
+
+    const syncBenefitsCarousel = () => {
+      const spacing = getSlideSpacing();
+      slides.forEach((slide, index) => {
+        const offset = getSlideOffset(index);
+        const absOffset = Math.abs(offset);
+        const isActive = absOffset === 0;
+        const isNear = absOffset === 1;
+        const isFar = absOffset === 2;
+        const isVisible = absOffset <= 2;
+        const direction = offset < 0 ? 1 : -1;
+        const scale = isActive ? 1 : isNear ? 0.82 : 0.66;
+        const opacity = isActive ? 1 : isNear ? 0.58 : isFar ? 0.25 : 0;
+        const translateZ = isActive ? 74 : isNear ? -66 : -178;
+        const rotateY = isActive ? 0 : direction * (isNear ? 10 : 16);
+
+        slide.style.setProperty("--carousel-x", `${offset * spacing}px`);
+        slide.style.setProperty("--carousel-z", `${translateZ}px`);
+        slide.style.setProperty("--carousel-scale", scale.toString());
+        slide.style.setProperty("--carousel-rotate", `${rotateY}deg`);
+        slide.style.setProperty("--carousel-opacity", opacity.toString());
+        slide.style.setProperty("--carousel-z-index", String(30 - absOffset));
+        slide.classList.toggle("is-active", isActive);
+        slide.classList.toggle("is-near", isNear);
+        slide.classList.toggle("is-far", isFar);
+        slide.classList.toggle("is-hidden", !isVisible);
+        slide.setAttribute("aria-hidden", isVisible ? "false" : "true");
+        slide.tabIndex = isVisible ? 0 : -1;
+      });
+    };
+
+    const setBenefitsSlide = (index) => {
+      activeSlide = (index + slides.length) % slides.length;
+      syncBenefitsCarousel();
+    };
+
+    const moveBenefitsSlide = (direction) => {
+      setBenefitsSlide(activeSlide + direction);
+    };
+
+    const stopBenefitsAutoplay = () => {
+      if (!autoTimer) return;
+      window.clearInterval(autoTimer);
+      autoTimer = 0;
+    };
+
+    const startBenefitsAutoplay = () => {
+      if (prefersReducedMotion || autoTimer || slides.length < 2) return;
+      autoTimer = window.setInterval(() => moveBenefitsSlide(1), 3800);
+    };
+
+    slides.forEach((slide, index) => {
+      slide.addEventListener("click", () => setBenefitsSlide(index));
+      slide.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setBenefitsSlide(index);
+          return;
+        }
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+          event.preventDefault();
+          moveBenefitsSlide(event.key === "ArrowLeft" ? -1 : 1);
+        }
+      });
+    });
+
+    prevButton?.addEventListener("click", () => moveBenefitsSlide(-1));
+    nextButton?.addEventListener("click", () => moveBenefitsSlide(1));
+    benefitsCarousel.addEventListener("pointerenter", stopBenefitsAutoplay);
+    benefitsCarousel.addEventListener("pointerleave", startBenefitsAutoplay);
+    benefitsCarousel.addEventListener("focusin", stopBenefitsAutoplay);
+    benefitsCarousel.addEventListener("focusout", () => {
+      requestAnimationFrame(() => {
+        if (!benefitsCarousel.contains(document.activeElement)) startBenefitsAutoplay();
+      });
+    });
+
+    let carouselResizeFrame = 0;
+    window.addEventListener("resize", () => {
+      if (carouselResizeFrame) return;
+      carouselResizeFrame = requestAnimationFrame(() => {
+        carouselResizeFrame = 0;
+        syncBenefitsCarousel();
+      });
+    }, { passive: true });
+
+    syncBenefitsCarousel();
+    startBenefitsAutoplay();
+  }
+
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {

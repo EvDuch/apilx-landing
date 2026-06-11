@@ -4,8 +4,8 @@
       <h2 data-i18n="benefits_title">Why Exactly Choose Us</h2>
     </div>
 
-    <div class="benefits-showcase__grid">
-      <article class="benefit-card benefit-card--flip reveal" tabindex="0">
+    <div class="benefits-showcase__grid" data-benefits-carousel>
+      <article class="benefit-card benefit-card--carousel reveal" tabindex="0" data-benefit-slide>
         <div class="benefit-card__flip">
           <div class="benefit-card__face benefit-card__face--front" aria-hidden="true">
             <img src="assets/benefit-flip-rtp.png?v=20260610-flip" alt="" loading="lazy" decoding="async" />
@@ -17,7 +17,7 @@
         </div>
       </article>
 
-      <article class="benefit-card benefit-card--flip reveal" tabindex="0">
+      <article class="benefit-card benefit-card--carousel reveal" tabindex="0" data-benefit-slide>
         <div class="benefit-card__flip">
           <div class="benefit-card__face benefit-card__face--front" aria-hidden="true">
             <img src="assets/benefit-flip-features.png?v=20260610-flip" alt="" loading="lazy" decoding="async" />
@@ -29,7 +29,7 @@
         </div>
       </article>
 
-      <article class="benefit-card benefit-card--flip reveal" tabindex="0">
+      <article class="benefit-card benefit-card--carousel reveal" tabindex="0" data-benefit-slide>
         <div class="benefit-card__flip">
           <div class="benefit-card__face benefit-card__face--front" aria-hidden="true">
             <img src="assets/benefit-flip-global.png?v=20260610-flip" alt="" loading="lazy" decoding="async" />
@@ -41,7 +41,7 @@
         </div>
       </article>
 
-      <article class="benefit-card benefit-card--flip reveal" tabindex="0">
+      <article class="benefit-card benefit-card--carousel reveal" tabindex="0" data-benefit-slide>
         <div class="benefit-card__flip">
           <div class="benefit-card__face benefit-card__face--front" aria-hidden="true">
             <img src="assets/benefit-flip-releases.png?v=20260610-flip" alt="" loading="lazy" decoding="async" />
@@ -53,7 +53,7 @@
         </div>
       </article>
 
-      <article class="benefit-card benefit-card--flip reveal" tabindex="0">
+      <article class="benefit-card benefit-card--carousel reveal" tabindex="0" data-benefit-slide>
         <div class="benefit-card__flip">
           <div class="benefit-card__face benefit-card__face--front" aria-hidden="true">
             <img src="assets/benefit-flip-support.png?v=20260610-flip" alt="" loading="lazy" decoding="async" />
@@ -65,7 +65,7 @@
         </div>
       </article>
 
-      <article class="benefit-card benefit-card--flip reveal" tabindex="0">
+      <article class="benefit-card benefit-card--carousel reveal" tabindex="0" data-benefit-slide>
         <div class="benefit-card__flip">
           <div class="benefit-card__face benefit-card__face--front" aria-hidden="true">
             <img src="assets/benefit-flip-formats.png?v=20260610-flip" alt="" loading="lazy" decoding="async" />
@@ -76,6 +76,10 @@
           </div>
         </div>
       </article>
+    </div>
+    <div class="benefits-carousel-nav" aria-label="Benefits carousel navigation">
+      <button class="benefits-carousel-arrow benefits-carousel-arrow--prev" type="button" data-benefits-prev aria-label="Previous benefit">‹</button>
+      <button class="benefits-carousel-arrow benefits-carousel-arrow--next" type="button" data-benefits-next aria-label="Next benefit">›</button>
     </div>
   </div>
 </section>
