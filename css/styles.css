@@ -13340,3 +13340,77 @@ body .site-shell::before {
   filter: blur(18px) saturate(1.08);
   transform: scale(1.04);
 }
+
+/* Why Exactly Choose Us: blue glass cards. */
+#benefits.benefits-grid-section .benefit-card--flip,
+#benefits.benefits-grid-section .benefit-card--flip:hover,
+#benefits.benefits-grid-section .benefit-card--flip:focus,
+#benefits.benefits-grid-section .benefit-card--flip:focus-within {
+  border-radius: clamp(28px, 3.2vw, 46px) !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face {
+  isolation: isolate !important;
+  border: 1px solid rgba(122, 194, 255, 0.72) !important;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(98, 159, 255, 0.28), transparent 42%),
+    linear-gradient(145deg, rgba(70, 134, 255, 0.18), rgba(4, 18, 56, 0.72) 52%, rgba(2, 11, 38, 0.9)) !important;
+  box-shadow:
+    0 0 0 1px rgba(134, 207, 255, 0.18),
+    0 18px 62px rgba(0, 68, 184, 0.26),
+    0 0 34px rgba(40, 176, 255, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -22px 46px rgba(21, 142, 255, 0.18) !important;
+  backdrop-filter: blur(18px) saturate(138%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(138%) !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face::before,
+#benefits.benefits-grid-section .benefit-card__face::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  display: block !important;
+  border-radius: inherit !important;
+  pointer-events: none !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face::before {
+  background:
+    radial-gradient(ellipse at -12% -18%, rgba(184, 216, 255, 0.3), transparent 48%),
+    radial-gradient(ellipse at 95% 96%, rgba(19, 166, 255, 0.34), transparent 42%),
+    linear-gradient(138deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04) 28%, transparent 52%) !important;
+  opacity: 0.88 !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face::after {
+  inset: 10px !important;
+  border: 1px solid rgba(116, 194, 255, 0.22) !important;
+  box-shadow:
+    inset 0 0 28px rgba(48, 171, 255, 0.14),
+    0 0 20px rgba(62, 184, 255, 0.12) !important;
+  opacity: 0.95 !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face--front {
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(91, 149, 255, 0.3), transparent 44%),
+    radial-gradient(ellipse at 84% 100%, rgba(12, 159, 255, 0.34), transparent 44%),
+    linear-gradient(145deg, rgba(14, 48, 112, 0.72), rgba(2, 14, 48, 0.94)) !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face--front img {
+  position: relative !important;
+  z-index: 0 !important;
+  border-radius: inherit !important;
+  filter: saturate(1.08) contrast(1.04) brightness(0.96) !important;
+}
+
+#benefits.benefits-grid-section .benefit-card__face--back {
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(91, 149, 255, 0.24), transparent 44%),
+    radial-gradient(ellipse at 84% 100%, rgba(12, 159, 255, 0.3), transparent 44%),
+    linear-gradient(180deg, rgba(0, 32, 95, 0.34), rgba(0, 8, 34, 0.36)),
+    #062a72 url("../assets/benefit-flip-text-back.png?v=20260610-text-back") center / cover no-repeat !important;
+}
