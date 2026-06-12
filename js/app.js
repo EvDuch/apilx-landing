@@ -5,7 +5,7 @@
     ["[data-partial=\"navbar\"]", "partials/navbar.html"],
     ["[data-partial=\"hero\"]", "partials/hero.html"],
     ["[data-partial=\"advantages\"]", "partials/advantages.html"],
-    ["[data-partial=\"providers\"]", "partials/providers.html"],
+    ["[data-partial=\"providers\"]", "partials/providers.html?v=20260611-catalog-logos"],
     ["[data-partial=\"faq\"]", "partials/faq.html"],
     ["[data-partial=\"footer\"]", "partials/footer.html"]
   ];

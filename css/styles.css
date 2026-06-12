@@ -13703,3 +13703,574 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal
     transition: none !important;
   }
 }
+
+/* Premium Game Catalog: cyan neon provider cards. */
+#catalog .catalog-grid,
+#catalog .catalog-grid.active-1,
+#catalog .catalog-grid.active-2,
+#catalog .catalog-grid.active-3,
+#catalog .catalog-grid.active-4,
+#catalog .catalog-grid.has-active:not(:hover):not(:focus-within) {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(18px, 1.7vw, 28px) !important;
+  align-items: stretch !important;
+  width: min(100%, 1520px) !important;
+  margin-inline: auto !important;
+}
+
+#catalog .catalog-card,
+#catalog .catalog-card:first-child,
+#catalog .catalog-grid:hover .catalog-card,
+#catalog .catalog-grid:focus-within .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card.is-active,
+#catalog .catalog-grid:hover .catalog-card:hover,
+#catalog .catalog-grid:focus-within .catalog-card:focus-within {
+  position: relative !important;
+  display: flex !important;
+  flex: initial !important;
+  flex-basis: auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: clamp(360px, 30vw, 470px) !important;
+  padding: clamp(28px, 2.3vw, 38px) !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(84, 202, 255, 0.86) !important;
+  border-radius: clamp(20px, 1.8vw, 30px) !important;
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(89, 157, 255, 0.3), transparent 48%),
+    radial-gradient(ellipse at 78% 100%, rgba(33, 171, 255, 0.16), transparent 46%),
+    linear-gradient(180deg, rgba(6, 33, 92, 0.88), rgba(1, 13, 45, 0.96)) !important;
+  box-shadow:
+    0 0 0 1px rgba(182, 239, 255, 0.18),
+    0 0 26px rgba(34, 178, 255, 0.3),
+    0 18px 58px rgba(0, 7, 35, 0.48),
+    inset 0 1px 0 rgba(222, 250, 255, 0.2),
+    inset 0 0 34px rgba(51, 187, 255, 0.18) !important;
+  backdrop-filter: blur(7px) saturate(112%) !important;
+  -webkit-backdrop-filter: blur(7px) saturate(112%) !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease !important;
+}
+
+#catalog .catalog-card:hover,
+#catalog .catalog-card:focus-within,
+#catalog .catalog-grid.has-active .catalog-card.is-active {
+  border-color: rgba(129, 225, 255, 0.98) !important;
+  box-shadow:
+    0 0 0 1px rgba(218, 250, 255, 0.24),
+    0 0 38px rgba(40, 192, 255, 0.44),
+    0 22px 64px rgba(0, 7, 35, 0.52),
+    inset 0 1px 0 rgba(236, 253, 255, 0.24),
+    inset 0 0 42px rgba(62, 198, 255, 0.24) !important;
+  transform: translateY(-2px) !important;
+}
+
+#catalog .catalog-card::before,
+#catalog .catalog-card::after {
+  content: "" !important;
+  position: absolute !important;
+  display: block !important;
+  pointer-events: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#catalog .catalog-card::before {
+  inset: 0 !important;
+  z-index: 1 !important;
+  border-radius: inherit !important;
+  background:
+    linear-gradient(136deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.055) 28%, transparent 54%),
+    radial-gradient(ellipse at 50% -8%, rgba(99, 194, 255, 0.24), transparent 52%) !important;
+}
+
+#catalog .catalog-card::after {
+  inset: 9px !important;
+  z-index: 2 !important;
+  border-radius: calc(clamp(20px, 1.8vw, 30px) - 9px) !important;
+  border: 1px solid rgba(119, 214, 255, 0.22) !important;
+  background: transparent !important;
+}
+
+#catalog .catalog-card-media,
+#catalog .catalog-card:hover .catalog-card-media,
+#catalog .catalog-card:focus-within .catalog-card-media,
+#catalog .catalog-grid.has-active .catalog-card .catalog-card-media {
+  position: absolute !important;
+  top: clamp(58px, 5vw, 78px) !important;
+  left: 50% !important;
+  z-index: 3 !important;
+  display: block !important;
+  width: calc(100% - clamp(52px, 4vw, 76px)) !important;
+  max-width: 100% !important;
+  height: clamp(102px, 8vw, 148px) !important;
+  min-height: 0 !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  opacity: 0.98 !important;
+  filter: saturate(1.08) contrast(1.04) brightness(1.04) drop-shadow(0 0 14px rgba(61, 206, 255, 0.18)) !important;
+  transform: translateX(-50%) !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+}
+
+#catalog .catalog-card--amusnet .catalog-card-media {
+  width: calc(100% - clamp(42px, 3.2vw, 58px)) !important;
+}
+
+#catalog .catalog-copy {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 4 !important;
+  display: block !important;
+  min-height: 0 !important;
+  pointer-events: none !important;
+}
+
+#catalog .catalog-card h3,
+#catalog .catalog-description {
+  display: none !important;
+}
+
+#catalog .game-count {
+  position: absolute !important;
+  left: 50% !important;
+  top: auto !important;
+  bottom: clamp(114px, 8.6vw, 134px) !important;
+  z-index: 5 !important;
+  width: max-content !important;
+  min-width: clamp(150px, 10.8vw, 194px) !important;
+  max-width: calc(100% - 56px) !important;
+  margin: 0 !important;
+  padding: 12px clamp(22px, 1.8vw, 30px) !important;
+  transform: translateX(-50%) !important;
+  border: 1px solid rgba(88, 198, 255, 0.42) !important;
+  border-radius: 999px !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(68, 190, 255, 0.2), transparent 72%),
+    rgba(4, 37, 96, 0.62) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(232, 252, 255, 0.12),
+    0 0 18px rgba(35, 174, 255, 0.14) !important;
+  color: #f5fbff !important;
+  font-size: clamp(17px, 1.28vw, 23px) !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+#catalog .catalog-card .btn {
+  position: absolute !important;
+  left: clamp(32px, 2.4vw, 46px) !important;
+  right: clamp(32px, 2.4vw, 46px) !important;
+  bottom: clamp(38px, 3.2vw, 58px) !important;
+  z-index: 5 !important;
+  display: inline-flex !important;
+  width: auto !important;
+  min-height: clamp(56px, 4.2vw, 72px) !important;
+  margin: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(84, 206, 255, 0.92) !important;
+  border-radius: clamp(10px, 0.9vw, 16px) !important;
+  background:
+    linear-gradient(180deg, rgba(13, 78, 163, 0.58), rgba(3, 23, 72, 0.74)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(222, 250, 255, 0.18),
+    inset 0 0 24px rgba(53, 188, 255, 0.14),
+    0 0 20px rgba(36, 185, 255, 0.22) !important;
+  color: #ffffff !important;
+  font-size: clamp(17px, 1.18vw, 22px) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+}
+
+#catalog .catalog-card .btn:hover,
+#catalog .catalog-card .btn:focus-visible {
+  border-color: rgba(170, 238, 255, 1) !important;
+  background:
+    linear-gradient(180deg, rgba(19, 98, 190, 0.68), rgba(4, 34, 94, 0.82)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(239, 253, 255, 0.24),
+    inset 0 0 26px rgba(75, 205, 255, 0.18),
+    0 0 26px rgba(56, 199, 255, 0.3) !important;
+}
+
+@media (max-width: 1180px) {
+  #catalog .catalog-grid,
+  #catalog .catalog-grid.active-1,
+  #catalog .catalog-grid.active-2,
+  #catalog .catalog-grid.active-3,
+  #catalog .catalog-grid.active-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    min-height: 430px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #catalog .catalog-grid,
+  #catalog .catalog-grid.active-1,
+  #catalog .catalog-grid.active-2,
+  #catalog .catalog-grid.active-3,
+  #catalog .catalog-grid.active-4 {
+    grid-template-columns: 1fr !important;
+  }
+
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    min-height: 390px !important;
+  }
+
+  #catalog .catalog-card-media,
+  #catalog .catalog-card:hover .catalog-card-media,
+  #catalog .catalog-card:focus-within .catalog-card-media,
+  #catalog .catalog-grid.has-active .catalog-card .catalog-card-media {
+    width: calc(100% - 54px) !important;
+  }
+}
+
+/* Shared cyan neon cards for regions, calculator and referral. */
+#map .region-list,
+#calculator .calculator-shell,
+#referral .referral-showcase {
+  position: relative !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(84, 202, 255, 0.86) !important;
+  border-radius: clamp(20px, 1.8vw, 30px) !important;
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(89, 157, 255, 0.3), transparent 48%),
+    radial-gradient(ellipse at 78% 100%, rgba(33, 171, 255, 0.16), transparent 46%),
+    linear-gradient(180deg, rgba(6, 33, 92, 0.88), rgba(1, 13, 45, 0.96)) !important;
+  box-shadow:
+    0 0 0 1px rgba(182, 239, 255, 0.18),
+    0 0 26px rgba(34, 178, 255, 0.3),
+    0 18px 58px rgba(0, 7, 35, 0.48),
+    inset 0 1px 0 rgba(222, 250, 255, 0.2),
+    inset 0 0 34px rgba(51, 187, 255, 0.18) !important;
+  backdrop-filter: blur(7px) saturate(112%) !important;
+  -webkit-backdrop-filter: blur(7px) saturate(112%) !important;
+}
+
+#map .region-list::before,
+#calculator .calculator-shell::before,
+#referral .referral-showcase::before,
+#map .region-list::after,
+#calculator .calculator-shell::after,
+#referral .referral-showcase::after {
+  content: "" !important;
+  position: absolute !important;
+  display: block !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+}
+
+#map .region-list::before,
+#calculator .calculator-shell::before,
+#referral .referral-showcase::before {
+  inset: 0 !important;
+  z-index: 0 !important;
+  border-radius: inherit !important;
+  background:
+    linear-gradient(136deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.055) 28%, transparent 54%),
+    radial-gradient(ellipse at 50% -8%, rgba(99, 194, 255, 0.24), transparent 52%) !important;
+}
+
+#map .region-list::after,
+#calculator .calculator-shell::after,
+#referral .referral-showcase::after {
+  inset: 9px !important;
+  z-index: 0 !important;
+  border-radius: calc(clamp(20px, 1.8vw, 30px) - 9px) !important;
+  border: 1px solid rgba(119, 214, 255, 0.22) !important;
+  background: transparent !important;
+}
+
+#map .region-list > *,
+#calculator .calculator-shell > *,
+#referral .referral-showcase > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+#map .region-list h3 {
+  color: #f5fbff !important;
+  text-shadow: 0 0 16px rgba(82, 209, 255, 0.2) !important;
+}
+
+#map .region-list li,
+#map .region-list li.active {
+  border: 1px solid rgba(88, 198, 255, 0.28) !important;
+  border-radius: 14px !important;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(68, 190, 255, 0.16), transparent 72%),
+    rgba(4, 37, 96, 0.42) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(232, 252, 255, 0.08),
+    0 0 14px rgba(35, 174, 255, 0.08) !important;
+}
+
+#map .region-list li:hover,
+#map .region-list li.active {
+  border-color: rgba(115, 221, 255, 0.52) !important;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(86, 207, 255, 0.24), transparent 72%),
+    rgba(7, 50, 122, 0.52) !important;
+}
+
+#calculator .control-card,
+#calculator .calc-comparison,
+#calculator .calc-chart-card {
+  border: 1px solid rgba(88, 198, 255, 0.3) !important;
+  border-radius: clamp(14px, 1.2vw, 20px) !important;
+  background:
+    radial-gradient(circle at 22% 0%, rgba(68, 190, 255, 0.14), transparent 72%),
+    rgba(3, 30, 83, 0.44) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(232, 252, 255, 0.1),
+    inset 0 0 24px rgba(53, 188, 255, 0.08),
+    0 0 14px rgba(35, 174, 255, 0.08) !important;
+  backdrop-filter: blur(4px) saturate(110%) !important;
+  -webkit-backdrop-filter: blur(4px) saturate(110%) !important;
+}
+
+#calculator .control-card:hover,
+#calculator .control-card:focus-within,
+#calculator .calc-chart-card:hover,
+#calculator .calc-chart-card:focus-within {
+  border-color: rgba(129, 225, 255, 0.54) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(232, 252, 255, 0.14),
+    inset 0 0 28px rgba(70, 203, 255, 0.12),
+    0 0 18px rgba(48, 190, 255, 0.14) !important;
+}
+
+#calculator .extra-revenue {
+  border: 1px solid rgba(84, 206, 255, 0.76) !important;
+  border-radius: clamp(14px, 1.2vw, 18px) !important;
+  background:
+    linear-gradient(180deg, rgba(13, 78, 163, 0.58), rgba(3, 23, 72, 0.74)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(222, 250, 255, 0.18),
+    inset 0 0 24px rgba(53, 188, 255, 0.14),
+    0 0 20px rgba(36, 185, 255, 0.2) !important;
+}
+
+#referral .referral-card-shape {
+  display: none !important;
+}
+
+#referral .referral-telegram,
+#referral .referral-monetize {
+  border: 1px solid rgba(84, 206, 255, 0.92) !important;
+  border-radius: clamp(10px, 0.9vw, 16px) !important;
+  background:
+    linear-gradient(180deg, rgba(13, 78, 163, 0.58), rgba(3, 23, 72, 0.74)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(222, 250, 255, 0.18),
+    inset 0 0 24px rgba(53, 188, 255, 0.14),
+    0 0 20px rgba(36, 185, 255, 0.22) !important;
+  color: #ffffff !important;
+}
+
+#referral .referral-telegram:hover,
+#referral .referral-telegram:focus-visible,
+#referral .referral-monetize:hover,
+#referral .referral-monetize:focus-visible {
+  border-color: rgba(170, 238, 255, 1) !important;
+  background:
+    linear-gradient(180deg, rgba(19, 98, 190, 0.68), rgba(4, 34, 94, 0.82)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(239, 253, 255, 0.24),
+    inset 0 0 26px rgba(75, 205, 255, 0.18),
+    0 0 26px rgba(56, 199, 255, 0.3) !important;
+}
+
+/* Referral needs the same neon shell without the old shaped-card layout. */
+#referral .referral-showcase,
+#referral .referral-showcase:hover,
+#referral .referral-showcase:focus-within {
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.92fr) minmax(270px, 0.72fr) !important;
+  align-items: center !important;
+  gap: clamp(28px, 4vw, 72px) !important;
+  min-height: clamp(520px, 42vw, 650px) !important;
+  padding: clamp(42px, 4vw, 68px) clamp(38px, 5vw, 82px) !important;
+  border: 1px solid rgba(84, 202, 255, 0.86) !important;
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(89, 157, 255, 0.3), transparent 48%),
+    radial-gradient(ellipse at 78% 100%, rgba(33, 171, 255, 0.16), transparent 46%),
+    linear-gradient(180deg, rgba(6, 33, 92, 0.88), rgba(1, 13, 45, 0.96)) !important;
+  box-shadow:
+    0 0 0 1px rgba(182, 239, 255, 0.18),
+    0 0 26px rgba(34, 178, 255, 0.3),
+    0 18px 58px rgba(0, 7, 35, 0.48),
+    inset 0 1px 0 rgba(222, 250, 255, 0.2),
+    inset 0 0 34px rgba(51, 187, 255, 0.18) !important;
+  transform: none !important;
+}
+
+#referral .referral-card-shape {
+  display: none !important;
+}
+
+#referral .referral-copy,
+html[lang="ru"] #referral .referral-copy {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 2 !important;
+  width: min(100%, 500px) !important;
+  max-width: 500px !important;
+  padding: 0 0 clamp(88px, 8vw, 118px) !important;
+}
+
+#referral .referral-title {
+  max-width: 8ch !important;
+  margin: 0 !important;
+  font-size: clamp(46px, 5vw, 78px) !important;
+  line-height: 0.94 !important;
+}
+
+#referral .referral-lead,
+#referral .referral-profit {
+  width: min(100%, 440px) !important;
+  max-width: 440px !important;
+  font-size: clamp(17px, 1.45vw, 23px) !important;
+  line-height: 1.22 !important;
+}
+
+#referral .referral-profit-title {
+  width: min(100%, 440px) !important;
+  max-width: 440px !important;
+  margin-top: clamp(22px, 2.5vw, 38px) !important;
+  font-size: clamp(18px, 1.6vw, 25px) !important;
+}
+
+#referral .referral-visual {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 2 !important;
+  width: 100% !important;
+  min-height: clamp(360px, 32vw, 500px) !important;
+  height: auto !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  pointer-events: none !important;
+}
+
+#referral .referral-visual img {
+  position: relative !important;
+  inset: auto !important;
+  width: min(92%, 390px) !important;
+  max-width: none !important;
+  height: auto !important;
+  display: block !important;
+  object-fit: contain !important;
+  transform: none !important;
+  translate: 0 0 !important;
+  rotate: 0deg !important;
+  opacity: 1 !important;
+  filter:
+    drop-shadow(0 26px 38px rgba(0, 0, 0, 0.34))
+    drop-shadow(0 0 24px rgba(79, 203, 255, 0.16)) !important;
+  animation: referralPhoneLevitateAir 6.6s ease-in-out infinite !important;
+}
+
+#referral .referral-telegram,
+#referral .referral-monetize {
+  position: absolute !important;
+  top: auto !important;
+  bottom: clamp(42px, 4vw, 64px) !important;
+  min-height: clamp(50px, 4.2vw, 62px) !important;
+  z-index: 4 !important;
+}
+
+#referral .referral-telegram {
+  left: clamp(38px, 5vw, 82px) !important;
+  right: auto !important;
+  min-width: clamp(170px, 15vw, 220px) !important;
+}
+
+#referral .referral-monetize {
+  left: calc(clamp(38px, 5vw, 82px) + clamp(190px, 16vw, 240px)) !important;
+  width: clamp(148px, 12vw, 188px) !important;
+}
+
+@media (max-width: 860px) {
+  #referral .referral-showcase,
+  #referral .referral-showcase:hover,
+  #referral .referral-showcase:focus-within {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+    padding: clamp(28px, 6vw, 42px) clamp(24px, 6vw, 40px) clamp(280px, 58vw, 360px) !important;
+  }
+
+  #referral .referral-copy,
+  html[lang="ru"] #referral .referral-copy {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-bottom: 0 !important;
+  }
+
+  #referral .referral-title {
+    max-width: 100% !important;
+    font-size: clamp(34px, 10vw, 50px) !important;
+  }
+
+  #referral .referral-visual {
+    position: absolute !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: clamp(74px, 18vw, 106px) !important;
+    width: min(66vw, 320px) !important;
+    min-height: 0 !important;
+    transform: translateX(-50%) !important;
+  }
+
+  #referral .referral-visual img {
+    width: 100% !important;
+  }
+
+  #referral .referral-telegram,
+  #referral .referral-monetize {
+    bottom: clamp(24px, 6vw, 34px) !important;
+    width: calc((100% - clamp(66px, 15vw, 92px)) / 2) !important;
+    min-width: 0 !important;
+    min-height: 46px !important;
+    padding-inline: 10px !important;
+    font-size: clamp(12px, 3.2vw, 15px) !important;
+  }
+
+  #referral .referral-telegram {
+    left: clamp(24px, 6vw, 40px) !important;
+    right: auto !important;
+  }
+
+  #referral .referral-monetize {
+    left: auto !important;
+    right: clamp(24px, 6vw, 40px) !important;
+  }
+}
