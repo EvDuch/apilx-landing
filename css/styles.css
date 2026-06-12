@@ -14338,3 +14338,41 @@ html[lang="ru"] #referral .referral-copy {
     0 0 18px rgba(48, 190, 255, 0.14) !important;
   transform: none !important;
 }
+
+/* Restore referral CTA positions from the original composition. */
+#referral .referral-showcase .referral-telegram {
+  top: clamp(32px, 4vw, 58px) !important;
+  right: clamp(38px, 5vw, 82px) !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: auto !important;
+  min-width: clamp(178px, 16vw, 220px) !important;
+}
+
+#referral .referral-showcase .referral-monetize {
+  top: auto !important;
+  right: auto !important;
+  bottom: clamp(42px, 4vw, 64px) !important;
+  left: clamp(38px, 5vw, 82px) !important;
+  width: clamp(148px, 12vw, 188px) !important;
+}
+
+@media (max-width: 860px) {
+  #referral .referral-showcase .referral-telegram,
+  #referral .referral-showcase .referral-monetize {
+    top: auto !important;
+    bottom: clamp(24px, 6vw, 34px) !important;
+    width: calc((100% - clamp(66px, 15vw, 92px)) / 2) !important;
+    min-width: 0 !important;
+  }
+
+  #referral .referral-showcase .referral-telegram {
+    right: auto !important;
+    left: clamp(24px, 6vw, 40px) !important;
+  }
+
+  #referral .referral-showcase .referral-monetize {
+    right: clamp(24px, 6vw, 40px) !important;
+    left: auto !important;
+  }
+}
