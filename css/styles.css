@@ -14179,6 +14179,9 @@ html[lang="ru"] #referral .referral-copy {
   -webkit-mask: none !important;
   mask: none !important;
   pointer-events: none !important;
+  translate: 0 clamp(24px, 2.8vw, 38px);
+  animation: referralPhoneStageLevitate 6.6s ease-in-out infinite !important;
+  will-change: translate;
 }
 
 #referral .referral-visual img {
@@ -14196,7 +14199,22 @@ html[lang="ru"] #referral .referral-copy {
   filter:
     drop-shadow(0 26px 38px rgba(0, 0, 0, 0.34))
     drop-shadow(0 0 24px rgba(79, 203, 255, 0.16)) !important;
-  animation: referralPhoneLevitateAir 6.6s ease-in-out infinite !important;
+  animation: none !important;
+}
+
+@keyframes referralPhoneStageLevitate {
+  0%,
+  100% {
+    translate: 0 clamp(24px, 2.8vw, 38px);
+  }
+
+  45% {
+    translate: 0 clamp(8px, 1.4vw, 18px);
+  }
+
+  72% {
+    translate: 0 clamp(16px, 2vw, 28px);
+  }
 }
 
 #referral .referral-telegram,
