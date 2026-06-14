@@ -14125,7 +14125,13 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal
     0 18px 58px rgba(0, 7, 35, 0.48),
     inset 0 1px 0 rgba(222, 250, 255, 0.2),
     inset 0 0 34px rgba(51, 187, 255, 0.18) !important;
-  transform: none !important;
+}
+
+@media (min-width: 981px) {
+  body #map .region-list:hover,
+  body #map .region-list:focus-within {
+    transform: translateX(clamp(-104px, -6vw, -62px)) !important;
+  }
 }
 
 #referral .referral-card-shape {
