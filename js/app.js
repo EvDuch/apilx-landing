@@ -5,7 +5,7 @@
     ["[data-partial=\"navbar\"]", "partials/navbar.html"],
     ["[data-partial=\"hero\"]", "partials/hero.html"],
     ["[data-partial=\"advantages\"]", "partials/advantages.html"],
-    ["[data-partial=\"providers\"]", "partials/providers.html?v=20260611-catalog-logos"],
+    ["[data-partial=\"providers\"]", "partials/providers.html?v=20260615-catalog-bestseller"],
     ["[data-partial=\"faq\"]", "partials/faq.html"],
     ["[data-partial=\"footer\"]", "partials/footer.html"]
   ];
@@ -744,16 +744,15 @@
   const turnoverRange = $("#turnoverRange");
   const turnoverInput = $("#turnoverInput");
   const rtpRange = $("#rtpRange");
+  const rtpStory = $("[data-rtp-story]");
   const moneyTargets = {
     turnoverLabel: $("[data-turnover-label]"),
     rtpLabel: $("[data-rtp-label]"),
     otherGgr: $("[data-other-ggr]"),
-    otherFee: $("[data-other-fee]"),
     otherNet: $("[data-other-net]"),
     apiRtp: $("[data-api-rtp]"),
     apiRate: $("[data-api-rate]"),
     apiGgr: $("[data-api-ggr]"),
-    apiFee: $("[data-api-fee]"),
     apiNet: $("[data-api-net]"),
     extra: $("[data-extra]")
   };
@@ -771,6 +770,7 @@
   const valueAnimations = new WeakMap();
 
   const animateValue = (el, nextValue, formatter = formatMoney, shouldAnimate = true) => {
+    if (!el) return;
     const activeAnimation = valueAnimations.get(el);
     if (activeAnimation) cancelAnimationFrame(activeAnimation);
 
@@ -822,20 +822,18 @@
       rtp: { other: 96, api: rtp, format: (value) => `${Math.round(value)}%`, delta: rtp - 96 },
       commission: { other: 10, api: commission * 100, format: (value) => `${Math.round(value)}%`, delta: commission * 100 - 10 },
       ggr: { other: otherGgr, api: apiGgr, format: formatMoney, delta: otherGgr ? ((apiGgr / otherGgr) - 1) * 100 : 0 },
-      fee: { other: otherFee, api: apiFee, format: formatMoney, delta: otherFee ? ((apiFee / otherFee) - 1) * 100 : 0 },
       net: { other: otherNet, api: apiNet, format: formatMoney, delta: otherNet ? ((apiNet / otherNet) - 1) * 100 : 0 }
     };
 
     moneyTargets.turnoverLabel.textContent = formatMoney(turnover);
     moneyTargets.rtpLabel.textContent = `${rtp}%`;
-    moneyTargets.apiRtp.textContent = `${rtp}%`;
-    moneyTargets.apiRate.textContent = `${Math.round(commission * 100)}%`;
+    if (moneyTargets.apiRtp) moneyTargets.apiRtp.textContent = `${rtp}%`;
+    if (moneyTargets.apiRate) moneyTargets.apiRate.textContent = `${Math.round(commission * 100)}%`;
+    if (rtpStory) rtpStory.style.setProperty("--api-rtp-progress", `${clamp(rtpProgress, 0, 1) * 100}%`);
 
     animateValue(moneyTargets.otherGgr, otherGgr, formatMoney, shouldAnimate);
-    animateValue(moneyTargets.otherFee, otherFee, formatMoney, shouldAnimate);
     animateValue(moneyTargets.otherNet, otherNet, formatMoney, shouldAnimate);
     animateValue(moneyTargets.apiGgr, apiGgr, formatMoney, shouldAnimate);
-    animateValue(moneyTargets.apiFee, apiFee, formatMoney, shouldAnimate);
     animateValue(moneyTargets.apiNet, apiNet, formatMoney, shouldAnimate);
     animateValue(moneyTargets.extra, extra, formatMoney, shouldAnimate);
 
@@ -858,22 +856,21 @@
       if (!data) return;
       const chartType = card.dataset.chart;
       const visualHeight = (value) => {
-        const maxTurnover = Number(turnoverRange.max);
+        const pairMax = Math.max(data.other, data.api, 1);
         const domains = {
           rtp: 100,
           commission: 10,
-          ggr: maxTurnover,
-          fee: maxTurnover * 0.08,
-          net: maxTurnover
+          ggr: pairMax,
+          net: pairMax
         };
         const domain = Math.max(domains[chartType] || Math.max(data.other, data.api, 1), 1);
         const normalized = clamp(value / domain, 0, 1);
-        return 8 + (Math.sqrt(normalized) * 74);
+        return 8 + (Math.sqrt(normalized) * 92);
       };
       const otherHeight = visualHeight(data.other);
       const apiHeight = visualHeight(data.api);
-      if (otherValue && !otherValue.matches("[data-other-ggr], [data-other-fee], [data-other-net]")) otherValue.textContent = data.format(data.other);
-      if (apiValue && !apiValue.matches("[data-api-ggr], [data-api-fee], [data-api-net], [data-api-rtp], [data-api-rate]")) apiValue.textContent = data.format(data.api);
+      if (otherValue && !otherValue.matches("[data-other-ggr], [data-other-net]")) otherValue.textContent = data.format(data.other);
+      if (apiValue && !apiValue.matches("[data-api-ggr], [data-api-net], [data-api-rtp], [data-api-rate]")) apiValue.textContent = data.format(data.api);
       if (otherBar) {
         otherBar.style.setProperty("--bar-height", `${otherHeight}%`);
         otherBar.style.setProperty("--bar-scale", String(clamp(otherHeight / 100, 0.08, 1)));

@@ -17,6 +17,7 @@
     { iso: "AO", country: "Angola", lat: -11.2027, lng: 17.8739, clients: 14 },
     { iso: "AR", country: "Argentina", lat: -38.4161, lng: -63.6167, clients: 22 },
     { iso: "AU", country: "Australia", lat: -25.2744, lng: 133.7751, clients: 28 },
+    { iso: "AQ", country: "Antarctica", lat: -82.8628, lng: 135.0000, clients: 0, tooltipKey: "map_tooltip_antarctica", fixedDotScale: 1.15 },
     { iso: "AT", country: "Austria", lat: 47.5162, lng: 14.5501, clients: 16 },
     { iso: "AZ", country: "Azerbaijan", lat: 40.1431, lng: 47.5769, clients: 17 },
     { iso: "BS", country: "Bahamas", lat: 25.0343, lng: -77.3963, clients: 9 },
@@ -157,7 +158,8 @@
     ["united arab emirates", "United Arab Emirates"],
     ["united kingdom", "United Kingdom"],
     ["england", "United Kingdom"],
-    ["great britain", "United Kingdom"]
+    ["great britain", "United Kingdom"],
+    ["antarctica", "Antarctica"]
   ]);
   const globeLibraries = [
     {
@@ -245,6 +247,10 @@
     }
   };
   const getClientLabel = (count) => translate("map_tooltip_clients").replace("{count}", count);
+  const getTooltipClientLabel = (point) => {
+    if (point.tooltipKey) return translate(point.tooltipKey).replace("{count}", point.clients);
+    return getClientLabel(point.clients);
+  };
   const renderRegionList = () => {
     if (!regionList) {
       regionRows = Array.from(document.querySelectorAll("[data-region-country]"));
@@ -334,6 +340,10 @@
     const areaByCountry = new Map(activeAreas.map(({ country, area }) => [country, Math.log1p(area)]));
 
     clientPoints.forEach((point) => {
+      if (Number.isFinite(point.fixedDotScale)) {
+        point.dotScale = point.fixedDotScale;
+        return;
+      }
       const logArea = areaByCountry.get(point.country);
       if (!Number.isFinite(logArea) || !Number.isFinite(minArea) || maxArea <= minArea) {
         point.dotScale = 1.1;
@@ -574,7 +584,7 @@
     if (!tooltip || !point) return;
     const position = event ? { x: event.clientX, y: event.clientY } : pointerPosition;
     tooltip.style.display = "block";
-    tooltip.innerHTML = `<strong>${getCountryLabel(point)}</strong><span> &mdash; ${getClientLabel(point.clients)}</span>`;
+    tooltip.innerHTML = `<strong>${getCountryLabel(point)}</strong><span> &mdash; ${getTooltipClientLabel(point)}</span>`;
     if (position) {
       tooltip.style.left = `${position.x}px`;
       tooltip.style.top = `${position.y}px`;

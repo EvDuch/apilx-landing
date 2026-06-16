@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en" class="is-booting">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="API LX premium B2B casino slot API landing page with flexible RTP, provider catalog, GGR calculator and contact form." />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin />
+  <title>API LX | Premium Casino Slot APIs</title>
+  <style>
+    html.is-booting,
+    html.is-booting body {
+      min-height: 100%;
+      overflow: hidden;
+      background: #090326;
+    }
+
+    html.is-booting .site-shell {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    html.is-booting body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 99998;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 79, 195, 0.28), transparent 28rem),
+        radial-gradient(circle at 82% 14%, rgba(46, 210, 255, 0.16), transparent 26rem),
+        linear-gradient(145deg, #12063b 0%, #07031b 68%, #03010d 100%);
+    }
+
+    html.is-booting body::after {
+      content: "";
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      z-index: 99999;
+      width: 48px;
+      height: 48px;
+      pointer-events: none;
+      background: url("assets/api-lx-symbol.webp") center / contain no-repeat;
+      transform: translate(-50%, -50%) scale(0.98);
+      filter: drop-shadow(0 0 18px rgba(46, 210, 255, 0.42));
+      animation: apiLxBootPulse 1s ease-in-out infinite alternate;
+    }
+
+    html:not(.is-booting) .site-shell {
+      opacity: 1;
+      transition: opacity 180ms ease;
+    }
+
+    @keyframes apiLxBootPulse {
+      from {
+        opacity: 0.58;
+        transform: translate(-50%, -50%) scale(0.94);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html.is-booting body::after {
+        animation: none;
+      }
+
+      html:not(.is-booting) .site-shell {
+        transition: none;
+      }
+    }
+  </style>
+  <script>
+    (() => {
+      const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+      window.API_LX_CONFIG = window.API_LX_CONFIG || {
+        turnstileSiteKey: "0x4AAAAAADSOrisXiUAEuGgD",
+        leadEndpointUrl: isLocalHost ? "http://127.0.0.1:8787/api/lead" : "https://apilx-landing.onrender.com/api/lead"
+      };
+    })();
+  </script>
+  <script>
+    (() => {
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      const root = document.documentElement;
+      let bootFinished = false;
+
+      const hasStartupHash = () => window.location.hash && window.location.hash.length > 1;
+
+      const forceHeroStart = ({ repeat = false } = {}) => {
+        if (hasStartupHash()) return;
+        const previousBehavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto";
+        window.scrollTo(0, 0);
+        requestAnimationFrame(() => window.scrollTo(0, 0));
+        const restore = () => {
+          window.scrollTo(0, 0);
+          root.style.scrollBehavior = previousBehavior;
+        };
+        window.setTimeout(restore, 80);
+        if (repeat) {
+          [180, 420, 760].forEach((delay) => window.setTimeout(() => {
+            if (!hasStartupHash()) window.scrollTo(0, 0);
+          }, delay));
+        }
+      };
+
+      const finishBoot = () => {
+        if (bootFinished) return;
+        bootFinished = true;
+        window.setTimeout(() => {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              root.classList.remove("is-booting");
+              root.classList.add("is-ready");
+              forceHeroStart({ repeat: true });
+            });
+          });
+        }, 180);
+      };
+
+      window.API_LX_FORCE_HERO_START = forceHeroStart;
+      window.API_LX_FINISH_BOOT = finishBoot;
+      window.addEventListener("pageshow", () => forceHeroStart({ repeat: true }));
+      window.addEventListener("load", () => forceHeroStart({ repeat: true }));
+      window.addEventListener("api-lx:partials-ready", finishBoot);
+      window.setTimeout(finishBoot, 4500);
+    })();
+  </script>
+  <link rel="stylesheet" href="css/styles.css?v=20260614-calculator-rtp-dominance" />
+</head>
+<body>
+  <div class="site-shell">
+    <div data-partial="navbar"></div>
+
+    <main>
+            <div data-partial="hero"></div>
+
+      <section class="marquee-strip" aria-label="API LX highlights">
+        <div class="marquee-track">
+          <div class="marquee-content">
+            <span data-i18n="marquee_api_lx">API LX</span>
+            <b data-i18n="marquee_flexible_rtp">Flexible RTP 0-100%</b>
+            <span data-i18n="marquee_fast_api">Fast API Connection</span>
+            <span data-i18n="marquee_low_fees">Low Fees</span>
+            <b data-i18n="marquee_provider_updates">Instant Provider Updates</b>
+            <span data-i18n="marquee_global_infra">Global Casino Infrastructure</span>
+            <span data-i18n="marquee_support">24/7 Support</span>
+          </div>
+          <div class="marquee-content" aria-hidden="true">
+            <span data-i18n="marquee_api_lx">API LX</span>
+            <b data-i18n="marquee_flexible_rtp">Flexible RTP 0-100%</b>
+            <span data-i18n="marquee_fast_api">Fast API Connection</span>
+            <span data-i18n="marquee_low_fees">Low Fees</span>
+            <b data-i18n="marquee_provider_updates">Instant Provider Updates</b>
+            <span data-i18n="marquee_global_infra">Global Casino Infrastructure</span>
+            <span data-i18n="marquee_support">24/7 Support</span>
+          </div>
+        </div>
+      </section>
+
+            <div data-partial="advantages"></div>
+
+            <div data-partial="providers"></div>
+
+      <section id="map" class="section">
+        <div class="container">
+          <div class="map-wrap globe-layout">
+            <div class="map-copy section-head reveal">
+              <p class="eyebrow" data-i18n="map_eyebrow">Global Coverage</p>
+              <h2 data-i18n="map_title">Our Global Client Network</h2>
+              <p data-i18n="map_subtitle">Trusted by operators across multiple regions. Be first in your GEO.</p>
+            </div>
+            <div class="globe-stage reveal" data-globe-shell>
+              <div class="globe-grid-glow" aria-hidden="true"></div>
+              <div class="globe-canvas" data-globe aria-label="Interactive 3D globe with active API LX client regions"></div>
+              <div class="globe-loading" data-globe-loading>Loading live network globe</div>
+              <div class="globe-fallback" data-globe-fallback hidden>
+                <div class="fallback-planet" aria-hidden="true">
+                  <span class="fallback-point brazil"><i></i></span>
+                  <span class="fallback-point india"><i></i></span>
+                  <span class="fallback-point turkey"><i></i></span>
+                  <span class="fallback-point mexico"><i></i></span>
+                  <span class="fallback-point indonesia"><i></i></span>
+                </div>
+                <p data-i18n="map_fallback_note">Live 3D globe is unavailable on this device. Active regions are shown in the panel.</p>
+              </div>
+            </div>
+            <aside class="region-list glass reveal">
+              <h3 data-i18n="map_active_regions">Active Regions</h3>
+              <ul data-region-list></ul>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="calculator" class="section">
+        <div class="container">
+          <div class="section-head center reveal">
+            <p class="eyebrow" data-i18n="calculator_eyebrow">GGR Simulator</p>
+            <h2 data-i18n="calculator_title">Calculate Your Extra GGR With API LX</h2>
+            <p data-i18n="calculator_subtitle">Compare fixed RTP providers against API LX flexible RTP and lower commission.</p>
+          </div>
+          <div class="calculator-shell glass reveal">
+            <div class="calc-controls">
+              <div class="control-card">
+                <label class="control-label" for="turnoverRange"><span data-i18n="calc_monthly_turnover">Monthly Turnover</span><strong class="control-value" data-turnover-label>$20,000,000</strong></label>
+                <div class="calc-mini-bars turnover-bars" aria-hidden="true" data-turnover-bars>
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <input id="turnoverRange" type="range" min="0" max="50000000" step="100000" value="20000000" />
+                <div class="range-scale"><span>$0</span><span>$50M</span></div>
+                <input class="turnover-input" id="turnoverInput" type="number" min="0" max="50000000" step="100000" value="20000000" aria-label="Monthly turnover input" />
+              </div>
+              <div class="control-card">
+                <label class="control-label" for="rtpRange"><span data-i18n="calc_api_rtp">API LX RTP</span><strong class="control-value" data-rtp-label>92%</strong></label>
+                <div class="calc-mini-bars rtp-bars" aria-hidden="true" data-rtp-bars>
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <input id="rtpRange" type="range" min="0" max="100" step="1" value="92" />
+                <div class="range-scale"><span>0%</span><span>100%</span></div>
+              </div>
+            </div>
+            <div class="calc-comparison">
+              <h3><span data-i18n="calc_api_lx">API LX</span> vs <span data-i18n="calc_other_providers">Other Providers</span></h3>
+              <div class="calc-chart-grid">
+                <article class="calc-chart-card calc-rtp-story" data-chart="rtp" data-rtp-story>
+                  <div class="chart-title"><span class="chart-icon">RTP</span><strong data-i18n="calc_fixed_rtp">Fixed RTP</strong></div>
+                  <div class="rtp-contrast">
+                    <div class="rtp-lane rtp-lane--locked">
+                      <div class="rtp-lane-head"><span data-i18n="calc_other_providers">Other Providers</span><strong data-other-value>96%</strong></div>
+                      <div class="rtp-track" aria-hidden="true">
+                        <span class="rtp-track-fill"></span>
+                        <span class="rtp-pin"></span>
+                        <span class="rtp-cross"></span>
+                      </div>
+                      <p data-i18n="calc_fixed_rtp_locked">Locked setting. Provider decides the margin.</p>
+                    </div>
+                    <div class="rtp-lane rtp-lane--api">
+                      <div class="rtp-lane-head"><span data-i18n="calc_api_lx">API LX</span><strong data-api-value data-api-rtp>92%</strong></div>
+                      <div class="rtp-track" aria-hidden="true">
+                        <span class="rtp-track-fill"></span>
+                        <span class="rtp-knob"></span>
+                      </div>
+                      <p data-i18n="calc_flexible_rtp_control">Move RTP across the full range for each GEO and strategy.</p>
+                    </div>
+                    <div class="rtp-advantage"><span data-i18n="calc_rtp_advantage">RTP control stays with you</span></div>
+                  </div>
+                </article>
+                <article class="calc-chart-card" data-chart="commission">
+                  <div class="chart-title"><span class="chart-icon">%</span><strong data-i18n="calc_average_fee">Average fee</strong></div>
+                  <div class="chart-bars">
+                    <div class="chart-bar-pair"><strong data-other-value>10%</strong><span class="bar other" data-other-bar></span><small data-i18n="calc_other_providers">Other Providers</small></div>
+                    <div class="chart-bar-pair"><strong data-api-value data-api-rate>6%</strong><span class="bar api" data-api-bar></span><small data-i18n="calc_api_lx">API LX</small></div>
+                  </div>
+                  <em data-delta>-4%</em>
+                </article>
+                <article class="calc-chart-card" data-chart="ggr">
+                  <div class="chart-title"><span class="chart-icon">$</span><strong data-i18n="calc_ggr">GGR</strong></div>
+                  <div class="chart-bars">
+                    <div class="chart-bar-pair"><strong data-other-value data-other-ggr>$0</strong><span class="bar other" data-other-bar></span><small data-i18n="calc_other_providers">Other Providers</small></div>
+                    <div class="chart-bar-pair"><strong data-api-value data-api-ggr>$0</strong><span class="bar api" data-api-bar></span><small data-i18n="calc_api_lx">API LX</small></div>
+                  </div>
+                  <em data-delta>+0%</em>
+                </article>
+                <article class="calc-chart-card" data-chart="net">
+                  <div class="chart-title"><span class="chart-icon">↗</span><strong data-i18n="calc_net">Net Revenue</strong></div>
+                  <div class="chart-bars">
+                    <div class="chart-bar-pair"><strong data-other-value data-other-net>$0</strong><span class="bar other" data-other-bar></span><small data-i18n="calc_other_providers">Other Providers</small></div>
+                    <div class="chart-bar-pair"><strong data-api-value data-api-net>$0</strong><span class="bar api" data-api-bar></span><small data-i18n="calc_api_lx">API LX</small></div>
+                  </div>
+                  <em data-delta>+0%</em>
+                </article>
+              </div>
+            </div>
+            <div class="extra-revenue"><span data-i18n="calc_extra_revenue">Extra Monthly Revenue</span><strong data-extra>$0</strong></div>
+            <p class="disclaimer" data-i18n="calc_disclaimer">Calculator values are estimates and may vary depending on traffic, player behavior and commercial terms.</p>
+          </div>
+        </div>
+      </section>
+
+            <div data-partial="faq"></div>
+
+      <section id="updates" class="section updates-section">
+        <div class="container">
+          <h2 class="updates-section-title reveal" data-i18n="updates_title">Our updates</h2>
+          <div class="updates-showcase reveal" data-updates-carousel data-active-update="1" style="--updates-index: 1">
+            <span class="update-sphere update-sphere-a" aria-hidden="true"></span>
+            <span class="update-sphere update-sphere-b" aria-hidden="true"></span>
+            <span class="update-sphere update-sphere-c" aria-hidden="true"></span>
+            <span class="update-sphere update-sphere-d" aria-hidden="true"></span>
+            <div class="updates-carousel">
+              <div class="updates-track" data-updates-track>
+                <article class="updates-release" data-update-slide aria-hidden="true" inert>
+            <div class="updates-intro">
+              <p class="eyebrow" data-i18n="updates_eyebrow">Latest updates</p>
+              <h2 data-i18n="updates_pgsoft_title">PG Soft Update is live on API LX</h2>
+              <p data-i18n="updates_pgsoft_intro">We’ve rolled out a new update for PG Soft on our platform.</p>
+            </div>
+            <div class="updates-timeline" aria-label="PG Soft platform update details">
+              <article class="timeline-entry timeline-entry-featured">
+                <span class="timeline-dot" aria-hidden="true"></span>
+                <time datetime="2026-05-21">May 21, 2026</time>
+                <h3 data-i18n="updates_new_games">New games added</h3>
+                <ul class="update-game-list">
+                  <li><span>2100928</span> Fortune Horse <em>fortune-horse</em></li>
+                  <li><span>2035783</span> Funky Fortunez <em>funky-fortunez</em></li>
+                  <li><span>2024510</span> Perfect Strike <em>perfect-strike</em></li>
+                  <li><span>2012025</span> Skylight Wonders <em>skylight-wonder</em></li>
+                  <li><span>2009635</span> Poker Kingdom Win <em>poker-kingdom</em></li>
+                  <li><span>1997301</span> Mayan Destiny <em>mayan-destiny</em></li>
+                  <li><span>1981965</span> Forbidden Alchemy <em>forbid-alchemy</em></li>
+                  <li><span>1950910</span> Inferno Mayhem <em>inferno-mayhem</em></li>
+                  <li><span>1940257</span> Alibaba’s Cave of Fortune <em>alibaba-cave</em></li>
+                  <li><span>1849515</span> Mythical Guardians <em>mythical-gdn</em></li>
+                </ul>
+              </article>
+              <article class="timeline-entry">
+                <span class="timeline-dot" aria-hidden="true"></span>
+                <h3 data-i18n="updates_new_languages">New languages added</h3>
+                <p data-i18n="updates_new_languages_text">German, Turkish, French, Swedish, Italian, Danish, Dutch, Finnish, Norwegian, Polish, Romanian</p>
+              </article>
+              <article class="timeline-entry">
+                <span class="timeline-dot" aria-hidden="true"></span>
+                <h3 data-i18n="updates_new_currencies">New currencies</h3>
+                <ul class="update-chip-list">
+                  <li>ETB <span>Ethiopian Birr</span></li>
+                  <li>GTQ <span>Guatemalan Quetzal</span></li>
+                  <li>SYP <span>Syrian Pound</span></li>
+                  <li>NPR <span>Nepalese Rupee</span></li>
+                  <li>KGS <span>Kyrgyzstani Som</span></li>
+                </ul>
+              </article>
+              <article class="timeline-entry">
+                <span class="timeline-dot" aria-hidden="true"></span>
+                <h3 data-i18n="updates_improvements">Improvements</h3>
+                <p data-i18n="updates_improvements_text">Minor fixes and stability improvements.</p>
+                <div class="update-checks">
+                  <span data-i18n="updates_fast_updates">Fast updates</span>
+                  <span data-i18n="updates_full_portfolio">Full provider portfolio</span>
+                  <span data-i18n="updates_stable_integrations">Stable integrations</span>
+                </div>
+                <p class="update-live-note" data-i18n="updates_live_note">The update is already live on the platform. For demos, game lists, or integration details:</p>
+              </article>
+            </div>
+                </article>
+
+                <article class="updates-release is-active" data-update-slide aria-hidden="false">
+                  <div class="updates-intro">
+                    <p class="eyebrow" data-i18n="updates_eyebrow">Latest updates</p>
+                    <h2 data-i18n="updates_pragmatic_title">Pragmatic Play Update is now live on API LX</h2>
+                    <p data-i18n="updates_pragmatic_intro">We’ve just rolled out another Pragmatic Play update with 13 new releases added to the platform.</p>
+                  </div>
+                  <div class="updates-timeline" aria-label="Pragmatic Play platform update details">
+                    <article class="timeline-entry timeline-entry-featured">
+                      <span class="timeline-dot" aria-hidden="true"></span>
+                      <time data-i18n="updates_status_now_live">Now live</time>
+                      <h3 data-i18n="updates_latest_games">Latest games added</h3>
+                      <ul class="update-game-list">
+                        <li><span>2661</span> Big Bass Football Bonanza <em>vs10bbwcup</em></li>
+                        <li><span>2660</span> Candy Rush <em>vs20candyia</em></li>
+                        <li><span>2659</span> The Big Dog House <em>vs20bgdoghouse</em></li>
+                        <li><span>2658</span> Triple Pot Plinko - Hercules <em>vswaysplnk3p</em></li>
+                        <li><span>2657</span> Heartbreakers <em>vs20prizegrow</em></li>
+                        <li><span>2656</span> Launch to Riches <em>vswaysrocktrls</em></li>
+                        <li><span>2655</span> Mr Null's Wicked Wares <em>vswaysmrcursc</em></li>
+                        <li><span>2654</span> Sweet Bonanza 2500 <em>vs20swbon2500</em></li>
+                        <li><span>2653</span> Dragon Pots Megaways <em>vswaysdragden</em></li>
+                        <li><span>2652</span> Great Ghosts <em>vs50grghsts</em></li>
+                        <li><span>2651</span> Big Bass Trophy Catch <em>vs10bbtrphfshn</em></li>
+                        <li><span>2650</span> Inca Queen <em>vs20thunder</em></li>
+                        <li><span>2649</span> Idol Pop Fever <em>vs20slightwdm</em></li>
+                      </ul>
+                    </article>
+                    <article class="timeline-entry">
+                      <span class="timeline-dot" aria-hidden="true"></span>
+                      <h3 data-i18n="updates_focus_title">At API LX, we continuously focus on:</h3>
+                      <div class="update-checks">
+                        <span data-i18n="updates_fast_updates">Fast provider updates</span>
+                        <span data-i18n="updates_full_portfolio">Full game availability</span>
+                        <span data-i18n="updates_stable_integrations">Stable infrastructure</span>
+                      </div>
+                    </article>
+                    <article class="timeline-entry">
+                      <span class="timeline-dot" aria-hidden="true"></span>
+                      <h3 data-i18n="updates_why_title">Why it matters</h3>
+                      <p data-i18n="updates_operators_note">Because operators shouldn’t wait weeks for fresh content to go live.</p>
+                      <p class="update-live-note" data-i18n="updates_pragmatic_live_note">The update is already available on the platform.</p>
+                      <button class="btn btn-primary" type="button" data-lead-open data-i18n="updates_contact_start">Contact us to get started.</button>
+                    </article>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="updates-carousel-nav" aria-label="Update navigation">
+              <button class="updates-arrow updates-arrow--older" type="button" data-updates-older data-i18n-aria-label="updates_older_label" aria-label="Previous update">←</button>
+              <button class="updates-arrow updates-arrow--newer" type="button" data-updates-newer data-i18n-aria-label="updates_newer_label" aria-label="Next update" hidden>→</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="referral" class="section referral-section">
+        <div class="container">
+          <h2 class="referral-section-title" data-i18n="referral_section_title">Our referral program</h2>
+          <div class="referral-showcase referral-redesign reveal">
+            <img class="referral-card-shape" src="assets/referral-card-shape.png?v=20260528-referral-redesign" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+            <div class="referral-copy">
+              <h2 class="referral-title">
+                <span class="referral-title-word referral-title-word--blue" data-i18n="referral_title_recommend">Refer.</span>
+                <span class="referral-title-word referral-title-word--purple" data-i18n="referral_title_earn">Earn.</span>
+                <span class="referral-title-word referral-title-word--pink" data-i18n="referral_title_repeat">Repeat.</span>
+              </h2>
+              <p class="referral-lead" data-i18n="referral_subtitle">Invite casino operators and earn recurring revenue from every partner who goes live.</p>
+              <h3 class="referral-profit-title" data-i18n="referral_profit_title">Earn together with us</h3>
+              <p class="referral-profit" data-i18n="referral_profit_text">Join the API LX partner program and turn warm introductions into stable B2B revenue.</p>
+            </div>
+            <a class="referral-telegram" href="#telegram-placeholder" data-i18n-aria-label="referral_telegram_label">
+              <img class="referral-telegram-icon" src="assets/referral-telegram-logo.png?v=20260529" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+              <span data-i18n="referral_telegram_cta">Telegram</span>
+            </a>
+            <button class="referral-monetize" type="button" data-referral-open data-i18n="referral_monetize_cta">Monetize</button>
+            <div class="referral-visual" aria-hidden="true">
+              <img src="assets/referral-floating-phone.png?v=20260529-floating-phone" alt="" loading="eager" decoding="async" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div data-partial="footer"></div>
+  </div>
+
+  <nav class="section-quick-nav" data-section-nav aria-label="Quick section navigation">
+    <a class="section-quick-nav__item" href="#benefits" data-section-nav-link aria-label="Benefits" data-i18n-aria-label="quick_nav_benefits">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+    <a class="section-quick-nav__item" href="#catalog" data-section-nav-link aria-label="Game catalog" data-i18n-aria-label="quick_nav_catalog">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+    <a class="section-quick-nav__item" href="#map" data-section-nav-link aria-label="Active regions" data-i18n-aria-label="quick_nav_regions">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+    <a class="section-quick-nav__item" href="#calculator" data-section-nav-link aria-label="GGR calculator" data-i18n-aria-label="quick_nav_calculator">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+    <a class="section-quick-nav__item" href="#faq" data-section-nav-link aria-label="FAQ" data-i18n-aria-label="quick_nav_faq">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+    <a class="section-quick-nav__item" href="#updates" data-section-nav-link aria-label="Updates" data-i18n-aria-label="quick_nav_updates">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+    <a class="section-quick-nav__item" href="#referral" data-section-nav-link aria-label="Referral program" data-i18n-aria-label="quick_nav_referral">
+      <span class="section-quick-nav__dot" aria-hidden="true"></span>
+    </a>
+  </nav>
+
+  <div class="modal" data-modal aria-hidden="true">
+    <div class="modal-dialog glass" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-top">
+        <div>
+          <p class="eyebrow" data-i18n="demo_eyebrow">Demo Lobby</p>
+          <h2 id="modalTitle" style="margin-bottom:0" data-i18n="demo_modal_title">Provider Demo Games</h2>
+        </div>
+        <button class="modal-close" type="button" aria-label="Close demo modal" data-i18n-aria-label="demo_close_label" data-modal-close>&times;</button>
+      </div>
+      <div class="demo-grid" data-demo-grid></div>
+    </div>
+  </div>
+
+  <div class="lead-modal" data-lead-modal aria-hidden="true">
+    <div class="lead-dialog glass" role="dialog" aria-modal="true" aria-labelledby="leadTitle" aria-describedby="leadSubtitle">
+      <button class="modal-close lead-close" type="button" aria-label="Close integration form" data-i18n-aria-label="lead_close_label" data-lead-close>&times;</button>
+      <div class="lead-content" data-lead-content>
+        <div class="lead-progress" aria-label="Lead form progress">
+          <span data-lead-progress-text>Шаг 1 из 7</span>
+          <div class="lead-progress-track"><i data-lead-progress-bar></i></div>
+        </div>
+
+        <p class="eyebrow" data-i18n="lead_eyebrow">B2B-заявка на интеграцию</p>
+        <h2 id="leadTitle" data-lead-question>What stage is your project at?</h2>
+        <p id="leadSubtitle" class="lead-step-hint" data-lead-hint>Choose one option</p>
+
+        <form class="lead-form lead-wizard" data-lead-form novalidate>
+          <section class="lead-step is-active" data-step-key="projectStage" data-question="lead_q_stage" data-hint="lead_h_choose">
+            <div class="wizard-options two">
+              <button class="wizard-option" type="button" data-choice="projectStage" data-value="active"><span data-i18n="lead_stage_active">Действующий проект</span></button>
+              <button class="wizard-option" type="button" data-choice="projectStage" data-value="development"><span data-i18n="lead_stage_development">Проект в разработке</span></button>
+            </div>
+            <p class="field-error" data-error-for="projectStage"></p>
+          </section>
+
+          <section class="lead-step" data-step-key="activeLaunch" data-question="lead_q_active_launch" data-hint="lead_h_active_launch" hidden>
+            <div class="wizard-options two">
+              <button class="wizard-option" type="button" data-choice="activeLaunch" data-value="under_3_months"><span data-i18n="lead_under_3_short">&lt;3 месяцев</span></button>
+              <button class="wizard-option" type="button" data-choice="activeLaunch" data-value="over_3_months"><span data-i18n="lead_over_3_short">3+ месяцев</span></button>
+            </div>
+            <p class="field-error" data-error-for="activeLaunch"></p>
+          </section>
+
+          <section class="lead-step" data-step-key="livePlan" data-question="lead_q_live_plan" data-hint="lead_h_live_plan" hidden>
+            <div class="wizard-options three">
+              <button class="wizard-option" type="button" data-choice="livePlan" data-value="under_1_month"><span data-i18n="lead_under_month_short">&lt;1 месяца</span></button>
+              <button class="wizard-option" type="button" data-choice="livePlan" data-value="1_2_months"><span data-i18n="lead_1_2_months">1-2 месяца</span></button>
+              <button class="wizard-option" type="button" data-choice="livePlan" data-value="over_2_months"><span data-i18n="lead_over_2_months_short">2+ месяцев</span></button>
+            </div>
+            <p class="field-error" data-error-for="livePlan"></p>
+          </section>
+
+          <section class="lead-step" data-step-key="projectType" data-question="lead_q_project_type" data-hint="lead_h_project_type" hidden>
+            <div class="wizard-options two">
+              <button class="wizard-option" type="button" data-choice="projectType" data-value="operator"><span data-i18n="lead_type_operator_short">Онлайн-казино</span></button>
+              <button class="wizard-option" type="button" data-choice="projectType" data-value="platform"><span data-i18n="lead_type_platform_short">Платформа</span></button>
+              <button class="wizard-option" type="button" data-choice="projectType" data-value="aggregator"><span data-i18n="lead_type_aggregator">Агрегатор</span></button>
+              <button class="wizard-option" type="button" data-choice="projectType" data-value="other"><span data-i18n="lead_type_other">Другое</span></button>
+            </div>
+            <p class="field-error" data-error-for="projectType"></p>
+          </section>
+
+          <section class="lead-step" data-step-key="geo" data-question="lead_q_regions" data-hint="lead_h_regions" hidden>
+            <div class="wizard-options region-options">
+              <button class="wizard-option" type="button" data-choice="regions" data-value="europe" data-multiple="true"><span data-i18n="lead_region_europe">Europe</span></button>
+              <button class="wizard-option" type="button" data-choice="regions" data-value="cis" data-multiple="true"><span data-i18n="lead_region_cis">CIS</span></button>
+              <button class="wizard-option" type="button" data-choice="regions" data-value="north_america" data-multiple="true"><span data-i18n="lead_region_north_america">North America</span></button>
+              <button class="wizard-option" type="button" data-choice="regions" data-value="latin_america" data-multiple="true"><span data-i18n="lead_region_latin_america">Latin America</span></button>
+              <button class="wizard-option" type="button" data-choice="regions" data-value="africa" data-multiple="true"><span data-i18n="lead_region_africa">Africa</span></button>
+              <button class="wizard-option" type="button" data-choice="regions" data-value="middle_east" data-multiple="true"><span data-i18n="lead_region_middle_east">Middle East</span></button>
+              <button class="wizard-option" type="button" data-choice="regions" data-value="asia" data-multiple="true"><span data-i18n="lead_region_asia">Asia</span></button>
+              <button class="wizard-option" type="button" data-choice="regions" data-value="other" data-multiple="true"><span data-i18n="lead_region_other">Other</span></button>
+              <button class="wizard-option" type="button" data-choice="regions" data-value="not_sure" data-multiple="true"><span data-i18n="lead_region_not_sure">Not sure yet</span></button>
+            </div>
+            <p class="field-error" data-error-for="regions"></p>
+            <div class="wizard-input-card geo-picker" data-geo-picker>
+              <div class="lead-field full">
+                <label id="leadCountriesLabel" for="leadCountriesTrigger" data-i18n="lead_countries_label">Target countries or regions</label>
+                <input id="leadCountries" name="countries" type="hidden" data-lead-countries required />
+                <button class="geo-select-trigger" id="leadCountriesTrigger" type="button" data-geo-trigger aria-haspopup="listbox" aria-expanded="false" aria-labelledby="leadCountriesLabel">
+                  <span data-geo-trigger-label data-i18n="lead_countries_select_placeholder">Select countries</span>
+                  <span class="geo-trigger-icon" aria-hidden="true">v</span>
+                </button>
+                <div class="geo-selected" data-geo-selected></div>
+                <div class="geo-panel" data-geo-panel hidden>
+                  <div class="geo-panel-top">
+                    <input class="geo-search" type="search" data-geo-search data-i18n-placeholder="lead_countries_search_placeholder" placeholder="Search country" aria-label="Search country" />
+                    <label class="geo-select-all">
+                      <input type="checkbox" data-geo-select-all />
+                      <span data-i18n="lead_countries_select_all">Select all</span>
+                    </label>
+                  </div>
+                  <div class="geo-options" data-geo-options role="listbox" aria-labelledby="leadCountriesLabel"></div>
+                  <p class="geo-empty" data-geo-empty hidden data-i18n="lead_countries_empty">Select a region to see countries.</p>
+                </div>
+                <p class="field-error" data-error-for="countries"></p>
+              </div>
+            </div>
+          </section>
+
+          <section class="lead-step" data-step-key="activeProjects" data-question="lead_q_active_projects" data-hint="lead_h_active_projects" hidden>
+            <div class="wizard-options four">
+              <button class="wizard-option" type="button" data-choice="activeProjects" data-value="1"><span>1</span></button>
+              <button class="wizard-option" type="button" data-choice="activeProjects" data-value="2-5"><span>2-5</span></button>
+              <button class="wizard-option" type="button" data-choice="activeProjects" data-value="5-10"><span>5-10</span></button>
+              <button class="wizard-option" type="button" data-choice="activeProjects" data-value="10+"><span>10+</span></button>
+            </div>
+            <p class="field-error" data-error-for="activeProjects"></p>
+          </section>
+
+          <section class="lead-step" data-step-key="ggr" data-question="lead_q_ggr" data-hint="lead_h_ggr" hidden>
+            <div class="wizard-options ggr">
+              <button class="wizard-option" type="button" data-choice="ggr" data-value="none"><span data-i18n="lead_ggr_none_short">Нет</span></button>
+              <button class="wizard-option" type="button" data-choice="ggr" data-value="<500k"><span>&lt;500k</span></button>
+              <button class="wizard-option" type="button" data-choice="ggr" data-value="500k-1m"><span>500k-1m</span></button>
+              <button class="wizard-option" type="button" data-choice="ggr" data-value="1m+"><span>1m+</span></button>
+              <button class="wizard-option" type="button" data-choice="ggr" data-value="prefer_not"><span data-i18n="lead_ggr_private_short">Не хочу говорить</span></button>
+            </div>
+            <p class="field-error" data-error-for="ggr"></p>
+          </section>
+
+          <section class="lead-step" data-step-key="contacts" data-question="lead_q_contacts" data-hint="lead_h_contacts" hidden>
+            <div class="wizard-contact-grid">
+              <div class="lead-field"><label for="leadName" data-i18n="lead_name">Имя</label><input id="leadName" name="name" autocomplete="name" required /><p class="field-error" data-error-for="name"></p></div>
+              <div class="lead-field"><label for="leadTelegram" data-i18n="lead_telegram_id">Telegram ID</label><input id="leadTelegram" name="telegramId" autocomplete="off" placeholder="@username" required /><p class="field-error" data-error-for="telegramId"></p></div>
+              <div class="lead-field lead-field-phone">
+                <label for="leadWhatsappLocal" data-i18n="lead_whatsapp_number">WhatsApp Number</label>
+                <div class="phone-input" data-phone-input>
+                  <div class="country-combobox" data-country-combobox>
+                    <button class="country-trigger" id="leadWhatsappCountryButton" type="button" data-country-trigger aria-haspopup="listbox" aria-expanded="false">
+                      <span data-country-label data-i18n="phone_select_country">🌐 Select country</span>
+                      <span aria-hidden="true">⌄</span>
+                    </button>
+                    <div class="country-panel" data-country-panel hidden>
+                      <input class="country-search" id="leadWhatsappCountrySearch" type="search" data-country-search autocomplete="off" placeholder="Search country or code" data-i18n-placeholder="phone_search_placeholder" aria-label="Search country" data-i18n-aria-label="phone_search_label" />
+                      <div class="country-options" data-country-options role="listbox" aria-labelledby="leadWhatsappCountryButton"></div>
+                    </div>
+                    <input id="leadWhatsappCode" name="whatsappCountryCode" type="hidden" required />
+                    <input id="leadWhatsappCountryIso" name="whatsappCountryIso" type="hidden" />
+                  </div>
+                  <input id="leadWhatsappLocal" name="whatsappLocalNumber" autocomplete="tel-national" inputmode="tel" placeholder="Local number" data-i18n-placeholder="phone_local_placeholder" required />
+                  <input id="leadWhatsapp" name="whatsappNumber" type="hidden" />
+                </div>
+                <p class="field-error" data-error-for="whatsappNumber"></p>
+              </div>
+              <div class="lead-field full"><label for="leadSource" data-i18n="lead_source">Как вы узнали о нас?</label><select id="leadSource" name="source" required><option value="" data-i18n="lead_source_placeholder">Выберите источник</option><option value="facebook">Facebook</option><option value="instagram">Instagram</option><option value="telegram">Telegram</option><option value="twitter">Twitter</option><option value="google_seo" data-i18n="lead_source_google">Google(or SEO)</option><option value="other" data-i18n="lead_source_other">Other</option></select><p class="field-error" data-error-for="source"></p></div>
+              <div class="lead-field full"><label for="leadMessage" data-i18n="lead_message">Сообщение</label><textarea id="leadMessage" name="message" data-i18n-placeholder="lead_message_placeholder" placeholder="Расскажите коротко, что хотите подключить или уточнить" required></textarea><p class="field-error" data-error-for="message"></p></div>
+              <div class="lead-field full lead-consent">
+                <label>
+                  <input id="privacyConsent" name="privacyConsent" type="checkbox" value="true" required />
+                  <span><span data-i18n="privacy_consent_prefix">I agree to the</span> <a href="/privacy.html" target="_blank" rel="noopener noreferrer" data-i18n="privacy_policy_link">Privacy Policy</a></span>
+                </label>
+                <p class="field-error" data-error-for="privacyConsent"></p>
+              </div>
+              <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
+                <label for="companyWebsite">Company website</label>
+                <input id="companyWebsite" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+            </div>
+          </section>
+
+          <div class="lead-actions">
+            <a class="lead-telegram-link" href="#telegram-placeholder" data-i18n-aria-label="referral_telegram_label">
+              <img src="assets/referral-telegram-logo.png?v=20260529" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+              <span data-i18n="referral_telegram_cta">Telegram</span>
+            </a>
+            <button class="lead-back" type="button" data-lead-back data-i18n="lead_back">Назад</button>
+            <button class="btn primary lead-next" type="button" data-lead-next data-i18n="lead_next">Далее</button>
+            <button class="btn primary lead-submit" type="submit" data-lead-submit hidden><span data-i18n="lead_submit">Отправить заявку</span></button>
+          </div>
+          <div data-turnstile-container></div>
+          <p class="lead-submit-error" data-lead-submit-error hidden tabindex="-1" data-i18n="lead_submit_error">Не удалось отправить заявку. Данные сохранены локально, попробуйте еще раз.</p>
+        </form>
+      </div>
+      <div class="lead-success" data-lead-success hidden>
+        <p class="eyebrow" data-i18n="lead_success_eyebrow">Request Sent</p>
+        <h2 data-i18n="lead_success_title">Спасибо!</h2>
+        <p data-i18n="lead_success_message">Спасибо! Наша команда свяжется с вами в ближайшее время.</p>
+        <button class="btn primary" type="button" data-lead-close><span data-i18n="lead_success_close">Закрыть</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="language-modal" data-language-modal aria-hidden="true">
+    <div class="language-dialog glass" role="dialog" aria-modal="true" aria-labelledby="languageTitle">
+      <div class="language-dialog-top">
+        <div>
+          <h2 id="languageTitle" data-i18n="language_modal_title">Other Languages</h2>
+        </div>
+        <button class="modal-close language-close" type="button" aria-label="Close language modal" data-i18n-aria-label="language_close_label" data-language-close><span data-i18n="language_close">Close</span><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="language-card-grid" data-language-grid></div>
+    </div>
+  </div>
+
+  <div class="map-tooltip" data-map-tooltip></div>
+
+  <script src="js/translations.js?v=20260614-calculator-rtp-dominance"></script>
+  <script src="js/latin-translations.js?v=20260614-calculator-rtp-dominance"></script>
+  <script src="js/language.js?v=20260605-force-default-en-safe"></script>
+  <script src="js/globe.js?v=20260610-neon-glow-dots"></script>
+  <script src="js/phone-data.js?v=20260521-phone-all-countries"></script>
+  <script src="js/app.js?v=20260614-calculator-rtp-dominance"></script>
+</body>
+</html>

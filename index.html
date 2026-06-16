@@ -132,7 +132,7 @@
       window.setTimeout(finishBoot, 4500);
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260614-region-card-hover-stable" />
+  <link rel="stylesheet" href="css/styles.css?v=20260616-calculator-cut-reverted" />
 </head>
 <body>
   <div class="site-shell">
@@ -203,12 +203,12 @@
         <div class="container">
           <div class="section-head center reveal">
             <p class="eyebrow" data-i18n="calculator_eyebrow">GGR Simulator</p>
-            <h2 data-i18n="calculator_title">Calculate Your Extra GGR With API LX</h2>
-            <p data-i18n="calculator_subtitle">Compare fixed RTP providers against API LX flexible RTP and lower commission.</p>
+            <h2 data-i18n="calculator_title">GGR-калькулятор</h2>
+            <p data-i18n="calculator_subtitle">Сравните результаты API LX и других провайдеров и оцените разницу в доходе.</p>
           </div>
           <div class="calculator-shell glass reveal">
             <div class="calc-controls">
-              <div class="control-card">
+              <div class="control-card control-card--turnover">
                 <label class="control-label" for="turnoverRange"><span data-i18n="calc_monthly_turnover">Monthly Turnover</span><strong class="control-value" data-turnover-label>$20,000,000</strong></label>
                 <div class="calc-mini-bars turnover-bars" aria-hidden="true" data-turnover-bars>
                   <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -217,25 +217,32 @@
                 <div class="range-scale"><span>$0</span><span>$50M</span></div>
                 <input class="turnover-input" id="turnoverInput" type="number" min="0" max="50000000" step="100000" value="20000000" aria-label="Monthly turnover input" />
               </div>
-              <div class="control-card">
-                <label class="control-label" for="rtpRange"><span data-i18n="calc_api_rtp">API LX RTP</span><strong class="control-value" data-rtp-label>92%</strong></label>
-                <div class="calc-mini-bars rtp-bars" aria-hidden="true" data-rtp-bars>
-                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <input id="rtpRange" type="range" min="0" max="100" step="1" value="92" />
-                <div class="range-scale"><span>0%</span><span>100%</span></div>
-              </div>
             </div>
             <div class="calc-comparison">
               <h3><span data-i18n="calc_api_lx">API LX</span> vs <span data-i18n="calc_other_providers">Other Providers</span></h3>
               <div class="calc-chart-grid">
-                <article class="calc-chart-card" data-chart="rtp">
+                <article class="calc-chart-card calc-rtp-story" data-chart="rtp" data-rtp-story>
                   <div class="chart-title"><span class="chart-icon">RTP</span><strong data-i18n="calc_fixed_rtp">Fixed RTP</strong></div>
-                  <div class="chart-bars">
-                    <div class="chart-bar-pair"><strong data-other-value>96%</strong><span class="bar other" data-other-bar></span><small data-i18n="calc_other_providers">Other Providers</small></div>
-                    <div class="chart-bar-pair"><strong data-api-value data-api-rtp>92%</strong><span class="bar api" data-api-bar></span><small data-i18n="calc_api_lx">API LX</small></div>
+                  <div class="rtp-contrast">
+                    <div class="rtp-lane rtp-lane--locked">
+                      <img class="rtp-lock-hero" src="assets/rtp-lock-red.png?v=20260614-dot" alt="" decoding="async" aria-hidden="true" />
+                      <div class="rtp-lane-head"><span data-i18n="calc_other_providers">Other Providers</span><strong data-other-value>96%</strong></div>
+                      <div class="rtp-track" aria-hidden="true">
+                        <span class="rtp-track-fill"></span>
+                        <span class="rtp-locked-dot"></span>
+                      </div>
+                      <p data-i18n="calc_fixed_rtp_locked">Фиксировано</p>
+                    </div>
+                    <div class="rtp-lane rtp-lane--api">
+                      <div class="rtp-lane-head"><span data-i18n="calc_api_lx">API LX</span><strong data-api-value data-api-rtp data-rtp-label>92%</strong></div>
+                      <div class="rtp-track rtp-track--interactive">
+                        <span class="rtp-track-fill" aria-hidden="true"></span>
+                        <input id="rtpRange" class="rtp-inline-range" type="range" min="0" max="100" step="1" value="92" aria-label="API LX RTP" />
+                      </div>
+                      <p data-i18n="calc_flexible_rtp_control">Динамический RTP, адаптированный под ваши цели, GEO и стратегии</p>
+                    </div>
+                    <div class="rtp-advantage"><span data-i18n="calc_rtp_advantage">RTP control stays with you</span></div>
                   </div>
-                  <em data-delta>+0%</em>
                 </article>
                 <article class="calc-chart-card" data-chart="commission">
                   <div class="chart-title"><span class="chart-icon">%</span><strong data-i18n="calc_average_fee">Average fee</strong></div>
@@ -250,14 +257,6 @@
                   <div class="chart-bars">
                     <div class="chart-bar-pair"><strong data-other-value data-other-ggr>$0</strong><span class="bar other" data-other-bar></span><small data-i18n="calc_other_providers">Other Providers</small></div>
                     <div class="chart-bar-pair"><strong data-api-value data-api-ggr>$0</strong><span class="bar api" data-api-bar></span><small data-i18n="calc_api_lx">API LX</small></div>
-                  </div>
-                  <em data-delta>+0%</em>
-                </article>
-                <article class="calc-chart-card" data-chart="fee">
-                  <div class="chart-title"><span class="chart-icon">%</span><strong data-i18n="calc_fee">Fee</strong></div>
-                  <div class="chart-bars">
-                    <div class="chart-bar-pair"><strong data-other-value data-other-fee>$0</strong><span class="bar other" data-other-bar></span><small data-i18n="calc_other_providers">Other Providers</small></div>
-                    <div class="chart-bar-pair"><strong data-api-value data-api-fee>$0</strong><span class="bar api" data-api-bar></span><small data-i18n="calc_api_lx">API LX</small></div>
                   </div>
                   <em data-delta>+0%</em>
                 </article>
@@ -650,11 +649,11 @@
 
   <div class="map-tooltip" data-map-tooltip></div>
 
-  <script src="js/translations.js?v=20260609-geo-picker"></script>
-  <script src="js/latin-translations.js?v=20260609-geo-picker"></script>
+  <script src="js/translations.js?v=20260615-calculator-inline-rtp"></script>
+  <script src="js/latin-translations.js?v=20260614-calculator-logic-restored"></script>
   <script src="js/language.js?v=20260605-force-default-en-safe"></script>
-  <script src="js/globe.js?v=20260610-neon-glow-dots"></script>
+  <script src="js/globe.js?v=20260615-antarctica-region"></script>
   <script src="js/phone-data.js?v=20260521-phone-all-countries"></script>
-  <script src="js/app.js?v=20260611-catalog-neon-logos"></script>
+  <script src="js/app.js?v=20260616-calculator-current-pair-scale"></script>
 </body>
 </html>
