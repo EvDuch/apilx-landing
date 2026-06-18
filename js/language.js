@@ -6,6 +6,16 @@ window.API_LX_LANGUAGE = (() => {
   const defaultLanguage = "en";
   const normalizeLanguage = (lang) => supportedLanguages.includes(lang) ? lang : "en";
 
+  const readStoredLanguage = () => {
+    try {
+      const stored = localStorage.getItem("api-lx-language");
+      if (stored) return normalizeLanguage(stored);
+    } catch {
+      /* Storage can be unavailable in strict browser modes. */
+    }
+    return normalizeLanguage(document.documentElement.lang || defaultLanguage);
+  };
+
   const writeStoredLanguage = (lang = defaultLanguage) => {
     try {
       localStorage.setItem("api-lx-language", normalizeLanguage(lang));
@@ -14,14 +24,14 @@ window.API_LX_LANGUAGE = (() => {
     }
   };
 
-  const forceDefaultLanguage = () => {
-    document.documentElement.lang = defaultLanguage;
+  const setDocumentLanguage = (lang = defaultLanguage) => {
+    const normalized = normalizeLanguage(lang);
+    document.documentElement.lang = normalized;
     document.documentElement.dir = "ltr";
-    writeStoredLanguage(defaultLanguage);
-    return defaultLanguage;
+    return normalized;
   };
 
-  forceDefaultLanguage();
+  setDocumentLanguage(readStoredLanguage());
 
   function applyDocumentMetadata(dictionary) {
     const titleKey = document.documentElement.dataset.titleKey;
@@ -33,7 +43,7 @@ window.API_LX_LANGUAGE = (() => {
     }
   }
 
-  function applyStaticLanguage(lang = defaultLanguage) {
+  function applyStaticLanguage(lang = readStoredLanguage()) {
     lang = normalizeLanguage(lang);
     const dictionary = { ...translations.en, ...(translations[lang] || {}) };
     document.documentElement.lang = lang;
@@ -63,7 +73,7 @@ window.API_LX_LANGUAGE = (() => {
     const currentLang = $("[data-current-lang]");
     const currentLangFlag = $("[data-current-lang-flag]");
     if (!langToggle || !langMenu || !languageModal || !languageGrid || !languageClose || !currentLang) {
-      applyStaticLanguage();
+      applyStaticLanguage(readStoredLanguage());
       return { closeLanguageMenu() {}, closeLanguageModal() {}, applyLanguage: applyStaticLanguage };
     }
 
@@ -189,9 +199,9 @@ window.API_LX_LANGUAGE = (() => {
       }
     });
 
-    applyLanguage(defaultLanguage);
+    applyLanguage(readStoredLanguage());
     return { closeLanguageMenu, closeLanguageModal, applyLanguage };
   }
 
-  return { initLanguageSystem, applyStaticLanguage };
+  return { initLanguageSystem, applyStaticLanguage, getCurrentLanguage: readStoredLanguage };
 })();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-key="demo_page_title" data-description-key="demo_page_description">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,14 +16,14 @@
     <section class="demo-hero" id="top">
       <div class="particle-field" aria-hidden="true"></div>
       <header class="demo-nav">
-        <a class="brand" href="index.html" aria-label="Back to API LX landing">
+        <a class="brand" href="index.html" aria-label="Back to API LX landing" data-i18n-aria-label="demo_back_to_landing_label">
           <img src="assets/api-lx-logo.webp" alt="API LX" />
         </a>
-        <span class="live-badge" data-provider-badge>API LX demos</span>
+        <span class="live-badge" data-provider-badge data-i18n="demo_provider_badge_all">API LX demos</span>
       </header>
 
       <div class="hero-content">
-        <p class="eyebrow">Demo Lobby</p>
+        <p class="eyebrow" data-i18n="demo_eyebrow">Demo Lobby</p>
         <h1 data-page-title>Demo Game Catalog</h1>
         <p data-page-subtitle>Search both provider catalogs, launch a slot, and keep the demo session inside this page.</p>
       </div>
@@ -31,19 +31,19 @@
 
     <section class="stats-section" aria-label="Catalog statistics">
       <div class="stat-card glass">
-        <span>Total games</span>
+        <span data-i18n="demo_stat_total_games">Total games</span>
         <strong data-total-games>0</strong>
       </div>
       <div class="stat-card glass">
-        <span>Provider</span>
+        <span data-i18n="demo_stat_provider">Provider</span>
         <strong data-provider-name>All providers</strong>
       </div>
       <div class="stat-card glass">
-        <span>First render</span>
+        <span data-i18n="demo_stat_first_render">First render</span>
         <strong>40</strong>
       </div>
       <div class="stat-card glass">
-        <span>Visible now</span>
+        <span data-i18n="demo_stat_visible_now">Visible now</span>
         <strong data-visible-games>0</strong>
       </div>
     </section>
@@ -51,27 +51,27 @@
     <section class="catalog-section" aria-labelledby="catalogTitle" data-catalog-view>
       <div class="section-head">
         <div>
-          <p class="eyebrow">Game Catalog</p>
-          <h2 id="catalogTitle">Choose a game</h2>
+          <p class="eyebrow" data-i18n="demo_catalog_eyebrow">Game Catalog</p>
+          <h2 id="catalogTitle" data-i18n="demo_catalog_title">Choose a game</h2>
         </div>
-        <a class="back-link" href="index.html#catalog">Back to API LX</a>
+        <a class="back-link" href="index.html#catalog" data-i18n="demo_back_to_api_lx">Back to API LX</a>
       </div>
 
       <div class="filter-bar" aria-label="Provider filters">
-        <button class="filter active" type="button" data-provider-filter="all" aria-pressed="true">All</button>
+        <button class="filter active" type="button" data-provider-filter="all" aria-pressed="true" data-i18n="demo_filter_all">All</button>
         <button class="filter" type="button" data-provider-filter="pragmatic" aria-pressed="false">Pragmatic Play</button>
         <button class="filter" type="button" data-provider-filter="pgsoft" aria-pressed="false">PG Soft</button>
       </div>
 
       <div class="catalog-toolbar" aria-label="Catalog controls">
         <label class="search-field" for="gameSearch">
-          <span>Search by game name</span>
-          <input id="gameSearch" type="search" autocomplete="off" placeholder="Sweet Bonanza, Gates of Olympus..." data-game-search />
+          <span data-i18n="demo_search_label">Search by game name</span>
+          <input id="gameSearch" type="search" autocomplete="off" placeholder="Sweet Bonanza, Gates of Olympus..." data-i18n-placeholder="demo_search_placeholder_all" data-game-search />
         </label>
-        <div class="catalog-count"><span data-visible-games>0</span> shown</div>
+        <div class="catalog-count"><span data-visible-games>0</span> <span data-i18n="demo_catalog_shown">shown</span></div>
       </div>
 
-      <p class="catalog-status" data-catalog-status role="status">Loading demo catalogs...</p>
+      <p class="catalog-status" data-catalog-status role="status" data-i18n="demo_catalog_loading">Loading demo catalogs...</p>
       <div class="game-grid" data-game-grid></div>
       <div class="load-more-row" data-load-more-wrap hidden>
         <button class="load-more" type="button" data-load-more>Load more</button>
@@ -81,21 +81,25 @@
     <section class="player-section" data-player-view hidden>
       <div class="player-shell">
         <div class="player-top">
-          <button class="back-to-games" type="button" data-back-to-games>Back to games</button>
-          <a class="back-link" href="index.html#catalog">Back to API LX</a>
+          <button class="back-to-games" type="button" data-back-to-games data-i18n="demo_back_to_games">Back to games</button>
+          <a class="back-link" href="index.html#catalog" data-i18n="demo_back_to_api_lx">Back to API LX</a>
         </div>
         <div>
           <span class="player-provider" data-frame-provider>Pragmatic Play</span>
-          <h2 data-frame-title>Demo Game</h2>
+          <h2 data-frame-title data-i18n="demo_frame_title">Demo Game</h2>
         </div>
         <div class="iframe-wrap">
-          <div class="iframe-loader" data-frame-loader hidden>Loading demo session...</div>
-          <iframe data-game-frame title="Pragmatic Play demo game" src="about:blank" loading="lazy" allow="fullscreen; autoplay; clipboard-read; clipboard-write" allowfullscreen></iframe>
+          <div class="iframe-loader" data-frame-loader hidden data-i18n="demo_frame_loading">Loading demo session...</div>
+          <iframe data-game-frame title="Casino provider demo game" data-i18n-aria-label="demo_iframe_title" src="about:blank" loading="lazy" allow="fullscreen; autoplay; clipboard-read; clipboard-write" allowfullscreen></iframe>
         </div>
       </div>
     </section>
   </main>
 
-  <script src="js/demo-games.js?v=20260602-pgsoft-public-demo"></script>
+  <script src="js/translations.js?v=20260617-extra-revenue-copy"></script>
+  <script src="js/latin-translations.js?v=20260617-extra-revenue-copy"></script>
+  <script src="js/language.js?v=20260617-site-localization"></script>
+  <script>window.API_LX_LANGUAGE?.applyStaticLanguage();</script>
+  <script src="js/demo-games.js?v=20260617-site-localization"></script>
 </body>
 </html>

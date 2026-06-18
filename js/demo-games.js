@@ -10,6 +10,45 @@
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
+  const getCurrentLanguage = () => {
+    try {
+      return window.API_LX_LANGUAGE?.getCurrentLanguage?.()
+        || document.documentElement.lang
+        || localStorage.getItem("api-lx-language")
+        || "en";
+    } catch {
+      return document.documentElement.lang || "en";
+    }
+  };
+
+  const t = (key, replacements = {}) => {
+    const dictionaries = window.API_LX_TRANSLATIONS || {};
+    const lang = getCurrentLanguage();
+    const dictionary = { ...(dictionaries.en || {}), ...(dictionaries[lang] || {}) };
+    const value = dictionary[key] || dictionaries.en?.[key] || key;
+    return Object.entries(replacements).reduce(
+      (text, [token, replacement]) => text.replaceAll(`{${token}}`, String(replacement)),
+      value
+    );
+  };
+
+  const getDemoLanguageParam = () => ({
+    en: "en",
+    ru: "ru",
+    fr: "fr",
+    es: "es",
+    pt: "pt"
+  }[getCurrentLanguage()] || "en");
+
+  const getProviderLabel = (providerKey) => {
+    const keyMap = {
+      all: "demo_provider_all",
+      pragmatic: "provider_pragmatic",
+      pgsoft: "provider_pgsoft"
+    };
+    return t(keyMap[providerKey] || keyMap.all);
+  };
+
   const els = {
     body: document.body,
     catalogView: $("[data-catalog-view]"),
@@ -39,12 +78,13 @@
       dataUrl: "./data/pragmatic-games.json",
       displayName: "Pragmatic Play",
       shortName: "Pragmatic",
-      error: "Unable to load ./data/pragmatic-games.json.",
+      errorKey: "demo_load_error_pragmatic",
+      missingKey: "demo_missing_pragmatic_symbol",
       normalize: (game, index) => ({
         id: `pragmatic-${game.symbol || index}`,
         providerKey: "pragmatic",
         provider: String(game.vendorid || "Pragmatic Play").trim(),
-        title: String(game.name || "Untitled game").trim(),
+        title: String(game.name || t("demo_untitled_game")).trim(),
         symbol: String(game.symbol || "").trim(),
         gameId: String(game.gameid || "").trim(),
         launchValue: String(game.symbol || "").trim(),
@@ -53,9 +93,9 @@
         miniBet: game.miniBet
       }),
       buildDemoUrl: (game) => {
-        if (!game.launchValue) throw new Error("Pragmatic Play game symbol is missing.");
+        if (!game.launchValue) throw new Error(t("demo_missing_pragmatic_symbol"));
         const params = [
-          "lang=en",
+          `lang=${encodeURIComponent(getDemoLanguageParam())}`,
           "cur=USD",
           `websiteUrl=${encodeURIComponent(PRAGMATIC_CLIENT_HUB_URL)}`,
           "gcpif=2831",
@@ -72,12 +112,13 @@
       dataUrl: "./data/PGSoft.json",
       displayName: "PG Soft",
       shortName: "PG Soft",
-      error: "Unable to load ./data/PGSoft.json.",
+      errorKey: "demo_load_error_pgsoft",
+      missingKey: "demo_missing_pgsoft_gameid",
       normalize: (game, index) => ({
         id: `pgsoft-${game.gameid || game.symbol || index}`,
         providerKey: "pgsoft",
         provider: String(game.vendorid || "PG Soft").trim(),
-        title: String(game.name || "Untitled game").trim(),
+        title: String(game.name || t("demo_untitled_game")).trim(),
         symbol: String(game.symbol || "").trim(),
         gameId: String(game.gameid || "").trim(),
         launchValue: String(game.gameid || "").trim(),
@@ -86,16 +127,10 @@
         miniBet: game.miniBet
       }),
       buildDemoUrl: (game) => {
-        if (!game.launchValue) throw new Error("PG Soft gameid is missing.");
-        return `${PGSOFT_DEMO_BASE_URL}?gi=${encodeURIComponent(game.launchValue)}&lang=en`;
+        if (!game.launchValue) throw new Error(t("demo_missing_pgsoft_gameid"));
+        return `${PGSOFT_DEMO_BASE_URL}?gi=${encodeURIComponent(game.launchValue)}&lang=${encodeURIComponent(getDemoLanguageParam())}`;
       }
     }
-  };
-
-  const filterLabels = {
-    all: "All providers",
-    pragmatic: "Pragmatic Play",
-    pgsoft: "PG Soft"
   };
 
   let games = [];
@@ -114,7 +149,7 @@
     return "all";
   };
 
-  const placeholderImage = (title = "Game") => {
+  const placeholderImage = (title = t("demo_placeholder_game")) => {
     const initials = title
       .split(/\s+/)
       .filter(Boolean)
@@ -144,7 +179,8 @@
   const formatMiniBet = (value) => {
     const number = Number(value);
     if (!Number.isFinite(number)) return "";
-    return new Intl.NumberFormat("en-US", {
+    const localeMap = { en: "en-US", ru: "ru-RU", fr: "fr-FR", es: "es-ES", pt: "pt-PT" };
+    return new Intl.NumberFormat(localeMap[getCurrentLanguage()] || "en-US", {
       style: "currency",
       currency: "USD",
       minimumFractionDigits: number % 1 === 0 ? 0 : 2,
@@ -162,17 +198,30 @@
   const providerMatches = (game) => activeProvider === "all" || game.providerKey === activeProvider;
 
   const updateProviderUi = () => {
-    const label = filterLabels[activeProvider] || filterLabels.all;
-    if (els.providerBadge) els.providerBadge.textContent = activeProvider === "all" ? "API LX demos" : `${label} demos`;
+    const label = getProviderLabel(activeProvider);
+    if (els.providerBadge) {
+      els.providerBadge.textContent = activeProvider === "all"
+        ? t("demo_provider_badge_all")
+        : t("demo_provider_badge_provider", { provider: label });
+    }
     if (els.providerName) els.providerName.textContent = label;
-    if (els.pageTitle) els.pageTitle.textContent = activeProvider === "all" ? "Demo Game Catalog" : `${label} Demo Games`;
+    if (els.pageTitle) {
+      els.pageTitle.textContent = activeProvider === "all"
+        ? t("demo_page_heading_all")
+        : t("demo_page_heading_provider", { provider: label });
+    }
     if (els.pageSubtitle) {
       els.pageSubtitle.textContent = activeProvider === "all"
-        ? "Search both provider catalogs, launch a slot, and keep the demo session inside this page."
-        : `Search ${label} demos, launch a slot, and keep the demo session inside this page.`;
+        ? t("demo_page_subtitle_all")
+        : t("demo_page_subtitle_provider", { provider: label });
     }
     if (els.search) {
-      els.search.setAttribute("placeholder", activeProvider === "pgsoft" ? "Plushie Frenzy, Fortune Gods..." : "Sweet Bonanza, Gates of Olympus...");
+      const placeholderKey = activeProvider === "pgsoft"
+        ? "demo_search_placeholder_pgsoft"
+        : activeProvider === "pragmatic"
+          ? "demo_search_placeholder_pragmatic"
+          : "demo_search_placeholder_all";
+      els.search.setAttribute("placeholder", t(placeholderKey));
     }
     els.providerFilters.forEach((button) => {
       const isActive = button.dataset.providerFilter === activeProvider;
@@ -223,7 +272,7 @@
 
     const provider = document.createElement("span");
     provider.className = "provider";
-    provider.textContent = game.provider;
+    provider.textContent = getProviderLabel(game.providerKey);
 
     const title = document.createElement("h3");
     title.textContent = game.title;
@@ -232,20 +281,22 @@
     meta.className = "game-meta";
 
     const launchId = document.createElement("span");
-    launchId.textContent = game.providerKey === "pgsoft" ? `gameid ${game.launchValue}` : game.symbol;
+    launchId.textContent = game.providerKey === "pgsoft"
+      ? t("demo_game_id", { id: game.launchValue })
+      : game.symbol;
     meta.append(launchId);
 
     const miniBet = formatMiniBet(game.miniBet);
     if (miniBet) {
       const bet = document.createElement("span");
-      bet.textContent = `Min bet ${miniBet}`;
+      bet.textContent = t("demo_min_bet", { value: miniBet });
       meta.append(bet);
     }
 
     const button = document.createElement("button");
     button.className = "play-button";
     button.type = "button";
-    button.textContent = "Play Demo";
+    button.textContent = t("demo_play_demo");
     button.disabled = !game.launchValue;
     button.addEventListener("click", () => openGame(game));
 
@@ -275,7 +326,7 @@
     if (loadErrors.length) {
       setStatus(loadErrors.join(" "), true);
     } else if (!filteredGames.length) {
-      setStatus("No games match your search.");
+      setStatus(t("demo_no_games"));
     } else {
       setStatus("");
     }
@@ -283,7 +334,9 @@
     if (els.loadMoreWrap && els.loadMore) {
       const hasMore = renderedCount < filteredGames.length;
       els.loadMoreWrap.hidden = !hasMore;
-      els.loadMore.textContent = `Load more (${filteredGames.length - renderedCount} left)`;
+      els.loadMore.textContent = hasMore
+        ? t("demo_load_more_left", { count: filteredGames.length - renderedCount })
+        : t("demo_load_more");
     }
 
     setTotals();
@@ -292,11 +345,11 @@
   const beginFrameLoading = () => {
     if (!els.frameLoader) return;
     window.clearTimeout(frameLoadingTimer);
-    els.frameLoader.textContent = "Loading demo session...";
+    els.frameLoader.textContent = t("demo_frame_loading");
     els.frameLoader.hidden = false;
     els.frameLoader.classList.add("is-visible");
     frameLoadingTimer = window.setTimeout(() => {
-      els.frameLoader.textContent = "Demo is still loading. Please try another game if it does not start.";
+      els.frameLoader.textContent = t("demo_frame_still_loading");
       els.frameLoader.hidden = false;
       els.frameLoader.classList.add("is-visible");
     }, 15000);
@@ -326,12 +379,12 @@
     try {
       demoUrl = providers[game.providerKey].buildDemoUrl(game);
     } catch (error) {
-      setStatus(error.message || "Demo is not available.", true);
+      setStatus(error.message || t("demo_not_available"), true);
       return;
     }
 
     if (els.frameTitle) els.frameTitle.textContent = game.title;
-    if (els.frameProvider) els.frameProvider.textContent = game.provider;
+    if (els.frameProvider) els.frameProvider.textContent = getProviderLabel(game.providerKey);
     setStatus("");
     beginFrameLoading();
     els.frame.src = demoUrl;
@@ -354,16 +407,16 @@
 
   const loadProvider = async (providerConfig) => {
     const response = await fetch(providerConfig.dataUrl, { cache: "no-store" });
-    if (!response.ok) throw new Error(`${providerConfig.error} HTTP ${response.status}`);
+    if (!response.ok) throw new Error(`${t(providerConfig.errorKey)} HTTP ${response.status}`);
     const payload = await response.json();
-    if (!Array.isArray(payload?.data)) throw new Error(`${providerConfig.error} Invalid data array.`);
+    if (!Array.isArray(payload?.data)) throw new Error(`${t(providerConfig.errorKey)} ${t("demo_invalid_data")}`);
     return payload.data
       .map(providerConfig.normalize)
       .filter((game) => game.title && game.launchValue);
   };
 
   const loadGames = async () => {
-    setStatus("Loading demo catalogs...");
+    setStatus(t("demo_catalog_loading"));
 
     const results = await Promise.allSettled(Object.values(providers).map(loadProvider));
     loadErrors = [];
@@ -375,7 +428,7 @@
         return;
       }
       const providerConfig = Object.values(providers)[index];
-      loadErrors.push(result.reason?.message || providerConfig.error);
+      loadErrors.push(result.reason?.message || t(providerConfig.errorKey));
     });
 
     applyFilters();
@@ -398,6 +451,16 @@
   });
   els.backToGames?.addEventListener("click", closeGame);
   els.frame?.addEventListener("load", finishFrameLoading);
+  if (els.frame) els.frame.title = t("demo_iframe_title");
+
+  window.addEventListener("api-lx-language-change", () => {
+    updateProviderUi();
+    if (els.frame) els.frame.title = t("demo_iframe_title");
+    if (els.frameTitle && !els.body.classList.contains("is-playing-demo")) {
+      els.frameTitle.textContent = t("demo_frame_title");
+    }
+    if (games.length) renderGames();
+  });
 
   loadGames();
 })();

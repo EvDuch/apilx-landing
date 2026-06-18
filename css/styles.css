@@ -12110,13 +12110,13 @@ body #benefits.benefits-grid-section .benefit-card.reveal-pop.visible:focus-with
 }
 
 #calculator .bar.other::before {
-  background: linear-gradient(180deg, #efe8ff 0%, #9b84d4 100%) !important;
+  background: #8f98a8 !important;
   box-shadow: none !important;
 }
 
 #calculator .bar.api::before {
-  background: linear-gradient(180deg, #63c8ff 0%, #5755f2 100%) !important;
-  box-shadow: 0 12px 30px rgba(81, 143, 255, 0.18) !important;
+  background: linear-gradient(180deg, #5bd8ff 0%, #3158f2 52%, #21105e 100%) !important;
+  box-shadow: 0 12px 30px rgba(49, 88, 242, 0.16) !important;
 }
 
 .calculator-dragging #calculator .bar,
@@ -13838,7 +13838,7 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal
 
 #catalog .game-count {
   position: absolute !important;
-  left: clamp(24px, 2vw, 34px) !important;
+  left: clamp(39px, 2vw, 34px) !important;
   top: clamp(24px, 2vw, 34px) !important;
   bottom: auto !important;
   z-index: 5 !important;
@@ -13865,28 +13865,29 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal
 
 #catalog .catalog-badge {
   position: absolute !important;
-  left: clamp(26px, 2vw, 38px) !important;
-  top: clamp(170px, 12vw, 190px) !important;
+  left: clamp(-36px, -2vw, -30px) !important;
+  top: clamp(22px, 1.5vw, 28px) !important;
   z-index: 6 !important;
   display: inline-flex !important;
-  width: max-content !important;
-  max-width: calc(100% - 56px) !important;
-  min-height: 30px !important;
+  width: clamp(126px, 7.5vw, 142px) !important;
+  max-width: none !important;
+  min-height: clamp(23px, 1.45vw, 26px) !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 8px 18px !important;
-  transform: none !important;
-  border: 1px solid rgba(255, 197, 98, 0.7) !important;
-  border-radius: 999px !important;
+  padding: 0 12px !important;
+  transform: rotate(-45deg) !important;
+  transform-origin: center center !important;
+  border: 0 !important;
+  border-radius: 0 !important;
   background: linear-gradient(180deg, #ffb13b 0%, #f27800 100%) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 244, 207, 0.34),
-    0 0 18px rgba(255, 137, 17, 0.28) !important;
+    inset 0 1px 0 rgba(255, 244, 207, 0.32),
+    0 8px 18px rgba(0, 0, 0, 0.2) !important;
   color: #1b0b00 !important;
-  font-size: clamp(12px, 0.82vw, 14px) !important;
+  font-size: clamp(9px, 0.62vw, 11px) !important;
   font-weight: 800 !important;
   line-height: 1 !important;
-  letter-spacing: 0.04em !important;
+  letter-spacing: 0 !important;
   text-transform: uppercase !important;
   pointer-events: none !important;
   white-space: nowrap !important;
@@ -14933,5 +14934,643 @@ html[lang="ru"] #referral .referral-copy {
 
   #calculator .rtp-contrast {
     min-height: 340px !important;
+  }
+}
+
+/* FAQ cards use the same cyan neon glass treatment as Premium Game Catalog. */
+#faq .faq-wrap {
+  gap: clamp(14px, 1.2vw, 20px) !important;
+  width: min(100%, 1040px) !important;
+  max-width: 1040px !important;
+}
+
+#faq .faq-item,
+#faq .faq-item:hover,
+#faq .faq-item:focus-within,
+#faq .faq-item.open {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(84, 202, 255, 0.86) !important;
+  border-radius: clamp(20px, 1.8vw, 30px) !important;
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(89, 157, 255, 0.3), transparent 48%),
+    radial-gradient(ellipse at 78% 100%, rgba(33, 171, 255, 0.16), transparent 46%),
+    linear-gradient(180deg, rgba(6, 33, 92, 0.88), rgba(1, 13, 45, 0.96)) !important;
+  box-shadow:
+    0 0 0 1px rgba(182, 239, 255, 0.18),
+    0 0 26px rgba(34, 178, 255, 0.3),
+    0 18px 58px rgba(0, 7, 35, 0.48),
+    inset 0 1px 0 rgba(222, 250, 255, 0.2),
+    inset 0 0 34px rgba(51, 187, 255, 0.18) !important;
+  backdrop-filter: blur(7px) saturate(112%) !important;
+  -webkit-backdrop-filter: blur(7px) saturate(112%) !important;
+  opacity: 1 !important;
+  transform: none !important;
+  transition: border-color 180ms ease, box-shadow 180ms ease !important;
+}
+
+#faq .faq-item:hover,
+#faq .faq-item:focus-within,
+#faq .faq-item.open {
+  border-color: rgba(129, 225, 255, 0.98) !important;
+  box-shadow:
+    0 0 0 1px rgba(218, 250, 255, 0.24),
+    0 0 38px rgba(40, 192, 255, 0.44),
+    0 22px 64px rgba(0, 7, 35, 0.52),
+    inset 0 1px 0 rgba(236, 253, 255, 0.24),
+    inset 0 0 42px rgba(62, 198, 255, 0.24) !important;
+}
+
+#faq .faq-item::before,
+#faq .faq-item:hover::before,
+#faq .faq-item:focus-within::before,
+#faq .faq-item.open::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+  border-radius: inherit !important;
+  background:
+    linear-gradient(136deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.055) 28%, transparent 54%),
+    radial-gradient(ellipse at 50% -8%, rgba(99, 194, 255, 0.24), transparent 52%) !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+
+#faq .faq-item::after,
+#faq .faq-item:hover::after,
+#faq .faq-item:focus-within::after,
+#faq .faq-item.open::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 9px !important;
+  z-index: 0 !important;
+  display: block !important;
+  border: 1px solid rgba(119, 214, 255, 0.22) !important;
+  border-radius: calc(clamp(20px, 1.8vw, 30px) - 9px) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+}
+
+#faq .faq-question,
+#faq .faq-answer {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+#faq .faq-question {
+  min-height: clamp(66px, 5vw, 82px) !important;
+  padding: clamp(18px, 1.6vw, 26px) clamp(22px, 2vw, 34px) !important;
+  color: #f5fbff !important;
+}
+
+#faq .faq-question span {
+  max-width: calc(100% - 44px) !important;
+}
+
+#faq .faq-question i::before,
+#faq .faq-question i::after {
+  background: #55d7ff !important;
+  box-shadow: 0 0 12px rgba(85, 215, 255, 0.42) !important;
+}
+
+#faq .faq-answer p,
+#faq .faq-answer .faq-list {
+  padding-right: clamp(22px, 2vw, 34px) !important;
+  padding-left: clamp(22px, 2vw, 34px) !important;
+  color: rgba(235, 247, 255, 0.78) !important;
+}
+
+/* Calculator: remove wrapper-card chrome and keep one border style on real cards. */
+#calculator .calculator-shell,
+#calculator .calculator-shell:hover,
+#calculator .calculator-shell:focus,
+#calculator .calculator-shell:focus-within,
+#calculator .calc-comparison,
+#calculator .calc-comparison:hover,
+#calculator .calc-comparison:focus,
+#calculator .calc-comparison:focus-within {
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+}
+
+#calculator .calculator-shell,
+#calculator .calculator-shell:hover,
+#calculator .calculator-shell:focus-within {
+  padding: 0 !important;
+}
+
+#calculator .calculator-shell::before,
+#calculator .calculator-shell::after,
+#calculator .calculator-shell:hover::before,
+#calculator .calculator-shell:hover::after,
+#calculator .calculator-shell:focus-within::before,
+#calculator .calculator-shell:focus-within::after,
+#calculator .calc-comparison::before,
+#calculator .calc-comparison::after,
+#calculator .calc-comparison:hover::before,
+#calculator .calc-comparison:hover::after,
+#calculator .calc-comparison:focus-within::before,
+#calculator .calc-comparison:focus-within::after {
+  display: none !important;
+  content: none !important;
+}
+
+#calculator .calc-comparison,
+#calculator .calc-comparison:hover,
+#calculator .calc-comparison:focus-within {
+  min-height: 0 !important;
+  padding: clamp(10px, 1.1vw, 16px) 0 0 !important;
+}
+
+#calculator .control-card,
+#calculator .control-card:hover,
+#calculator .control-card:focus-within,
+#calculator .calc-chart-card,
+#calculator .calc-chart-card:hover,
+#calculator .calc-chart-card:focus-within,
+#calculator .calc-chart-card:last-child,
+#calculator .extra-revenue,
+#calculator .extra-revenue:hover,
+#calculator .extra-revenue:focus-within {
+  border: 1px solid rgba(84, 206, 255, 0.72) !important;
+  border-radius: clamp(14px, 1.2vw, 20px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(232, 252, 255, 0.12),
+    inset 0 0 24px rgba(53, 188, 255, 0.1),
+    0 0 16px rgba(35, 174, 255, 0.12) !important;
+  transform: none !important;
+}
+
+/* Quick navigator: glass dots with thin borders. */
+.section-quick-nav__dot,
+.section-quick-nav__item:hover .section-quick-nav__dot,
+.section-quick-nav__item:focus-visible .section-quick-nav__dot {
+  width: 18px !important;
+  height: 18px !important;
+  border: 1px solid rgba(174, 239, 255, 0.9) !important;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.08) 42%, rgba(65, 211, 255, 0.42)),
+    rgba(88, 215, 255, 0.34) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.62),
+    inset 0 -1px 0 rgba(44, 169, 217, 0.28) !important;
+  backdrop-filter: blur(5px) saturate(125%) !important;
+  -webkit-backdrop-filter: blur(5px) saturate(125%) !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+.section-quick-nav__item.is-active .section-quick-nav__dot,
+.section-quick-nav__item.is-active:hover .section-quick-nav__dot,
+.section-quick-nav__item.is-active:focus-visible .section-quick-nav__dot {
+  border-color: rgba(255, 190, 232, 0.96) !important;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.09) 42%, rgba(255, 47, 165, 0.58)),
+    rgba(255, 47, 165, 0.48) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.66),
+    inset 0 -1px 0 rgba(190, 20, 112, 0.32) !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+/* GGR calculator cards: hover/focus must not change card styling. */
+#calculator .control-card,
+#calculator .control-card:hover,
+#calculator .control-card:focus,
+#calculator .control-card:focus-within,
+#calculator .calc-chart-card:not(.calc-rtp-story),
+#calculator .calc-chart-card:not(.calc-rtp-story):hover,
+#calculator .calc-chart-card:not(.calc-rtp-story):focus,
+#calculator .calc-chart-card:not(.calc-rtp-story):focus-within,
+#calculator .extra-revenue,
+#calculator .extra-revenue:hover,
+#calculator .extra-revenue:focus,
+#calculator .extra-revenue:focus-within {
+  opacity: 1 !important;
+  border: 1px solid rgba(84, 206, 255, 0.72) !important;
+  border-radius: clamp(14px, 1.2vw, 20px) !important;
+  background:
+    radial-gradient(circle at 22% 0%, rgba(68, 190, 255, 0.14), transparent 72%),
+    rgba(3, 30, 83, 0.44) !important;
+  background-image:
+    radial-gradient(circle at 22% 0%, rgba(68, 190, 255, 0.14), transparent 72%),
+    linear-gradient(rgba(3, 30, 83, 0.44), rgba(3, 30, 83, 0.44)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(232, 252, 255, 0.12),
+    inset 0 0 24px rgba(53, 188, 255, 0.1),
+    0 0 16px rgba(35, 174, 255, 0.12) !important;
+  backdrop-filter: blur(4px) saturate(110%) !important;
+  -webkit-backdrop-filter: blur(4px) saturate(110%) !important;
+  filter: none !important;
+  transform: none !important;
+  transition-property: height, width, color !important;
+}
+
+#calculator .calc-rtp-story,
+#calculator .calc-rtp-story:hover,
+#calculator .calc-rtp-story:focus,
+#calculator .calc-rtp-story:focus-within {
+  opacity: 1 !important;
+  border: 1px solid rgba(84, 206, 255, 0.72) !important;
+  border-radius: clamp(14px, 1.2vw, 20px) !important;
+  background:
+    radial-gradient(circle at 72% 18%, rgba(82, 218, 255, 0.22), transparent 36%),
+    radial-gradient(circle at 18% 100%, rgba(255, 28, 144, 0.16), transparent 42%),
+    linear-gradient(180deg, rgba(4, 39, 104, 0.72), rgba(1, 10, 42, 0.92)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(232, 252, 255, 0.12),
+    inset 0 0 24px rgba(53, 188, 255, 0.1),
+    0 0 16px rgba(35, 174, 255, 0.12) !important;
+  backdrop-filter: blur(4px) saturate(110%) !important;
+  -webkit-backdrop-filter: blur(4px) saturate(110%) !important;
+  filter: none !important;
+  transform: none !important;
+  transition-property: height, width, color !important;
+}
+
+/* Calculator monthly turnover input: hide native number steppers. */
+#calculator .turnover-input {
+  appearance: textfield !important;
+  -moz-appearance: textfield !important;
+  padding-right: 14px !important;
+}
+
+#calculator .turnover-input::-webkit-outer-spin-button,
+#calculator .turnover-input::-webkit-inner-spin-button {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+/* Calculator extra revenue: match the card border color. */
+#calculator .extra-revenue span,
+#calculator .extra-revenue strong,
+#calculator .extra-revenue:hover span,
+#calculator .extra-revenue:hover strong,
+#calculator .extra-revenue:focus-within span,
+#calculator .extra-revenue:focus-within strong {
+  color: rgb(84, 206, 255) !important;
+  text-shadow: none !important;
+}
+
+#calculator .extra-revenue,
+#calculator .extra-revenue:hover,
+#calculator .extra-revenue:focus,
+#calculator .extra-revenue:focus-within {
+  margin-top: clamp(12px, 1vw, 18px) !important;
+}
+
+#calculator .extra-revenue strong,
+#calculator .extra-revenue:hover strong,
+#calculator .extra-revenue:focus-within strong {
+  color: #f6c860 !important;
+}
+
+/* Why Exactly Choose Us: sharpen carousel card text. */
+#benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face--back {
+  background:
+    linear-gradient(180deg, rgba(2, 14, 48, 0) 0%, rgba(2, 14, 48, 0.68) 30%, rgba(1, 8, 34, 0.92) 100%) !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face--back h3,
+#benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face--back p {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 4, 18, 0.72) !important;
+  -webkit-font-smoothing: antialiased !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face--back h3 {
+  font-weight: 850 !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face--back p {
+  color: rgba(255, 255, 255, 0.92) !important;
+  font-weight: 650 !important;
+}
+
+body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.is-near {
+  opacity: 0.72 !important;
+  filter: saturate(1.1) brightness(0.98) !important;
+}
+
+/* Why Exactly Choose Us: keep card text visible at 100% browser zoom. */
+#benefits.benefits-grid-section .benefits-showcase__grid[data-benefits-carousel] {
+  height: clamp(600px, 52vw, 700px) !important;
+}
+
+body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal-pop.visible,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel:hover,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel:focus,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel:focus-within,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal-pop.visible:hover,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal-pop.visible:focus,
+body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal-pop.visible:focus-within {
+  width: clamp(300px, 24vw, 370px) !important;
+  height: clamp(500px, 40vw, 540px) !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face--front {
+  flex-basis: 48% !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face--back {
+  gap: clamp(7px, 0.7vw, 10px) !important;
+  padding: 0 clamp(22px, 2.1vw, 30px) clamp(22px, 2vw, 28px) !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face--back h3 {
+  font-size: clamp(21px, 1.45vw, 27px) !important;
+  line-height: 1.12 !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face--back p {
+  max-height: 0 !important;
+  font-size: clamp(13px, 0.9vw, 15px) !important;
+  line-height: 1.34 !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--carousel.is-active .benefit-card__face--back p {
+  max-height: 240px !important;
+}
+
+#benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face--back h3,
+#benefits.benefits-grid-section .benefit-card--carousel .benefit-card__face--back p {
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+}
+
+/* Premium Game Catalog: keep localized demo labels inside buttons. */
+#catalog .catalog-card .btn,
+#catalog .catalog-card .btn:hover,
+#catalog .catalog-card .btn:focus-visible {
+  left: clamp(18px, 1.45vw, 28px) !important;
+  right: clamp(18px, 1.45vw, 28px) !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  padding: 0 10px !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+}
+
+#catalog .catalog-card .btn span {
+  display: inline-block !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  text-align: center !important;
+  text-overflow: unset !important;
+  white-space: nowrap !important;
+}
+
+html[lang="ru"] #catalog .catalog-card .btn,
+html[lang="ru"] #catalog .catalog-card .btn:hover,
+html[lang="ru"] #catalog .catalog-card .btn:focus-visible {
+  font-size: clamp(16px, 0.96vw, 18px) !important;
+}
+
+/* Mobile-only final fixes: keep desktop composition intact. */
+@media (max-width: 760px) {
+  .topbar,
+  .topbar.is-scrolled {
+    transform: none !important;
+    contain: none !important;
+    overflow: visible !important;
+  }
+
+  .topbar .nav-links,
+  .topbar .nav-links.open,
+  .nav-links.open {
+    position: fixed !important;
+    top: 50svh !important;
+    left: 50vw !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: min(300px, calc(100vw - 56px)) !important;
+    max-width: min(300px, calc(100vw - 56px)) !important;
+    max-height: min(460px, calc(100svh - 112px)) !important;
+    transform: translate(-50%, -50%) !important;
+    transform-origin: center center !important;
+  }
+
+  .topbar .nav-links:not(.open),
+  .nav-links:not(.open) {
+    transform: translate(calc(50vw + 32px), -50%) !important;
+  }
+
+  .lead-modal,
+  .lead-modal.open {
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 12px !important;
+  }
+
+  .lead-dialog,
+  .lead-dialog:hover,
+  .lead-dialog:focus-within {
+    width: min(100%, 430px) !important;
+    max-height: calc(100svh - 24px) !important;
+    border-radius: 24px !important;
+    clip-path: inset(0 round 24px) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    box-shadow: 0 18px 46px rgba(10, 5, 26, 0.24) !important;
+  }
+
+  .lead-dialog::before,
+  .lead-dialog::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  .lead-dialog .lead-actions {
+    display: grid !important;
+    grid-template-columns: minmax(0, auto) minmax(0, 1fr) minmax(90px, auto) !important;
+    align-items: end !important;
+    gap: 8px !important;
+    margin-top: 18px !important;
+    padding: 14px 0 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .lead-dialog .lead-actions::before,
+  .lead-dialog .lead-actions::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  .lead-dialog .lead-actions > .lead-back {
+    justify-self: start !important;
+    min-width: 0 !important;
+    padding-inline: 13px !important;
+  }
+
+  .lead-dialog .lead-actions > .lead-telegram-link {
+    justify-self: start !important;
+    min-width: 0 !important;
+    max-width: 134px !important;
+    min-height: 42px !important;
+    padding: 0 10px !important;
+    gap: 6px !important;
+    font-size: 12px !important;
+    line-height: 1.05 !important;
+    white-space: nowrap !important;
+  }
+
+  .lead-dialog .lead-actions > .lead-telegram-link img {
+    width: 22px !important;
+    height: 22px !important;
+    flex: 0 0 22px !important;
+  }
+
+  .lead-dialog .lead-actions > .lead-next,
+  .lead-dialog .lead-actions > .lead-submit {
+    justify-self: end !important;
+    min-width: 102px !important;
+    width: auto !important;
+    padding-inline: 18px !important;
+  }
+
+  #catalog .catalog-card-media,
+  #catalog .catalog-card:hover .catalog-card-media,
+  #catalog .catalog-card:focus-within .catalog-card-media,
+  #catalog .catalog-grid.has-active .catalog-card .catalog-card-media {
+    top: clamp(116px, 30vw, 144px) !important;
+    width: min(72%, 260px) !important;
+    height: clamp(82px, 21vw, 112px) !important;
+  }
+
+  #catalog .catalog-card--pgsoft .catalog-card-media,
+  #catalog .catalog-card--pgsoft:hover .catalog-card-media,
+  #catalog .catalog-card--pgsoft:focus-within .catalog-card-media,
+  #catalog .catalog-card--amatic .catalog-card-media,
+  #catalog .catalog-card--amatic:hover .catalog-card-media,
+  #catalog .catalog-card--amatic:focus-within .catalog-card-media,
+  #catalog .catalog-card--amusnet .catalog-card-media,
+  #catalog .catalog-card--amusnet:hover .catalog-card-media,
+  #catalog .catalog-card--amusnet:focus-within .catalog-card-media {
+    width: min(58%, 220px) !important;
+    height: clamp(70px, 18vw, 96px) !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .bar,
+  #calculator .calc-chart-card:not(.calc-rtp-story):hover .bar,
+  #calculator .calc-chart-card:not(.calc-rtp-story):focus-within .bar {
+    width: min(22px, 70%) !important;
+    max-width: 70% !important;
+  }
+
+  #referral .referral-showcase,
+  #referral .referral-showcase:hover,
+  #referral .referral-showcase:focus-within {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: clamp(28px, 7vw, 38px) clamp(20px, 6vw, 28px) clamp(112px, 30vw, 136px) !important;
+    overflow: hidden !important;
+  }
+
+  #referral .referral-copy,
+  html[lang="ru"] #referral .referral-copy {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  #referral .referral-title {
+    max-width: 100% !important;
+    font-size: clamp(34px, 10vw, 46px) !important;
+    line-height: 0.98 !important;
+  }
+
+  #referral .referral-lead,
+  #referral .referral-profit {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: clamp(15px, 4vw, 17px) !important;
+    line-height: 1.24 !important;
+  }
+
+  #referral .referral-profit-title {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 18px !important;
+    font-size: clamp(17px, 4.4vw, 20px) !important;
+  }
+
+  #referral .referral-visual,
+  #referral .referral-visual img {
+    display: none !important;
+  }
+
+  #referral .referral-telegram,
+  #referral .referral-monetize {
+    bottom: clamp(24px, 7vw, 32px) !important;
+    min-height: 46px !important;
+    width: calc((100% - clamp(56px, 15vw, 72px)) / 2) !important;
+    min-width: 0 !important;
+    padding-inline: 8px !important;
+    font-size: clamp(12px, 3.3vw, 14px) !important;
+    white-space: nowrap !important;
+  }
+
+  #referral .referral-telegram {
+    left: clamp(20px, 6vw, 28px) !important;
+  }
+
+  #referral .referral-monetize {
+    right: clamp(20px, 6vw, 28px) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  #calculator .calc-chart-card:not(.calc-rtp-story) .bar,
+  #calculator .calc-chart-card:not(.calc-rtp-story):hover .bar,
+  #calculator .calc-chart-card:not(.calc-rtp-story):focus-within .bar {
+    width: min(20px, 72%) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  #referral .referral-showcase,
+  #referral .referral-showcase:hover,
+  #referral .referral-showcase:focus-within {
+    min-height: clamp(500px, 118vw, 560px) !important;
+    padding-bottom: clamp(106px, 29vw, 128px) !important;
+  }
+
+  #referral .referral-telegram,
+  #referral .referral-monetize {
+    bottom: clamp(24px, 7vw, 32px) !important;
+    width: calc((100% - clamp(72px, 18vw, 86px)) / 2) !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  #referral .referral-redesign::before {
+    border-radius: inherit !important;
+    -webkit-mask: none !important;
+    mask: none !important;
+  }
+
+  #referral .referral-redesign::after,
+  #referral .referral-card-shape {
+    content: none !important;
+    display: none !important;
   }
 }
