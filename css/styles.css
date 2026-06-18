@@ -15547,6 +15547,13 @@ html[lang="ru"] #catalog .catalog-card .btn:focus-visible {
 }
 
 @media (max-width: 760px) {
+  #catalog .catalog-card-media,
+  #catalog .catalog-card:hover .catalog-card-media,
+  #catalog .catalog-card:focus-within .catalog-card-media,
+  #catalog .catalog-grid.has-active .catalog-card .catalog-card-media {
+    top: clamp(86px, 22vw, 108px) !important;
+  }
+
   #referral .referral-showcase,
   #referral .referral-showcase:hover,
   #referral .referral-showcase:focus-within {

@@ -11,6 +11,35 @@
 
   if (!shell || !mount) return;
 
+  const GLOBE_ASSET_VERSION = "20260618-globe-cache-recovery";
+  const pendingScriptLoads = new Map();
+
+  const versionedAssetUrl = (url) => {
+    try {
+      const parsed = new URL(url, window.location.href);
+      parsed.searchParams.set("apilxv", GLOBE_ASSET_VERSION);
+      return parsed.href;
+    } catch {
+      const separator = String(url).includes("?") ? "&" : "?";
+      return `${url}${separator}apilxv=${encodeURIComponent(GLOBE_ASSET_VERSION)}`;
+    }
+  };
+
+  const wait = (duration) => new Promise((resolve) => window.setTimeout(resolve, duration));
+
+  const retry = async (task, attempts = 2, delay = 320) => {
+    let lastError;
+    for (let attempt = 0; attempt < attempts; attempt += 1) {
+      try {
+        return await task(attempt);
+      } catch (error) {
+        lastError = error;
+        if (attempt < attempts - 1) await wait(delay);
+      }
+    }
+    throw lastError;
+  };
+
   const clientPoints = [
     { iso: "AL", country: "Albania", lat: 41.1533, lng: 20.1683, clients: 12 },
     { iso: "DZ", country: "Algeria", lat: 28.0339, lng: 1.6596, clients: 18 },
@@ -513,20 +542,24 @@
     return !hasWebGL() || (window.innerWidth < 380 && (lowMemory || lowCpu));
   };
 
-  const loadScript = (src) => new Promise((resolve, reject) => {
-    if (document.querySelector(`script[src="${src}"]`)) {
-      resolve();
-      return;
-    }
-    const script = document.createElement("script");
-    script.src = src;
-    script.async = true;
-    script.crossOrigin = "anonymous";
-    script.referrerPolicy = "no-referrer";
-    script.onload = resolve;
-    script.onerror = () => reject(new Error(`Unable to load ${src}`));
-    document.head.appendChild(script);
-  });
+  const loadScript = (src) => {
+    if (pendingScriptLoads.has(src)) return pendingScriptLoads.get(src);
+
+    const scriptLoad = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = versionedAssetUrl(src);
+      script.async = true;
+      script.crossOrigin = "anonymous";
+      script.referrerPolicy = "no-referrer";
+      script.dataset.apiLxGlobeSrc = src;
+      script.onload = resolve;
+      script.onerror = () => reject(new Error(`Unable to load ${src}`));
+      document.head.appendChild(script);
+    }).finally(() => pendingScriptLoads.delete(src));
+
+    pendingScriptLoads.set(src, scriptLoad);
+    return scriptLoad;
+  };
 
   const loadCdnLibrary = async ({ name, globalName, urls }) => {
     if (window[globalName]) return;
@@ -553,9 +586,11 @@
     let lastError;
     for (const url of urls) {
       try {
-        const response = await fetch(url, { cache: "force-cache", mode: "cors" });
+        const response = await fetch(versionedAssetUrl(url), { cache: "reload", mode: "cors" });
         if (!response.ok) throw new Error(`Unable to load ${url}`);
-        return response.json();
+        const payload = await response.json();
+        if (!payload || typeof payload !== "object") throw new Error(`Invalid JSON from ${url}`);
+        return payload;
       } catch (error) {
         lastError = error;
       }
@@ -564,9 +599,15 @@
   };
 
   const fetchWorldPolygons = async () => {
-    const topology = await fetchFirstJson(worldAtlasUrls);
-    const geoJson = window.topojson?.feature(topology, topology.objects.countries);
-    return Array.isArray(geoJson.features) ? geoJson.features : [];
+    return retry(async () => {
+      const topology = await fetchFirstJson(worldAtlasUrls);
+      if (!topology?.objects?.countries) throw new Error("World atlas is missing country data");
+      const geoJson = window.topojson?.feature(topology, topology.objects.countries);
+      if (!Array.isArray(geoJson?.features) || !geoJson.features.length) {
+        throw new Error("World atlas did not produce country polygons");
+      }
+      return geoJson.features;
+    }, 2, 380);
   };
 
   const showFallback = () => {
@@ -843,7 +884,7 @@
     }
 
     try {
-      await loadGlobeLibraries();
+      await retry(loadGlobeLibraries, 2, 380);
     } catch (error) {
       console.warn("[api-lx-globe] CDN globe libraries unavailable, using fallback globe.", error);
       showFallback();
