@@ -137,6 +137,7 @@ window.API_LX_TRANSLATIONS = (() => {
     map_subtitle: "Operadores de múltiples regiones confían en nosotros. Sé el primero en tu GEO.",
     map_active_regions: "Regiones activas",
     map_tooltip_clients: "{count} clientes activos",
+    map_coming_soon: "próximamente",
     map_fallback_note: "El globo 3D en vivo no está disponible en este dispositivo. Las regiones activas se muestran en el panel.",
 
     calculator_eyebrow: "Simulador GGR",
@@ -173,7 +174,7 @@ window.API_LX_TRANSLATIONS = (() => {
     faq_3_a_1: "El DepositPay de $500 se usa como depósito para activar el acceso a producción. No es una comisión adicional: se descuenta por completo en futuras liquidaciones y se devuelve mediante facturas.",
     faq_3_a_2: "Si decides no lanzar en producción después de pagar DepositPay, emitiremos un reembolso completo sin condiciones ocultas ni deducciones.",
     faq_4_q: "¿Con qué frecuencia salen actualizaciones y juegos nuevos?",
-    faq_4_a_1: "Como nuestros slots se basan en código fuente original y tenemos contactos directos dentro de los equipos de proveedores, recibimos materiales y actualizaciones originales directamente para desarrollo.",
+    faq_4_a_1: "Como nuestros slots se basan en código fuente original, recibimos materiales y actualizaciones originales directamente para desarrollo.",
     faq_4_a_2: "Esto nos permite publicar juegos y actualizaciones al mismo tiempo que los proveedores originales, día a día. En algunos casos, las actualizaciones aparecieron en nuestro lado incluso antes del lanzamiento oficial.",
     faq_4_a_3: "Puedes seguir los nuevos lanzamientos y actualizaciones en nuestro canal oficial de Telegram:",
     faq_telegram_link: "Telegram oficial de APILX",
@@ -529,6 +530,7 @@ window.API_LX_TRANSLATIONS = (() => {
     map_subtitle: "Des opérateurs de plusieurs régions nous font confiance. Soyez le premier dans votre GEO.",
     map_active_regions: "Régions actives",
     map_tooltip_clients: "{count} clients actifs",
+    map_coming_soon: "bientôt",
     map_fallback_note: "Le globe 3D en direct n'est pas disponible sur cet appareil. Les régions actives sont affichées dans le panneau.",
 
     calculator_eyebrow: "Simulateur GGR",
@@ -565,7 +567,7 @@ window.API_LX_TRANSLATIONS = (() => {
     faq_3_a_1: "Le DepositPay de $500 sert de dépôt pour activer l'accès production. Ce n'est pas un frais supplémentaire : il est entièrement déduit des règlements futurs et restitué via les factures.",
     faq_3_a_2: "Si vous décidez de ne pas lancer la production après avoir payé DepositPay, nous émettrons un remboursement complet sans conditions cachées ni retenues.",
     faq_4_q: "À quelle fréquence sortent les mises à jour et nouveaux jeux ?",
-    faq_4_a_1: "Comme nos slots reposent sur le code source original et grâce à des contacts directs dans les équipes fournisseurs, nous recevons les matériaux et mises à jour originaux directement pour le développement.",
+    faq_4_a_1: "Comme nos slots reposent sur le code source original, nous recevons les matériaux et mises à jour originaux directement pour le développement.",
     faq_4_a_2: "Cela nous permet de sortir les nouveaux jeux et mises à jour en même temps que les fournisseurs originaux, jour pour jour. Dans certains cas, des mises à jour sont apparues chez nous avant la sortie officielle.",
     faq_4_a_3: "Vous pouvez suivre les nouveaux jeux et mises à jour sur notre canal Telegram officiel :",
     faq_telegram_link: "Telegram officiel APILX",
@@ -921,6 +923,7 @@ window.API_LX_TRANSLATIONS = (() => {
     map_subtitle: "Operadores de várias regiões confiam em nós. Seja o primeiro no seu GEO.",
     map_active_regions: "Regiões ativas",
     map_tooltip_clients: "{count} clientes ativos",
+    map_coming_soon: "em breve",
     map_fallback_note: "O globo 3D ao vivo não está disponível neste dispositivo. As regiões ativas são exibidas no painel.",
 
     calculator_eyebrow: "Simulador GGR",
@@ -957,7 +960,7 @@ window.API_LX_TRANSLATIONS = (() => {
     faq_3_a_1: "O DepositPay de $500 é usado como depósito para ativar o acesso de produção. Não é uma taxa adicional: ele é totalmente considerado em liquidações futuras e retornado por meio das faturas.",
     faq_3_a_2: "Se você decidir não lançar em produção depois de pagar o DepositPay, emitiremos reembolso integral sem condições ocultas ou deduções.",
     faq_4_q: "Com que frequência saem atualizações e novos jogos?",
-    faq_4_a_1: "Como nossos slots são baseados em código-fonte original e graças a contatos diretos nas equipes dos provedores, recebemos materiais e atualizações originais diretamente para desenvolvimento.",
+    faq_4_a_1: "Como nossos slots são baseados em código-fonte original, recebemos materiais e atualizações originais diretamente para desenvolvimento.",
     faq_4_a_2: "Isso nos permite lançar novos jogos e atualizações ao mesmo tempo que os provedores originais, dia a dia. Em alguns casos, atualizações apareceram do nosso lado até antes do lançamento oficial.",
     faq_4_a_3: "Você pode acompanhar novos lançamentos e atualizações no nosso canal oficial do Telegram:",
     faq_telegram_link: "Telegram oficial APILX",
@@ -1375,6 +1378,48 @@ window.API_LX_TRANSLATIONS = (() => {
     privacy_page_description: "Политика конфиденциальности API LX: как мы собираем, используем и защищаем информацию, отправленную через apilx.co."
   };
 
-  Object.assign(translations, { en, ru, es, fr, pt });
+  const catalogDescriptionOverrides = {
+    en: {
+      map_coming_soon: "coming soon",
+      catalog_pragmatic_description: "Popular provider with Free Spins, Bonus Buy, unique bonus mechanics, Replay, tournaments and a convenient game lobby for quick slot access.",
+      catalog_pgsoft_description: "Provider of modern mobile slots with unique bonus mechanics. Each game offers its own gameplay features and individual bonus experience.",
+      catalog_amatic_description: "Classic slots with retro styling and simple mechanics. Key features include Gamble, letting players risk winnings to increase them, plus Bonus Buy in selected modern titles.",
+      catalog_amusnet_description: "European provider known for varied bonus rounds and free spin series. Each game offers its own mechanics and features, making gameplay more engaging."
+    },
+    ru: {
+      map_coming_soon: "скоро",
+      catalog_pragmatic_description: "Популярный провайдер с большим набором функций: фриспины, Bonus Buy, уникальные бонусные механики, Replay, турниры и удобное игровое лобби для быстрого доступа к слотам.",
+      catalog_pgsoft_description: "Провайдер современных мобильных слотов с уникальными бонусными механиками. Каждая игра предлагает собственные игровые особенности и индивидуальный бонусный опыт.",
+      catalog_amatic_description: "Классические слоты с ретро-стилем и простыми механиками. Среди ключевых функций — Gamble, позволяющая рискнуть выигрышем ради его увеличения, а также Bonus Buy в некоторых современных играх.",
+      catalog_amusnet_description: "Европейский провайдер, известный разнообразием бонусных раундов и сериями фриспинов. Каждая игра предлагает собственные механики и особенности, делая игровой процесс более увлекательным."
+    },
+    es: {
+      map_coming_soon: "próximamente",
+      catalog_pragmatic_description: "Proveedor popular con muchas funciones: Free Spins, Bonus Buy, mecánicas de bonus únicas, Replay, torneos y un lobby cómodo para acceder rápido a los slots.",
+      catalog_pgsoft_description: "Proveedor de slots móviles modernos con mecánicas de bonus únicas. Cada juego ofrece funciones propias y una experiencia de bonus individual.",
+      catalog_amatic_description: "Slots clásicos con estilo retro y mecánicas simples. Entre sus funciones clave están Gamble y Bonus Buy en algunos títulos modernos.",
+      catalog_amusnet_description: "Proveedor europeo conocido por rondas de bonus variadas y series de Free Spins. Cada juego ofrece sus propias mecánicas y características, haciendo el gameplay más atractivo."
+    },
+    fr: {
+      map_coming_soon: "bientôt",
+      catalog_pragmatic_description: "Fournisseur populaire avec de nombreuses fonctions : Free Spins, Bonus Buy, mécaniques bonus uniques, Replay, tournois et lobby pratique pour accéder rapidement aux slots.",
+      catalog_pgsoft_description: "Fournisseur de slots mobiles modernes avec des mécaniques bonus uniques. Chaque jeu propose ses propres fonctionnalités et une expérience bonus distincte.",
+      catalog_amatic_description: "Slots classiques au style rétro et aux mécaniques simples. Les fonctions clés incluent Gamble et Bonus Buy dans certains titres modernes.",
+      catalog_amusnet_description: "Fournisseur européen connu pour ses tours bonus variés et ses séries de Free Spins. Chaque jeu propose ses propres mécaniques et particularités, rendant le gameplay plus engageant."
+    },
+    pt: {
+      map_coming_soon: "em breve",
+      catalog_pragmatic_description: "Provedor popular com amplo conjunto de funções: Free Spins, Bonus Buy, mecânicas de bônus únicas, Replay, torneios e lobby prático para acesso rápido aos slots.",
+      catalog_pgsoft_description: "Provedor de slots mobile modernos com mecânicas de bônus únicas. Cada jogo oferece recursos próprios e uma experiência de bônus individual.",
+      catalog_amatic_description: "Slots clássicos com estilo retrô e mecânicas simples. Entre os principais recursos estão Gamble e Bonus Buy em alguns títulos modernos.",
+      catalog_amusnet_description: "Provedor europeu conhecido por rodadas de bônus variadas e séries de Free Spins. Cada jogo oferece mecânicas e recursos próprios, tornando a experiência mais envolvente."
+    }
+  };
+
+  Object.assign(translations, { en, ru, es, fr, pt, br: { ...pt } });
+  Object.entries(catalogDescriptionOverrides).forEach(([code, values]) => {
+    translations[code] = { ...(translations[code] || en), ...values };
+  });
+  translations.br = { ...(translations.br || pt), ...catalogDescriptionOverrides.pt };
   return translations;
 })();

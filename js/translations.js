@@ -91,7 +91,8 @@ window.API_LX_TRANSLATIONS = (() => {
     map_subtitle: "Trusted by operators across multiple regions. Be first in your GEO.",
     map_active_regions: "Active Regions",
     map_tooltip_clients: "{count} active clients",
-    map_tooltip_antarctica: "0 clients - penguins have not learned how to earn yet",
+    map_coming_soon: "coming soon",
+    map_tooltip_antarctica: "coming soon",
     map_fallback_note: "Live 3D globe is unavailable on this device. Active regions are shown in the panel.",
     country_brazil: "Brazil",
     country_india: "India",
@@ -170,7 +171,7 @@ window.API_LX_TRANSLATIONS = (() => {
     faq_3_a_1: "DepositPay of $500 is used as a deposit to activate production access. This amount is not an additional fee: it is fully counted in future settlements and returned through invoices.",
     faq_3_a_2: "If you decide not to launch in production after paying DepositPay, we will issue a full refund with no hidden conditions or deductions.",
     faq_4_q: "How often do updates and new games come out?",
-    faq_4_a_1: "Because our slots are based on original source code, and thanks to direct contacts inside provider teams, we receive original materials and updates directly for development.",
+    faq_4_a_1: "Because our slots are based on original source code, we receive original materials and updates directly for development.",
     faq_4_a_2: "This allows us to release new games and updates at the same time as the original providers, day-to-day. In some cases, updates appeared on our side even earlier than the official original release.",
     faq_4_a_3: "You can follow new game releases and updates in our official Telegram channel:",
     faq_telegram_link: "APILX Official Telegram",
@@ -554,7 +555,8 @@ window.API_LX_TRANSLATIONS = (() => {
     map_subtitle: "Нам доверяют операторы в разных регионах, стань первым в своём GEO.",
     map_active_regions: "Активные регионы",
     map_tooltip_clients: "{count} активных клиентов",
-    map_tooltip_antarctica: "0 клиентов - пингвины еще не научились зарабатывать",
+    map_coming_soon: "скоро",
+    map_tooltip_antarctica: "скоро",
     map_fallback_note: "3D-глобус недоступен на этом устройстве. Активные регионы показаны в панели.",
     country_brazil: "Бразилия",
     country_india: "Индия",
@@ -633,7 +635,7 @@ window.API_LX_TRANSLATIONS = (() => {
     faq_3_a_1: "DepositPay в размере $500 используется как депозит для активации production-доступа. Эта сумма не является дополнительной комиссией — она полностью учитывается в дальнейших расчетах и возвращается через инвойсы.",
     faq_3_a_2: "Если после оплаты DepositPay вы решите не запускаться в production, мы оформим полный возврат средств. Без скрытых условий и удержаний.",
     faq_4_q: "Как часто выходят обновления и новые игры?",
-    faq_4_a_1: "Так как наши слоты основаны на оригинальном исходном коде, а также благодаря прямым контактам внутри провайдеров, мы получаем оригинальные материалы и обновления напрямую для разработки.",
+    faq_4_a_1: "Так как наши слоты основаны на оригинальном исходном коде, мы получаем оригинальные материалы и обновления напрямую для разработки.",
     faq_4_a_2: "Это позволяет нам выпускать новые игры и обновления одновременно с оригинальными провайдерами — day-to-day. В некоторых случаях обновления у нас появлялись даже раньше официального релиза у оригинала.",
     faq_4_a_3: "Следить за выходом новых игр и обновлений вы можете в нашем официальном Telegram-канале:",
     faq_telegram_link: "APILX Official Telegram",
@@ -931,5 +933,97 @@ window.API_LX_TRANSLATIONS = (() => {
   translations.en = en;
   translations.ru = { ...en, ...ru };
   translations.br = { ...en, ...(translations.pt || {}) };
+
+  const catalogDescriptionOverrides = {
+    en: {
+      map_coming_soon: "coming soon",
+      catalog_pragmatic_description: "Popular provider with Free Spins, Bonus Buy, unique bonus mechanics, Replay, tournaments and a convenient game lobby for quick slot access.",
+      catalog_pgsoft_description: "Provider of modern mobile slots with unique bonus mechanics. Each game offers its own gameplay features and individual bonus experience.",
+      catalog_amatic_description: "Classic slots with retro styling and simple mechanics. Key features include Gamble, letting players risk winnings to increase them, plus Bonus Buy in selected modern titles.",
+      catalog_amusnet_description: "European provider known for varied bonus rounds and free spin series. Each game offers its own mechanics and features, making gameplay more engaging."
+    },
+    ru: {
+      map_coming_soon: "скоро",
+      catalog_pragmatic_description: "Популярный провайдер с большим набором функций: фриспины, Bonus Buy, уникальные бонусные механики, Replay, турниры и удобное игровое лобби для быстрого доступа к слотам.",
+      catalog_pgsoft_description: "Провайдер современных мобильных слотов с уникальными бонусными механиками. Каждая игра предлагает собственные игровые особенности и индивидуальный бонусный опыт.",
+      catalog_amatic_description: "Классические слоты с ретро-стилем и простыми механиками. Среди ключевых функций — Gamble, позволяющая рискнуть выигрышем ради его увеличения, а также Bonus Buy в некоторых современных играх.",
+      catalog_amusnet_description: "Европейский провайдер, известный разнообразием бонусных раундов и сериями фриспинов. Каждая игра предлагает собственные механики и особенности, делая игровой процесс более увлекательным."
+    },
+    de: {
+      map_coming_soon: "demnächst",
+      catalog_pragmatic_description: "Beliebter Anbieter mit vielen Funktionen: Free Spins, Bonus Buy, einzigartige Bonusmechaniken, Replay, Turniere und eine praktische Lobby für schnellen Slot-Zugriff.",
+      catalog_pgsoft_description: "Anbieter moderner Mobile-Slots mit einzigartigen Bonusmechaniken. Jedes Spiel bietet eigene Features und ein individuelles Bonuserlebnis.",
+      catalog_amatic_description: "Klassische Slots im Retro-Stil mit einfachen Mechaniken. Zu den wichtigsten Funktionen gehören Gamble und Bonus Buy in ausgewählten modernen Spielen.",
+      catalog_amusnet_description: "Europäischer Anbieter, bekannt für abwechslungsreiche Bonusrunden und Free-Spin-Serien. Jedes Spiel bietet eigene Mechaniken und macht das Gameplay spannender."
+    },
+    it: {
+      map_coming_soon: "prossimamente",
+      catalog_pragmatic_description: "Provider popolare con molte funzioni: Free Spins, Bonus Buy, meccaniche bonus uniche, Replay, tornei e una lobby comoda per accedere rapidamente agli slot.",
+      catalog_pgsoft_description: "Provider di slot mobile moderne con meccaniche bonus uniche. Ogni gioco offre caratteristiche proprie e un'esperienza bonus individuale.",
+      catalog_amatic_description: "Slot classiche in stile retro con meccaniche semplici. Tra le funzioni principali ci sono Gamble e Bonus Buy in alcuni titoli moderni.",
+      catalog_amusnet_description: "Provider europeo noto per round bonus vari e serie di Free Spins. Ogni gioco offre meccaniche e caratteristiche proprie, rendendo il gameplay più coinvolgente."
+    },
+    hi: {
+      map_coming_soon: "जल्द आ रहा है",
+      catalog_pragmatic_description: "लोकप्रिय प्रदाता जिसमें Free Spins, Bonus Buy, खास बोनस मैकेनिक्स, Replay, टूर्नामेंट और स्लॉट तक तेज पहुंच के लिए सुविधाजनक गेम लॉबी है।",
+      catalog_pgsoft_description: "अद्वितीय बोनस मैकेनिक्स वाले आधुनिक मोबाइल स्लॉट्स का प्रदाता। हर गेम अपनी अलग विशेषताएं और अलग बोनस अनुभव देता है।",
+      catalog_amatic_description: "रेट्रो शैली और सरल मैकेनिक्स वाले क्लासिक स्लॉट्स। मुख्य सुविधाओं में Gamble और कुछ आधुनिक गेम्स में Bonus Buy शामिल हैं।",
+      catalog_amusnet_description: "यूरोपीय प्रदाता, जो विविध बोनस राउंड और Free Spins सीरीज के लिए जाना जाता है। हर गेम अपनी अलग मैकेनिक्स और विशेषताएं देता है।"
+    },
+    zh: {
+      map_coming_soon: "即将推出",
+      catalog_pragmatic_description: "热门供应商，提供免费旋转、Bonus Buy、独特奖励机制、Replay、锦标赛，以及便于快速进入老虎机的游戏大厅。",
+      catalog_pgsoft_description: "现代移动老虎机供应商，拥有独特的奖励机制。每款游戏都有自己的玩法特点和独立的奖励体验。",
+      catalog_amatic_description: "复古风格的经典老虎机，机制简单清晰。核心功能包括 Gamble，以及部分现代游戏中的 Bonus Buy。",
+      catalog_amusnet_description: "欧洲供应商，以多样化奖励回合和免费旋转系列闻名。每款游戏都有自己的机制和特色，让玩法更具吸引力。"
+    },
+    ka: {
+      map_coming_soon: "მალე",
+      catalog_pragmatic_description: "პოპულარული პროვაიდერი ფუნქციების დიდი ნაკრებით: Free Spins, Bonus Buy, უნიკალური ბონუს-მექანიკები, Replay, ტურნირები და მოსახერხებელი ლობი სლოტებზე სწრაფი წვდომისთვის.",
+      catalog_pgsoft_description: "თანამედროვე მობილური სლოტების პროვაიდერი უნიკალური ბონუს-მექანიკებით. თითოეულ თამაშს აქვს საკუთარი ფუნქციები და ინდივიდუალური ბონუს-გამოცდილება.",
+      catalog_amatic_description: "კლასიკური რეტრო სტილის სლოტები მარტივი მექანიკებით. მთავარ ფუნქციებს შორისაა Gamble და Bonus Buy ზოგიერთ თანამედროვე თამაშში.",
+      catalog_amusnet_description: "ევროპული პროვაიდერი, ცნობილი მრავალფეროვანი ბონუს-რაუნდებითა და Free Spins სერიებით. თითოეულ თამაშს აქვს საკუთარი მექანიკები და მახასიათებლები."
+    },
+    th: {
+      map_coming_soon: "เร็วๆ นี้",
+      catalog_pragmatic_description: "ผู้ให้บริการยอดนิยมพร้อมฟีเจอร์ครบถ้วน: Free Spins, Bonus Buy, กลไกโบนัสเฉพาะตัว, Replay, ทัวร์นาเมนต์ และล็อบบี้เกมที่เข้าถึงสล็อตได้รวดเร็ว",
+      catalog_pgsoft_description: "ผู้ให้บริการสล็อตมือถือสมัยใหม่ที่มีโบนัสเมคานิกเฉพาะตัว แต่ละเกมมีฟีเจอร์และประสบการณ์โบนัสของตัวเอง",
+      catalog_amatic_description: "สล็อตคลาสสิกสไตล์เรโทรพร้อมกลไกที่เข้าใจง่าย ฟีเจอร์หลักมี Gamble และ Bonus Buy ในบางเกมสมัยใหม่",
+      catalog_amusnet_description: "ผู้ให้บริการยุโรปที่ขึ้นชื่อเรื่องรอบโบนัสหลากหลายและซีรีส์ Free Spins แต่ละเกมมีเมคานิกและจุดเด่นของตัวเอง"
+    },
+    ko: {
+      map_coming_soon: "출시 예정",
+      catalog_pragmatic_description: "Free Spins, Bonus Buy, 고유 보너스 메커니즘, Replay, 토너먼트, 빠른 슬롯 접근을 위한 편리한 게임 로비를 갖춘 인기 공급사입니다.",
+      catalog_pgsoft_description: "고유한 보너스 메커니즘을 갖춘 현대적인 모바일 슬롯 공급사입니다. 각 게임은 자체 기능과 개별 보너스 경험을 제공합니다.",
+      catalog_amatic_description: "레트로 스타일과 단순한 메커니즘의 클래식 슬롯입니다. 주요 기능에는 Gamble과 일부 최신 게임의 Bonus Buy가 포함됩니다.",
+      catalog_amusnet_description: "다양한 보너스 라운드와 Free Spins 시리즈로 알려진 유럽 공급사입니다. 각 게임은 고유한 메커니즘과 기능을 제공합니다."
+    },
+    vi: {
+      map_coming_soon: "sắp ra mắt",
+      catalog_pragmatic_description: "Nhà cung cấp phổ biến với nhiều tính năng: Free Spins, Bonus Buy, cơ chế thưởng độc đáo, Replay, giải đấu và lobby thuận tiện để vào slot nhanh.",
+      catalog_pgsoft_description: "Nhà cung cấp slot mobile hiện đại với cơ chế thưởng độc đáo. Mỗi trò chơi có tính năng riêng và trải nghiệm bonus riêng.",
+      catalog_amatic_description: "Slot cổ điển phong cách retro với cơ chế đơn giản. Tính năng chính gồm Gamble và Bonus Buy trong một số game hiện đại.",
+      catalog_amusnet_description: "Nhà cung cấp châu Âu nổi tiếng với vòng thưởng đa dạng và chuỗi Free Spins. Mỗi game có cơ chế và đặc điểm riêng, giúp trải nghiệm hấp dẫn hơn."
+    },
+    sr: {
+      map_coming_soon: "uskoro",
+      catalog_pragmatic_description: "Popularan provajder sa velikim skupom funkcija: Free Spins, Bonus Buy, jedinstvene bonus mehanike, Replay, turniri i praktičan lobby za brz pristup slotovima.",
+      catalog_pgsoft_description: "Provajder modernih mobilnih slotova sa jedinstvenim bonus mehanikama. Svaka igra nudi sopstvene funkcije i individualno bonus iskustvo.",
+      catalog_amatic_description: "Klasični slotovi retro stila sa jednostavnim mehanikama. Ključne funkcije uključuju Gamble i Bonus Buy u nekim modernim igrama.",
+      catalog_amusnet_description: "Evropski provajder poznat po raznovrsnim bonus rundama i Free Spins serijama. Svaka igra ima sopstvene mehanike i karakteristike."
+    },
+    tr: {
+      map_coming_soon: "çok yakında",
+      catalog_pragmatic_description: "Free Spins, Bonus Buy, benzersiz bonus mekanikleri, Replay, turnuvalar ve slotlara hızlı erişim için kullanışlı oyun lobisi sunan popüler sağlayıcı.",
+      catalog_pgsoft_description: "Benzersiz bonus mekaniklerine sahip modern mobil slot sağlayıcısı. Her oyun kendi özelliklerini ve ayrı bir bonus deneyimini sunar.",
+      catalog_amatic_description: "Retro stile ve sade mekaniklere sahip klasik slotlar. Temel özellikler arasında Gamble ve bazı modern oyunlarda Bonus Buy bulunur.",
+      catalog_amusnet_description: "Çeşitli bonus turları ve Free Spins serileriyle bilinen Avrupalı sağlayıcı. Her oyun kendi mekaniklerini ve özelliklerini sunarak deneyimi daha ilgi çekici hale getirir."
+    }
+  };
+
+  Object.entries(catalogDescriptionOverrides).forEach(([code, values]) => {
+    translations[code] = { ...(translations[code] || en), ...values };
+  });
+
   return translations;
 })();

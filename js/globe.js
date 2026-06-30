@@ -11,7 +11,7 @@
 
   if (!shell || !mount) return;
 
-  const GLOBE_ASSET_VERSION = "20260618-globe-cache-recovery";
+  const GLOBE_ASSET_VERSION = "20260624-antarctica-coming-soon";
   const pendingScriptLoads = new Map();
 
   const versionedAssetUrl = (url) => {
@@ -26,6 +26,7 @@
   };
 
   const wait = (duration) => new Promise((resolve) => window.setTimeout(resolve, duration));
+  const nextFrame = () => new Promise((resolve) => window.requestAnimationFrame(resolve));
 
   const retry = async (task, attempts = 2, delay = 320) => {
     let lastError;
@@ -46,7 +47,7 @@
     { iso: "AO", country: "Angola", lat: -11.2027, lng: 17.8739, clients: 14 },
     { iso: "AR", country: "Argentina", lat: -38.4161, lng: -63.6167, clients: 22 },
     { iso: "AU", country: "Australia", lat: -25.2744, lng: 133.7751, clients: 28 },
-    { iso: "AQ", country: "Antarctica", lat: -82.8628, lng: 135.0000, clients: 0, tooltipKey: "map_tooltip_antarctica", fixedDotScale: 1.15 },
+    { iso: "AQ", country: "Antarctica", lat: -82.8628, lng: 135.0000, clients: 0, clientLabelKey: "map_coming_soon", fixedDotScale: 1.15 },
     { iso: "AT", country: "Austria", lat: 47.5162, lng: 14.5501, clients: 16 },
     { iso: "AZ", country: "Azerbaijan", lat: 40.1431, lng: 47.5769, clients: 17 },
     { iso: "BS", country: "Bahamas", lat: 25.0343, lng: -77.3963, clients: 9 },
@@ -257,6 +258,11 @@
   let pendingDrag = { x: 0, y: 0 };
   let dragVelocity = { x: 0, y: 0 };
   let pointerListeners = [];
+  let resizeFrame = 0;
+  let wakeupTimers = [];
+  let wakeListeners = [];
+  let animationWatchdog = 0;
+  let lastAnimatedAt = 0;
 
   const translate = (key) => {
     const translations = window.API_LX_TRANSLATIONS || {};
@@ -276,9 +282,13 @@
     }
   };
   const getClientLabel = (count) => translate("map_tooltip_clients").replace("{count}", count);
+  const getPointClientLabel = (point) => {
+    if (point.clientLabelKey) return translate(point.clientLabelKey);
+    return getClientLabel(point.clients);
+  };
   const getTooltipClientLabel = (point) => {
     if (point.tooltipKey) return translate(point.tooltipKey).replace("{count}", point.clients);
-    return getClientLabel(point.clients);
+    return getPointClientLabel(point);
   };
   const renderRegionList = () => {
     if (!regionList) {
@@ -292,7 +302,7 @@
       const country = document.createElement("strong");
       country.textContent = getCountryLabel(point);
       const clients = document.createElement("span");
-      clients.textContent = getClientLabel(point.clients);
+      clients.textContent = getPointClientLabel(point);
       row.append(country, clients);
       regionList.append(row);
     });
@@ -537,9 +547,27 @@
   };
 
   const shouldUseFallback = () => {
-    const lowMemory = navigator.deviceMemory && navigator.deviceMemory <= 2;
-    const lowCpu = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2;
-    return !hasWebGL() || (window.innerWidth < 380 && (lowMemory || lowCpu));
+    return !hasWebGL();
+  };
+
+  const waitForMountReady = async () => {
+    for (let attempt = 0; attempt < 90; attempt += 1) {
+      const mountRect = mount.getBoundingClientRect();
+      const shellRect = shell.getBoundingClientRect();
+      const hasUsableSize = mountRect.width >= 160
+        && mountRect.height >= 160
+        && shellRect.width >= 160
+        && shellRect.height >= 160;
+
+      if (hasUsableSize) {
+        await nextFrame();
+        return true;
+      }
+
+      await nextFrame();
+    }
+
+    return false;
   };
 
   const loadScript = (src) => {
@@ -607,7 +635,7 @@
         throw new Error("World atlas did not produce country polygons");
       }
       return geoJson.features;
-    }, 2, 380);
+    }, 3, 420);
   };
 
   const showFallback = () => {
@@ -786,6 +814,14 @@
     canvasRect = renderer.domElement.getBoundingClientRect();
   };
 
+  const scheduleResize = () => {
+    if (resizeFrame) return;
+    resizeFrame = requestAnimationFrame(() => {
+      resizeFrame = 0;
+      resize();
+    });
+  };
+
   const setupDragRotation = () => {
     const onPointerMove = (event) => {
       const events = typeof event.getCoalescedEvents === "function" ? event.getCoalescedEvents() : [event];
@@ -852,7 +888,15 @@
   const cleanup = () => {
     isDestroyed = true;
     cancelAnimationFrame(frameId);
+    cancelAnimationFrame(resizeFrame);
     frameId = 0;
+    resizeFrame = 0;
+    wakeupTimers.forEach((timer) => window.clearTimeout(timer));
+    wakeupTimers = [];
+    wakeListeners.forEach(([target, eventName, handler]) => target.removeEventListener(eventName, handler));
+    wakeListeners = [];
+    window.clearInterval(animationWatchdog);
+    animationWatchdog = 0;
     resizeObserver?.disconnect();
     visibilityObserver?.disconnect();
     if (onDocumentVisibilityChange) {
@@ -883,8 +927,14 @@
       return;
     }
 
+    if (!await waitForMountReady()) {
+      console.warn("[api-lx-globe] Globe container did not receive a usable size, using fallback globe.");
+      showFallback();
+      return;
+    }
+
     try {
-      await retry(loadGlobeLibraries, 2, 380);
+      await retry(loadGlobeLibraries, 3, 420);
     } catch (error) {
       console.warn("[api-lx-globe] CDN globe libraries unavailable, using fallback globe.", error);
       showFallback();
@@ -911,14 +961,22 @@
     camera = new THREE.PerspectiveCamera(42, 1, 1, 1200);
     camera.position.set(0, 0, 330);
 
-    renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: !isCoarsePointer && (window.devicePixelRatio || 1) <= 1.5,
-      powerPreference: "high-performance"
-    });
+    const lowPower = isLowPowerDevice();
+    try {
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: !lowPower && (window.devicePixelRatio || 1) <= 1.5,
+        powerPreference: lowPower ? "low-power" : "high-performance"
+      });
+    } catch (error) {
+      console.warn("[api-lx-globe] WebGL renderer unavailable, using fallback globe.", error);
+      showFallback();
+      return;
+    }
     renderer.setClearColor(0x000000, 0);
-    const pixelRatioLimit = isLowPowerDevice() ? 1 : (window.innerWidth < 768 ? 1.15 : 1.5);
+    const pixelRatioLimit = lowPower ? 1 : (window.innerWidth < 768 ? 1.15 : 1.5);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, pixelRatioLimit));
+    mount.replaceChildren();
     mount.appendChild(renderer.domElement);
     shell.dataset.globeMode = "webgl";
 
@@ -1006,6 +1064,11 @@
     resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(mount);
     resize();
+    window.addEventListener("load", scheduleResize, { once: true });
+    requestAnimationFrame(() => {
+      resize();
+      requestAnimationFrame(resize);
+    });
     setupDragRotation();
 
     shell.classList.add("ready");
@@ -1013,11 +1076,50 @@
     if (fallback) fallback.hidden = true;
     window.addEventListener("beforeunload", cleanup);
 
-    const animate = () => {
-      if (isDestroyed || !isGlobeInView || !isDocumentVisible) {
+    const renderGlobeFrame = (allowRaycast = false) => {
+      if (!renderer || !scene || !camera || isDestroyed) return;
+      updateWebglMarkers(performance.now());
+      if (allowRaycast) raycastMarkers();
+      renderer.render(scene, camera);
+    };
+
+    const forceRender = () => {
+      if (!renderer || !scene || !camera || isDestroyed) return;
+      resize();
+      renderGlobeFrame(false);
+    };
+
+    const isShellVisibleOnScreen = () => {
+      const rect = shell.getBoundingClientRect();
+      return rect.width > 0
+        && rect.height > 0
+        && rect.bottom > -220
+        && rect.top < window.innerHeight + 220
+        && rect.right > 0
+        && rect.left < window.innerWidth;
+    };
+
+    const queueWarmupRenders = () => {
+      wakeupTimers.forEach((timer) => window.clearTimeout(timer));
+      wakeupTimers = [];
+      [0, 80, 180, 360, 720, 1400].forEach((delay) => {
+        const timer = window.setTimeout(() => {
+          forceRender();
+          if (!document.hidden) {
+            const animationIsStale = !lastAnimatedAt || performance.now() - lastAnimatedAt > 500;
+            startAnimation(animationIsStale);
+          }
+        }, delay);
+        wakeupTimers.push(timer);
+      });
+    };
+
+    const animate = (timestamp = performance.now()) => {
+      if (isDestroyed || !isDocumentVisible || (!isGlobeInView && !isShellVisibleOnScreen())) {
         frameId = 0;
         return;
       }
+      lastAnimatedAt = timestamp;
       if (!prefersReducedMotion) {
         if (pendingDrag.x || pendingDrag.y) {
           globe.rotation.y += pendingDrag.x * 0.006;
@@ -1032,14 +1134,18 @@
           dragVelocity.y *= 0.92;
         }
       }
-      updateWebglMarkers(performance.now());
-      raycastMarkers();
-      renderer.render(scene, camera);
+      renderGlobeFrame(true);
       frameId = requestAnimationFrame(animate);
     };
 
-    const startAnimation = () => {
-      if (frameId || isDestroyed) return;
+    const startAnimation = (restart = false) => {
+      if (isDestroyed || !isDocumentVisible) return;
+      if (!isGlobeInView && !isShellVisibleOnScreen()) return;
+      if (restart && frameId) {
+        cancelAnimationFrame(frameId);
+        frameId = 0;
+      }
+      if (frameId) return;
       frameId = requestAnimationFrame(animate);
     };
 
@@ -1050,26 +1156,59 @@
     };
 
     const updateAnimationState = () => {
-      if (isGlobeInView && isDocumentVisible) startAnimation();
+      if (isDocumentVisible && (isGlobeInView || isShellVisibleOnScreen())) startAnimation();
       else stopAnimation();
     };
 
     onDocumentVisibilityChange = () => {
       isDocumentVisible = !document.hidden;
       updateAnimationState();
+      if (isDocumentVisible) {
+        forceRender();
+        queueWarmupRenders();
+      }
     };
     document.addEventListener("visibilitychange", onDocumentVisibilityChange);
+
+    const wakeGlobe = () => {
+      isDocumentVisible = !document.hidden;
+      forceRender();
+      updateAnimationState();
+      queueWarmupRenders();
+    };
+
+    [
+      [window, "pageshow", wakeGlobe],
+      [window, "focus", wakeGlobe],
+      [window, "resize", wakeGlobe]
+    ].forEach(([target, eventName, handler]) => {
+      target.addEventListener(eventName, handler, { passive: true });
+      wakeListeners.push([target, eventName, handler]);
+    });
+
+    animationWatchdog = window.setInterval(() => {
+      if (isDestroyed || document.hidden || (!isGlobeInView && !isShellVisibleOnScreen())) return;
+      isDocumentVisible = true;
+      const animationIsStale = !frameId || !lastAnimatedAt || performance.now() - lastAnimatedAt > 900;
+      if (animationIsStale) startAnimation(true);
+    }, 500);
 
     if ("IntersectionObserver" in window) {
       visibilityObserver = new IntersectionObserver((entries) => {
         const entry = entries[0];
         isGlobeInView = Boolean(entry?.isIntersecting);
         updateAnimationState();
+        if (isGlobeInView) {
+          forceRender();
+          queueWarmupRenders();
+        }
       }, { rootMargin: "220px 0px", threshold: 0.01 });
       visibilityObserver.observe(shell);
     }
 
+    forceRender();
     updateAnimationState();
+    queueWarmupRenders();
   };
 
   initGlobe();

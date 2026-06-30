@@ -99,7 +99,7 @@ function validateLeadPayload(payload) {
 
   const requiredFields = ["name", "telegramId", "whatsappNumber", "leadType", "pageUrl", "language", "createdAt"];
   if (payload.leadType !== "Referral partner") {
-    requiredFields.push("source", "message", "stage", "launchTiming", "projectType", "countries", "activeProjects", "ggr");
+    requiredFields.push("source", "stage", "launchTiming", "projectType", "countries", "activeProjects", "ggr");
   }
 
   const missingField = requiredFields.find((field) => !String(payload[field] || "").trim());

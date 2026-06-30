@@ -5,18 +5,24 @@
     ["[data-partial=\"navbar\"]", "partials/navbar.html"],
     ["[data-partial=\"hero\"]", "partials/hero.html"],
     ["[data-partial=\"advantages\"]", "partials/advantages.html"],
-    ["[data-partial=\"providers\"]", "partials/providers.html?v=20260615-catalog-bestseller"],
+    ["[data-partial=\"providers\"]", "partials/providers.html?v=20260618-catalog-mobile-tune"],
     ["[data-partial=\"faq\"]", "partials/faq.html"],
     ["[data-partial=\"footer\"]", "partials/footer.html"]
   ];
+  const assetBase = window.API_LX_ASSET_BASE || "";
+  const resolveLocalUrl = (url) => assetBase ? `${assetBase}${url}` : url;
+  const rewritePartialAssets = (html) => {
+    if (!assetBase) return html;
+    return html.replace(/(src|href)="(assets\/|privacy\.html|demo-games\.html)/g, `$1="${assetBase}$2`);
+  };
 
   async function loadPartials() {
     await Promise.all(partials.map(async ([selector, url]) => {
       const target = document.querySelector(selector);
       if (!target) return;
-      const response = await fetch(url, { cache: "no-store" });
+      const response = await fetch(resolveLocalUrl(url), { cache: "no-store" });
       if (!response.ok) throw new Error(`Unable to load partial: ${url}`);
-      target.outerHTML = await response.text();
+      target.outerHTML = rewritePartialAssets(await response.text());
     }));
   }
 
@@ -682,11 +688,7 @@
 
   $$("[data-provider]").forEach((button) => {
     button.addEventListener("click", () => {
-      if (button.dataset.provider === "Pragmatic Play" && button.closest("#catalog")) {
-        window.location.assign("demo-games.html");
-        return;
-      }
-      openModal(button.dataset.provider);
+      openLeadModal();
     });
   });
   const catalogGrid = $("#catalog .catalog-grid");
@@ -946,10 +948,12 @@
   const leadProgress = $(".lead-progress");
   const leadProgressText = $("[data-lead-progress-text]");
   const leadProgressBar = $("[data-lead-progress-bar]");
+  const leadActions = $(".lead-actions");
   const leadBack = $("[data-lead-back]");
   const leadNext = $("[data-lead-next]");
   const leadSubmit = $("[data-lead-submit]");
   const leadSubmitError = $("[data-lead-submit-error]");
+  const leadTelegramLink = $(".lead-telegram-link");
   let lastFocusedElement = null;
   let leadStepIndex = 0;
   let leadState = {};
@@ -1096,7 +1100,14 @@
 
   const normalizePhoneDigits = (value = "") => String(value).replace(/\D/g, "");
   const stripNationalPrefix = (digits = "") => digits.replace(/^0+/, "");
-  const phoneLabel = (country) => country ? `${country.flag} ${country.name} ${country.code}` : t("phone_select_country");
+  const compactPhoneCountryQuery = typeof window.matchMedia === "function"
+    ? window.matchMedia("(max-width: 760px)")
+    : null;
+  const isCompactPhoneCountry = () => Boolean(compactPhoneCountryQuery?.matches);
+  const phoneLabel = (country) => {
+    if (!country) return isCompactPhoneCountry() ? "+" : t("phone_select_country");
+    return isCompactPhoneCountry() ? country.code : `${country.flag} ${country.name} ${country.code}`;
+  };
 
   const getSelectedPhoneCountry = () => {
     const { iso, code } = getPhoneElements();
@@ -1106,6 +1117,13 @@
       || phoneCountries.find((country) => country.code === selectedCode)
       || null;
   };
+
+  const refreshPhoneCountryLabel = () => {
+    const { label } = getPhoneElements();
+    if (label) label.textContent = phoneLabel(getSelectedPhoneCountry());
+  };
+
+  compactPhoneCountryQuery?.addEventListener?.("change", refreshPhoneCountryLabel);
 
   const getCountryFromLocale = () => {
     const configCountry = String(window.API_LX_CONFIG?.countryCode || window.API_LX_CONFIG?.geoCountryCode || "").toUpperCase();
@@ -1463,7 +1481,7 @@
     const data = new FormData(leadForm);
     const requiredFields = leadMode === "referral"
       ? ["name", "telegramId", "whatsappNumber", "privacyConsent"]
-      : ["name", "telegramId", "whatsappNumber", "source", "message", "privacyConsent"];
+      : ["name", "telegramId", "whatsappNumber", "source", "privacyConsent"];
     return requiredFields.every((field) => String(data.get(field) || "").trim());
   };
 
@@ -1507,6 +1525,9 @@
     clearLeadErrors();
 
     const isContactsStep = activeKey === "contacts";
+    leadActions?.classList.toggle("is-contacts-step", isContactsStep);
+    leadActions?.classList.toggle("is-referral-mode", isReferralMode);
+    if (leadTelegramLink) leadTelegramLink.hidden = isContactsStep && !isReferralMode;
     if (leadBack) leadBack.hidden = isReferralMode || leadStepIndex === 0;
     if (leadNext) leadNext.hidden = isReferralMode || isContactsStep;
     if (leadSubmit) {
@@ -1597,7 +1618,7 @@
       const whatsappNumber = String(data.get("whatsappNumber") || "").trim();
       const requiredContactFields = leadMode === "referral"
         ? ["name", "telegramId", "whatsappNumber", "privacyConsent"]
-        : ["name", "telegramId", "whatsappNumber", "source", "message", "privacyConsent"];
+        : ["name", "telegramId", "whatsappNumber", "source", "privacyConsent"];
 
       requiredContactFields.forEach((field) => {
         if (!String(data.get(field) || "").trim()) {

@@ -12198,6 +12198,9 @@ body #benefits.benefits-grid-section .benefit-card.reveal-pop.visible:focus-with
   #calculator .calc-chart-card[data-chart="net"] .chart-bar-pair strong {
     font-size: 6.1px !important;
     line-height: 0.92 !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: keep-all !important;
   }
 }
 
@@ -12221,6 +12224,9 @@ body #benefits.benefits-grid-section .benefit-card.reveal-pop.visible:focus-with
   #calculator .calc-chart-card[data-chart="ggr"] .chart-bar-pair strong,
   #calculator .calc-chart-card[data-chart="net"] .chart-bar-pair strong {
     font-size: 5.8px !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: keep-all !important;
   }
 }
 
@@ -13867,7 +13873,7 @@ body #benefits.benefits-grid-section .benefit-card.benefit-card--carousel.reveal
   position: absolute !important;
   left: clamp(-36px, -2vw, -30px) !important;
   top: clamp(22px, 1.5vw, 28px) !important;
-  z-index: 6 !important;
+  z-index: 12 !important;
   display: inline-flex !important;
   width: clamp(126px, 7.5vw, 142px) !important;
   max-width: none !important;
@@ -15579,5 +15585,2002 @@ html[lang="ru"] #catalog .catalog-card .btn:focus-visible {
   #referral .referral-card-shape {
     content: none !important;
     display: none !important;
+  }
+}
+
+/* Provider catalog recovery: stable lanes for count, logo, text and CTA. */
+#catalog,
+#catalog.section,
+#catalog .container,
+#catalog .catalog-grid {
+  overflow: visible !important;
+}
+
+#catalog.section {
+  min-height: auto !important;
+  padding-bottom: clamp(82px, 7vw, 128px) !important;
+}
+
+#catalog .catalog-grid,
+#catalog .catalog-grid.active-1,
+#catalog .catalog-grid.active-2,
+#catalog .catalog-grid.active-3,
+#catalog .catalog-grid.active-4,
+#catalog .catalog-grid.has-active:not(:hover):not(:focus-within) {
+  height: auto !important;
+  min-height: 0 !important;
+  align-items: stretch !important;
+}
+
+#catalog .catalog-card,
+#catalog .catalog-card:first-child,
+#catalog .catalog-grid:hover .catalog-card,
+#catalog .catalog-grid:focus-within .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card.is-active,
+#catalog .catalog-grid:hover .catalog-card:hover,
+#catalog .catalog-grid:focus-within .catalog-card:focus-within {
+  display: grid !important;
+  grid-template-rows: auto clamp(82px, 6vw, 102px) minmax(0, 1fr) auto !important;
+  row-gap: clamp(18px, 1.6vw, 26px) !important;
+  height: auto !important;
+  min-height: clamp(540px, 33vw, 610px) !important;
+  padding: clamp(28px, 2.2vw, 36px) clamp(30px, 2.3vw, 42px) clamp(30px, 2.4vw, 44px) !important;
+  overflow: hidden !important;
+  align-content: stretch !important;
+  transform: none !important;
+}
+
+#catalog .catalog-card-media,
+#catalog .catalog-card:hover .catalog-card-media,
+#catalog .catalog-card:focus-within .catalog-card-media,
+#catalog .catalog-grid.has-active .catalog-card .catalog-card-media,
+#catalog .catalog-grid.has-active .catalog-card.is-active .catalog-card-media {
+  position: relative !important;
+  inset: auto !important;
+  order: 2 !important;
+  z-index: 5 !important;
+  display: block !important;
+  align-self: center !important;
+  justify-self: center !important;
+  width: min(calc(100% - 18px), 270px) !important;
+  height: clamp(74px, 5.8vw, 96px) !important;
+  margin: 0 !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: none !important;
+}
+
+#catalog .catalog-card--pgsoft .catalog-card-media,
+#catalog .catalog-card--pgsoft:hover .catalog-card-media,
+#catalog .catalog-card--pgsoft:focus-within .catalog-card-media,
+#catalog .catalog-card--amatic .catalog-card-media,
+#catalog .catalog-card--amatic:hover .catalog-card-media,
+#catalog .catalog-card--amatic:focus-within .catalog-card-media,
+#catalog .catalog-card--amusnet .catalog-card-media,
+#catalog .catalog-card--amusnet:hover .catalog-card-media,
+#catalog .catalog-card--amusnet:focus-within .catalog-card-media {
+  width: min(calc(100% - 30px), 250px) !important;
+  height: clamp(70px, 5.2vw, 90px) !important;
+}
+
+#catalog .game-count,
+#catalog .catalog-copy > .game-count {
+  position: relative !important;
+  inset: auto !important;
+  order: 1 !important;
+  z-index: 6 !important;
+  align-self: start !important;
+  justify-self: start !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: max-content !important;
+  min-width: clamp(120px, 8vw, 148px) !important;
+  max-width: calc(100% - 82px) !important;
+  margin: 0 !important;
+  padding: clamp(8px, 0.7vw, 10px) clamp(15px, 1.15vw, 20px) !important;
+  transform: none !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+}
+
+#catalog .catalog-copy {
+  position: relative !important;
+  inset: auto !important;
+  order: 3 !important;
+  z-index: 5 !important;
+  display: block !important;
+  align-self: start !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+  text-align: center !important;
+}
+
+#catalog .catalog-card h3 {
+  display: none !important;
+}
+
+#catalog .catalog-description,
+html[lang="ru"] #catalog .catalog-description,
+html[lang="fr"] #catalog .catalog-description,
+html[lang="de"] #catalog .catalog-description {
+  --catalog-description-cut: clamp(34px, 3vw, 52px);
+  display: block !important;
+  box-sizing: border-box !important;
+  width: calc(100% + clamp(14px, 1.2vw, 22px)) !important;
+  max-width: none !important;
+  margin: 0 0 0 calc(clamp(7px, 0.6vw, 11px) * -1) !important;
+  padding: clamp(10px, 0.86vw, 13px) calc(clamp(14px, 1vw, 18px) + var(--catalog-description-cut)) clamp(10px, 0.86vw, 13px) clamp(13px, 1vw, 17px) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background:
+    linear-gradient(135deg, rgba(255, 55, 177, 0.96) 0%, rgba(219, 37, 151, 0.94) 58%, rgba(182, 25, 125, 0.92) 100%) !important;
+  clip-path: polygon(0 0, calc(100% - var(--catalog-description-cut)) 0, 100% 100%, 0 100%) !important;
+  color: rgba(255, 255, 255, 0.98) !important;
+  font-size: clamp(12px, 0.76vw, 14px) !important;
+  line-height: 1.24 !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  text-shadow: 0 1px 2px rgba(68, 0, 48, 0.34) !important;
+  filter: drop-shadow(0 10px 18px rgba(126, 0, 85, 0.22)) !important;
+}
+
+#catalog .catalog-card .btn,
+#catalog .catalog-card .btn:hover,
+#catalog .catalog-card .btn:focus-visible {
+  position: relative !important;
+  inset: auto !important;
+  order: 4 !important;
+  z-index: 6 !important;
+  align-self: end !important;
+  justify-self: stretch !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: clamp(54px, 3.6vw, 64px) !important;
+  margin: clamp(12px, 1vw, 18px) 0 0 !important;
+  padding: 0 clamp(14px, 1.1vw, 20px) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  transform: none !important;
+}
+
+#catalog .catalog-card .btn span {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 1180px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    min-height: 560px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    grid-template-rows: auto clamp(66px, 17vw, 84px) minmax(0, 1fr) auto !important;
+    row-gap: clamp(14px, 4vw, 18px) !important;
+    min-height: clamp(560px, 136vw, 640px) !important;
+    padding: clamp(24px, 6vw, 30px) !important;
+  }
+
+  #catalog .catalog-card-media,
+  #catalog .catalog-card:hover .catalog-card-media,
+  #catalog .catalog-card:focus-within .catalog-card-media,
+  #catalog .catalog-grid.has-active .catalog-card .catalog-card-media,
+  #catalog .catalog-grid.has-active .catalog-card.is-active .catalog-card-media {
+    width: min(70%, 250px) !important;
+    height: clamp(62px, 16vw, 78px) !important;
+  }
+
+  #catalog .catalog-card--pgsoft .catalog-card-media,
+  #catalog .catalog-card--pgsoft:hover .catalog-card-media,
+  #catalog .catalog-card--pgsoft:focus-within .catalog-card-media,
+  #catalog .catalog-card--amatic .catalog-card-media,
+  #catalog .catalog-card--amatic:hover .catalog-card-media,
+  #catalog .catalog-card--amatic:focus-within .catalog-card-media,
+  #catalog .catalog-card--amusnet .catalog-card-media,
+  #catalog .catalog-card--amusnet:hover .catalog-card-media,
+  #catalog .catalog-card--amusnet:focus-within .catalog-card-media {
+    width: min(64%, 226px) !important;
+    height: clamp(58px, 15vw, 74px) !important;
+  }
+
+  #catalog .game-count,
+  #catalog .catalog-copy > .game-count {
+    min-width: clamp(112px, 30vw, 138px) !important;
+    max-width: calc(100% - 76px) !important;
+  }
+
+  #catalog .catalog-description,
+  html[lang="ru"] #catalog .catalog-description,
+  html[lang="fr"] #catalog .catalog-description,
+  html[lang="de"] #catalog .catalog-description {
+    font-size: clamp(11.2px, 2.95vw, 12.5px) !important;
+    line-height: 1.2 !important;
+  }
+
+  #catalog .catalog-card .btn,
+  #catalog .catalog-card .btn:hover,
+  #catalog .catalog-card .btn:focus-visible {
+    min-height: 52px !important;
+    margin-top: 10px !important;
+    font-size: clamp(14px, 3.6vw, 16px) !important;
+  }
+}
+
+/* Catalog/mobile refinement: compact cards, readable buttons, stacked mobile catalog. */
+#catalog .catalog-card,
+#catalog .catalog-card:first-child,
+#catalog .catalog-grid:hover .catalog-card,
+#catalog .catalog-grid:focus-within .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card.is-active,
+#catalog .catalog-grid:hover .catalog-card:hover,
+#catalog .catalog-grid:focus-within .catalog-card:focus-within {
+  grid-template-rows: auto clamp(68px, 5vw, 88px) minmax(108px, 1fr) auto !important;
+  row-gap: clamp(14px, 1.25vw, 20px) !important;
+  min-height: clamp(500px, 30vw, 560px) !important;
+  padding: clamp(24px, 2vw, 32px) clamp(28px, 2.1vw, 38px) clamp(26px, 2.1vw, 36px) !important;
+}
+
+#catalog .catalog-card-media,
+#catalog .catalog-card:hover .catalog-card-media,
+#catalog .catalog-card:focus-within .catalog-card-media,
+#catalog .catalog-grid.has-active .catalog-card .catalog-card-media,
+#catalog .catalog-grid.has-active .catalog-card.is-active .catalog-card-media {
+  height: clamp(66px, 5vw, 84px) !important;
+}
+
+#catalog .catalog-card--pgsoft .catalog-card-media,
+#catalog .catalog-card--pgsoft:hover .catalog-card-media,
+#catalog .catalog-card--pgsoft:focus-within .catalog-card-media,
+#catalog .catalog-card--amatic .catalog-card-media,
+#catalog .catalog-card--amatic:hover .catalog-card-media,
+#catalog .catalog-card--amatic:focus-within .catalog-card-media,
+#catalog .catalog-card--amusnet .catalog-card-media,
+#catalog .catalog-card--amusnet:hover .catalog-card-media,
+#catalog .catalog-card--amusnet:focus-within .catalog-card-media {
+  height: clamp(62px, 4.7vw, 80px) !important;
+}
+
+#catalog .catalog-description,
+html[lang="ru"] #catalog .catalog-description,
+html[lang="fr"] #catalog .catalog-description,
+html[lang="de"] #catalog .catalog-description {
+  font-size: clamp(11.4px, 0.7vw, 13.1px) !important;
+  line-height: 1.18 !important;
+  text-align: center !important;
+}
+
+#catalog .catalog-card .btn,
+#catalog .catalog-card .btn:hover,
+#catalog .catalog-card .btn:focus-visible {
+  min-height: clamp(58px, 3.7vw, 68px) !important;
+  padding: 0 clamp(12px, 1vw, 18px) !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  line-height: 1.12 !important;
+}
+
+#catalog .catalog-card .btn span {
+  display: block !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  line-height: inherit !important;
+  text-wrap: balance !important;
+}
+
+@media (max-width: 1180px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    min-height: clamp(456px, 49vw, 500px) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  #catalog .catalog-grid,
+  #catalog .catalog-grid.active-1,
+  #catalog .catalog-grid.active-2,
+  #catalog .catalog-grid.active-3,
+  #catalog .catalog-grid.active-4,
+  #catalog .catalog-grid.has-active:not(:hover):not(:focus-within) {
+    grid-template-columns: 1fr !important;
+    width: min(100%, 430px) !important;
+    gap: 22px !important;
+  }
+
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    grid-template-rows: auto clamp(52px, 13.5vw, 66px) minmax(0, auto) auto !important;
+    row-gap: 9px !important;
+    min-height: clamp(420px, 102vw, 470px) !important;
+    padding: clamp(18px, 4.8vw, 24px) !important;
+  }
+
+  #catalog .catalog-description,
+  html[lang="ru"] #catalog .catalog-description,
+  html[lang="fr"] #catalog .catalog-description,
+  html[lang="de"] #catalog .catalog-description {
+    font-size: clamp(10.6px, 2.72vw, 11.8px) !important;
+    line-height: 1.14 !important;
+  }
+
+  #catalog .catalog-card .btn,
+  #catalog .catalog-card .btn:hover,
+  #catalog .catalog-card .btn:focus-visible {
+    min-height: 50px !important;
+    margin-top: 6px !important;
+    font-size: clamp(12.8px, 3.35vw, 14.8px) !important;
+  }
+
+  #calculator .calc-chart-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: clamp(8px, 2.4vw, 12px) !important;
+    align-items: stretch !important;
+  }
+
+  #calculator .calc-rtp-story,
+  #calculator .calc-rtp-story:hover,
+  #calculator .calc-rtp-story:focus-within {
+    grid-column: 1 / -1 !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story),
+  #calculator .calc-chart-card:not(.calc-rtp-story):hover,
+  #calculator .calc-chart-card:not(.calc-rtp-story):focus-within {
+    min-width: 0 !important;
+    min-height: clamp(312px, 82vw, 360px) !important;
+    padding: clamp(12px, 3vw, 16px) clamp(8px, 2.2vw, 12px) !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-title {
+    gap: 6px !important;
+    align-items: center !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-title strong {
+    font-size: clamp(9px, 2.6vw, 11.5px) !important;
+    line-height: 1.08 !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-icon {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    font-size: 12px !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-bars {
+    gap: clamp(6px, 2vw, 10px) !important;
+    min-height: 220px !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-bar-pair {
+    gap: 8px !important;
+    min-width: 0 !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .bar {
+    width: clamp(34px, 10vw, 46px) !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-bar-pair strong {
+    font-size: clamp(8px, 2.25vw, 10px) !important;
+    line-height: 1.1 !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-bar-pair small {
+    font-size: clamp(7.5px, 2.1vw, 9px) !important;
+    line-height: 1.1 !important;
+  }
+}
+
+/* Final mobile calculator money labels: never split max currency values. */
+@media (max-width: 760px) {
+  #calculator .calc-chart-grid {
+    gap: clamp(4px, 1.35vw, 6px) !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story),
+  #calculator .calc-chart-card:not(.calc-rtp-story):hover,
+  #calculator .calc-chart-card:not(.calc-rtp-story):focus-within {
+    padding-right: clamp(4px, 1.1vw, 6px) !important;
+    padding-left: clamp(4px, 1.1vw, 6px) !important;
+  }
+
+  #calculator .calc-chart-card[data-chart="ggr"],
+  #calculator .calc-chart-card[data-chart="ggr"]:hover,
+  #calculator .calc-chart-card[data-chart="ggr"]:focus-within,
+  #calculator .calc-chart-card[data-chart="net"],
+  #calculator .calc-chart-card[data-chart="net"]:hover,
+  #calculator .calc-chart-card[data-chart="net"]:focus-within {
+    padding-right: clamp(2px, 0.8vw, 4px) !important;
+    padding-left: clamp(2px, 0.8vw, 4px) !important;
+  }
+
+  #calculator .calc-chart-card[data-chart="ggr"] .chart-bars,
+  #calculator .calc-chart-card[data-chart="net"] .chart-bars {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: clamp(0px, 0.5vw, 3px) !important;
+  }
+
+  #calculator .calc-chart-card[data-chart="ggr"] .chart-bar-pair,
+  #calculator .calc-chart-card[data-chart="net"] .chart-bar-pair {
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-self: stretch !important;
+    justify-items: center !important;
+  }
+
+  #calculator .calc-chart-card[data-chart="ggr"] .chart-bar-pair strong,
+  #calculator .calc-chart-card[data-chart="ggr"]:hover .chart-bar-pair strong,
+  #calculator .calc-chart-card[data-chart="ggr"]:focus-within .chart-bar-pair strong,
+  #calculator .calc-chart-card[data-chart="net"] .chart-bar-pair strong,
+  #calculator .calc-chart-card[data-chart="net"]:hover .chart-bar-pair strong,
+  #calculator .calc-chart-card[data-chart="net"]:focus-within .chart-bar-pair strong {
+    display: block !important;
+    width: max-content !important;
+    min-width: max-content !important;
+    max-width: none !important;
+    font-size: clamp(6.4px, 1.8vw, 7.8px) !important;
+    line-height: 1 !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: keep-all !important;
+    text-align: center !important;
+  }
+}
+
+/* Mobile calculator money labels: keep maximum values on one line. */
+@media (max-width: 760px) {
+  #calculator .calc-chart-card[data-chart="ggr"],
+  #calculator .calc-chart-card[data-chart="ggr"]:hover,
+  #calculator .calc-chart-card[data-chart="ggr"]:focus-within,
+  #calculator .calc-chart-card[data-chart="net"],
+  #calculator .calc-chart-card[data-chart="net"]:hover,
+  #calculator .calc-chart-card[data-chart="net"]:focus-within {
+    padding-right: clamp(4px, 1.4vw, 7px) !important;
+    padding-left: clamp(4px, 1.4vw, 7px) !important;
+  }
+
+  #calculator .calc-chart-card[data-chart="ggr"] .chart-bars,
+  #calculator .calc-chart-card[data-chart="net"] .chart-bars {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: clamp(2px, 0.9vw, 5px) !important;
+  }
+
+  #calculator .calc-chart-card[data-chart="ggr"] .chart-bar-pair,
+  #calculator .calc-chart-card[data-chart="net"] .chart-bar-pair {
+    min-width: 0 !important;
+    justify-items: center !important;
+  }
+
+  #calculator .calc-chart-card[data-chart="ggr"] .chart-bar-pair strong,
+  #calculator .calc-chart-card[data-chart="net"] .chart-bar-pair strong {
+    display: block !important;
+    width: max-content !important;
+    max-width: none !important;
+    min-width: max-content !important;
+    font-size: clamp(5.2px, 1.45vw, 6.4px) !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: keep-all !important;
+    text-align: center !important;
+  }
+}
+
+/* Final provider catalog layout with visible localized descriptions. */
+#catalog .catalog-card,
+#catalog .catalog-card:first-child,
+#catalog .catalog-grid:hover .catalog-card,
+#catalog .catalog-grid:focus-within .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card.is-active,
+#catalog .catalog-grid:hover .catalog-card:hover,
+#catalog .catalog-grid:focus-within .catalog-card:focus-within {
+  min-height: clamp(500px, 32vw, 560px) !important;
+}
+
+#catalog .catalog-card-media,
+#catalog .catalog-card:hover .catalog-card-media,
+#catalog .catalog-card:focus-within .catalog-card-media,
+#catalog .catalog-grid.has-active .catalog-card .catalog-card-media {
+  top: clamp(58px, 4.8vw, 78px) !important;
+  left: 50% !important;
+  width: min(calc(100% - clamp(64px, 5vw, 96px)), 292px) !important;
+  height: clamp(74px, 6.2vw, 108px) !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: translateX(-50%) !important;
+}
+
+#catalog .catalog-card--pgsoft .catalog-card-media,
+#catalog .catalog-card--pgsoft:hover .catalog-card-media,
+#catalog .catalog-card--pgsoft:focus-within .catalog-card-media,
+#catalog .catalog-card--amatic .catalog-card-media,
+#catalog .catalog-card--amatic:hover .catalog-card-media,
+#catalog .catalog-card--amatic:focus-within .catalog-card-media,
+#catalog .catalog-card--amusnet .catalog-card-media,
+#catalog .catalog-card--amusnet:hover .catalog-card-media,
+#catalog .catalog-card--amusnet:focus-within .catalog-card-media {
+  width: min(calc(100% - clamp(70px, 5.6vw, 108px)), 272px) !important;
+  height: clamp(70px, 5.8vw, 100px) !important;
+}
+
+#catalog .catalog-copy {
+  position: absolute !important;
+  top: clamp(176px, 13vw, 212px) !important;
+  right: clamp(26px, 2.2vw, 40px) !important;
+  bottom: clamp(120px, 8vw, 138px) !important;
+  left: clamp(26px, 2.2vw, 40px) !important;
+  z-index: 5 !important;
+  display: block !important;
+  width: auto !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+}
+
+#catalog .catalog-card h3 {
+  display: none !important;
+}
+
+#catalog .catalog-description {
+  display: block !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  color: rgba(242, 248, 255, 0.94) !important;
+  font-size: clamp(12.4px, 0.82vw, 15px) !important;
+  font-weight: 500 !important;
+  line-height: 1.34 !important;
+  letter-spacing: 0 !important;
+  text-wrap: pretty;
+  text-shadow: 0 1px 2px rgba(0, 8, 32, 0.28) !important;
+}
+
+#catalog .game-count {
+  top: clamp(22px, 1.8vw, 32px) !important;
+  right: clamp(22px, 1.8vw, 32px) !important;
+  left: auto !important;
+  transform: none !important;
+}
+
+#catalog .catalog-card .btn {
+  right: clamp(32px, 2.4vw, 46px) !important;
+  left: clamp(32px, 2.4vw, 46px) !important;
+  bottom: clamp(28px, 2.6vw, 46px) !important;
+  min-height: clamp(50px, 3.6vw, 62px) !important;
+  font-size: clamp(15px, 1vw, 19px) !important;
+}
+
+html[lang="ru"] #catalog .catalog-description,
+html[lang="fr"] #catalog .catalog-description,
+html[lang="de"] #catalog .catalog-description {
+  font-size: clamp(11.9px, 0.78vw, 14.2px) !important;
+  line-height: 1.3 !important;
+}
+
+@media (max-width: 1180px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    min-height: 500px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    min-height: clamp(510px, 124vw, 560px) !important;
+  }
+
+  #catalog .catalog-card-media,
+  #catalog .catalog-card:hover .catalog-card-media,
+  #catalog .catalog-card:focus-within .catalog-card-media,
+  #catalog .catalog-grid.has-active .catalog-card .catalog-card-media {
+    top: clamp(58px, 14vw, 72px) !important;
+    width: min(70%, 260px) !important;
+    height: clamp(66px, 17vw, 84px) !important;
+  }
+
+  #catalog .catalog-card--pgsoft .catalog-card-media,
+  #catalog .catalog-card--pgsoft:hover .catalog-card-media,
+  #catalog .catalog-card--pgsoft:focus-within .catalog-card-media,
+  #catalog .catalog-card--amatic .catalog-card-media,
+  #catalog .catalog-card--amatic:hover .catalog-card-media,
+  #catalog .catalog-card--amatic:focus-within .catalog-card-media,
+  #catalog .catalog-card--amusnet .catalog-card-media,
+  #catalog .catalog-card--amusnet:hover .catalog-card-media,
+  #catalog .catalog-card--amusnet:focus-within .catalog-card-media {
+    width: min(62%, 230px) !important;
+    height: clamp(60px, 15vw, 78px) !important;
+  }
+
+  #catalog .catalog-copy {
+    top: clamp(154px, 38vw, 174px) !important;
+    right: clamp(22px, 6vw, 28px) !important;
+    bottom: clamp(96px, 24vw, 112px) !important;
+    left: clamp(22px, 6vw, 28px) !important;
+  }
+
+  #catalog .catalog-description {
+    font-size: clamp(12px, 3.2vw, 13.6px) !important;
+    line-height: 1.28 !important;
+  }
+
+  html[lang="ru"] #catalog .catalog-description,
+  html[lang="fr"] #catalog .catalog-description,
+  html[lang="de"] #catalog .catalog-description {
+    font-size: clamp(11.2px, 3vw, 12.7px) !important;
+    line-height: 1.22 !important;
+  }
+
+  #catalog .game-count {
+    top: clamp(18px, 5vw, 24px) !important;
+    right: clamp(18px, 5vw, 24px) !important;
+  }
+
+  #catalog .catalog-card .btn {
+    right: clamp(22px, 6vw, 28px) !important;
+    left: clamp(22px, 6vw, 28px) !important;
+    bottom: clamp(22px, 6vw, 28px) !important;
+    min-height: 50px !important;
+    font-size: clamp(15px, 4vw, 17px) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    min-height: 548px !important;
+  }
+
+  #catalog .catalog-description,
+  html[lang="ru"] #catalog .catalog-description,
+  html[lang="fr"] #catalog .catalog-description,
+  html[lang="de"] #catalog .catalog-description {
+    font-size: 11.2px !important;
+    line-height: 1.2 !important;
+  }
+}
+
+/* Provider catalog layout fix: keep badges, logos, copy and CTA in separate lanes. */
+#catalog.section,
+#catalog .container,
+#catalog .catalog-grid {
+  overflow: visible !important;
+}
+
+#catalog.section {
+  min-height: auto !important;
+  padding-bottom: clamp(72px, 7vw, 120px) !important;
+}
+
+#catalog .catalog-grid,
+#catalog .catalog-grid.active-1,
+#catalog .catalog-grid.active-2,
+#catalog .catalog-grid.active-3,
+#catalog .catalog-grid.active-4,
+#catalog .catalog-grid.has-active:not(:hover):not(:focus-within) {
+  height: auto !important;
+  min-height: 0 !important;
+  align-items: stretch !important;
+}
+
+#catalog .catalog-card,
+#catalog .catalog-card:first-child,
+#catalog .catalog-grid:hover .catalog-card,
+#catalog .catalog-grid:focus-within .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card.is-active,
+#catalog .catalog-grid:hover .catalog-card:hover,
+#catalog .catalog-grid:focus-within .catalog-card:focus-within {
+  height: auto !important;
+  min-height: clamp(620px, 45vw, 690px) !important;
+  padding: clamp(26px, 2.2vw, 34px) !important;
+  overflow: hidden !important;
+}
+
+#catalog .game-count,
+#catalog .catalog-copy > .game-count {
+  position: absolute !important;
+  top: clamp(30px, 2.4vw, 42px) !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: 50% !important;
+  z-index: 5 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: clamp(118px, 9vw, 150px) !important;
+  width: max-content !important;
+  max-width: calc(100% - 96px) !important;
+  margin: 0 !important;
+  padding: clamp(8px, 0.72vw, 11px) clamp(16px, 1.2vw, 22px) !important;
+  transform: translateX(-50%) !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+}
+
+#catalog .catalog-card-media,
+#catalog .catalog-card:hover .catalog-card-media,
+#catalog .catalog-card:focus-within .catalog-card-media,
+#catalog .catalog-grid.has-active .catalog-card .catalog-card-media,
+#catalog .catalog-grid.has-active .catalog-card.is-active .catalog-card-media {
+  top: clamp(122px, 9vw, 150px) !important;
+  left: 50% !important;
+  width: min(calc(100% - clamp(58px, 5vw, 92px)), 280px) !important;
+  height: clamp(78px, 6vw, 104px) !important;
+  transform: translateX(-50%) !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+#catalog .catalog-card--pgsoft .catalog-card-media,
+#catalog .catalog-card--pgsoft:hover .catalog-card-media,
+#catalog .catalog-card--pgsoft:focus-within .catalog-card-media,
+#catalog .catalog-card--amatic .catalog-card-media,
+#catalog .catalog-card--amatic:hover .catalog-card-media,
+#catalog .catalog-card--amatic:focus-within .catalog-card-media,
+#catalog .catalog-card--amusnet .catalog-card-media,
+#catalog .catalog-card--amusnet:hover .catalog-card-media,
+#catalog .catalog-card--amusnet:focus-within .catalog-card-media {
+  width: min(calc(100% - clamp(68px, 5.8vw, 108px)), 260px) !important;
+  height: clamp(78px, 5.8vw, 98px) !important;
+}
+
+#catalog .catalog-copy {
+  position: absolute !important;
+  top: clamp(248px, 18vw, 286px) !important;
+  right: clamp(28px, 2.25vw, 40px) !important;
+  bottom: clamp(126px, 8vw, 144px) !important;
+  left: clamp(28px, 2.25vw, 40px) !important;
+  z-index: 5 !important;
+  overflow: visible !important;
+}
+
+#catalog .catalog-description {
+  display: block !important;
+  max-width: 100% !important;
+  color: rgba(246, 250, 255, 0.96) !important;
+  font-size: clamp(12px, 0.78vw, 14px) !important;
+  line-height: 1.28 !important;
+  font-weight: 500 !important;
+}
+
+html[lang="ru"] #catalog .catalog-description,
+html[lang="fr"] #catalog .catalog-description,
+html[lang="de"] #catalog .catalog-description {
+  font-size: clamp(11.4px, 0.72vw, 13px) !important;
+  line-height: 1.22 !important;
+}
+
+#catalog .catalog-card .btn,
+#catalog .catalog-card .btn:hover,
+#catalog .catalog-card .btn:focus-visible {
+  right: clamp(30px, 2.3vw, 42px) !important;
+  bottom: clamp(32px, 2.5vw, 44px) !important;
+  left: clamp(30px, 2.3vw, 42px) !important;
+  min-height: clamp(52px, 3.8vw, 62px) !important;
+  padding: 0 14px !important;
+}
+
+@media (max-width: 1180px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    min-height: 620px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    min-height: clamp(585px, 148vw, 650px) !important;
+  }
+
+  #catalog .game-count {
+    top: clamp(26px, 7vw, 34px) !important;
+    max-width: calc(100% - 90px) !important;
+  }
+
+  #catalog .catalog-card-media,
+  #catalog .catalog-card:hover .catalog-card-media,
+  #catalog .catalog-card:focus-within .catalog-card-media,
+  #catalog .catalog-grid.has-active .catalog-card .catalog-card-media {
+    top: clamp(104px, 27vw, 122px) !important;
+    width: min(70%, 250px) !important;
+    height: clamp(70px, 18vw, 88px) !important;
+  }
+
+  #catalog .catalog-card--pgsoft .catalog-card-media,
+  #catalog .catalog-card--pgsoft:hover .catalog-card-media,
+  #catalog .catalog-card--pgsoft:focus-within .catalog-card-media,
+  #catalog .catalog-card--amatic .catalog-card-media,
+  #catalog .catalog-card--amatic:hover .catalog-card-media,
+  #catalog .catalog-card--amatic:focus-within .catalog-card-media,
+  #catalog .catalog-card--amusnet .catalog-card-media,
+  #catalog .catalog-card--amusnet:hover .catalog-card-media,
+  #catalog .catalog-card--amusnet:focus-within .catalog-card-media {
+    width: min(62%, 230px) !important;
+    height: clamp(66px, 16vw, 82px) !important;
+  }
+
+  #catalog .catalog-copy {
+    top: clamp(204px, 52vw, 230px) !important;
+    right: clamp(24px, 6vw, 30px) !important;
+    bottom: clamp(98px, 25vw, 116px) !important;
+    left: clamp(24px, 6vw, 30px) !important;
+  }
+
+  #catalog .catalog-description,
+  html[lang="ru"] #catalog .catalog-description,
+  html[lang="fr"] #catalog .catalog-description,
+  html[lang="de"] #catalog .catalog-description {
+    font-size: clamp(11.2px, 3vw, 12.6px) !important;
+    line-height: 1.2 !important;
+  }
+
+  #catalog .catalog-card .btn,
+  #catalog .catalog-card .btn:hover,
+  #catalog .catalog-card .btn:focus-visible {
+    right: clamp(24px, 6vw, 30px) !important;
+    left: clamp(24px, 6vw, 30px) !important;
+    bottom: clamp(24px, 6vw, 30px) !important;
+    min-height: 52px !important;
+  }
+}
+
+/* Provider catalog recovery final override. */
+#catalog,
+#catalog.section,
+#catalog .container,
+#catalog .catalog-grid {
+  overflow: visible !important;
+}
+
+#catalog.section {
+  min-height: auto !important;
+  padding-bottom: clamp(82px, 7vw, 128px) !important;
+}
+
+#catalog .catalog-grid,
+#catalog .catalog-grid.active-1,
+#catalog .catalog-grid.active-2,
+#catalog .catalog-grid.active-3,
+#catalog .catalog-grid.active-4,
+#catalog .catalog-grid.has-active:not(:hover):not(:focus-within) {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(18px, 1.7vw, 28px) !important;
+  width: min(100%, 1520px) !important;
+  margin-inline: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  align-items: stretch !important;
+}
+
+#catalog .catalog-card,
+#catalog .catalog-card:first-child,
+#catalog .catalog-grid:hover .catalog-card,
+#catalog .catalog-grid:focus-within .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card.is-active,
+#catalog .catalog-grid:hover .catalog-card:hover,
+#catalog .catalog-grid:focus-within .catalog-card:focus-within {
+  display: grid !important;
+  grid-template-rows: auto clamp(82px, 6vw, 102px) minmax(0, 1fr) auto !important;
+  row-gap: clamp(18px, 1.6vw, 26px) !important;
+  flex: initial !important;
+  flex-basis: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: clamp(540px, 33vw, 610px) !important;
+  padding: clamp(28px, 2.2vw, 36px) clamp(30px, 2.3vw, 42px) clamp(30px, 2.4vw, 44px) !important;
+  overflow: hidden !important;
+  align-content: stretch !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+#catalog .catalog-grid.has-active .catalog-card:not(.is-active),
+#catalog .catalog-grid:hover .catalog-card:not(:hover),
+#catalog .catalog-grid:focus-within .catalog-card:not(:focus-within) {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+#catalog .catalog-card-media,
+#catalog .catalog-card:hover .catalog-card-media,
+#catalog .catalog-card:focus-within .catalog-card-media,
+#catalog .catalog-grid.has-active .catalog-card .catalog-card-media,
+#catalog .catalog-grid.has-active .catalog-card.is-active .catalog-card-media {
+  position: relative !important;
+  inset: auto !important;
+  order: 2 !important;
+  z-index: 5 !important;
+  display: block !important;
+  align-self: center !important;
+  justify-self: center !important;
+  width: min(calc(100% - 18px), 270px) !important;
+  height: clamp(74px, 5.8vw, 96px) !important;
+  margin: 0 !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: none !important;
+}
+
+#catalog .catalog-card--pgsoft .catalog-card-media,
+#catalog .catalog-card--pgsoft:hover .catalog-card-media,
+#catalog .catalog-card--pgsoft:focus-within .catalog-card-media,
+#catalog .catalog-card--amatic .catalog-card-media,
+#catalog .catalog-card--amatic:hover .catalog-card-media,
+#catalog .catalog-card--amatic:focus-within .catalog-card-media,
+#catalog .catalog-card--amusnet .catalog-card-media,
+#catalog .catalog-card--amusnet:hover .catalog-card-media,
+#catalog .catalog-card--amusnet:focus-within .catalog-card-media {
+  width: min(calc(100% - 30px), 250px) !important;
+  height: clamp(70px, 5.2vw, 90px) !important;
+}
+
+#catalog .game-count,
+#catalog .catalog-copy > .game-count {
+  position: relative !important;
+  inset: auto !important;
+  order: 1 !important;
+  z-index: 6 !important;
+  align-self: start !important;
+  justify-self: start !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: max-content !important;
+  min-width: clamp(120px, 8vw, 148px) !important;
+  max-width: calc(100% - 82px) !important;
+  margin: 0 !important;
+  padding: clamp(8px, 0.7vw, 10px) clamp(15px, 1.15vw, 20px) !important;
+  transform: none !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+}
+
+#catalog .catalog-copy {
+  position: relative !important;
+  inset: auto !important;
+  order: 3 !important;
+  z-index: 5 !important;
+  display: block !important;
+  align-self: start !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+  text-align: center !important;
+}
+
+#catalog .catalog-card h3 {
+  display: none !important;
+}
+
+#catalog .catalog-description,
+html[lang="ru"] #catalog .catalog-description,
+html[lang="fr"] #catalog .catalog-description,
+html[lang="de"] #catalog .catalog-description {
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  clip-path: none !important;
+  color: rgba(242, 248, 255, 0.94) !important;
+  font-size: clamp(12px, 0.76vw, 14px) !important;
+  line-height: 1.24 !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  text-wrap: pretty !important;
+  text-shadow: 0 1px 2px rgba(0, 8, 32, 0.28) !important;
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+#catalog .catalog-card .btn,
+#catalog .catalog-card .btn:hover,
+#catalog .catalog-card .btn:focus-visible {
+  position: relative !important;
+  inset: auto !important;
+  order: 4 !important;
+  z-index: 6 !important;
+  align-self: end !important;
+  justify-self: stretch !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: clamp(54px, 3.6vw, 64px) !important;
+  margin: clamp(12px, 1vw, 18px) 0 0 !important;
+  padding: 0 clamp(14px, 1.1vw, 20px) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  transform: none !important;
+}
+
+#catalog .catalog-card .btn span {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 1180px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    min-height: 560px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    grid-template-rows: auto clamp(66px, 17vw, 84px) minmax(0, 1fr) auto !important;
+    row-gap: clamp(14px, 4vw, 18px) !important;
+    min-height: clamp(560px, 136vw, 640px) !important;
+    padding: clamp(24px, 6vw, 30px) !important;
+  }
+
+  #catalog .catalog-card-media,
+  #catalog .catalog-card:hover .catalog-card-media,
+  #catalog .catalog-card:focus-within .catalog-card-media,
+  #catalog .catalog-grid.has-active .catalog-card .catalog-card-media,
+  #catalog .catalog-grid.has-active .catalog-card.is-active .catalog-card-media {
+    width: min(70%, 250px) !important;
+    height: clamp(62px, 16vw, 78px) !important;
+  }
+
+  #catalog .catalog-card--pgsoft .catalog-card-media,
+  #catalog .catalog-card--pgsoft:hover .catalog-card-media,
+  #catalog .catalog-card--pgsoft:focus-within .catalog-card-media,
+  #catalog .catalog-card--amatic .catalog-card-media,
+  #catalog .catalog-card--amatic:hover .catalog-card-media,
+  #catalog .catalog-card--amatic:focus-within .catalog-card-media,
+  #catalog .catalog-card--amusnet .catalog-card-media,
+  #catalog .catalog-card--amusnet:hover .catalog-card-media,
+  #catalog .catalog-card--amusnet:focus-within .catalog-card-media {
+    width: min(64%, 226px) !important;
+    height: clamp(58px, 15vw, 74px) !important;
+  }
+
+  #catalog .game-count,
+  #catalog .catalog-copy > .game-count {
+    min-width: clamp(112px, 30vw, 138px) !important;
+    max-width: calc(100% - 76px) !important;
+  }
+
+  #catalog .catalog-description,
+  html[lang="ru"] #catalog .catalog-description,
+  html[lang="fr"] #catalog .catalog-description,
+  html[lang="de"] #catalog .catalog-description {
+    font-size: clamp(11.2px, 2.95vw, 12.5px) !important;
+    line-height: 1.2 !important;
+  }
+
+  #catalog .catalog-card .btn,
+  #catalog .catalog-card .btn:hover,
+  #catalog .catalog-card .btn:focus-visible {
+    min-height: 52px !important;
+    margin-top: 10px !important;
+    font-size: clamp(14px, 3.6vw, 16px) !important;
+  }
+}
+
+/* Final mobile/catalog tuning for localized provider copy. */
+#catalog .catalog-card,
+#catalog .catalog-card:first-child,
+#catalog .catalog-grid:hover .catalog-card,
+#catalog .catalog-grid:focus-within .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card,
+#catalog .catalog-grid.has-active .catalog-card.is-active,
+#catalog .catalog-grid:hover .catalog-card:hover,
+#catalog .catalog-grid:focus-within .catalog-card:focus-within {
+  grid-template-rows: auto clamp(62px, 4.6vw, 80px) minmax(92px, 1fr) auto !important;
+  row-gap: clamp(10px, 0.9vw, 15px) !important;
+  min-height: clamp(456px, 26.5vw, 500px) !important;
+  padding: clamp(22px, 1.7vw, 28px) clamp(26px, 1.9vw, 34px) clamp(24px, 1.8vw, 30px) !important;
+}
+
+#catalog .catalog-card-media,
+#catalog .catalog-card:hover .catalog-card-media,
+#catalog .catalog-card:focus-within .catalog-card-media,
+#catalog .catalog-grid.has-active .catalog-card .catalog-card-media,
+#catalog .catalog-grid.has-active .catalog-card.is-active .catalog-card-media {
+  height: clamp(60px, 4.4vw, 78px) !important;
+}
+
+#catalog .catalog-card--pgsoft .catalog-card-media,
+#catalog .catalog-card--pgsoft:hover .catalog-card-media,
+#catalog .catalog-card--pgsoft:focus-within .catalog-card-media,
+#catalog .catalog-card--amatic .catalog-card-media,
+#catalog .catalog-card--amatic:hover .catalog-card-media,
+#catalog .catalog-card--amatic:focus-within .catalog-card-media,
+#catalog .catalog-card--amusnet .catalog-card-media,
+#catalog .catalog-card--amusnet:hover .catalog-card-media,
+#catalog .catalog-card--amusnet:focus-within .catalog-card-media {
+  height: clamp(58px, 4.1vw, 74px) !important;
+}
+
+#catalog .catalog-description,
+html[lang="ru"] #catalog .catalog-description,
+html[lang="fr"] #catalog .catalog-description,
+html[lang="de"] #catalog .catalog-description {
+  font-size: clamp(11.4px, 0.7vw, 13.1px) !important;
+  line-height: 1.18 !important;
+}
+
+#catalog .catalog-card .btn,
+#catalog .catalog-card .btn:hover,
+#catalog .catalog-card .btn:focus-visible {
+  min-height: clamp(54px, 3.2vw, 62px) !important;
+  margin-top: clamp(8px, 0.8vw, 12px) !important;
+  padding: 0 clamp(12px, 1vw, 18px) !important;
+  white-space: normal !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+  line-height: 1.12 !important;
+  isolation: isolate !important;
+}
+
+#catalog .catalog-card .btn span {
+  display: block !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  line-height: inherit !important;
+  text-wrap: balance !important;
+}
+
+@media (max-width: 1180px) {
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    min-height: clamp(456px, 49vw, 500px) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  #catalog .catalog-grid,
+  #catalog .catalog-grid.active-1,
+  #catalog .catalog-grid.active-2,
+  #catalog .catalog-grid.active-3,
+  #catalog .catalog-grid.active-4,
+  #catalog .catalog-grid.has-active:not(:hover):not(:focus-within) {
+    grid-template-columns: 1fr !important;
+    width: min(100%, 430px) !important;
+    gap: 22px !important;
+  }
+
+  #catalog .catalog-card,
+  #catalog .catalog-card:first-child,
+  #catalog .catalog-grid:hover .catalog-card,
+  #catalog .catalog-grid:focus-within .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card,
+  #catalog .catalog-grid.has-active .catalog-card.is-active {
+    grid-template-rows: auto clamp(58px, 15vw, 74px) minmax(0, auto) auto !important;
+    row-gap: 13px !important;
+    min-height: clamp(456px, 112vw, 520px) !important;
+    padding: clamp(22px, 5.6vw, 28px) !important;
+  }
+
+  #catalog .catalog-description,
+  html[lang="ru"] #catalog .catalog-description,
+  html[lang="fr"] #catalog .catalog-description,
+  html[lang="de"] #catalog .catalog-description {
+    font-size: clamp(11px, 2.85vw, 12.4px) !important;
+    line-height: 1.17 !important;
+    text-align: center !important;
+  }
+
+  #catalog .catalog-card .btn,
+  #catalog .catalog-card .btn:hover,
+  #catalog .catalog-card .btn:focus-visible {
+    min-height: 56px !important;
+    margin-top: 8px !important;
+    font-size: clamp(13.2px, 3.45vw, 15.2px) !important;
+  }
+
+  #calculator .calc-chart-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: clamp(8px, 2.4vw, 12px) !important;
+    align-items: stretch !important;
+  }
+
+  #calculator .calc-rtp-story,
+  #calculator .calc-rtp-story:hover,
+  #calculator .calc-rtp-story:focus-within {
+    grid-column: 1 / -1 !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story),
+  #calculator .calc-chart-card:not(.calc-rtp-story):hover,
+  #calculator .calc-chart-card:not(.calc-rtp-story):focus-within {
+    min-width: 0 !important;
+    min-height: clamp(312px, 82vw, 360px) !important;
+    padding: clamp(12px, 3vw, 16px) clamp(8px, 2.2vw, 12px) !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-title {
+    gap: 6px !important;
+    align-items: center !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-title strong {
+    font-size: clamp(9px, 2.6vw, 11.5px) !important;
+    line-height: 1.08 !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-icon {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    font-size: 12px !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-bars {
+    gap: clamp(6px, 2vw, 10px) !important;
+    min-height: 220px !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-bar-pair {
+    gap: 8px !important;
+    min-width: 0 !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .bar {
+    width: clamp(34px, 10vw, 46px) !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-bar-pair strong {
+    font-size: clamp(8px, 2.25vw, 10px) !important;
+    line-height: 1.1 !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .chart-bar-pair small {
+    font-size: clamp(7.5px, 2.1vw, 9px) !important;
+    line-height: 1.1 !important;
+  }
+}
+
+/* Final mobile calculator money labels: keep max values readable on one line. */
+@media (max-width: 760px) {
+  #calculator .calc-chart-grid {
+    gap: clamp(4px, 1.35vw, 6px) !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story),
+  #calculator .calc-chart-card:not(.calc-rtp-story):hover,
+  #calculator .calc-chart-card:not(.calc-rtp-story):focus-within {
+    padding-right: clamp(4px, 1.1vw, 6px) !important;
+    padding-left: clamp(4px, 1.1vw, 6px) !important;
+  }
+
+  #calculator .calc-chart-card[data-chart="ggr"],
+  #calculator .calc-chart-card[data-chart="ggr"]:hover,
+  #calculator .calc-chart-card[data-chart="ggr"]:focus-within,
+  #calculator .calc-chart-card[data-chart="net"],
+  #calculator .calc-chart-card[data-chart="net"]:hover,
+  #calculator .calc-chart-card[data-chart="net"]:focus-within {
+    padding-right: clamp(2px, 0.8vw, 4px) !important;
+    padding-left: clamp(2px, 0.8vw, 4px) !important;
+  }
+
+  #calculator .calc-chart-card[data-chart="ggr"] .chart-bars,
+  #calculator .calc-chart-card[data-chart="net"] .chart-bars {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: clamp(0px, 0.5vw, 3px) !important;
+  }
+
+  #calculator .calc-chart-card[data-chart="ggr"] .chart-bar-pair,
+  #calculator .calc-chart-card[data-chart="net"] .chart-bar-pair {
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-self: stretch !important;
+    justify-items: center !important;
+  }
+
+  #calculator .calc-chart-card[data-chart="ggr"] .chart-bar-pair strong,
+  #calculator .calc-chart-card[data-chart="ggr"]:hover .chart-bar-pair strong,
+  #calculator .calc-chart-card[data-chart="ggr"]:focus-within .chart-bar-pair strong,
+  #calculator .calc-chart-card[data-chart="net"] .chart-bar-pair strong,
+  #calculator .calc-chart-card[data-chart="net"]:hover .chart-bar-pair strong,
+  #calculator .calc-chart-card[data-chart="net"]:focus-within .chart-bar-pair strong {
+    display: block !important;
+    width: max-content !important;
+    min-width: max-content !important;
+    max-width: none !important;
+    font-size: clamp(6.4px, 1.8vw, 7.8px) !important;
+    line-height: 1 !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: keep-all !important;
+    text-align: center !important;
+  }
+}
+
+/* Final mobile calculator stability: chart cards are display-only, RTP starts cleanly at zero. */
+@media (max-width: 760px) {
+  #calculator .calc-chart-card:not(.calc-rtp-story) {
+    pointer-events: none !important;
+    cursor: default !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story),
+  #calculator .calc-chart-card:not(.calc-rtp-story):hover,
+  #calculator .calc-chart-card:not(.calc-rtp-story):focus,
+  #calculator .calc-chart-card:not(.calc-rtp-story):focus-within,
+  #calculator .calc-chart-card:not(.calc-rtp-story):active {
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+
+  #calculator .calc-chart-card:not(.calc-rtp-story) .bar,
+  #calculator .calc-chart-card:not(.calc-rtp-story):hover .bar,
+  #calculator .calc-chart-card:not(.calc-rtp-story):focus .bar,
+  #calculator .calc-chart-card:not(.calc-rtp-story):focus-within .bar,
+  #calculator .calc-chart-card:not(.calc-rtp-story):active .bar {
+    width: clamp(34px, 10vw, 46px) !important;
+    min-width: clamp(34px, 10vw, 46px) !important;
+    max-width: 100% !important;
+    transform: none !important;
+  }
+
+  #calculator .rtp-lane--api .rtp-track-fill {
+    left: 0 !important;
+    width: var(--api-rtp-progress, 92%) !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #calculator .rtp-inline-range,
+  #calculator .rtp-inline-range:hover,
+  #calculator .rtp-inline-range:focus,
+  #calculator .rtp-inline-range:focus-visible {
+    outline: 0 !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+}
+
+/* Arabic standalone page: keep the current design, mirror reading flow, keep Latin digits. */
+html[dir="rtl"] body {
+  direction: rtl;
+}
+
+html[dir="rtl"] .topbar .nav {
+  direction: rtl;
+  flex-direction: row;
+}
+
+html[dir="rtl"] .topbar .nav-actions {
+  direction: rtl;
+  flex-direction: row;
+}
+
+html[dir="rtl"] .topbar .nav-links {
+  flex-direction: row;
+}
+
+html[dir="rtl"] .nav-actions,
+html[dir="rtl"] .nav-links,
+html[dir="rtl"] .hero-actions,
+html[dir="rtl"] .hero-kpis,
+html[dir="rtl"] .catalog-grid,
+html[dir="rtl"] .calc-controls,
+html[dir="rtl"] .calc-chart-grid,
+html[dir="rtl"] .referral-actions,
+html[dir="rtl"] .lead-actions,
+html[dir="rtl"] .footer-grid {
+  direction: rtl;
+}
+
+html[dir="rtl"] .hero-copy,
+html[dir="rtl"] .benefit-card,
+html[dir="rtl"] .provider-card,
+html[dir="rtl"] .updates-card,
+html[dir="rtl"] .timeline-entry,
+html[dir="rtl"] .referral-copy,
+html[dir="rtl"] .lead-dialog,
+html[dir="rtl"] .language-dialog,
+html[dir="rtl"] .footer-column,
+html[dir="rtl"] .footer-brand {
+  text-align: right;
+}
+
+html[dir="rtl"] .section-head,
+html[dir="rtl"] .catalog-heading,
+html[dir="rtl"] .updates-section-title,
+html[dir="rtl"] #calculator .section-head,
+html[dir="rtl"] #referral .referral-section-title,
+html[dir="rtl"] .calc-comparison h3 {
+  text-align: center;
+}
+
+html[dir="rtl"] .language-menu {
+  right: auto;
+  left: 0;
+}
+
+html[dir="rtl"] .language-card-label,
+html[dir="rtl"] .language-menu button > span,
+html[dir="rtl"] .language-quick span {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .language-chevron,
+html[dir="rtl"] .geo-trigger-icon {
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] .lead-field input,
+html[dir="rtl"] .lead-field textarea,
+html[dir="rtl"] .lead-field select,
+html[dir="rtl"] .geo-search,
+html[dir="rtl"] .country-search {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] input[type="number"],
+html[dir="rtl"] input[type="tel"],
+html[dir="rtl"] .turnover-input,
+html[dir="rtl"] .control-value,
+html[dir="rtl"] .chart-bar-pair strong,
+html[dir="rtl"] .provider-game-count,
+html[dir="rtl"] .game-count,
+html[dir="rtl"] .catalog-badge,
+html[dir="rtl"] .calc-result-value,
+html[dir="rtl"] [data-extra],
+html[dir="rtl"] [data-count] {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+html[dir="rtl"] .range-scale,
+html[dir="rtl"] .rtp-lane-head,
+html[dir="rtl"] .region-list li,
+html[dir="rtl"] .chart-bars,
+html[dir="rtl"] .phone-input {
+  direction: ltr;
+}
+
+html[dir="rtl"] .region-list h3,
+html[dir="rtl"] .region-list li span,
+html[dir="rtl"] .region-list li strong {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+html[dir="rtl"] .bestseller-ribbon {
+  left: auto;
+  right: -34px;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 760px) {
+  html[dir="rtl"] .topbar .nav {
+    direction: rtl;
+    flex-direction: row !important;
+  }
+
+  html[dir="rtl"] .topbar .nav-actions {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+
+  html[dir="rtl"] .topbar .language-menu {
+    right: auto !important;
+    left: 12px !important;
+  }
+
+  html[dir="rtl"] .mobile-menu {
+    text-align: right;
+  }
+}
+
+/* Arabic page layout fixes: keep RTL content, but preserve LTR mechanics for tracks and carousels. */
+html[dir="rtl"] #map .map-wrap {
+  direction: rtl !important;
+}
+
+html[dir="rtl"] #map .region-list {
+  justify-self: start !important;
+  margin-left: clamp(18px, 2.2vw, 36px) !important;
+  margin-right: 0 !important;
+  transform: none !important;
+}
+
+html[dir="rtl"] #map .region-list ul {
+  direction: ltr !important;
+}
+
+html[dir="rtl"] #map .region-list li {
+  direction: rtl !important;
+}
+
+html[dir="rtl"] #calculator .control-card--turnover {
+  direction: rtl !important;
+}
+
+html[dir="rtl"] #calculator .control-card--turnover .control-label {
+  direction: rtl !important;
+}
+
+html[dir="rtl"] #calculator .control-card--turnover .turnover-bars,
+html[dir="rtl"] #calculator .control-card--turnover .range-scale,
+html[dir="rtl"] #calculator .control-card--turnover input[type="range"] {
+  direction: ltr !important;
+}
+
+html[dir="rtl"] #calculator .control-card--turnover input[type="range"] {
+  background:
+    linear-gradient(90deg, #7d45ff 0 var(--range-progress, 50%), rgba(255, 255, 255, 0.14) var(--range-progress, 50%) 100%) !important;
+}
+
+html[dir="rtl"] #calculator .turnover-input {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  direction: ltr !important;
+  text-align: right !important;
+}
+
+html[dir="rtl"] #updates .updates-showcase,
+html[dir="rtl"] #updates .updates-carousel,
+html[dir="rtl"] #updates .updates-track {
+  direction: ltr !important;
+}
+
+html[dir="rtl"] #updates .updates-release {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+html[dir="rtl"] #updates .updates-release > * {
+  direction: rtl !important;
+}
+
+html[dir="rtl"] #referral .referral-visual {
+  animation-name: referralPhoneStageLevitateRtl !important;
+}
+
+@keyframes referralPhoneStageLevitateRtl {
+  0%,
+  100% {
+    translate: 0 clamp(-24px, -1.6vw, -10px);
+  }
+
+  45% {
+    translate: 0 clamp(-42px, -2.7vw, -22px);
+  }
+
+  72% {
+    translate: 0 clamp(-34px, -2.1vw, -16px);
+  }
+}
+
+html[dir="rtl"] .section-quick-nav {
+  left: max(18px, env(safe-area-inset-left)) !important;
+  right: auto !important;
+  transform: translate3d(-28px, -50%, 0) scale(0.98) !important;
+}
+
+html[dir="rtl"] .section-quick-nav.is-visible {
+  transform: translate3d(0, -50%, 0) scale(1) !important;
+}
+
+html[dir="rtl"] .section-quick-nav.is-visible.is-collapsed {
+  transform: translate3d(calc(var(--quick-nav-peek, 76%) * -1), -50%, 0) scale(0.98) !important;
+}
+
+html[dir="rtl"] .section-quick-nav.is-visible.is-collapsed:hover,
+html[dir="rtl"] .section-quick-nav.is-visible.is-collapsed:focus-within {
+  transform: translate3d(0, -50%, 0) scale(1) !important;
+}
+
+html[dir="rtl"] .section-quick-nav::before {
+  left: auto !important;
+  right: -24px !important;
+  border-left: 0 !important;
+  border-right: 1.2px solid rgba(117, 215, 255, 0.46) !important;
+  border-radius: 0 999px 999px 0 !important;
+  transform: translate3d(-8px, -50%, 0) scaleY(0.92) !important;
+}
+
+html[dir="rtl"] .section-quick-nav::after {
+  left: -34px !important;
+  right: auto !important;
+}
+
+@media (max-width: 980px) {
+  html[dir="rtl"] #map .region-list {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Arabic localized page: use the same physical layout as the other locales. */
+html[data-page-lang="ar"] .topbar .nav,
+html[data-page-lang="ar"] .topbar .nav-actions,
+html[data-page-lang="ar"] .topbar .nav-links,
+html[data-page-lang="ar"] .nav-actions,
+html[data-page-lang="ar"] .nav-links,
+html[data-page-lang="ar"] .hero-actions,
+html[data-page-lang="ar"] .hero-kpis,
+html[data-page-lang="ar"] .catalog-grid,
+html[data-page-lang="ar"] .calc-controls,
+html[data-page-lang="ar"] .calc-chart-grid,
+html[data-page-lang="ar"] .referral-actions,
+html[data-page-lang="ar"] .lead-actions,
+html[data-page-lang="ar"] .footer-grid,
+html[data-page-lang="ar"] #map .map-wrap,
+html[data-page-lang="ar"] #updates .updates-showcase,
+html[data-page-lang="ar"] #updates .updates-carousel,
+html[data-page-lang="ar"] #updates .updates-track {
+  direction: ltr !important;
+}
+
+html[data-page-lang="ar"] .topbar .nav,
+html[data-page-lang="ar"] .topbar .nav-actions,
+html[data-page-lang="ar"] .topbar .nav-links {
+  flex-direction: row !important;
+}
+
+html[data-page-lang="ar"] .topbar .nav-actions {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+html[data-page-lang="ar"] .language-menu {
+  right: 0 !important;
+  left: auto !important;
+}
+
+html[data-page-lang="ar"] .language-card-label,
+html[data-page-lang="ar"] .language-menu button > span,
+html[data-page-lang="ar"] .language-quick span {
+  flex-direction: row !important;
+}
+
+html[data-page-lang="ar"] .language-chevron,
+html[data-page-lang="ar"] .geo-trigger-icon {
+  transform: none !important;
+}
+
+html[data-page-lang="ar"] .bestseller-ribbon {
+  left: -34px !important;
+  right: auto !important;
+  transform: rotate(-45deg) !important;
+}
+
+html[data-page-lang="ar"] #calculator .control-card--turnover,
+html[data-page-lang="ar"] #calculator .control-card--turnover .control-label,
+html[data-page-lang="ar"] #calculator .control-card--turnover .turnover-bars,
+html[data-page-lang="ar"] #calculator .control-card--turnover .range-scale,
+html[data-page-lang="ar"] #calculator .control-card--turnover input[type="range"] {
+  direction: ltr !important;
+}
+
+html[data-page-lang="ar"] #calculator .control-card--turnover input[type="range"] {
+  background:
+    linear-gradient(90deg, #7d45ff 0 var(--range-progress, 50%), rgba(255, 255, 255, 0.14) var(--range-progress, 50%) 100%) !important;
+}
+
+html[data-page-lang="ar"] #calculator .turnover-input {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+html[data-page-lang="ar"] #referral .referral-visual {
+  animation-name: referralPhoneStageLevitate !important;
+}
+
+html[data-page-lang="ar"] .section-quick-nav {
+  right: max(18px, env(safe-area-inset-right)) !important;
+  left: auto !important;
+  transform: translate3d(28px, -50%, 0) scale(0.98) !important;
+}
+
+html[data-page-lang="ar"] .section-quick-nav.is-visible {
+  transform: translate3d(0, -50%, 0) scale(1) !important;
+}
+
+html[data-page-lang="ar"] .section-quick-nav.is-visible.is-collapsed {
+  transform: translate3d(calc(100% - var(--quick-nav-peek)), -50%, 0) scale(0.98) !important;
+}
+
+html[data-page-lang="ar"] .section-quick-nav.is-visible.is-collapsed:hover,
+html[data-page-lang="ar"] .section-quick-nav.is-visible.is-collapsed:focus-within {
+  transform: translate3d(0, -50%, 0) scale(1) !important;
+}
+
+html[data-page-lang="ar"] .section-quick-nav::before {
+  left: -24px !important;
+  right: auto !important;
+  border: 1.2px solid rgba(117, 215, 255, 0.46) !important;
+  border-right: 0 !important;
+  border-left: 1.2px solid rgba(117, 215, 255, 0.46) !important;
+  border-radius: 999px 0 0 999px !important;
+  transform: translate3d(8px, -50%, 0) scaleY(0.92) !important;
+}
+
+html[data-page-lang="ar"] .section-quick-nav::after {
+  right: -34px !important;
+  left: auto !important;
+}
+
+@media (min-width: 981px) {
+  html[data-page-lang="ar"] #map .region-list,
+  html[data-page-lang="ar"] #map .region-list.reveal-pop.visible {
+    justify-self: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: translateX(clamp(-104px, -6vw, -62px)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  html[data-page-lang="ar"] .topbar .nav {
+    flex-direction: row !important;
+  }
+
+  html[data-page-lang="ar"] .topbar .nav-actions {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  html[data-page-lang="ar"] .topbar .language-menu {
+    right: 12px !important;
+    left: auto !important;
+  }
+}
+
+/* Mobile referral card: keep both CTA buttons as identical boxes. */
+@media (max-width: 760px) {
+  #referral .referral-showcase .referral-telegram,
+  #referral .referral-showcase .referral-monetize {
+    top: auto !important;
+    bottom: clamp(24px, 7vw, 32px) !important;
+    width: calc((100% - (clamp(20px, 6vw, 28px) * 2) - clamp(14px, 4vw, 18px)) / 2) !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: clamp(40px, 10.5vw, 46px) !important;
+    min-height: clamp(40px, 10.5vw, 46px) !important;
+    padding: 0 clamp(8px, 2.8vw, 12px) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: clamp(6px, 1.8vw, 8px) !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    line-height: 1 !important;
+    text-align: center !important;
+  }
+
+  #referral .referral-showcase .referral-telegram {
+    left: clamp(20px, 6vw, 28px) !important;
+    right: auto !important;
+  }
+
+  #referral .referral-showcase .referral-monetize {
+    left: auto !important;
+    right: clamp(20px, 6vw, 28px) !important;
+  }
+
+  #referral .referral-showcase .referral-telegram span,
+  #referral .referral-showcase .referral-monetize {
+    font-size: clamp(12px, 3.25vw, 14px) !important;
+    font-weight: 700 !important;
+  }
+
+  #referral .referral-showcase .referral-telegram span {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  #referral .referral-showcase .referral-telegram-icon {
+    width: clamp(20px, 5.8vw, 24px) !important;
+    height: clamp(20px, 5.8vw, 24px) !important;
+    flex: 0 0 clamp(20px, 5.8vw, 24px) !important;
+  }
+}
+
+/* Arabic page polish: keep the existing layout, fix clipped update lights and referral balance. */
+html[data-page-lang="ar"] #updates .updates-timeline {
+  --updates-axis-x: clamp(38px, 3.2vw, 54px) !important;
+  --updates-timeline-pad: clamp(92px, 7vw, 124px) !important;
+}
+
+html[data-page-lang="ar"] #updates .updates-timeline,
+html[data-page-lang="ar"] #updates .timeline-entry {
+  overflow: visible !important;
+}
+
+@media (min-width: 761px) {
+  html[data-page-lang="ar"] #updates .updates-timeline {
+    --updates-axis-x: clamp(52px, 4vw, 68px) !important;
+    --updates-timeline-pad: clamp(116px, 8.5vw, 148px) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  html[data-page-lang="ar"] #updates .updates-timeline {
+    --updates-axis-x: clamp(38px, 10vw, 46px) !important;
+    --updates-timeline-pad: clamp(66px, 17vw, 76px) !important;
+  }
+}
+
+@media (min-width: 861px) {
+  html[data-page-lang="ar"] #referral .referral-copy {
+    transform: translateY(clamp(24px, 2.6vw, 46px)) !important;
+  }
+
+  html[data-page-lang="ar"] #referral .referral-visual {
+    translate: 0 clamp(-44px, -3vw, -20px) !important;
+    animation-name: referralPhoneStageLevitateArRaised !important;
+  }
+}
+
+@keyframes referralPhoneStageLevitateArRaised {
+  0%,
+  100% {
+    translate: 0 clamp(-44px, -3vw, -20px);
+  }
+
+  45% {
+    translate: 0 clamp(-66px, -4.2vw, -34px);
+  }
+
+  72% {
+    translate: 0 clamp(-54px, -3.5vw, -26px);
+  }
+}
+
+@media (max-width: 760px) {
+  .lead-dialog .phone-input {
+    grid-template-columns: minmax(76px, 92px) minmax(0, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .lead-dialog .country-trigger {
+    min-width: 0 !important;
+    padding-inline: 10px 8px !important;
+    gap: 6px !important;
+  }
+
+  .lead-dialog .country-trigger [data-country-label] {
+    flex: 1 1 auto !important;
+    text-align: center !important;
+  }
+
+  .lead-dialog .lead-actions {
+    grid-template-columns: minmax(0, auto) minmax(0, 1fr) minmax(102px, auto) !important;
+  }
+
+  .lead-dialog .lead-actions > .lead-telegram-link {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  .lead-dialog .lead-actions > .lead-back:not([hidden]) {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+  }
+
+  .lead-dialog .lead-actions > .lead-next,
+  .lead-dialog .lead-actions > .lead-submit {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    margin-left: auto !important;
+  }
+
+  .lead-dialog .lead-actions.is-contacts-step:not(.is-referral-mode) {
+    grid-template-columns: minmax(92px, auto) minmax(112px, auto) !important;
+    justify-content: space-between !important;
+  }
+
+  .lead-dialog .lead-actions.is-contacts-step:not(.is-referral-mode) > .lead-telegram-link {
+    display: none !important;
+  }
+
+  .lead-dialog .lead-actions.is-contacts-step:not(.is-referral-mode) > .lead-back:not([hidden]) {
+    grid-column: 1 !important;
+    justify-self: start !important;
+  }
+
+  .lead-dialog .lead-actions.is-contacts-step:not(.is-referral-mode) > .lead-submit {
+    grid-column: 2 !important;
+    justify-self: end !important;
   }
 }
