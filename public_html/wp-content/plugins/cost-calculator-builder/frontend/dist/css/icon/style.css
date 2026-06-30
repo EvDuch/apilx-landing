@@ -1,0 +1,954 @@
+@font-face {
+  font-family: 'ccb-fonts';
+  src:  url('fonts/ccb-fonts.eot?8bht45');
+  src:  url('fonts/ccb-fonts.eot?8bht45#iefix') format('embedded-opentype'),
+    url('fonts/ccb-fonts.ttf?8bht45') format('truetype'),
+    url('fonts/ccb-fonts.woff?8bht45') format('woff'),
+    url('fonts/ccb-fonts.svg?8bht45#ccb-fonts') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="ccb-icon-"], [class*=" ccb-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'ccb-fonts' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ccb-icon-price-tag:before {
+  content: "\ea30";
+}
+.ccb-icon-Chart-1:before {
+  content: "\ea2a";
+  color: #1ab163;
+}
+.ccb-icon-Chat-Square:before {
+  content: "\ea2b";
+}
+.ccb-icon-Color:before {
+  content: "\ea2c";
+}
+.ccb-icon-Left:before {
+  content: "\ea2d";
+}
+.ccb-icon-Link-2:before {
+  content: "\ea2e";
+}
+.ccb-icon-Shopping-Cart:before {
+  content: "\ea2f";
+  color: #1ab163;
+}
+.ccb-icon-Dashboard-chart:before {
+  content: "\ea29";
+  color: #fff;
+}
+.ccb-icon-icon-code:before {
+  content: "\ea0c";
+  color: #1ab163;
+}
+.ccb-icon-credit-card:before {
+  content: "\ea0b";
+  color: #9facb9;
+}
+.ccb-icon-sticky-calc:before {
+  content: "\ea0a";
+  color: #1ab163;
+}
+.ccb-icon-Icon-element:before {
+  content: "\ea09";
+  color: #9facb9;
+}
+.ccb-icon-no-preview:before {
+  content: "\ea03";
+}
+.ccb-icon-group-element:before {
+  content: "\ea01";
+}
+.ccb-icon-inner-line:before {
+  content: "\ea02";
+}
+.ccb-icon-Checkmark-Circle-2:before {
+  content: "\ea00";
+  color: #1ab163;
+}
+.ccb-icon-Down:before {
+  content: "\e9ff";
+}
+.ccb-icon-order-detail:before {
+  content: "\e9fe";
+}
+.ccb-icon-cloud:before {
+  content: "\e9ec";
+}
+.ccb-icon-pazzle:before {
+  content: "\e9ed";
+}
+.ccb-icon-reload:before {
+  content: "\e9ee";
+}
+.ccb-icon-several:before {
+  content: "\e9ef";
+}
+.ccb-icon-pdf-lite:before {
+  content: "\e9f0";
+}
+.ccb-icon-order-list:before {
+  content: "\e9f1";
+}
+.ccb-icon-picture:before {
+  content: "\e9f2";
+}
+.ccb-icon-upload:before {
+  content: "\e9f3";
+}
+.ccb-icon-multi-range:before {
+  content: "\e9f4";
+}
+.ccb-icon-time-picker:before {
+  content: "\e9f5";
+}
+.ccb-icon-date-picker:before {
+  content: "\e9f6";
+}
+.ccb-icon-seven:before {
+  content: "\e9f7";
+}
+.ccb-icon-paypal-p:before {
+  content: "\e9f8";
+}
+.ccb-icon-stripe-s:before {
+  content: "\e9f9";
+}
+.ccb-icon-woo:before {
+  content: "\e9fa";
+}
+.ccb-icon-shield:before {
+  content: "\e9fb";
+}
+.ccb-icon-schema:before {
+  content: "\e9fc";
+}
+.ccb-icon-page:before {
+  content: "\e9fd";
+}
+.ccb-icon-Add-Plus-Circle:before {
+  content: "\e9eb";
+}
+.ccb-icon-repeater:before {
+  content: "\e9ea";
+}
+.ccb-icon-Browser:before {
+  content: "\e9e9";
+}
+.ccb-icon-History:before {
+  content: "\e9e8";
+}
+.ccb-icon-Check-Circle-new:before {
+  content: "\e9e7";
+}
+.ccb-icon-Arrow-Previous:before {
+  content: "\e9e6";
+}
+.ccb-icon-close-x:before {
+  content: "\e9e5";
+}
+.ccb-icon-dropdown-2:before {
+  content: "\e9e3";
+}
+.ccb-icon-new-calculator:before {
+  content: "\e9e4";
+}
+.ccb-icon-globus:before {
+  content: "\e9df";
+}
+.ccb-icon-update:before {
+  content: "\e9e0";
+}
+.ccb-icon-support:before {
+  content: "\e9e1";
+}
+.ccb-icon-feature:before {
+  content: "\e9e2";
+}
+.ccb-icon-ccb-icon-video-play:before {
+  content: "\e9de";
+}
+.ccb-icon-drag-dots:before {
+  content: "\e9dd";
+}
+.ccb-icon-circle-question:before {
+  content: "\e9dc";
+}
+.ccb-icon-Webhooks:before {
+  content: "\e9db";
+}
+.ccb-icon-timepicker-light-clock:before {
+  content: "\e9da";
+}
+.ccb-icon-ccb_time_picker:before {
+  content: "\e9d9";
+}
+.ccb-icon-icon-Unlock-filled:before {
+  content: "\e9d7";
+}
+.ccb-icon-Graphic-Designing:before {
+  content: "\e9d6";
+}
+.ccb-icon-Advanced-Mortgage-Calculator:before {
+  content: "\e97b";
+}
+.ccb-icon-After-School-Club-Registration:before {
+  content: "\e97c";
+}
+.ccb-icon-Agency-Booking:before {
+  content: "\e97d";
+}
+.ccb-icon-Attorney-Appointment-Booking:before {
+  content: "\e97e";
+}
+.ccb-icon-Barber-Shop:before {
+  content: "\e97f";
+}
+.ccb-icon-Beauty-Salon-Booking:before {
+  content: "\e980";
+}
+.ccb-icon-BMI-Calculator:before {
+  content: "\e981";
+}
+.ccb-icon-Business-Coaching-Booking:before {
+  content: "\e982";
+}
+.ccb-icon-Car-Rental-Booking:before {
+  content: "\e983";
+}
+.ccb-icon-Charity-Donation:before {
+  content: "\e984";
+}
+.ccb-icon-Chess-Club-Application:before {
+  content: "\e985";
+}
+.ccb-icon-Cleaning-Company:before {
+  content: "\e986";
+}
+.ccb-icon-Clinic-Booking:before {
+  content: "\e987";
+}
+.ccb-icon-Compound-Interest-Calculator:before {
+  content: "\e988";
+}
+.ccb-icon-Condition:before {
+  content: "\e989";
+}
+.ccb-icon-Conference-Registration:before {
+  content: "\e98a";
+}
+.ccb-icon-Content-Writing-Agency:before {
+  content: "\e98b";
+}
+.ccb-icon-Conversion-Calculator:before {
+  content: "\e98c";
+}
+.ccb-icon-Custom-Totals:before {
+  content: "\e98d";
+}
+.ccb-icon-Daily-Calorie-Intake-Calculator:before {
+  content: "\e98e";
+}
+.ccb-icon-Delivery-Service:before {
+  content: "\e98f";
+}
+.ccb-icon-Dental-Service:before {
+  content: "\e990";
+}
+.ccb-icon-Dental-Supply-Order:before {
+  content: "\e991";
+}
+.ccb-icon-Dinner-Reservation:before {
+  content: "\e992";
+}
+.ccb-icon-Discount-Calculator:before {
+  content: "\e993";
+}
+.ccb-icon-Energy-Consumption:before {
+  content: "\e994";
+}
+.ccb-icon-Exhibition-Booking:before {
+  content: "\e995";
+}
+.ccb-icon-Fabric-Company1:before {
+  content: "\e996";
+}
+.ccb-icon-Facial-Booking:before {
+  content: "\e997";
+}
+.ccb-icon-Flower-Order-Form:before {
+  content: "\e998";
+}
+.ccb-icon-Food-Catering:before {
+  content: "\e999";
+}
+.ccb-icon-Football-League-Entry:before {
+  content: "\e99a";
+}
+.ccb-icon-Fuel-Cost-Calculator:before {
+  content: "\e99b";
+}
+.ccb-icon-Fundraiser-Order:before {
+  content: "\e99c";
+}
+.ccb-icon-Funeral-Home-Company:before {
+  content: "\e99d";
+}
+.ccb-icon-Gift-Card-Order-Form:before {
+  content: "\e99e";
+}
+.ccb-icon-Golf-Tournament-Entry:before {
+  content: "\e99f";
+}
+.ccb-icon-Graphic-Design:before {
+  content: "\e9a0";
+}
+.ccb-icon-High-School-Calculator:before {
+  content: "\e9a1";
+}
+.ccb-icon-High-School-Reunion-Registration:before {
+  content: "\e9a2";
+}
+.ccb-icon-Hosting:before {
+  content: "\e9a3";
+}
+.ccb-icon-Hotel-Reservation:before {
+  content: "\e9a4";
+}
+.ccb-icon-Ideal-Weight-Calculator:before {
+  content: "\e9a5";
+}
+.ccb-icon-Insurance-Booking:before {
+  content: "\e9a6";
+}
+.ccb-icon-Interior-Design-Booking:before {
+  content: "\e9a7";
+}
+.ccb-icon-Internet-Marketing:before {
+  content: "\e9a8";
+}
+.ccb-icon-Jewelry-Order-Form:before {
+  content: "\e9a9";
+}
+.ccb-icon-Kitchen-Renovations:before {
+  content: "\e9aa";
+}
+.ccb-icon-Laboratory-Diagnosis:before {
+  content: "\e9ab";
+}
+.ccb-icon-Loan-Calculator:before {
+  content: "\e9ac";
+}
+.ccb-icon-Maintenance-Service:before {
+  content: "\e9ad";
+}
+.ccb-icon-Marketing-Advice-Booking:before {
+  content: "\e9ae";
+}
+.ccb-icon-Medicine-Order:before {
+  content: "\e9af";
+}
+.ccb-icon-Paid-Blog-Post-Submission:before {
+  content: "\e9b0";
+}
+.ccb-icon-Party-Planner:before {
+  content: "\e9b1";
+}
+.ccb-icon-Paycheck-Calculator:before {
+  content: "\e9b2";
+}
+.ccb-icon-Percentage-Calculator:before {
+  content: "\e9b3";
+}
+.ccb-icon-Personal-Trainer-Booking:before {
+  content: "\e9b4";
+}
+.ccb-icon-Photo-Upload:before {
+  content: "\e9b5";
+}
+.ccb-icon-Photography-Booking:before {
+  content: "\e9b6";
+}
+.ccb-icon-Printing-Service:before {
+  content: "\e9b7";
+}
+.ccb-icon-Promotional-Items-Order:before {
+  content: "\e9b8";
+}
+.ccb-icon-Psychologist-Advice-Booking:before {
+  content: "\e9b9";
+}
+.ccb-icon-Renovation1:before {
+  content: "\e9ba";
+}
+.ccb-icon-Reset-Value:before {
+  content: "\e9bb";
+}
+.ccb-icon-ROI-Calculator:before {
+  content: "\e9bc";
+}
+.ccb-icon-ROS-Calculator:before {
+  content: "\e9bd";
+}
+.ccb-icon-Sales-Call-Booking:before {
+  content: "\e9be";
+}
+.ccb-icon-Sample-Size-Calculator:before {
+  content: "\e9bf";
+}
+.ccb-icon-Savings-and-Investment-Calculator:before {
+  content: "\e9c0";
+}
+.ccb-icon-School-Residential-Payment:before {
+  content: "\e9c1";
+}
+.ccb-icon-School-Trip-PayPal-Payment:before {
+  content: "\e9c2";
+}
+.ccb-icon-School-Uniform-Order:before {
+  content: "\e9c3";
+}
+.ccb-icon-Social-Media-Management:before {
+  content: "\e9c4";
+}
+.ccb-icon-Spa-Booking:before {
+  content: "\e9c5";
+}
+.ccb-icon-T-Shirt-Order-Form:before {
+  content: "\e9c6";
+}
+.ccb-icon-Takeout-Order-Form:before {
+  content: "\e9c7";
+}
+.ccb-icon-Tax-Calculator:before {
+  content: "\e9c8";
+}
+.ccb-icon-Taxi-Booking-Form:before {
+  content: "\e9c9";
+}
+.ccb-icon-Ticket-Order-Form:before {
+  content: "\e9ca";
+}
+.ccb-icon-Tip-Calculator:before {
+  content: "\e9cb";
+}
+.ccb-icon-Tour-Booking:before {
+  content: "\e9cc";
+}
+.ccb-icon-Tuition-Fee:before {
+  content: "\e9cd";
+}
+.ccb-icon-Vaccination-Service:before {
+  content: "\e9ce";
+}
+.ccb-icon-VAT-Calculator:before {
+  content: "\e9cf";
+}
+.ccb-icon-Venue-Rental1:before {
+  content: "\e9d0";
+}
+.ccb-icon-Veterinary-Appointment-Booking:before {
+  content: "\e9d1";
+}
+.ccb-icon-Village-Hall-Room-Booking:before {
+  content: "\e9d2";
+}
+.ccb-icon-Wedding-Planner-Booking:before {
+  content: "\e9d3";
+}
+.ccb-icon-Wholesale-Order:before {
+  content: "\e9d4";
+}
+.ccb-icon-Yearbook-Order:before {
+  content: "\e9d5";
+}
+.ccb-icon-Envelope:before {
+  content: "\e979";
+}
+.ccb-icon-Lock:before {
+  content: "\e97a";
+}
+.ccb-icon-Search-Magnifier:before {
+  content: "\e978";
+}
+.ccb-icon-Add-Plus-Circle-filled:before {
+  content: "\e95c";
+}
+.ccb-icon-Beauty:before {
+  content: "\e95d";
+}
+.ccb-icon-Bulb:before {
+  content: "\e95e";
+}
+.ccb-icon-Calculators-filled:before {
+  content: "\e95f";
+}
+.ccb-icon-Car-Rental:before {
+  content: "\e960";
+}
+.ccb-icon-Car-Wash:before {
+  content: "\e961";
+}
+.ccb-icon-Coins:before {
+  content: "\e962";
+}
+.ccb-icon-Color-Palette-filled:before {
+  content: "\e963";
+}
+.ccb-icon-Delivery:before {
+  content: "\e964";
+}
+.ccb-icon-Dental:before {
+  content: "\e965";
+}
+.ccb-icon-Fabric-Company:before {
+  content: "\e966";
+}
+.ccb-icon-Flash-On-filled:before {
+  content: "\e967";
+}
+.ccb-icon-Globe:before {
+  content: "\e968";
+}
+.ccb-icon-heart-filled:before {
+  content: "\e969";
+  color: #d94141;
+}
+.ccb-icon-Heart-outlined:before {
+  content: "\e96a";
+}
+.ccb-icon-Horn:before {
+  content: "\e96b";
+}
+.ccb-icon-Import-Upload:before {
+  content: "\e96c";
+}
+.ccb-icon-Lock-filled:before {
+  content: "\e96d";
+}
+.ccb-icon-Magister-Hat:before {
+  content: "\e96e";
+}
+.ccb-icon-Medical:before {
+  content: "\e96f";
+}
+.ccb-icon-Print:before {
+  content: "\e970";
+}
+.ccb-icon-Renovation:before {
+  content: "\e971";
+}
+.ccb-icon-Trash-filled:before {
+  content: "\e972";
+  color: #d94141;
+}
+.ccb-icon-Trucking:before {
+  content: "\e974";
+}
+.ccb-icon-Venue-Rental:before {
+  content: "\e975";
+}
+.ccb-icon-Wedding-Planner:before {
+  content: "\e976";
+}
+.ccb-icon-Weight:before {
+  content: "\e977";
+}
+.ccb-icon-html:before {
+  content: "\e95b";
+}
+.ccb-icon-circle-plus:before {
+  content: "\e913";
+}
+.ccb-icon-radius:before {
+  content: "\e959";
+}
+.ccb-icon-ccb-logo:before {
+  content: "\e958";
+}
+.ccb-icon-mail:before {
+  content: "\e957";
+}
+.ccb-icon-image-checkbox:before {
+  content: "\e955";
+}
+.ccb-icon-image-radio:before {
+  content: "\e956";
+}
+.ccb-icon-pdf:before {
+  content: "\e900";
+}
+.ccb-icon-Box-open-2:before {
+  content: "\e901";
+}
+.ccb-icon-close:before {
+  content: "\e902";
+}
+.ccb-icon-Layer-2:before {
+  content: "\e903";
+}
+.ccb-icon-Loading:before {
+  content: "\e904";
+}
+.ccb-icon-Path-2572:before {
+  content: "\e905";
+}
+.ccb-icon-Path-3367:before {
+  content: "\e906";
+}
+.ccb-icon-Path-3398:before {
+  content: "\e907";
+}
+.ccb-icon-Path-3400:before {
+  content: "\e908";
+}
+.ccb-icon-Path-3440---Outline:before {
+  content: "\e909";
+}
+.ccb-icon-Path-3448:before {
+  content: "\e90a";
+}
+.ccb-icon-Path-3453:before {
+  content: "\e90b";
+}
+.ccb-icon-Path-3458:before {
+  content: "\e90c";
+}
+.ccb-icon-Path-3464:before {
+  content: "\e90d";
+}
+.ccb-icon-Path-3468:before {
+  content: "\e90e";
+}
+.ccb-icon-Path-3481:before {
+  content: "\e90f";
+}
+.ccb-icon-Path-3482:before {
+  content: "\e910";
+}
+.ccb-icon-Path-3483:before {
+  content: "\e911";
+}
+.ccb-icon-Path-3484:before {
+  content: "\e912";
+}
+.ccb-icon-Path-3485:before {
+  content: "\e95a";
+}
+.ccb-icon-Path-3486:before {
+  content: "\e914";
+}
+.ccb-icon-Path-3487:before {
+  content: "\e915";
+}
+.ccb-icon-Path-3488:before {
+  content: "\e916";
+}
+.ccb-icon-Path-3489:before {
+  content: "\e917";
+}
+.ccb-icon-Path-3490:before {
+  content: "\e918";
+}
+.ccb-icon-Path-3491:before {
+  content: "\e919";
+}
+.ccb-icon-Path-3492:before {
+  content: "\e91a";
+}
+.ccb-icon-Path-3493:before {
+  content: "\e91b";
+}
+.ccb-icon-Path-3494:before {
+  content: "\e91c";
+}
+.ccb-icon-Path-3495:before {
+  content: "\e91d";
+}
+.ccb-icon-Path-3496:before {
+  content: "\e91e";
+}
+.ccb-icon-Path-3498:before {
+  content: "\e91f";
+}
+.ccb-icon-Path-3499:before {
+  content: "\e920";
+}
+.ccb-icon-Path-3500:before {
+  content: "\e921";
+}
+.ccb-icon-Path-3501:before {
+  content: "\e922";
+}
+.ccb-icon-Path-3502:before {
+  content: "\e923";
+}
+.ccb-icon-Path-3503:before {
+  content: "\e924";
+}
+.ccb-icon-Path-3505:before {
+  content: "\e925";
+}
+.ccb-icon-Path-3508:before {
+  content: "\e926";
+}
+.ccb-icon-Path-3509:before {
+  content: "\e927";
+}
+.ccb-icon-Path-3510:before {
+  content: "\e928";
+}
+.ccb-icon-Path-3511:before {
+  content: "\e929";
+}
+.ccb-icon-Path-3512:before {
+  content: "\e92a";
+}
+.ccb-icon-Path-3513:before {
+  content: "\e92b";
+}
+.ccb-icon-Path-3514:before {
+  content: "\e92c";
+}
+.ccb-icon-Path-3515:before {
+  content: "\e92d";
+}
+.ccb-icon-Path-3516:before {
+  content: "\e92e";
+}
+.ccb-icon-Path-3517:before {
+  content: "\e92f";
+}
+.ccb-icon-Path-3518:before {
+  content: "\e930";
+}
+.ccb-icon-Path-34581:before {
+  content: "\e931";
+}
+.ccb-icon-Path-36518:before {
+  content: "\e932";
+}
+.ccb-icon-Path-36519:before {
+  content: "\e933";
+}
+.ccb-icon-path7:before {
+  content: "\e934";
+}
+.ccb-icon-path3745:before {
+  content: "\e935";
+}
+.ccb-icon-Subtraction-6:before {
+  content: "\e936";
+}
+.ccb-icon-Subtraction-7:before {
+  content: "\e937";
+}
+.ccb-icon-Subtraction-8:before {
+  content: "\e938";
+}
+.ccb-icon-Union-5:before {
+  content: "\e939";
+}
+.ccb-icon-Union-6:before {
+  content: "\e93a";
+}
+.ccb-icon-Union-15:before {
+  content: "\e93b";
+}
+.ccb-icon-Union-16:before {
+  content: "\e93c";
+}
+.ccb-icon-Union-17:before {
+  content: "\e93d";
+}
+.ccb-icon-Union-18:before {
+  content: "\e93e";
+}
+.ccb-icon-Union-19:before {
+  content: "\e93f";
+}
+.ccb-icon-Union-20:before {
+  content: "\e940";
+}
+.ccb-icon-Union-21:before {
+  content: "\e941";
+}
+.ccb-icon-Union-22:before {
+  content: "\e942";
+}
+.ccb-icon-Union-23:before {
+  content: "\e943";
+}
+.ccb-icon-Union-24:before {
+  content: "\e944";
+}
+.ccb-icon-Union-25:before {
+  content: "\e945";
+}
+.ccb-icon-Union-26:before {
+  content: "\e946";
+}
+.ccb-icon-Union-27:before {
+  content: "\e947";
+}
+.ccb-icon-Union-28:before {
+  content: "\e948";
+}
+.ccb-icon-Union-29:before {
+  content: "\e949";
+}
+.ccb-icon-Union-30:before {
+  content: "\e94a";
+}
+.ccb-icon-Union-31:before {
+  content: "\e94b";
+}
+.ccb-icon-Union-32:before {
+  content: "\e94c";
+}
+.ccb-icon-Union-33:before {
+  content: "\e94d";
+}
+.ccb-icon-Union-34:before {
+  content: "\e94e";
+}
+.ccb-icon-XMLID_426:before {
+  content: "\e94f";
+}
+.ccb-icon-Octicons:before {
+  content: "\e950";
+}
+.ccb-icon-Path-3599:before {
+  content: "\e951";
+}
+.ccb-icon-Path-3601:before {
+  content: "\e952";
+}
+.ccb-icon-feedback:before {
+  content: "\e953";
+}
+.ccb-icon-click-out:before {
+  content: "\e954";
+}
+.ccb-icon-email-template:before {
+  content: "\e9d8";
+}
+.ccb-icon-Sale-Discount:before {
+  content: "\ea04";
+  color: #1ab163;
+}
+.ccb-icon-Promocode:before {
+  content: "\ea05";
+}
+.ccb-icon-location-lite:before {
+  content: "\ea06";
+}
+.ccb-icon-location:before {
+  content: "\ea07";
+}
+.ccb-icon-plus-lite:before {
+  content: "\ea08";
+}
+.ccb-icon-page-break:before {
+  content: "\ea0d";
+}
+.ccb-icon-radius-check:before {
+  content: "\ea0e";
+}
+.ccb-icon-info-circle:before {
+  content: "\ea0f";
+}
+.ccb-icon-AI:before {
+  content: "\ea10";
+  color: #1ab163;
+}
+.ccb-icon-multi-step:before {
+  content: "\ea11";
+}
+.ccb-icon-phone-solid:before {
+  content: "\ea12";
+}
+.ccb-icon-account-solid:before {
+  content: "\e973";
+}
+.ccb-icon-space:before {
+  content: "\ea13";
+}
+.ccb-icon-textarea:before {
+  content: "\ea14";
+}
+.ccb-icon-mail-solid:before {
+  content: "\ea15";
+}
+.ccb-icon-Cost-Calculator-Admin-Sidebar-Left:before {
+  content: "\ea16";
+}
+.ccb-icon-Cost-Calculator-Admin-Sidebar-Right:before {
+  content: "\ea17";
+}
+.ccb-icon-Cost-Calculator-Admin-Align-Center:before {
+  content: "\ea20";
+}
+.ccb-icon-Cost-Calculator-Admin-Align-Left:before {
+  content: "\ea21";
+}
+.ccb-icon-Cost-Calculator-Admin-Align-Center1:before {
+  content: "\ea18";
+}
+.ccb-icon-Cost-Calculator-Admin-Align-Left1:before {
+  content: "\ea1a";
+}
+.ccb-icon-Cost-Calculator-Admin-Align-Right:before {
+  content: "\ea19";
+}
+.ccb-icon-Cost-Calculator-Admin-Border-All:before {
+  content: "\ea1b";
+}
+.ccb-icon-Cost-Calculator-Admin-Border-Left:before {
+  content: "\ea1c";
+}
+.ccb-icon-Cost-Calculator-Admin-Border-Right:before {
+  content: "\ea1d";
+}
+.ccb-icon-Cost-Calculator-Admin-Border-Top:before {
+  content: "\ea1e";
+}
+.ccb-icon-Cost-Calculator-Admin-Bottom:before {
+  content: "\ea1f";
+}
+.ccb-icon-Cost-Calculator-Admin-New-Align-Justified:before {
+  content: "\ea22";
+}
+.ccb-icon-Cost-Calculator-Admin-Sidebar-1:before {
+  content: "\ea23";
+}
+.ccb-icon-Cost-Calculator-Admin-Sidebar:before {
+  content: "\ea25";
+}
+.ccb-icon-Cost-Calculator-Admin:before {
+  content: "\ea24";
+}
+.ccb-icon-share-quote:before {
+  content: "\ea26";
+}
+.ccb-icon-form-edit-manager:before {
+  content: "\ea27";
+}
+.ccb-icon-warning:before {
+  content: "\ea28";
+}

@@ -1,0 +1,7 @@
+#adminmenu .toplevel_page_cost_calculator_builder.wp-menu-open  {
+    background-color: #00b163 !important;
+}
+
+#adminmenu .toplevel_page_cost_calculator_builder.wp-menu-open:after {
+    border-right-color: #cfd5e2 !important;
+}

@@ -1,0 +1,19 @@
+{
+    "/frontend/dist/sticky.js": "/frontend/dist/sticky.js",
+    "/frontend/dist/bundle.js": "/frontend/dist/bundle.js",
+    "/frontend/dist/admin.js": "/frontend/dist/admin.js",
+    "/frontend/dist/preview.js": "/frontend/dist/preview.js",
+    "/frontend/dist/welcome.js": "/frontend/dist/welcome.js",
+    "/frontend/dist/order.js": "/frontend/dist/order.js",
+    "/frontend/dist/templates.js": "/frontend/dist/templates.js",
+    "/frontend/dist/category.js": "/frontend/dist/category.js",
+    "/frontend/dist/css/gopro.css": "/frontend/dist/css/gopro.css",
+    "/frontend/dist/css/admin.css": "/frontend/dist/css/admin.css",
+    "/frontend/dist/css/style.css": "/frontend/dist/css/style.css",
+    "/frontend/dist/css/sticky.css": "/frontend/dist/css/sticky.css",
+    "/frontend/dist/css/pdf-template.css": "/frontend/dist/css/pdf-template.css",
+    "/frontend/dist/css/templates.css": "/frontend/dist/css/templates.css",
+    "/frontend/dist/css/welcome.css": "/frontend/dist/css/welcome.css",
+    "/frontend/dist/css/pro-features.css": "/frontend/dist/css/pro-features.css",
+    "/frontend/dist/css/preview.css": "/frontend/dist/css/preview.css"
+}

@@ -1,0 +1,51 @@
+body.toplevel_page_cost_calculator_builder #ccb-feature-request, body.cost-calculator_page_cost_calculator_orders #ccb-feature-request, body.cost-calculator_page_cost_calculator_builder-affiliation #ccb-feature-request, body.cost-calculator_page_cost_calculator_builder-account #ccb-feature-request, body.cost-calculator_page_cost_calculator_builder-contact #ccb-feature-request {
+  display: inline-block !important;
+}
+
+#ccb-feature-request {
+  position: fixed;
+  bottom: 28px;
+  right: 20px;
+  width: 28px;
+  height: 28px;
+  padding: 14px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  background-color: #00a0df;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  box-sizing: content-box;
+}
+#ccb-feature-request:hover span {
+  transition: all 0.1s;
+  transition-delay: 0.1s;
+  visibility: visible;
+  opacity: 1;
+}
+#ccb-feature-request img {
+  width: 29px;
+}
+#ccb-feature-request span {
+  position: fixed;
+  right: 15px;
+  bottom: 95px;
+  min-width: 170px;
+  padding: 6px 12px 7px;
+  color: #ffffff;
+  font-size: 13px;
+  line-height: 16px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 5px;
+  background-color: #00a0df;
+  visibility: hidden;
+  opacity: 0;
+}
+#ccb-feature-request span::after {
+  content: "";
+  position: absolute;
+  top: 45px;
+  right: 26px;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 10px solid #00a0df;
+}

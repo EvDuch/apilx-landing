@@ -1,0 +1,42 @@
+<wpml-config>
+    <custom-types>
+        <custom-type translate="1">cost-calc</custom-type>
+        <custom-type translate="1">cost-calc-templates</custom-type>
+        <custom-type translate="1">cost-calc-category</custom-type>
+    </custom-types>
+    <custom-fields>
+        <custom-field action="translate">stm-fields</custom-field>
+        <custom-field action="translate">stm-name</custom-field>
+        <custom-field action="copy">stm-conditions</custom-field>
+    </custom-fields>
+    <elementor-widgets>
+        <widget name="stm_calc">
+            <fields>
+                <field>ccb_calculator</field>
+            </fields>
+        </widget>
+    </elementor-widgets>
+    <custom-fields-texts>
+        <key name="stm-fields">
+            <key name="*">
+                <key name="label" />
+                <key name="description" />
+                <key name="placeholder" />
+                <key name="sign" />
+                <key name="options">
+                    <key name="*">
+                        <key name="optionText" />
+                    </key>
+                </key>
+            </key>
+        </key>
+    </custom-fields-texts>
+    <shortcodes>
+        <shortcode>
+            <tag ignore-content="1">stm-calc</tag>
+            <attributes>
+                <attribute type="post-ids" sub-type="cost-calc">id</attribute>
+            </attributes>
+        </shortcode>
+    </shortcodes>
+</wpml-config>
